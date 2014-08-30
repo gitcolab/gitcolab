@@ -1,34 +1,34 @@
 Feature: Login
 
   Scenario: Inactive user can't login
-    Given I am on "/"
-    When I fill:
-      | Username | inactive |
-      | Password | inactive |
-    And I click on "Login"
-    Then I should see "Bad credentials"
+    When I am on route "fos_user_security_login"
+    When I fill in the following:
+      | Username | dexter.schwartz |
+      | Password | dexter.schwartz |
+    And I press "Login"
+    And I should see "User account is disabled."
 
   Scenario: Remember me cookie works
 
-      # First, verify behavior without "remember me"
-    Given I am on "/"
-    When I fill:
+  # First, verify behavior without "remember me"
+    Given I am on "/login"
+    When I fill in the following:
       | Username | ena |
       | Password | ena |
-    And I click on "Login"
+    And I follow "Login"
     When I delete cookie "PHPSESSID"
-    Then I should see "Projects"
-    And I refresh
-    Then I should not see "Projects"
+    Given I am on "/login"
+    When I fill in the following:
+      | Username | ena |
+      | Password | ena |
+    And I check "remember_me"
+    And I follow "Login"
+    When I delete cookie "PHPSESSID"
 
-      # Second, with "remember me"
-    Given I am on "/"
-    When I fill:
-      | Username | ena |
-      | Password | ena |
-    And I click on "id=_remember_me"
-    And I click on "Login"
-    When I delete cookie "PHPSESSID"
-    Then I should see "Projects"
-    And I refresh
-    Then I should see "Projects"
+  Scenario: Log in with bad credentials
+    When I am on route "fos_user_security_login"
+    When I fill in the following:
+      | Username | bar |
+      | Password | bar |
+    And I press "Login"
+    And I should see "Invalid username or password"

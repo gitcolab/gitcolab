@@ -1,15 +1,15 @@
 <?php
 
-/*
-* This file is part of the Tempo-project package http://tempo-project.org/>.
-*
-* (c) Mlanawo Mbechezi  <mlanawo.mbechezi@ikimea.com>
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+/**
+ * This file is part of Gitcolab.
+ *
+ * (c) Mbechezi mlanawo <mlanawo@mbechezi.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Tempo\Bundle\CoreBundle\DependencyInjection;
+namespace Gitcolab\Bundle\AppBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class TempoCoreExtension extends Extension
+class GitcolabAppExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -32,7 +32,44 @@ class TempoCoreExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $this->remapParametersNamespaces($config, $container, array(
+            '' => array(
+                'model_manager_name' => 'gitcolab_app.model_manager_name',
+            )
+        ));
+        $container->setParameter($this->getAlias() . '.backend_type_orm', true);
+
         $loader->load('services.xml');
-        $loader->load('doctrine_extensions.xml');
+    }
+
+    protected function remapParameters(array $config, ContainerBuilder $container, array $map)
+    {
+        foreach ($map as $name => $paramName) {
+            if (array_key_exists($name, $config)) {
+                $container->setParameter($paramName, $config[$name]);
+            }
+        }
+    }
+
+    protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
+    {
+        foreach ($namespaces as $ns => $map) {
+            if ($ns) {
+                if (!array_key_exists($ns, $config)) {
+                    continue;
+                }
+                $namespaceConfig = $config[$ns];
+            } else {
+                $namespaceConfig = $config;
+            }
+            if (is_array($map)) {
+                $this->remapParameters($namespaceConfig, $container, $map);
+            } else {
+                foreach ($namespaceConfig as $name => $value) {
+                    $container->setParameter(sprintf($map, $name), $value);
+                }
+            }
+        }
     }
 }

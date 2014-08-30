@@ -1,0 +1,4 @@
+_welcome:
+  path: /
+  defaults:
+      _controller: GitcolabAppBundle:Dashboard:main

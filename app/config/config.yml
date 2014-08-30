@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -58,7 +58,19 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        entity_managers:
+            default:
+                auto_mapping: true
+                mappings:
+                    StofDoctrineExtensionsBundle: true
+
+# app/config/config.yml
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            tree: true
+            timestampable: true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -67,3 +79,10 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+# app/config/config.yml
+fos_user:
+    db_driver: %gitcolab_db_storage%
+    firewall_name: main
+    user_class: Gitcolab\Bundle\AppBundle\Model\User

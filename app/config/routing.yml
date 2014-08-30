@@ -1,0 +1,6 @@
+# app/config/routing.yml
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+_gitcolab_app:
+    resource: "@GitcolabAppBundle/Resources/config/routing.yml"

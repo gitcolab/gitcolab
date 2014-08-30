@@ -16,5 +16,21 @@ namespace Gitcolab\Bundle\AppBundle\Behat;
  */
 class FeatureContext extends BaseContext
 {
+    /**
+     * @Given /^I am on route "([^"]*)"$/
+     */
+    public function iAmOnRoute($route)
+    {
+        $url = $this->kernel->getContainer()->get('router')->generate($route, array(), false);
+        $this->getSession()->visit($this->locatePath($url));
+    }
 
+    /**
+     * @Given /^I delete cookie "([^"]*)"$/
+     */
+    public function iDeleteCookie($route)
+    {
+        $session = $this->getSession();
+        $session->restart();
+    }
 }

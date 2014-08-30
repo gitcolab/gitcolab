@@ -17,7 +17,7 @@ before_script:
     - cp behat.yml.dist behat.yml
 
     - wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar
-    - mkdir bin/java/
+    - mkdir -p bin/java/
     - mv yuicompressor-2.4.8.jar bin/java/yuicompressor.jar
 
     - npm install

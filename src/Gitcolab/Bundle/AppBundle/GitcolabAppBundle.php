@@ -12,8 +12,30 @@
 namespace Gitcolab\Bundle\AppBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler\OverrideServiceCompilerPass;
+
 
 class GitcolabAppBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new OverrideServiceCompilerPass());
 
+        $mappings = array(
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Gitcolab\Bundle\AppBundle\Model',
+        );
+
+        $ormCompilerClass = 'Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass';
+
+        if (class_exists($ormCompilerClass)) {
+            $container->addCompilerPass(
+                DoctrineOrmMappingsPass::createXmlMappingDriver(
+                    $mappings,
+                    array('gitcolab_app.model_manager_name'),
+                    'gitcolab_app.backend_type_orm'
+                ));
+        }
+    }
 }

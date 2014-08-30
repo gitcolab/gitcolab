@@ -11,7 +11,12 @@
 
 namespace Gitcolab\Bundle\AppBundle\Controller;
 
-class Dashboard extends Controller
-{
+use Symfony\Component\HttpFoundation\Response;
 
+class DashboardController extends Controller
+{
+    public function mainAction()
+    {
+        return new Response();
+    }
 }
