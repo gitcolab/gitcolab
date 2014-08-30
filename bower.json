@@ -1,0 +1,16 @@
+{
+    "name": "gitcolab",
+    "version": "0.1.0",
+    "dependencies": {
+        "bootstrap": "3.1.1",
+        "jquery": "2.1.1",
+        "jquery-ui": "1.10.4",
+        "moment": "2.8.0",
+        "modernizr": "2.8.2",
+        "tinycon": "latest",
+        "socket.io-client": "1.0.3",
+        "selectize": "0.9.1",
+        "ionicons": "1.5.2",
+        "angularjs": "latest"
+    }
+}

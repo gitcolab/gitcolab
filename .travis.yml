@@ -1,0 +1,57 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - hhvm-nightly
+
+matrix:
+    allow_failures:
+        - php: 5.6
+        - php: hhvm-nightly
+
+before_script:
+    - echo "Starting install" > install.log
+
+    - cp behat.yml.dist behat.yml
+
+    - wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar
+    - mkdir bin/java/
+    - mv yuicompressor-2.4.8.jar bin/java/yuicompressor.jar
+
+    - npm install
+    - npm -v
+    - bower -version
+    - bower update --config.interactive=false --allow-root
+
+    # Composer
+    - composer self-update
+    - composer config --global process-timeout 5000
+    - set "COMPOSER_PROCESS_TIMEOUT=5000"
+    - composer install --prefer-source
+
+    # For KnpSnappy
+    - wget https://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2 --output-document=wkhtmltopdf.tar.bz2
+    - tar -jxvf wkhtmltopdf.tar.bz2
+    - sudo mv wkhtmltopdf-amd64 /usr/bin/wkhtmltopdf
+
+    # Selenium
+    - sh -e /etc/init.d/xvfb start && export DISPLAY=:99 && wget http://selenium.googlecode.com/files/selenium-server-standalone-2.33.0.jar
+    - java -jar selenium-server-standalone-2.33.0.jar > /dev/null &
+    - sleep 5
+
+    # Install database
+    - php app/console doctrine:database:create -e=test > /dev/null
+    - php app/console doctrine:schema:create -e=test > /dev/null
+    - php app/console doctrine:fixtures:load --no-interaction -e=test > /dev/null
+
+    # Loading web server for selenium
+    - node bin/server.js > error.log &
+    - php app/console server:run > error.log &
+
+
+script:
+    - ./bin/phpunit -c app/
+    - ./bin/phpspec run
+    - ./bin/behat -fprogress --verbose

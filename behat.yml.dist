@@ -1,0 +1,22 @@
+default:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: false
+
+    suites:
+        default:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Gitcolab\Bundle\AppBundle\Behat\FeatureContext
+
+    extensions:
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony2: ~
+
+            browser_name: firefox
+            show_auto:    false
+        Behat\Symfony2Extension: ~
