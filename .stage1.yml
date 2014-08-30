@@ -1,0 +1,23 @@
+image: symfony2
+writable:
+    - app/logs
+    - app/cache
+    - web/uploads
+    
+build:
+   - apt-get update -y
+   - apt-get install -y software-properties-common python-software-properties python g++ make
+   - apt-add-repository ppa:chris-lea/node.js
+   - apt-get update -y
+   - apt-get install -y nodejs
+   - npm install -g bower less
+   - npm install
+   - bower install --allow-root
+   - mysqladmin create gitcolab
+   - mkdir bin/java
+   - wget "https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar" -O bin/java/yuicompressor.jar
+   - composer install --ansi --no-progress --dev --prefer-dist --no-interaction
+   - app/console doctrine:schema:update --force
+   - app/console doctrine:fixtures:load --env=dev --no-interaction
+   - app/console assets:install web/
+   - app/console assetic:dump
