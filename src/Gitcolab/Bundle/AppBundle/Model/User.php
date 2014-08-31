@@ -17,6 +17,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser
 {
     protected $token;
+    protected $keys;
     protected $createdAt;
     protected $updatedAt;
     protected $lastName;
@@ -36,6 +37,14 @@ class User extends BaseUser
         return $this->token;
     }
 
+    public function setKeys($keys)
+    {
+        $this->keys = $keys;
+    }
+    public function getKeys()
+    {
+        return $this->keys;
+    }
 
     /**
      * {@inheritdoc}
@@ -80,7 +89,6 @@ class User extends BaseUser
     {
         return $this->firstName .' '. strtoupper($this->lastName);
     }
-
 
     /**
      * {@inheritdoc}
@@ -153,6 +161,5 @@ class User extends BaseUser
     {
         return $this->viadeo;
     }
-
 
 }

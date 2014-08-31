@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8" />
+
+        {% stylesheets
+            '@GitcolabAppBundle/Resources/client/less/style.less'
+            filter='less, ?cssrewrite,?yui_css' debug=true
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% block stylesheets %}{% endblock %}
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"  />
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"  />
+        <title>{% block title %}{{ 'Welcome'|trans }}{% endblock %} - Tempo</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div id="glob">
+            <header id="header" class="navbar" role="banner">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="/">GitColab</a>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                            </form>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user }}<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ path('user_settings') }}">Settings</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </header>
+            <div class="container">
+                {% block body %}{% endblock %}
+            </div>
+            {% block javascripts %}
+                {% javascripts
+                    'vendor/socket.io-client/socket.io.js'
+                    'vendor/jquery/dist/jquery.js'
+                    'vendor/jquery-ui/ui/jquery-ui.js'
+                    'vendor/bootstrap/dist/js/bootstrap.min.js'
+                    'vendor/tinycon/tinycon.min.js'
+                    'vendor/moment/moment.js'
+                    'vendor/modernizr/modernizr.js'
+                    '@BazingaJsTranslationBundle/Resources/js/translator.js'
+                    '@FOSJsRoutingBundle/Resources/public/js/router.js'
+                    'vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+                    'vendor/selectize/dist/js/standalone/selectize.min.js'
+                    '@GitcolabAppBundle/Resources/client/js/app.js'
+                filter="?yui_js"
+                output="js/main.js"
+                %}
+                <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+                <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            {% endblock %}
+        </div>
+    </body>
+</html>

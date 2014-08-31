@@ -19,3 +19,6 @@ parameters:
     use_assetic_controller: true
 
     gitcolab_db_storage: orm
+
+    node_bin: /usr/local/bin/node
+    node_modules: '%kernel.root_dir%/../node_modules'

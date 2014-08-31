@@ -33,10 +33,14 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    #bundles:        [ ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
+        less:
+            node: %node_bin%
+            node_paths: [%node_modules%]
+            apply_to: "\.less$"
         #closure:
         #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
         #yui_css:
@@ -52,10 +56,6 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
-
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         entity_managers:
@@ -63,6 +63,8 @@ doctrine:
                 auto_mapping: true
                 mappings:
                     StofDoctrineExtensionsBundle: true
+                    GitcolabAppBundle:
+                      prefix: Gitcolab\Bundle\AppBundle\Model
 
 # app/config/config.yml
 stof_doctrine_extensions:
@@ -86,3 +88,24 @@ fos_user:
     db_driver: %gitcolab_db_storage%
     firewall_name: main
     user_class: Gitcolab\Bundle\AppBundle\Model\User
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+    routing_loader:
+        default_format: json
+    access_denied_listener:
+        json: true
+    exception:
+        codes:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+
+mopa_bootstrap:
+    form:
+        show_legend: false # default is true
+        show_child_legend: false # default is true
+        error_type: block # or inline which is default

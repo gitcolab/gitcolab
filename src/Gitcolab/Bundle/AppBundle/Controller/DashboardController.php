@@ -17,6 +17,10 @@ class DashboardController extends Controller
 {
     public function mainAction()
     {
-        return new Response();
+        $view = $this->view(array(), 200)
+            ->setTemplate("GitcolabAppBundle:Dashboard:main.html.twig")
+        ;
+
+        return $this->handleView($view);
     }
 }

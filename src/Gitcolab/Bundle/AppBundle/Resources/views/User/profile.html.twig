@@ -1,0 +1,31 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+
+{% block bodyClass %}users edit profile{% endblock %}
+{% block body %}
+    {% include 'GitcolabAppBundle:User:_tabs.html.twig' %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Account Profile
+        </div>
+        <div class="panel-body">
+            <form action="#" method="POST" class="fos_user_profile_edit">
+
+                <fieldset>
+                    {{ form_row(form.first_name) }}
+                    {{ form_row(form.last_name) }}
+                </fieldset>
+
+                <fieldset>
+                    {{ form_row(form.localisation) }}
+                </fieldset>
+
+                <div class="form-actions clearfix">
+                    {{ form_rest(form) }}
+
+                    <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-primary pull-right" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock body %}

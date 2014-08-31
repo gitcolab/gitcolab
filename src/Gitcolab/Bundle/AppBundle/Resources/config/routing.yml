@@ -2,3 +2,14 @@ _welcome:
   path: /
   defaults:
       _controller: GitcolabAppBundle:Dashboard:main
+
+user:
+  resource: "@GitcolabAppBundle/Resources/config/routing/user.yml"
+  prefix: /user
+
+_keys_api:
+  type: rest
+  prefix:   /api/{version}/internal/key
+  resource: "@GitcolabAppBundle/Resources/config/routing/key_api.yml"
+  defaults:
+      version: v1

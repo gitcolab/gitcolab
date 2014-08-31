@@ -1,0 +1,5 @@
+<ul class="subnav-links nav nav-tabs" role="tablist">
+    <li class="{% if app.request.attributes.get('_route') == 'user_profile' %}active{% endif %}"><a href="{{ path('user_profile') }}">Profile</a></li>
+    <li class="{% if app.request.attributes.get('_route') == 'user_account' %}active{% endif %}"><a href="{{ path('user_account') }}">Account</a></li>
+    <li class="{% if app.request.attributes.get('_route') == 'user_keys' %}active{% endif %}"><a href="{{ path('user_keys') }}">SSH Keys</a></li>
+</ul>

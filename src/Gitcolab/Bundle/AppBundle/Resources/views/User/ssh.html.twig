@@ -1,0 +1,32 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+{% block body %}
+    {% include 'GitcolabAppBundle:User:_tabs.html.twig' %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            SSH Keys
+        </div>
+        <div class="panel-body">
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key in keys %}
+                    <tr>
+                        <td>
+                            <div></div>
+                            <div>Added on {{ key.createdAt | localizeddate('long', 'none') }} — Last used on {{ key.updatedAt| localizeddate('long', 'none') }} </div>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger"> Delete </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock body %}

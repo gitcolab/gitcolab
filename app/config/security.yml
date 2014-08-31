@@ -15,6 +15,11 @@ security:
         dev:
              pattern:  ^/(_(profiler|wdt)|css|images|js)/
              security: false
+        api:
+            pattern: ^/api
+            stateless: false
+            simple_preauth:
+              authenticator: gitcolab.security.api_internal
         main:
             pattern: ^/
             form_login:
