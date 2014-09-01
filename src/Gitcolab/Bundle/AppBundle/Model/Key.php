@@ -23,6 +23,7 @@ class Key
     public function setKey($key)
     {
         $this->key = $key;
+
         return $this;
     }
 
@@ -34,6 +35,8 @@ class Key
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
     }
 
     public function getTitle()
@@ -44,6 +47,7 @@ class Key
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
     public function getCreatedAt()
@@ -53,6 +57,7 @@ class Key
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
     public function getUpdatedAt()
@@ -62,7 +67,8 @@ class Key
 
     public function setUser(User $user)
     {
-        $this->user  =  $user;
+        $this->user = $user;
+
         return $this;
     }
 

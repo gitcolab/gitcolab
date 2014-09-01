@@ -44,6 +44,11 @@ class KeyController extends Controller
                 $this->getDoctrine()->getManager()->flush();
             }
 
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'SSH key created!'
+            );
+
             return $this->redirect($this->generateUrl('user_keys'));
         }
 

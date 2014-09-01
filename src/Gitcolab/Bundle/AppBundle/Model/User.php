@@ -13,7 +13,6 @@ namespace Gitcolab\Bundle\AppBundle\Model;
 
 use FOS\UserBundle\Model\User as BaseUser;
 
-
 class User extends BaseUser
 {
     protected $token;
@@ -41,6 +40,8 @@ class User extends BaseUser
     public function setKeys($keys)
     {
         $this->keys = $keys;
+
+        return $this;
     }
     public function getKeys()
     {

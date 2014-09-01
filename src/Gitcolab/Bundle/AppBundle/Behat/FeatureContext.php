@@ -33,4 +33,29 @@ class FeatureContext extends BaseContext
         $session = $this->getSession();
         $session->restart();
     }
+
+    /**
+     * @Given /^I logout$/
+     */
+    public function iLogout()
+    {
+        return array(
+            new When('I am on "/logout"'),
+        );
+    }
+
+    /**
+     * @Given /^I am connected as "((?:[^"]|"")*)"(?: with password "((?:[^"]|"")*)")?$/
+     */
+    public function iAmConnectedAs($username, $password = '')
+    {
+        $password = $password ?: $username;
+
+        $this->getSession()->visit($this->generatePageUrl('fos_user_security_login'));
+
+        $this->fillField('Username', $username);
+        $this->fillField('Password', $password);
+        $this->pressButton('_submit');
+        $this->assertPageContainsText('logout');
+    }
 }

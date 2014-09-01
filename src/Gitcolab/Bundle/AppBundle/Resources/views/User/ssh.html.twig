@@ -17,7 +17,7 @@
                 {% for key in keys %}
                     <tr>
                         <td>
-                            <div></div>
+                            <div><strong>{{ key.title }}</strong></div>
                             <div>Added on {{ key.createdAt | localizeddate('long', 'none') }} — Last used on {{ key.updatedAt| localizeddate('long', 'none') }} </div>
                         </td>
                         <td>
