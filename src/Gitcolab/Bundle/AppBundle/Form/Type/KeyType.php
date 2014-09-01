@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormViewInterface;
 use Symfony\Component\Form\AbstractType;
 
-class ProfileType  extends AbstractType
+class KeyType  extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -23,14 +23,13 @@ class ProfileType  extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name')
-            ->add('last_name')
-            ->add('localisation', null, array('required' => false))
+            ->add('title')
+            ->add('key')
         ;
     }
 
     public function getName()
     {
-        return 'profile';
+        return 'key';
     }
 }

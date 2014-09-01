@@ -11,7 +11,11 @@
 
 namespace Gitcolab\Bundle\AppBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
+use Gitcolab\Bundle\AppBundle\Model\Key;
+use Gitcolab\Bundle\AppBundle\Form\Type\KeyType;
+
 
 class KeyController extends Controller
 {
@@ -23,5 +27,35 @@ class KeyController extends Controller
         $view->setData($key);
 
         return $view;
+    }
+
+    public function createAction(Request $request)
+    {
+        $key = new Key();
+        $key->setUser($this->getUser());
+        $form = $this->createForm(new KeyType(), $key);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if( $form->isValid()) {
+
+                //todo check ssh key is valid
+                $this->getDoctrine()->getManager()->persist($key);
+                $this->getDoctrine()->getManager()->flush();
+            }
+
+            return $this->redirect($this->generateUrl('user_keys'));
+        }
+
+        $view = $this->view(array('form' => $form->createView() ), 200)
+            ->setTemplate("GitcolabAppBundle:Key:create.html.twig")
+        ;
+
+        return $this->handleView($view);
+    }
+
+    public function deleteAction()
+    {
+
     }
 }

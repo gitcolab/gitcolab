@@ -106,6 +106,9 @@ fos_rest:
 
 mopa_bootstrap:
     form:
-        show_legend: false # default is true
-        show_child_legend: false # default is true
-        error_type: block # or inline which is default
+        show_legend: false
+        show_child_legend: false
+        error_type: block
+        render_fieldset: false
+        render_optional_text: false
+        checkbox_label: 'both'

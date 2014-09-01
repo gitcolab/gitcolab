@@ -3,8 +3,9 @@
     {% include 'GitcolabAppBundle:User:_tabs.html.twig' %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            SSH Keys
+            SSH Key
         </div>
+        <p>This is a list of SSH keys associated with your account. Remove any keys that you do not recognize. </p>
         <div class="panel-body">
             <table>
                 <thead>
@@ -27,6 +28,10 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div id="form-add-key-ssh">
+        {{ render(controller('GitcolabAppBundle:Key:create')) }}
     </div>
 
 {% endblock body %}

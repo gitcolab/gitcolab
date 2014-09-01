@@ -7,6 +7,10 @@ user:
   resource: "@GitcolabAppBundle/Resources/config/routing/user.yml"
   prefix: /user
 
+key:
+  resource: "@GitcolabAppBundle/Resources/config/routing/key.yml"
+  prefix : /key
+
 _keys_api:
   type: rest
   prefix:   /api/{version}/internal/key

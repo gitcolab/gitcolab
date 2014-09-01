@@ -22,6 +22,7 @@ class User extends BaseUser
     protected $updatedAt;
     protected $lastName;
     protected $firstName;
+    protected $localisation;
     protected $avatar;
     protected $skype;
     protected $viadeo;
@@ -88,6 +89,18 @@ class User extends BaseUser
     public function getFullName()
     {
         return $this->firstName .' '. strtoupper($this->lastName);
+    }
+
+    public function setLocalisation($localisation)
+    {
+        $this->localisation = $localisation;
+
+        return $this;
+    }
+
+    public function getLocalisation()
+    {
+        return $this->localisation;
     }
 
     /**

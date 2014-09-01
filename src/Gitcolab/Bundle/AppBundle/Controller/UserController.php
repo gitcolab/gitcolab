@@ -16,16 +16,6 @@ use Gitcolab\Bundle\AppBundle\Form\Type\ProfileType;
 
 class UserController extends Controller
 {
-    public function settingsAction()
-    {
-        $view = $this->view(array(), 200)
-            ->setTemplate("GitcolabAppBundle:User:settings.html.twig")
-            ->setTemplateVar('users')
-        ;
-
-        return $this->handleView($view);
-    }
-
     public function sshAction()
     {
 
@@ -45,14 +35,14 @@ class UserController extends Controller
     public function profileAction(Request $request)
     {
         $profile = $this->getUser();
-        $form = $this->createForm(new ProfileType());
+        $form = $this->createForm(new ProfileType(), $profile);
 
         if ($form->handleRequest($request)->isValid()) {
             $this->getDoctrine()->getManager()->persist($profile);
             $this->getDoctrine()->getManager()->flush();
         }
 
-        $view = $this->view(array('form' => $form ), 200)
+        $view = $this->view(array('form' => $form->createView() ), 200)
             ->setTemplate("GitcolabAppBundle:User:profile.html.twig")
             ->setTemplateVar('user')
         ;

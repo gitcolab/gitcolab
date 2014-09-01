@@ -1,0 +1,4 @@
+key_create:
+  path: /create
+  defaults:
+      _controller: GitcolabAppBundle:Key:create

@@ -1,8 +1,3 @@
-user_settings:
-  path: /settings
-  defaults:
-      _controller: GitcolabAppBundle:User:settings
-
 user_profile:
   path: /profile
   defaults:

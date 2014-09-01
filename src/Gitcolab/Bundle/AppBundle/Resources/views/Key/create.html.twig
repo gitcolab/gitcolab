@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Add an SSH Key
+    </div>
+    <div class="panel-body">
+        <form action="{{ path('key_create') }}" method="post">
+            {{ form_row(form.title) }}
+            {{ form_row(form.key) }}
+
+
+            {{ form_rest(form) }}
+
+            <input type="submit" class="btn btn-primary" />
+        </form>
+    </div>
+</div>

@@ -31,6 +31,16 @@ class Key
         return $this->key;
     }
 
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
