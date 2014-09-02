@@ -1,4 +1,4 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 {% block body %}
-    {% include 'GitcolabAppBundle:User:_tabs.html.twig' %}
+    {{ knp_menu_render('user_setting_tabs') }}
 {% endblock body %}
