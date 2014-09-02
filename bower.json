@@ -11,6 +11,7 @@
         "socket.io-client": "1.0.3",
         "selectize": "0.9.1",
         "ionicons": "1.5.2",
-        "angularjs": "latest"
+        "angularjs": "latest",
+        "eonasdan-bootstrap-datetimepicker": "latest"
     }
 }

@@ -1,0 +1,55 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+{% block site_header %}
+{% endblock %}
+
+
+{% block body %}
+{% block content %}
+
+    {% if error %}
+        <div>{{ error|trans }}</div>
+    {% endif %}
+
+    <div class="form-login">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Login
+            </div>
+            <div class="panel-body">
+                <form action="{{ path('fos_user_security_check') }}" method="post" class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="username" class="col-sm-3 control-label">{{ 'security.login.username'|trans }}</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-3 control-label">{{ 'security.login.password'|trans }}</label>
+                            <div class="col-sm-9">
+                                <input type="password" id="password" name="_password" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <div class="checkbox">
+                                    <label for="remember_me">
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                        {{ 'security.login.remember_me'|trans }} &nbsp; <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <div class="form-actions clearfix">
+                        <button type="submit" class="btn btn-primary" name="login" id="login"><i class="icon-lock"></i> {{ 'security.login.submit'|trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% endblock body %}

@@ -15,14 +15,14 @@ Feature: Login
     When I fill in the following:
       | Username | ena |
       | Password | ena |
-    And I follow "Login"
+    And I press "Login"
     When I delete cookie "PHPSESSID"
     Given I am on "/login"
     When I fill in the following:
       | Username | ena |
       | Password | ena |
     And I check "remember_me"
-    And I follow "Login"
+    And I press "Login"
     When I delete cookie "PHPSESSID"
 
   Scenario: Log in with bad credentials

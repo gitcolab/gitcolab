@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new Gitcolab\Bundle\AppBundle\GitcolabAppBundle()
         );

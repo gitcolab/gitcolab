@@ -16,11 +16,12 @@
         <![endif]-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"  />
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"  />
-        <title>{% block title %}{{ 'Welcome'|trans }}{% endblock %} - Tempo</title>
+        <title>{% block title %}{{ 'Welcome'|trans }}{% endblock %} - GitColab</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         <div id="glob">
+            {% block site_header %}
             <header id="header" class="navbar" role="banner">
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container">
@@ -54,6 +55,7 @@
                     </div><!-- /.container-fluid -->
                 </nav>
             </header>
+            {% endblock site_header %}
             <div class="container">
                 <div class="flash-container">
                     {% block flashes %}

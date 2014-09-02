@@ -55,7 +55,7 @@ class FeatureContext extends BaseContext
 
         $this->fillField('Username', $username);
         $this->fillField('Password', $password);
-        $this->pressButton('_submit');
+        $this->pressButton('login');
         $this->assertPageContainsText('logout');
     }
 }
