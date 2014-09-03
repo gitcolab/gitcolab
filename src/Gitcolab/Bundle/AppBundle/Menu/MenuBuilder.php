@@ -30,7 +30,7 @@ class MenuBuilder
         $menu->addChild('Profile', array('route' => 'user_profile'));
         $menu->addChild('Account', array('route' => 'user_account'));
         $menu->addChild('SSH Keys', array('route' => 'user_keys'));
-        
+
         return $menu;
     }
 

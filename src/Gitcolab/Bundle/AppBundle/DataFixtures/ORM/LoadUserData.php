@@ -74,7 +74,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             $account->addRole(User::ROLE_DEFAULT);
             $account->setEnabled(true);
 
-
             if($username == 'dexter.schwartz') {
                 $account->setEnabled(false);
             }
