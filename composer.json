@@ -28,7 +28,8 @@
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "friendsofsymfony/jsrouting-bundle": "1.5.3",
         "willdurand/js-translation-bundle": "@stable",
-        "mopa/bootstrap-bundle": "v3.0.0-beta4"
+        "mopa/bootstrap-bundle": "v3.0.0-beta4",
+        "white-october/pagerfanta-bundle": "2.1.*@dev"
 
     },
     "require-dev": {
