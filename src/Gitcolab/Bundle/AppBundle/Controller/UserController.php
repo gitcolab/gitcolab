@@ -18,10 +18,7 @@ class UserController extends Controller
 {
     public function sshAction()
     {
-
-        $keys = $this->getDoctrine()
-            ->getManager()
-                ->getRepository('GitcolabAppBundle:Key')
+        $keys = $this->getRepository('GitcolabAppBundle:Key')
                     ->findAll(array('user' =>$this->getuser()));
 
         $view = $this->view($keys, 200)
@@ -38,8 +35,7 @@ class UserController extends Controller
         $form = $this->createForm(new ProfileType(), $profile);
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->getDoctrine()->getManager()->persist($profile);
-            $this->getDoctrine()->getManager()->flush();
+            $this->persistAndFlush($profile);
         }
 
         $view = $this->view(array('form' => $form->createView() ), 200)

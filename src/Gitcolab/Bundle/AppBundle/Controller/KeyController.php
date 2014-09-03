@@ -21,7 +21,7 @@ class KeyController extends Controller
 {
     public function discoverAction($key)
     {
-        $key = $this->getDoctrine()->getManager()->getRepository('GitcolabAppBundle:Key')->find($key);
+        $key = $this->getRepository('Key')->find($key);
 
         $view = View::create();
         $view->setData($key);
@@ -40,8 +40,7 @@ class KeyController extends Controller
             if( $form->isValid()) {
 
                 //todo check ssh key is valid
-                $this->getDoctrine()->getManager()->persist($key);
-                $this->getDoctrine()->getManager()->flush();
+                $this->persistAndFlush($key);
             }
 
             $this->get('session')->getFlashBag()->add(
