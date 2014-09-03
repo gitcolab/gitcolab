@@ -19,11 +19,9 @@ class OrganizationRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('o')
             ->leftJoin('o.users', 'users')
-            ->leftJoin('users.user', 'user');
-
-        if (null !== $user) {
-            $query->where('user.id  = ?1')->setParameter(1, $user);
-        }
+            ->leftJoin('users.user', 'user')
+            ->where('user.id  = ?1')
+            ->setParameter(1, $user);
 
         return $query->getQuery()->getResult();
     }

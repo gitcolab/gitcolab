@@ -33,9 +33,11 @@ class CreateUserOrganizationSubscriber
 
     public function onRegistrationInitialise(UserEvent $event)
     {
-        $organization = new Organization();
-        $organization->setName($event->getUser()->getUsername());
-        $organization->setEmail($event->getUser()->getEmail());
+        $user = $event->getUser();
+
+        $organization = (new Organization())
+            ->setName($user->getUsername())
+            ->setEmail($user->getEmail());
 
         $this->entityManager->persist($organization);
         $this->entityManager->flush();

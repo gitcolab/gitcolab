@@ -13,12 +13,32 @@ namespace Gitcolab\Bundle\AppBundle\Model;
 
 class OrganizationUser
 {
+    /**
+     * @var object
+     */
     protected $organization;
+
+    /**
+     * @var object
+     */
     protected $user;
+
+    /**
+     * @var string
+     */
     protected $role;
+
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
 
-    public function __construct($organization, $user, $role)
+    /**
+     * @param Organization $organization
+     * @param User $user
+     * @param $role
+     */
+    public function __construct(Organization $organization, User $user, $role)
     {
         $this->organization;
         $this->user;
@@ -32,28 +52,45 @@ class OrganizationUser
         return $this;
     }
 
+    /**
+     * @return \DateTime
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * @param $user
+     * @return $this
+     */
     public function setUser($user)
     {
         $this->user = $user;
         return $this;
     }
 
+    /**
+     * @return objects
+     */
     public function getUser()
     {
         return $this->user;
     }
 
+    /**
+     * @param $role
+     * @return $this
+     */
     public function setRole($role)
     {
         $this->role = $role;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getRole()
     {
         return $this->role;

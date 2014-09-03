@@ -21,11 +21,10 @@ class OrganizationController extends Controller
     public function createAction(Request $request)
     {
         $organization = new Organization();
-        $form = $this->createForm(new OrganizationType);
+        $form = $this->createForm(new OrganizationType, $organization);
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->getDoctrine()->getManager()->persist($organization);
-            $this->getDoctrine()->getManager()->flush();
+            $this->persistAndFlush($organization);
 
             $this->redirect($this->generateUrl('_welcome'));
         }
