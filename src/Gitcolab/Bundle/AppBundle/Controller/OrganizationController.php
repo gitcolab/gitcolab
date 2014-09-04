@@ -20,7 +20,8 @@ class OrganizationController extends Controller
 {
     public function createAction(Request $request)
     {
-        $organization = new Organization();
+        $organization = (new Organization())
+            ->addUser($this->getUser(), 'ROLE_ADMIN');
         $form = $this->createForm(new OrganizationType, $organization);
 
         if ($form->handleRequest($request)->isValid()) {

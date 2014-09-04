@@ -17,11 +17,13 @@ class DashboardController extends Controller
 {
     public function mainAction()
     {
-        $organizations = $this->getRepository('Organization')->findOrganizationsByUser($this->getUser());
-
-        $view = $this->view(array(), 200)
-            ->setTemplate("GitcolabAppBundle:Dashboard:main.html.twig")
-        ;
+        $organizations = $this->getRepository('Organization')->findOrganizationsByUser($this->getUser()->getId());
+        $view = $this
+            ->view(array(
+                'organizations' => $organizations,
+            ))
+            ->setStatusCode(200)
+            ->setTemplate("GitcolabAppBundle:Dashboard:main.html.twig");
 
         return $this->handleView($view);
     }

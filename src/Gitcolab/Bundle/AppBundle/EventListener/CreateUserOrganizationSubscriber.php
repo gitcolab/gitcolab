@@ -11,6 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\EventListener;
 
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\UserEvent;
 use Gitcolab\Bundle\AppBundle\Model\Organization;
@@ -19,7 +20,7 @@ class CreateUserOrganizationSubscriber
 {
     public $entityManager;
 
-    public function __construct($entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
@@ -27,10 +28,13 @@ class CreateUserOrganizationSubscriber
     public static function getSubscribedEvents()
     {
         return array(
-            FOSUserEvents::REGISTRATION_INITIALIZE => 'onRegistrationInitialise'
+            FOSUserEvents::REGISTRATION_COMPLETED => 'onRegistrationInitialise'
         );
     }
 
+    /**
+     * @param UserEvent $event
+     */
     public function onRegistrationInitialise(UserEvent $event)
     {
         $user = $event->getUser();
@@ -39,7 +43,17 @@ class CreateUserOrganizationSubscriber
             ->setName($user->getUsername())
             ->setEmail($user->getEmail());
 
-        $this->entityManager->persist($organization);
+        $this->persistAndFlush($organization);
+
+        $organization ->addUser($user, 'ROLE_ADMIN');
+
+        $this->persistAndFlush($organization);
+
+    }
+
+    public function persistAndFlush($entity)
+    {
+        $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
 }

@@ -90,6 +90,24 @@ class Organization
     }
 
     /**
+     * @param $email
+     * @return $this
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
      * @param $slug
      * @return $this
      */
@@ -119,6 +137,17 @@ class Organization
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * @param $user
+     * @param string $role
+     * @return $this
+     */
+    public function addUser($user, $role = 'ROLE_USER')
+    {
+        $this->users[] = new OrganizationUser($this, $user, $role);
+        return $this;
     }
 
     /**

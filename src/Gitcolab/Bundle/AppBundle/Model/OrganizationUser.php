@@ -40,8 +40,8 @@ class OrganizationUser
      */
     public function __construct(Organization $organization, User $user, $role)
     {
-        $this->organization;
-        $this->user;
+        $this->organization = $organization;
+        $this->user = $user;
         $this->role = $role;
         $this->createdAt = new \DateTime();
     }

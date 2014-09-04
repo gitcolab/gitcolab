@@ -12,7 +12,7 @@
         <id name="user" type="integer" association-key="true" />
         <field name="role" type="integer" />
 
-        <many-to-one field="organization" target-entity="Gitcolab\Bundle\AppBundle\Model\Organization" />
+        <many-to-one field="organization" inversed-by="users" target-entity="Gitcolab\Bundle\AppBundle\Model\Organization" />
         <many-to-one field="user" target-entity="Gitcolab\Bundle\AppBundle\Model\User" />
 
         <field name="createdAt" column="created_at" type="date" nullable="false">
