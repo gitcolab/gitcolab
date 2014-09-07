@@ -18,7 +18,7 @@ class UserController extends Controller
 {
     public function sshAction()
     {
-        $keys = $this->getRepository('GitcolabAppBundle:Key')
+        $keys = $this->getRepository('Key')
                     ->findAll(array('user' =>$this->getuser()));
 
         $view = $this->view($keys, 200)

@@ -1,4 +1,17 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 {% block body %}
+    <div class="container">
+        <div id="dashboard-switch" class="btn-group pull-left">
+            {% for organization in organizations %}
+            <button class="btn btn-default" type="button">
+                <img width="20" height="20" src="{{ gravatar(organization.email) }}" alt="{{ organization.name }}" />
+                {{ organization.name }}
+            </button>
+            {% endfor %}
+            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                <span class="caret"></span>
+            </button>
+        </div>
+    </div>
 {% endblock body %}
 

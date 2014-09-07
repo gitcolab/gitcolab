@@ -17,7 +17,13 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+
 use Gitcolab\Bundle\AppBundle\Model\User;
+
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -36,6 +42,9 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function load(ObjectManager $manager)
     {
+        $doctrine = $this->container->get('doctrine');
+        $dispatcher = $this->container->get('event_dispatcher');
+
         $userManager = $this->container->get('fos_user.user_manager');
         $users = array(
             'admin'           => 'Ad Min',
@@ -64,30 +73,31 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             if ($username == 'admin') {
                 $account->addRole(User::ROLE_SUPER_ADMIN);
             }
-            $account->setUsername($username);
-            $account->setUsernameCanonical($username);
-            $account->setEmail($username. '@test.com');
-            $account->setEmailCanonical($username. '@test.com');
-            $account->setLastName($fullName[1]);
-            $account->setFirstName($fullName[0]);
-            $account->setPlainPassword($username);
-            $account->addRole(User::ROLE_DEFAULT);
-            $account->setEnabled(true);
-
+            $account
+                ->setUsername($username)
+                ->setUsernameCanonical($username)
+                ->setEmail($username. '@test.com')
+                ->setEmailCanonical($username. '@test.com')
+                ->setLastName($fullName[1])
+                ->setFirstName($fullName[0])
+                ->setPlainPassword($username)
+                ->addRole(User::ROLE_DEFAULT)
+                ->setEnabled(true);
 
             if($username == 'dexter.schwartz') {
                 $account->setEnabled(false);
             }
             $account->setToken(sha1(uniqid(rand(), true)));
-
             $userManager->updateUser($account, true);
+
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($account, new Request(), new Response()));
 
             $this->addReference($username, $account);
         }
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getOrder()
     {
