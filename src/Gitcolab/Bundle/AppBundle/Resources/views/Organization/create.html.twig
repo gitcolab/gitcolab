@@ -1,0 +1,21 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+
+{% block bodyClass %}organization{% endblock %}
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Organization
+        </div>
+        <div class="panel-body">
+            <form method="post" action="{{ path('organization_create') }}">
+
+                {{ form_errors(form) }}
+
+                {{ form_row(form.name) }}
+                {{ form_row(form.email) }}
+                <input type="submit" class="btn btn-primary" />
+                {{ form_rest(form) }}
+            </form>
+        </div>
+    </div>
+{% endblock body %}

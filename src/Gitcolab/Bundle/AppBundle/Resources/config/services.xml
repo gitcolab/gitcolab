@@ -7,10 +7,16 @@
 
         <parameter key="gitcolab.security.api_internal.class">Gitcolab\Bundle\AppBundle\Security\ApiInternalProvider</parameter>
         <parameter key="gitcolab.menu.builder.class">Gitcolab\Bundle\AppBundle\Menu\MenuBuilder</parameter>
+        <parameter key="gitcolab.twig.extension.class">Gitcolab\Bundle\AppBundle\Twig\Extension\AppExtension</parameter>
+        <parameter key="gitcolab.listener.orga_user_create.class">Gitcolab\Bundle\AppBundle\EventListener\CreateUserOrganizationSubscriber</parameter>
     </parameters>
 
     <services>
         <service id="twig.extension.intl" class="Twig_Extensions_Extension_Intl">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="gitcolab.twig.extension" class="%gitcolab.twig.extension.class%">
             <tag name="twig.extension" />
         </service>
 
@@ -24,6 +30,11 @@
         
         <service id="gitcolab.user.setting.tabs" class="Knp\Menu\MenuItem" factory-service="gitcolab.menu.builder" factory-method="createTabUserSettings">
             <tag name="knp_menu.menu" alias="user_setting_tabs"/>
+        </service>
+
+        <service id="gitcolab.listener.orga_user_create" class="%gitcolab.listener.orga_user_create.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="kernel.event_listener" event="fos_user.registration.completed" method="onRegistrationInitialise" />
         </service>
 
     </services>

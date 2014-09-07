@@ -17,3 +17,7 @@ _keys_api:
   resource: "@GitcolabAppBundle/Resources/config/routing/key_api.yml"
   defaults:
       version: v1
+
+organization:
+  resource: "@GitcolabAppBundle/Resources/config/routing/organization.yml"
+  prefix : /organization

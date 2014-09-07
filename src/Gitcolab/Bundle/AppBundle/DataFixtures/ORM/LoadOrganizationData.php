@@ -17,28 +17,30 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Gitcolab\Bundle\AppBundle\Model\Key;
+use Gitcolab\Bundle\AppBundle\Model\Organization;
 
-class LoadUserKeyData extends AbstractFixture implements OrderedFixtureInterface
+class LoadOrganizationData
 {
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        $key  = (new Key())
-            ->setUser($this->getReference('ena'))
-            ->setTitle('Laptop-home')
-            ->setKey('key-laptop-home');
-        ;
-        $manager->persist($key);
+        $organization = (new Organization())
+            ->setName('Foo')
+            ->getEmail('foo@foo.io');
 
-        $key  = (new Key())
-            ->setUser($this->getReference('ena'))
-            ->setTitle('Laptop-office')
-            ->setKey('key-Laptop-office')
-        ;
-        $manager->persist($key);
+        $manager->persist($organization);
+
+
+        $organization = (new Organization())
+            ->setName('Bar')
+            ->getEmail('bar@bar.io');
+
+
+        $organization = (new Organization())
+            ->setName('FooBar')
+            ->getEmail('foobar@foobar.io');
 
         $manager->flush();
     }
@@ -48,6 +50,6 @@ class LoadUserKeyData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 20;
+        return 30;
     }
 }
