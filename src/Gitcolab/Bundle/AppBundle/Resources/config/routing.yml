@@ -21,3 +21,11 @@ _keys_api:
 organization:
   resource: "@GitcolabAppBundle/Resources/config/routing/organization.yml"
   prefix : /organization
+
+project_show:
+  path: /{slug}
+  defaults:
+      _controller: GitcolabAppBundle:Project:show
+project:
+  resource: "@GitcolabAppBundle/Resources/config/routing/project.yml"
+  prefix : /project

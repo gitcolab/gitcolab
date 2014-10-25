@@ -50,10 +50,20 @@ class Organization
     protected $updatedAt;
 
     /**
+     * @var object
+     */
+    protected $lastActivity;
+
+    /**
      *
      * @var string
      */
     protected $avatar;
+
+    /**
+     * @var object
+     */
+    protected $projects;
 
     /**
      *
@@ -140,6 +150,25 @@ class Organization
     }
 
     /**
+     * @param $projects
+     * @return $this
+     */
+    public function setProjects($projects)
+    {
+        $this->projects = $projects;
+
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    public function getProjects()
+    {
+        return $this->projects;
+    }
+
+    /**
      * @param $user
      * @param string $role
      * @return $this
@@ -166,5 +195,10 @@ class Organization
     public function getUsers()
     {
         return $this->users;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

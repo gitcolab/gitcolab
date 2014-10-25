@@ -11,5 +11,6 @@
 !/bin/server.js
 /composer.phar
 .idea/
+.DS_Store
 .vagrant/
 gitcolab-shell/

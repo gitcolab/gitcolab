@@ -17,12 +17,18 @@ class OrganizationRepository extends EntityRepository
 {
     public function findOrganizationsByUser($user)
     {
+        $query = $this->queryOrganizationsByUser($user);
+        return $query->getQuery()->getResult();
+    }
+
+    public function queryOrganizationsByUser($user)
+    {
         $query = $this->createQueryBuilder('o')
             ->leftJoin('o.users', 'users')
             ->leftJoin('users.user', 'user')
             ->where('user.id  = ?1')
             ->setParameter(1, $user);
 
-        return $query->getQuery()->getResult();
+        return $query;
     }
 }

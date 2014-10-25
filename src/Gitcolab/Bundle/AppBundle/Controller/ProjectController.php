@@ -13,32 +13,39 @@ namespace Gitcolab\Bundle\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
-use Gitcolab\Bundle\AppBundle\Form\Type\OrganizationType;
-use Gitcolab\Bundle\AppBundle\Model\Organization;
+use Gitcolab\Bundle\AppBundle\Form\Type\ProjectType;
+use Gitcolab\Bundle\AppBundle\Model\Project;
 
-class OrganizationController extends Controller
+class ProjectController extends Controller
 {
     public function createAction(Request $request)
     {
-        $organization = new Organization();
+        $project = new Project();
 
-        $form = $this->createForm(new OrganizationType, $organization);
+        $form = $this->createForm(new ProjectType(), $project, array(
+            'user_id' => $this->getUser()
+        ));
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->persistAndFlush($organization);
 
-            $organization->addUser($this->getUser(), 'ROLE_ADMIN');
-            $this->persistAndFlush($organization);
+            $this->persistAndFlush($project);
+            $project->addUser($this->getUser(), 'ROLE_ADMIN');
+            $this->persistAndFlush($project);
 
-            return $this->redirectToRoute('_welcome');
+            $this->redirectToRoute($this->generateUrl('_welcome'));
         }
 
         $view = View::create();
         $view->setData(array(
             'form' => $form->createView()
         ));
-        $view->setTemplate('GitcolabAppBundle:Organization:create.html.twig');
+        $view->setTemplate('GitcolabAppBundle:Project:create.html.twig');
 
         return $this->handleView($view);
+    }
+
+    public function showAction()
+    {
+
     }
 }

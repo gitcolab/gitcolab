@@ -13,5 +13,228 @@ namespace Gitcolab\Bundle\AppBundle\Model;
 
 class Project
 {
+    /**
+     * @var int
+     */
+    protected $id;
 
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $slug;
+
+    /**
+     * @var string
+     */
+    protected $description;
+
+    /**
+     *
+     * @var object
+     */
+    protected $createdAt;
+
+    /**
+     *
+     * @var object
+     */
+    protected $updatedAt;
+
+    /**
+     *
+     * @var object
+     */
+    protected $lastActivity;
+
+    /**
+     * @var object
+     */
+    protected $repository;
+
+    /**
+     * @var object
+     */
+    protected $organization;
+
+    /**
+     * @var string
+     */
+    protected $defaultBranch;
+
+    /**
+     * @var object
+     */
+    protected $users;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param $name
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param $slug
+     * @return self
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param $description
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreatedAt(\DateTime $created)
+    {
+        $this->createdAt = $created;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updated)
+    {
+        $this->updatedAt = $updated;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLastActivity(\DateTime $lastActivity)
+    {
+        $this->lastActivity = $lastActivity;
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastActivity()
+    {
+        return $this->lastActivity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultBranch()
+    {
+        return $this->defaultBranch;
+    }
+
+    /**
+     * @param $defaultBranch
+     */
+    public function setDefaultBranch($defaultBranch)
+    {
+        $this->defaultBranch = $defaultBranch;
+        return $this;
+    }
+
+    public function setOrganization(Organization $organization)
+    {
+        $this->organization = $organization;
+        return $this;
+    }
+
+    public function getOrganization()
+    {
+        return $this->organization;
+    }
+
+    /**
+     * @param Repository $repository
+     */
+    public function setRepository(Repository $repository)
+    {
+        $this->repository = $repository;
+        return $this;
+    }
+
+    public function addUser($user, $role)
+    {
+        return $this;
+    }
+
+    public function getUsers()
+    {
+        return array();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

@@ -2,12 +2,17 @@
 {% block body %}
     <div class="container">
         <div id="dashboard-switch" class="btn-group pull-left">
-            {% for organization in organizations %}
             <button class="btn btn-default" type="button">
-                <img width="20" height="20" src="{{ gravatar(organization.email) }}" alt="{{ organization.name }}" />
-                {{ organization.name }}
+                <img width="20" height="20" src="{{ gravatar(organizations[0].email) }}" alt="{{ organizations[0].name }}" />
+                {{ organizations[0].name }}
             </button>
-            {% endfor %}
+
+            <ul class="dropdown-menu" role="menu">
+                {% for organization in organizations %}
+                <li><a href="#">{{ organization.name }}</a></li>
+                {% endfor %}
+            </ul>
+
             <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
                 <span class="caret"></span>
             </button>

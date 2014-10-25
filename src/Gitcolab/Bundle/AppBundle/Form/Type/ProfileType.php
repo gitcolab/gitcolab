@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormViewInterface;
 use Symfony\Component\Form\AbstractType;
 
-class ProfileType  extends AbstractType
+class ProfileType extends AbstractType
 {
     /**
      * {@inheritdoc}

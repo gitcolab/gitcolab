@@ -9,8 +9,8 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.5.*",
-        "doctrine/orm": "~2.4",
-        "doctrine/doctrine-bundle": "~1.3",
+        "doctrine/orm": "2.5.*@dev",
+        "doctrine/dbal": "2.5.*@dev",
         "doctrine/doctrine-bundle": "1.3.*@dev",
         "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
         "doctrine/migrations": "~1.0@dev",
