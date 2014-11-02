@@ -11,17 +11,25 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
+
         <field name="name" column="name" type="string" nullable="true" unique="true" />
+
         <field name="slug" type="string" length="255" unique="true">
             <gedmo:slug unique="true" updatable="true" separator="-" fields="name" />
         </field>
+
         <field name="avatar" column="avatar" type="string" nullable="true" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
+
         <field name="updatedAt" column="updated_at" type="datetime">
             <gedmo:timestampable on="update"/>
         </field>
+
+        <one-to-many field="projects" target-entity="Project" mapped-by="organization" />
+
         <one-to-many field="users" target-entity="Gitcolab\Bundle\AppBundle\Model\OrganizationUser" mapped-by="organization">
             <cascade>
                 <cascade-all/>

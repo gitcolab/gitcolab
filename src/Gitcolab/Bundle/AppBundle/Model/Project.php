@@ -11,6 +11,8 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Gitonomy\Git\Repository;
+
 class Project
 {
     /**
@@ -65,6 +67,11 @@ class Project
      * @var string
      */
     protected $defaultBranch;
+
+    /**
+     * @var int
+     */
+    protected $repositorySize;
 
     /**
      * @var object
@@ -221,6 +228,16 @@ class Project
     {
         $this->repository = $repository;
         return $this;
+    }
+
+    public function getRepositorySize()
+    {
+        return $this->repositorySize;
+    }
+
+    public function setRepositorySize($repositorySize)
+    {
+        $this->repositorySize = $repositorySize;
     }
 
     public function addUser($user, $role)

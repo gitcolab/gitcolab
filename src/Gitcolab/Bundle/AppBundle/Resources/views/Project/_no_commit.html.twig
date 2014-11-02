@@ -1,0 +1,43 @@
+{% set repo_url = 'git@' ~ gitcolab_url ~ ':' ~ project_slug(project) ~ '.git' %}
+<div id="repo-content" class="clear container">
+    <div id="repo-bare">
+        <div id="repo-bare-start" class="panel">
+            <div class="panel-content">
+                <div id="repo-clone" class="clear text-center">
+                    <h2>Clone this repository</h2>
+                    <div class="pull-left btn-group">
+                        <button class="btn btn-primary btn-inverse" id="repo-clone-ssh" data-link="{{ repo_url }}">SSH</button>
+                        <button class="btn btn-primary btn-inverse" id="repo-clone-https" data-link="https://{{ repo_url }}">HTTPS</button>
+                    </div>
+                    <div class="btn-group col-md-10">
+                        <input id="repo-clone-url" type="text" class="form-control pull-left" value="{{ repo_url }}" readonly="">
+                        <button class="btn btn-primary btn-inverse pull-left" id="repo-clone-copy" data-copy-val="val" data-copy-from="#repo-clone-url" original-title="">Copy</button>
+                    </div>
+                    <p class="text-center clearbox" id="repo-clone-help">Need help cloning? Visit <a target="_blank" href="http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository">Help</a>!</p>
+                    <hr>
+                </div>
+                <div id="repo-bare-cmd" class="text-center">
+                    <h2>Create a new repository on the command line</h2>
+                    <pre class="text-left radius">
+                            <code>
+                                touch README.md
+                                git init
+                                git add README.md
+                                git commit -m "first commit"
+                                git remote add origin <span class="clone-url">{{ repo_url }}</span>
+                                git push -u origin master
+                            </code>
+                        </pre>
+                    <br>
+                    <hr>
+                </div>
+                <div id="repo-bare-remote" class="text-center">
+                    <h2>Push an existing repository from the command line</h2>
+                        <pre class="text-left radius"><code>git remote add origin <span class="clone-url">{{ repo_url }}</span>
+                        git push -u origin master</code></pre>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

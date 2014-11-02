@@ -18,9 +18,12 @@ class DashboardController extends Controller
     public function mainAction()
     {
         $organizations = $this->getRepository('Organization')->findOrganizationsByUser($this->getUser()->getId());
+        $projects = $this->getRepository('Project')->findProjectsByUser($this->getUser()->getId());
+
         $view = $this
             ->view(array(
                 'organizations' => $organizations,
+                'projects' => $projects,
             ))
             ->setStatusCode(200)
             ->setTemplate("GitcolabAppBundle:Dashboard:main.html.twig");

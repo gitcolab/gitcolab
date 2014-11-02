@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+
+        <parameter key="gitcolab.git.repository_pool.class">Gitcolab\Bundle\AppBundle\Git\RepositoryPoolSubscriber</parameter>
+        <parameter key="gitcolab.git.hook_injector.class">Gitcolab\Bundle\AppBundle\Git\HookInjector</parameter>
+
+    </parameters>
+
+    <services>
+
+        <service id="gitcolab.git.repository_pool" class="%gitcolab.git.repository_pool.class%">
+            <tag name="gitcolab.event_subscriber" />
+            <tag name="kernel.event_subscriber" />
+            <argument>%repository_path%</argument>
+        </service>
+
+        <service id="gitcolab.git.hook_injector" class="%gitcolab.git.hook_injector.class%">
+            <tag name="gitcolab.event_listener" event="gitcolab.project_create" method="onProjectCreate" />
+            <argument type="collection">
+                <argument key="pre-receive">%kernel.root_dir%/Resources/hooks/pre-receive</argument>
+                <argument key="post-receive">%kernel.root_dir%/Resources/hooks/post-receive</argument>
+            </argument>
+        </service>
+
+    </services>
+</container>

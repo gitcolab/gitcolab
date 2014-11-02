@@ -14,9 +14,11 @@ namespace Gitcolab\Bundle\AppBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\EventDispatcher\Event;
 use Doctrine\ORM\Query;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
+
 
 class Controller extends FOSRestController
 {
@@ -93,5 +95,15 @@ class Controller extends FOSRestController
         }
 
         $this->container->get('session')->getFlashBag()->add($type, $message);
+    }
+
+    /**
+     * @param $eventName
+     * @param Event $event
+     * @return Event
+     */
+    protected function dispatch($eventName, Event $event)
+    {
+        return $this->get('event_dispatcher')->dispatch($eventName, $event);
     }
 }

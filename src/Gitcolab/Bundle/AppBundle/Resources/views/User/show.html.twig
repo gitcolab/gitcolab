@@ -1,0 +1,48 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+
+{% block bodyClass %}users show{% endblock %}
+{% block body %}
+<div class="col-md-3">
+    <div>
+        <a href="http://gravatar.com/emails/" id="profile-avatar" original-title="Change your avatar at gravatar.com">
+            <img class="profile-avatar" src="{{ gravatar(user.email, 200) }}" title="{{ user.username }}">
+        </a>
+        <div class="text-center" id="profile-name">
+            <span class="center-block" id="profile-username">{{ user.username }}</span>
+        </div>
+    </div>
+    <div class="profile-info">
+        <hr>
+        <ul class="list-no-style">
+            <li class="list-group-item"><a href="mailto:mlanawo.mbechezi@ikimea.com" rel="nofollow">{{ user.email }}</a></li>
+            <li class="list-group-item">Joined on Aug 31, 2014</li>
+        </ul>
+        <hr>
+    </div>
+</div>
+<div class="col-md-6">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#repositories" role="tab" data-toggle="tab">Repositories</a></li>
+        <li role="presentation"><a href="#activity" role="tab" data-toggle="tab">Public Activity</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="repositories">
+            <ul class="list-no-style">
+            {% for repository in repositories %}
+                <li>
+                    <h3><a href="{{ project_slug(repository) }}">{{ repository }}</a></h3>
+                    <div></div>
+                    <div> {{ repository.lastActivity|localizeddate('medium', 'none', app.request.locale) }} </div>
+                </li>
+            {% endfor %}
+            </ul>
+
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="activity">...</div>
+    </div>
+
+</div>
+{% endblock body %}

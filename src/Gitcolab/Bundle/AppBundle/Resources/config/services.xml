@@ -5,6 +5,7 @@
 
     <parameters>
 
+        <parameter key="gitcolab.event_dispatcher.class">Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher</parameter>
         <parameter key="gitcolab.security.api_internal.class">Gitcolab\Bundle\AppBundle\Security\ApiInternalProvider</parameter>
         <parameter key="gitcolab.menu.builder.class">Gitcolab\Bundle\AppBundle\Menu\MenuBuilder</parameter>
         <parameter key="gitcolab.twig.extension.class">Gitcolab\Bundle\AppBundle\Twig\Extension\AppExtension</parameter>
@@ -14,6 +15,10 @@
     <services>
         <service id="twig.extension.intl" class="Twig_Extensions_Extension_Intl">
             <tag name="twig.extension" />
+        </service>
+
+        <service id="gitcolab.event_dispatcher" class="%gitcolab.event_dispatcher.class%">
+            <argument type="service" id="service_container" />
         </service>
 
         <service id="gitcolab.twig.extension" class="%gitcolab.twig.extension.class%">

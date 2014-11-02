@@ -54,4 +54,18 @@ class UserController extends Controller
 
         return $this->handleView($view);
     }
+
+    public function showAction()
+    {
+        $repositories = $this->getRepository('Project')->findBy(array(
+            'organization' => $this->getUser()
+        ));
+
+        $view = $this->view(array(
+            'user' => $this->getUser(),
+            'repositories' => $repositories
+        ), 200)->setTemplate("GitcolabAppBundle:User:show.html.twig");
+
+        return $this->handleView($view);
+    }
 }

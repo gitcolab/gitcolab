@@ -41,8 +41,14 @@ class GitcolabAppExtension extends Extension
         $container->setParameter($this->getAlias() . '.backend_type_orm', true);
 
         $loader->load('services.xml');
+        $loader->load('git.xml');
     }
 
+    /**
+     * @param array $config
+     * @param ContainerBuilder $container
+     * @param array $map
+     */
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)
     {
         foreach ($map as $name => $paramName) {
@@ -52,6 +58,11 @@ class GitcolabAppExtension extends Extension
         }
     }
 
+    /**
+     * @param array $config
+     * @param ContainerBuilder $container
+     * @param array $namespaces
+     */
     protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
     {
         foreach ($namespaces as $ns => $map) {

@@ -1,0 +1,6 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+
+{% block bodyClass %}project show{% endblock %}
+{% block body %}
+    {% include 'GitcolabAppBundle:Project:_no_commit.html.twig'  %}
+{% endblock body %}

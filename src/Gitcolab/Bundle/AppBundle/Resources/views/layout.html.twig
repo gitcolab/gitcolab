@@ -19,7 +19,7 @@
         <title>{% block title %}{{ 'Welcome'|trans }}{% endblock %} - GitColab</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    <body class="{% block bodyClass %}{% endblock %}">
         <div id="glob">
             {% block site_header %}
             <header id="header" role="banner">
@@ -55,8 +55,8 @@
                                 <li>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{ path('project_create') }}">Create project</a></li>
-                                        <li><a href="{{ path('organization_create') }}">Create organization</a></li>
+                                        <li><a href="{{ path('project_create') }}">New Project</a></li>
+                                        <li><a href="{{ path('organization_create') }}">New Organization</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>

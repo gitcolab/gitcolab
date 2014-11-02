@@ -18,14 +18,28 @@ _keys_api:
   defaults:
       version: v1
 
+user_profile_show:
+  path: /{slug}
+  defaults:
+      _controller: GitcolabAppBundle:User:show
+
 organization:
   resource: "@GitcolabAppBundle/Resources/config/routing/organization.yml"
   prefix : /organization
+
+project:
+  resource: "@GitcolabAppBundle/Resources/config/routing/project.yml"
+  prefix : /project
 
 project_show:
   path: /{slug}
   defaults:
       _controller: GitcolabAppBundle:Project:show
-project:
-  resource: "@GitcolabAppBundle/Resources/config/routing/project.yml"
-  prefix : /project
+  requirements:
+      slug: ".+"
+
+project_setting:
+  path: /{slug}/settings
+  defaults:
+       _controller: GitcolabAppBundle:Project:settings
+
