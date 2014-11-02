@@ -23,7 +23,6 @@ class GitcolabListenersPass implements CompilerPassInterface
         //var_dump($container->findTaggedServiceIds('gitcolab.event_subscriber'));
 
         foreach ($container->findTaggedServiceIds('gitcolab.event_subscriber') as $id => $tags) {
-            var_dump('ddd');
             $definition->addMethodCall('addSubscriberService', array($id, $container->getDefinition($id)->getClass()));
         }
     }
