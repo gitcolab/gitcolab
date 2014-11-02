@@ -14,10 +14,6 @@ parameters:
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    debug_toolbar:          true
-    debug_redirects:        false
-    use_assetic_controller: true
-
     gitcolab_db_storage: orm
 
     node_bin: /usr/local/bin/node
