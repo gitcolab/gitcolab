@@ -1,37 +1,43 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 {% block body %}
-    {{ knp_menu_render('user_setting_tabs') }}
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            SSH Key
+
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                SSH Key
+            </div>
+            <p>This is a list of SSH keys associated with your account. Remove any keys that you do not recognize. </p>
+            <div class="panel-body">
+                <ul>
+                    {% for key in keys %}
+                        <tr>
+                            <div>
+                                <div><strong>{{ key.title }}</strong></div>
+                                <div>Added on {{ key.createdAt | localizeddate('long', 'none') }} — Last used on {{ key.updatedAt| localizeddate('long', 'none') }} </div>
+                            </div>
+                            <div>
+                                <a class="btn btn-danger btn-inverse"> Delete </a>
+                            </div>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </ul>
+            </div>
         </div>
-        <p>This is a list of SSH keys associated with your account. Remove any keys that you do not recognize. </p>
-        <div class="panel-body">
-            <table>
-                <thead>
-                <tr>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for key in keys %}
-                    <tr>
-                        <td>
-                            <div><strong>{{ key.title }}</strong></div>
-                            <div>Added on {{ key.createdAt | localizeddate('long', 'none') }} — Last used on {{ key.updatedAt| localizeddate('long', 'none') }} </div>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger"> Delete </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+
+        <div id="form-add-key-ssh">
+            {{ render(controller('GitcolabAppBundle:Key:create')) }}
         </div>
     </div>
-
-    <div id="form-add-key-ssh">
-        {{ render(controller('GitcolabAppBundle:Key:create')) }}
+    <div class="col-md-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Settings</strong>
+            </div>
+            <div class="panel-body">
+                {{ knp_menu_render('user_setting_tabs') }}
+            </div>
+        </div>
     </div>
 
 {% endblock body %}

@@ -1,4 +1,13 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 {% block body %}
-    {{ knp_menu_render('user_setting_tabs') }}
+    <div class="col-md-2">
+        <div class="panel-default">
+            <div class="panel-heading">
+                <strong>Settings</strong>
+            </div>
+            <div class="panel-body">
+                {{ knp_menu_render('user_setting_tabs') }}
+            </div>
+        </div>
+    </div>
 {% endblock body %}
