@@ -14,3 +14,4 @@
 .DS_Store
 .vagrant/
 gitcolab-shell/
+node_modules/
