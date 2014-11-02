@@ -5,7 +5,7 @@
 
         {% stylesheets
             '@GitcolabAppBundle/Resources/client/less/style.less'
-            filter='less, ?cssrewrite,?yui_css' debug=true
+            filter='less,?uglifycss' debug=true
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -83,19 +83,16 @@
             </div>
             {% block javascripts %}
                 {% javascripts
-                    'vendor/socket.io-client/socket.io.js'
                     'vendor/jquery/dist/jquery.js'
                     'vendor/jquery-ui/ui/jquery-ui.js'
                     'vendor/bootstrap/dist/js/bootstrap.min.js'
-                    'vendor/tinycon/tinycon.min.js'
                     'vendor/moment/moment.js'
                     'vendor/modernizr/modernizr.js'
                     '@BazingaJsTranslationBundle/Resources/js/translator.js'
                     '@FOSJsRoutingBundle/Resources/public/js/router.js'
-                    'vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
                     'vendor/selectize/dist/js/standalone/selectize.min.js'
                     '@GitcolabAppBundle/Resources/client/js/app.js'
-                filter="?yui_js"
+                filter="?uglifyjs2"
                 output="js/main.js"
                 %}
                 <script src="{{ asset_url }}"></script>

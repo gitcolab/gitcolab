@@ -44,6 +44,11 @@ assetic:
             node: %node_bin%
             node_paths: [%node_modules%]
             apply_to: "\.less$"
+        uglifyjs2:
+            # the path to the uglifyjs executable
+            bin: %node_modules%/.bin/uglifyjs
+        uglifycss:
+            bin: %node_modules%/.bin/uglifycss
 
 # Doctrine Configuration
 doctrine:
