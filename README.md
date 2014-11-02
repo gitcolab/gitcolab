@@ -54,7 +54,7 @@ option there.
 
 ```bash
 $ cp behat.yml.dist behat.yml
-$ vi behat.yml
+$ vim behat.yml
 ```
 
 Then download [Selenium Server](http://seleniumhq.org/download/), and run it.

@@ -1,12 +1,12 @@
 Feature: Login
 
   Scenario: Inactive user can't login
-    When I am on route "fos_user_security_login"
+    When I am on "/login"
     When I fill in the following:
       | Username | dexter.schwartz |
       | Password | dexter.schwartz |
     And I press "Login"
-    And I should see "User account is disabled."
+    And I should see "Account is disabled."
 
   Scenario: Remember me cookie works
 
@@ -26,9 +26,9 @@ Feature: Login
     When I delete cookie "PHPSESSID"
 
   Scenario: Log in with bad credentials
-    When I am on route "fos_user_security_login"
+    When I am on "/login"
     When I fill in the following:
       | Username | bar |
       | Password | bar |
     And I press "Login"
-    And I should see "Invalid username or password"
+    And I should see "Invalid credentials."

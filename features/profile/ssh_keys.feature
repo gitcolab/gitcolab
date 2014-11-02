@@ -11,7 +11,7 @@ Feature: Manage SSH keys
     And I should not see "Laptop-friend"
     When I am on "/user/ssh"
     And I fill in the following:
-      | Title | Laptop-friend |
-      | Key | key-Laptop-friend |
+      | Title | Laptop-friend     |
+      | Key   | key-Laptop-friend |
     And I press "Save"
     Then I should see "SSH key created!"

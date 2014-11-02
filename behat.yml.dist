@@ -1,4 +1,6 @@
 default:
+    autoload:
+        'Context': %paths.base%/features
     formatters:
         pretty:
             verbose:  true
@@ -9,14 +11,24 @@ default:
         default:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - Gitcolab\Bundle\AppBundle\Behat\FeatureContext
+                - Context\FeatureContext
 
     extensions:
         Behat\MinkExtension:
-            sessions:
-                default:
-                    symfony2: ~
 
-            browser_name: firefox
-            show_auto:    false
+            # You have probably something like "myproject.dev" instead of "localhost"
+            base_url: 'http://localhost:8080/app_test.php'
+
+            goutte: ~
+            selenium2: ~
+            default_session: goutte
+            javascript_session: selenium2
+
+            # Usefull when you use the "And show last response" command
+            # You can change it to `firefox %s` or maybe `google_chrome %s`
+            show_cmd: firefox %s
+
+            # To set at true if you want to see the error in a browser
+            show_auto: false
+
         Behat\Symfony2Extension: ~
