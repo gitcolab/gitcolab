@@ -15,7 +15,7 @@
         <service id="gitcolab.git.repository_pool" class="%gitcolab.git.repository_pool.class%">
             <tag name="gitcolab.event_subscriber" />
             <tag name="kernel.event_subscriber" />
-            <argument>%repository_path%</argument>
+            <argument>%gitcolab.repository_path%</argument>
         </service>
 
         <service id="gitcolab.git.hook_injector" class="%gitcolab.git.hook_injector.class%">

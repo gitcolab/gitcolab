@@ -115,6 +115,6 @@ mopa_bootstrap:
 
 
 gitcolab_app:
-    repository_path: %repository_path%
+    repository_path: %gitcolab.repository_path%
     # ssh_host: ssh.host_example.com
     # user: git
