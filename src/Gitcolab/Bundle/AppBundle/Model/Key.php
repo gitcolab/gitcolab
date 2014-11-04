@@ -43,6 +43,11 @@ class Key
      */
     protected $updatedAt;
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * @param $key
      * @return $this

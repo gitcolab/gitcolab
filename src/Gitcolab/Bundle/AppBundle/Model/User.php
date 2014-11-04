@@ -17,6 +17,7 @@ class User extends BaseUser
 {
     protected $token;
     protected $keys;
+    protected $activities;
     protected $createdAt;
     protected $updatedAt;
     protected $lastName;
@@ -46,6 +47,17 @@ class User extends BaseUser
     public function getKeys()
     {
         return $this->keys;
+    }
+
+    public function setActivities($activities)
+    {
+        $this->activities = $activities;
+
+        return $this;
+    }
+    public function getActivities()
+    {
+        return $this->activities;
     }
 
     /**
@@ -174,6 +186,11 @@ class User extends BaseUser
     public function getViadeo()
     {
         return $this->viadeo;
+    }
+
+    public function _toString()
+    {
+        return $this->username;
     }
 
 }
