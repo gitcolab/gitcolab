@@ -1,6 +1,6 @@
 security:
     encoders:
-        Gitcolab\Bundle\AppBundle\Entity\User\User:
+        Gitcolab\Bundle\AppBundle\Model\User\User:
             algorithm: sha512
             encode_as_base64: true
             iterations: 34
@@ -11,7 +11,7 @@ security:
     providers:
         main:
             entity:
-                class: Gitcolab\Bundle\AppBundle\Entity\User\User
+                class: Gitcolab\Bundle\AppBundle\Model\User\User
                 property: username
 
     firewalls:
