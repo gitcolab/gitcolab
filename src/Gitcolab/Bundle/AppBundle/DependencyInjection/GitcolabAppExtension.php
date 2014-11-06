@@ -37,5 +37,6 @@ class GitcolabAppExtension extends Extension
 
         $loader->load('services.xml');
         $loader->load('git.xml');
+        $loader->load('services/user.xml');
     }
 }

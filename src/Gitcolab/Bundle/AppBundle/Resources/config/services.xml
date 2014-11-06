@@ -32,7 +32,7 @@
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="translator" />
         </service>
-        
+
         <service id="gitcolab.user.setting.tabs" class="Knp\Menu\MenuItem" factory-service="gitcolab.menu.builder" factory-method="createTabUserSettings">
             <tag name="knp_menu.menu" alias="user_setting_tabs"/>
         </service>

@@ -13,9 +13,10 @@
         </id>
 
         <field name="title" column="title" type="string" nullable="true" />
+
         <field name="key" column="ssh_key" type="text" nullable="true" />
 
-        <many-to-one field="user" inversed-by="keys" target-entity="Gitcolab\Bundle\AppBundle\Model\User" />
+        <many-to-one field="user" inversed-by="keys" target-entity="Gitcolab\Bundle\AppBundle\Model\User\User" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

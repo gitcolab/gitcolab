@@ -15,14 +15,9 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 
+use Gitcolab\Bundle\AppBundle\Model\User\User;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-
-use Gitcolab\Bundle\AppBundle\Model\User;
 
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
@@ -42,11 +37,10 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function load(ObjectManager $manager)
     {
-        $doctrine = $this->container->get('doctrine');
-        $dispatcher = $this->container->get('event_dispatcher');
 
-        $userManager = $this->container->get('fos_user.user_manager');
-        $users = array(
+        //$userManager = $this->container->get('fos_user.user_manager');
+        $userFactory = $this->container->get('gitcolab_app.user.factory');
+        $users = [
             'admin'           => 'Ad Min',
             'ena'             => 'Ena Ikimea',
             'john.doe'        => 'John Doe',
@@ -64,33 +58,32 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             'chase.hoffman'   => 'Chase Hoffman',
             'gregory.joyner'  => 'Gregory Joyner',
             'dexter.schwartz' => 'Dexter Schwartz'
-        );
+        ];
 
         foreach ($users as $username => $name) {
-            $account = $userManager->createUser();
             $fullName = explode(' ', $name);
 
+            $account = $userFactory->createUser([
+                'username' => $username,
+                'email'    => $username . '@test.com',
+                'lastName' => $fullName[1],
+                'firstName' => $fullName[0],
+                'plainPassword' => $username,
+                'roles' => [User::ROLE_USER]
+            ]);
+
             if ($username == 'admin') {
-                $account->addRole(User::ROLE_SUPER_ADMIN);
+                $account->addRole(User::ROLE_ADMIN);
             }
-            $account
-                ->setUsername($username)
-                ->setUsernameCanonical($username)
-                ->setEmail($username. '@test.com')
-                ->setEmailCanonical($username. '@test.com')
-                ->setLastName($fullName[1])
-                ->setFirstName($fullName[0])
-                ->setPlainPassword($username)
-                ->addRole(User::ROLE_DEFAULT)
-                ->setEnabled(true);
 
             if($username == 'dexter.schwartz') {
                 $account->setEnabled(false);
             }
-            $account->setToken(sha1(uniqid(rand(), true)));
-            $userManager->updateUser($account, true);
+            //$account->setToken(sha1(uniqid(rand(), true)));
+            //$userManager->updateUser($account, true);
 
-            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($account, new Request(), new Response()));
+            //$dispatcher = $this->container->get('event_dispatcher');
+            //$dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($account, new Request(), new Response()));
 
             $this->addReference($username, $account);
         }

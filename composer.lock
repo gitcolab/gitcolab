@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "34e5a9ad3faf09e806b0ce5880ef4ef7",
+    "hash": "48f6296f6de947d8632e63529e9a5f58",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1019,73 +1019,6 @@
                 "rest"
             ],
             "time": "2014-08-15 12:18:54"
-        },
-        {
-            "name": "friendsofsymfony/user-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "9714a92e968f7e12431ccf5fecb1346f0d5adc65"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/9714a92e968f7e12431ccf5fecb1346f0d5adc65",
-                "reference": "9714a92e968f7e12431ccf5fecb1346f0d5adc65",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "symfony/form": "~2.3",
-                "symfony/framework-bundle": "~2.3",
-                "symfony/security-bundle": "~2.3",
-                "symfony/twig-bundle": "~2.3"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "*",
-                "swiftmailer/swiftmailer": ">=4.3, <6.0",
-                "symfony/validator": "~2.3",
-                "symfony/yaml": "~2.3",
-                "willdurand/propel-typehintable-behavior": "dev-master"
-            },
-            "suggest": {
-                "willdurand/propel-typehintable-behavior": "Needed when using the propel implementation"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "FOS\\UserBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christophe Coevoet",
-                    "email": "stof@notk.org"
-                },
-                {
-                    "name": "FriendsOfSymfony Community",
-                    "homepage": "https://github.com/friendsofsymfony/FOSUserBundle/contributors"
-                },
-                {
-                    "name": "Thibault Duplessis",
-                    "email": "thibault.duplessis@gmail.com"
-                }
-            ],
-            "description": "Symfony FOSUserBundle",
-            "homepage": "http://friendsofsymfony.github.com",
-            "keywords": [
-                "User management"
-            ],
-            "time": "2014-10-20 09:15:23"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -4330,7 +4263,6 @@
         "doctrine/doctrine-migrations-bundle": 20,
         "doctrine/migrations": 20,
         "stof/doctrine-extensions-bundle": 20,
-        "friendsofsymfony/user-bundle": 20,
         "willdurand/js-translation-bundle": 0,
         "mopa/bootstrap-bundle": 10,
         "white-october/pagerfanta-bundle": 20,

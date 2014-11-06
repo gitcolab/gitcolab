@@ -25,7 +25,6 @@
         "knplabs/knp-menu-bundle": "~2.0",
         "jms/serializer-bundle": "~0.13",
         "friendsofsymfony/rest-bundle": "~1.0",
-        "friendsofsymfony/user-bundle": "2.0.*@dev",
         "friendsofsymfony/jsrouting-bundle": "1.5.3",
         "willdurand/js-translation-bundle": "@stable",
         "mopa/bootstrap-bundle": "v3.0.0-beta4",

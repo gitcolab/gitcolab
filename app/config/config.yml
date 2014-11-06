@@ -70,7 +70,6 @@ doctrine:
                     GitcolabAppBundle:
                       prefix: Gitcolab\Bundle\AppBundle\Model
 
-# app/config/config.yml
 stof_doctrine_extensions:
     default_locale: en_US
     orm:
@@ -88,11 +87,6 @@ swiftmailer:
     spool:     { type: memory }
 
 
-# app/config/config.yml
-fos_user:
-    db_driver: %gitcolab.db_storage%
-    firewall_name: main
-    user_class: Gitcolab\Bundle\AppBundle\Model\User
 
 fos_rest:
     param_fetcher_listener: true

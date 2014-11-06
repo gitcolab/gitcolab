@@ -6,28 +6,35 @@
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
 
-    <entity name="Gitcolab\Bundle\AppBundle\Model\User" table="gitcolab_user">
+    <entity name="Gitcolab\Bundle\AppBundle\Model\User\User" table="gitcolab_user">
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
 
+        <field name="email" column="email" type="string" nullable="true" />
+        <field name="username" column="username" type="string" nullable="true" />
+        <field name="slugUsername" column="slug_username" type="string" length="255" unique="true">
+            <gedmo:slug unique="true" updatable="true" separator="-" fields="username" />
+        </field>
+        <field name="salt" column="salt" type="string" nullable="true" />
+        <field name="password" column="password" type="string" nullable="true" />
         <field name="token" column="token" type="string" nullable="true" />
-        <one-to-many field="keys" target-entity="Key" mapped-by="user" />
-        <one-to-many field="activities" target-entity="Activity" mapped-by="author" />
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
         <field name="avatar" column="avatar" type="string" nullable="true" />
-        <field name="skype" column="skype" type="string" nullable="true" />
-        <field name="viadeo" column="viadeo" type="string" nullable="true" />
-        <field name="linkedin" column="linkedin" type="string" nullable="true" />
-        <field name="twitter" column="twitter" type="string" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
         <field name="updatedAt" column="updated_at" type="datetime">
             <gedmo:timestampable on="update"/>
         </field>
+        <field name="enabled" column="enabled" type="boolean" />
+        <field name="locked" column="locked" type="boolean" />
+        <field name="roles" column="roles" type="array" />
+
+        <one-to-many field="keys" target-entity="Key" mapped-by="user" />
+        <one-to-many field="activities" target-entity="Activity" mapped-by="author" />
     </entity>
 
 </doctrine-mapping>
