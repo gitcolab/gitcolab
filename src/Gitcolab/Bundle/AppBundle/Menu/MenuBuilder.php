@@ -26,7 +26,7 @@ class MenuBuilder
     public function createTabUserSettings()
     {
         $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'subnav-links nav nav-tabs');
+        $menu->setChildrenAttribute('class', 'subnav-links nav nav-pills nav-stacked');
         $menu->addChild('Profile', array('route' => 'user_profile'));
         $menu->addChild('Account', array('route' => 'user_account'));
         $menu->addChild('SSH Keys', array('route' => 'user_keys'));
