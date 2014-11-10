@@ -1,4 +1,14 @@
 organization_create:
-  path: /create
+  path: /organization/create
   defaults:
       _controller: GitcolabAppBundle:Organization:create
+
+organization_show:
+  path: /{slug}
+  defaults:
+      _controller: GitcolabAppBundle:Organization:show
+
+organization_setting:
+  path: /{slug}/settings
+  defaults:
+      _controller: GitcolabAppBundle:Organization:settings

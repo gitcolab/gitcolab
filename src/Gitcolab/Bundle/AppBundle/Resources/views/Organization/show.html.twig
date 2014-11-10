@@ -3,27 +3,59 @@
 {% block bodyClass %}project show{% endblock %}
 {% block body %}
     <div class="col-md-8">
-        <div>
-            user
+        <div class="head-orga clearfix">
+            <img src="{{ gravatar(organization.email) }}" />
+            <h1>
+                <span>{{ organization }}</span>
+                <a class="btn btn-default btn-xs" href="{{ path('organization_setting', {'slug': organization.slug }) }}">
+                    <span class="glyphicon glyphicon-wrench"></span>
+                </a>
+            </h1>
         </div>
-        <div class="panel-body">
-
+        <div class="option-orga clearfix">
+            <form class="col-md-6" method="post" action="?">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Filter</label>
+                    <input type="text" name="name" class="form-control" />
+                </div>
+            </form>
+            <div class="col-md-6">
+                <a href="{{ path('project_create', {'org': organization.slug}) }}" class="pull-right btn btn-primary">
+                    New repository
+                </a>
+            </div>
+        </div>
+        <div>
+            <ul class="repositories">
+                {% for project in repositories %}
+                <li>
+                    <h3>
+                        <a href="{{ project_slug(project) }}">{{ project }}</a>
+                    </h3>
+                    <p class="description">{{ project.description }}</p>
+                    <div class="last-updated">{{ project.updatedAt|localizeddate('medium', 'none', app.request.locale) }}</div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% if repositories.haveToPaginate() %}
+                {{ pagerfanta(repositories, 'twitter_bootstrap3') }}
+            {% endif %}
         </div>
     </div>
     <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a class="text-grey right" href="/org/shine-d/members"><strong>1</strong></a>
+                <a class="label label-default pull-right" href="/org/shine-d/members"><strong>1</strong></a>
                 <strong>People</strong>
             </div>
             <div class="panel-body"></div>
         </div>
-        <div class="panel panel-default">
+        <!--<div class="panel panel-default">
             <div class="panel-heading">
                 <a class="text-grey right" href="/org/shine-d/members"><strong>1</strong></a>
                 <strong>Team</strong>
             </div>
             <div class="panel-body"></div>
-        </div>
+        </div>-->
     </div>
 {% endblock body %}

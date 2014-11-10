@@ -14,6 +14,7 @@ namespace Gitcolab\Bundle\AppBundle\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Gitcolab\Bundle\AppBundle\Model\Project;
+use Gitcolab\Bundle\AppBundle\Model\User;
 
 class ProjectEvent extends Event
 {

@@ -13,8 +13,11 @@ namespace Gitcolab\Bundle\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Gitcolab\Bundle\AppBundle\Form\Type\OrganizationType;
 use Gitcolab\Bundle\AppBundle\Model\Organization;
+
 
 class OrganizationController extends Controller
 {
@@ -41,4 +44,36 @@ class OrganizationController extends Controller
 
         return $this->handleView($view);
     }
+
+    public function showAction(Request $request, $slug)
+    {
+        $orgaUser = $this->getRepository('User')->findOneBy(array('usernameCanonical' => $slug));
+        if ($orgaUser) {
+            $response = $this->forward('GitcolabAppBundle:User:show', array(
+                'slug'  => $slug,
+            ));
+
+            return $response;
+        }
+
+        $organization = $this->getRepository('Organization')->findOneBySlug($slug);
+        $listQuery = $this->getRepository('Project')->getListPaginatorQueryBuilder($slug,'', array('name' => 'ASC'));
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($listQuery));
+        $paginator
+            ->setMaxPerPage(10)
+            ->setCurrentPage($request->request->get('page', 1), false, true);
+
+        return $this->render('GitcolabAppBundle:Organization:show.html.twig', array(
+            'organization'  => $organization,
+            'repositories' => $paginator
+        ));
+    }
+
+    public function settingsAction(Organization $organization)
+    {
+        return $this->render('GitcolabAppBundle:Organization:settings.html.twig', array(
+            'organization'  => $organization,
+        ));
+    }
+
 }

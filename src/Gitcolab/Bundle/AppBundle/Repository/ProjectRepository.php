@@ -45,4 +45,32 @@ class ProjectRepository extends EntityRepository
 
         return $query;
     }
+
+    /**
+     * @param string $search
+     * @param array $orderBy
+     * @return QueryBuilder
+     */
+    public function getListPaginatorQueryBuilder($org, $search = '', array $orderBy = array())
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.organization', 'org');
+
+        if ('' !== $search) {
+            foreach ($this->_class->getFieldNames() as $fieldName) {
+                $qb->orWhere(sprintf('p.%s LIKE :search', $fieldName));
+            }
+            $qb->setParameter(':search', '%'.$search.'%');
+        }
+
+        foreach ($orderBy as $field => $order) {
+            $qb->addOrderBy('p.'.$field, $order);
+        }
+
+        $qb->andWhere('org.slug = ?2')
+           ->setParameter(2, $org);
+
+
+        return $qb;
+    }
 }
