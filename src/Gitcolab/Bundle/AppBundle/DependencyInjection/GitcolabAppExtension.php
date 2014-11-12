@@ -38,48 +38,5 @@ class GitcolabAppExtension extends Extension
         $loader->load('services.xml');
         $loader->load('git.xml');
         $loader->load('services/user.xml');
-<<<<<<< HEAD
-=======
-    }
-
-    /**
-     * @param array $config
-     * @param ContainerBuilder $container
-     * @param array $map
-     */
-    protected function remapParameters(array $config, ContainerBuilder $container, array $map)
-    {
-        foreach ($map as $name => $paramName) {
-            if (array_key_exists($name, $config)) {
-                $container->setParameter($paramName, $config[$name]);
-            }
-        }
-    }
-
-    /**
-     * @param array $config
-     * @param ContainerBuilder $container
-     * @param array $namespaces
-     */
-    protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
-    {
-        foreach ($namespaces as $ns => $map) {
-            if ($ns) {
-                if (!array_key_exists($ns, $config)) {
-                    continue;
-                }
-                $namespaceConfig = $config[$ns];
-            } else {
-                $namespaceConfig = $config;
-            }
-            if (is_array($map)) {
-                $this->remapParameters($namespaceConfig, $container, $map);
-            } else {
-                foreach ($namespaceConfig as $name => $value) {
-                    $container->setParameter(sprintf($map, $name), $value);
-                }
-            }
-        }
->>>>>>> 413767040b3fd6cf256dc5f3ee51051a4cb210f7
     }
 }
