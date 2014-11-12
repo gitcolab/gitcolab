@@ -12,6 +12,8 @@
 namespace Gitcolab\Bundle\AppBundle\Model\User;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Gitcolab\Bundle\AppBundle\Model\Activity;
+use Gitcolab\Bundle\AppBundle\Model\Key;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 

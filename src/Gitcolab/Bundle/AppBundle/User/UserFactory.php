@@ -23,5 +23,7 @@ class UserFactory
             $method = 'set' . ucfirst($methodPart);
             $user->$method($value);
         }
+
+        return $user;
     }
 }

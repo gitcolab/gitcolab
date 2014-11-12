@@ -6,8 +6,5 @@ _bazinga_jstranslation:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
-fos_user_security:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-
 _gitcolab_app:
     resource: "@GitcolabAppBundle/Resources/config/routing.yml"
