@@ -21,9 +21,6 @@ class GitcolabAppBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new OverrideServiceCompilerPass());
-        $container->addCompilerPass(new GitcolabListenersPass());
-
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Gitcolab\Bundle\AppBundle\Model',
         );

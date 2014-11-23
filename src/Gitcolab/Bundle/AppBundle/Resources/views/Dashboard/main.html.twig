@@ -3,6 +3,7 @@
 {% block body %}
     <div class="container">
         <div id="dashboard-switch" class="btn-group pull-left">
+            {% if organizations is not empty %}
             <button class="btn btn-default" type="button">
                 <img width="20" height="20" src="{{ gravatar(organizations[0].email) }}" alt="{{ organizations[0].name }}" />
                 {{ organizations[0].name }}
@@ -17,6 +18,7 @@
             <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
                 <span class="caret"></span>
             </button>
+            {% endif %}
         </div>
     </div>
 

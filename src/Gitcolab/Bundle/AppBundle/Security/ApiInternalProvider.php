@@ -11,7 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\Security;
 
-use Gitcolab\Bundle\AppBundle\Model\User;
+use Gitcolab\Bundle\AppBundle\Model\User\User;
 use Symfony\Component\Security\Core\Authentication\SimplePreAuthenticatorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;

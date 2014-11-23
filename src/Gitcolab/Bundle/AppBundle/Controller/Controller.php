@@ -12,8 +12,6 @@
 namespace Gitcolab\Bundle\AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\Event;
 use Doctrine\ORM\Query;
 use Pagerfanta\Pagerfanta;
@@ -44,13 +42,13 @@ class Controller extends FOSRestController
     }
 
     /**
-     * @param $class
-     * @param string $domaine
+     * @param string $class
+     * @param string $domain
      * @return \Doctrine\Common\Persistence\ObjectRepository
      */
-    protected function getRepository($class, $domaine = 'GitcolabAppBundle')
+    protected function getRepository($class, $domain = 'GitcolabAppBundle')
     {
-        return $this->getDoctrine()->getRepository($domaine. ':'.$class);
+        return $this->getDoctrine()->getRepository($domain . ':' . $class);
     }
 
     /**
@@ -73,9 +71,9 @@ class Controller extends FOSRestController
      * @param array  $parameters An array of parameters
      * @param int    $status     The status code to use for the Response
      *
-     * @return RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function redirectToRoute($route, array $parameters = array(), $status = 302)
+    protected function redirectToRoute($route, array $parameters = [], $status = 302)
     {
         return $this->redirect($this->generateUrl($route, $parameters), $status);
     }

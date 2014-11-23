@@ -1,14 +1,25 @@
 user_profile:
-  path: /profile
-  defaults:
-      _controller: GitcolabAppBundle:User:profile
+    path: /profile
+    defaults:
+        _controller: GitcolabAppBundle:User:profile
 
 user_account:
-  path: /account
-  defaults:
-      _controller: GitcolabAppBundle:User:account
+    path: /account
+    defaults:
+        _controller: GitcolabAppBundle:User:account
 
 user_keys:
-  path: /ssh
-  defaults:
-      _controller: GitcolabAppBundle:User:ssh
+    path: /ssh
+    defaults:
+        _controller: GitcolabAppBundle:User:ssh
+
+login:
+    path: /login
+    defaults:
+        _controller: GitcolabAppBundle:User/Security:login
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
