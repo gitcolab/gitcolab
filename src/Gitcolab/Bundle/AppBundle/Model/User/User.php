@@ -614,4 +614,9 @@ class User implements AdvancedUserInterface, \Serializable
         $this->email = $parameters['email'];
         $this->roles = new ArrayCollection($parameters['roles']);
     }
+
+    public function __toString()
+    {
+        return $this->username;
+    }
 }

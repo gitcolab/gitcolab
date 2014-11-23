@@ -68,7 +68,9 @@ doctrine:
                 mappings:
                     StofDoctrineExtensionsBundle: true
                     GitcolabAppBundle:
-                      prefix: Gitcolab\Bundle\AppBundle\Model
+                        prefix: Gitcolab\Bundle\AppBundle\Model
+                        dir: "%kernel.root_dir%/../src/Gitcolab/Bundle/AppBundle/Model/"
+                        type: xml
 
 stof_doctrine_extensions:
     default_locale: en_US
