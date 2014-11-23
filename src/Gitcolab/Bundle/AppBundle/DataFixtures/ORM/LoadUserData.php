@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 
 use Gitcolab\Bundle\AppBundle\Model\User\User;
+use Gitcolab\Bundle\AppBundle\User\UserFactory;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -37,9 +38,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
      */
     public function load(ObjectManager $manager)
     {
-
-        //$userManager = $this->container->get('fos_user.user_manager');
-        $userFactory = $this->container->get('gitcolab_app.user.factory');
+        /** @var UserFactory $userFactory */
+        $userFactory = $this->container->get('gitcolab.user.factory');
         $users = [
             'admin'           => 'Ad Min',
             'ena'             => 'Ena Ikimea',
@@ -79,14 +79,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
             if($username == 'dexter.schwartz') {
                 $account->setEnabled(false);
             }
-            //$account->setToken(sha1(uniqid(rand(), true)));
-            //$userManager->updateUser($account, true);
-
-            //$dispatcher = $this->container->get('event_dispatcher');
-            //$dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($account, new Request(), new Response()));
 
             $this->addReference($username, $account);
+
+            $manager->persist($account);
         }
+
+        $manager->flush();
     }
 
     /**
