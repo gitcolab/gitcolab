@@ -8,11 +8,7 @@
 
     <entity name="Gitcolab\Bundle\AppBundle\Model\Organization" repository-class="Gitcolab\Bundle\AppBundle\Repository\OrganizationRepository" table="gitcolab_organization">
 
-        <id name="id" type="integer" column="id">
-            <generator strategy="AUTO" />
-        </id>
 
-        <field name="name" column="name" type="string" nullable="true" unique="true" />
 
         <field name="slug" type="string" length="255" unique="true">
             <gedmo:slug unique="true" updatable="true" separator="-" fields="name" />

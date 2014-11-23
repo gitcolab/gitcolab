@@ -14,33 +14,20 @@ namespace Gitcolab\Bundle\AppBundle\Model\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gitcolab\Bundle\AppBundle\Model\Activity;
 use Gitcolab\Bundle\AppBundle\Model\Key;
+use Gitcolab\Bundle\AppBundle\Model\OrganizationUser;
+use Gitcolab\Bundle\AppBundle\Model\Owner;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
-class User implements AdvancedUserInterface, \Serializable
+class User extends Owner implements AdvancedUserInterface, \Serializable
 {
     const ROLE_ADMIN = 'ROLE_ADMIN';
     const ROLE_USER = 'ROLE_USER';
 
     /**
-     * @var int
-     */
-    protected $id;
-
-    /**
      * @var string
      */
     protected $email;
-
-    /**
-     * @var string
-     */
-    protected $username;
-
-    /**
-     * @var string
-     */
-    protected $slugUsername;
 
     /**
      * @var string
@@ -118,6 +105,11 @@ class User implements AdvancedUserInterface, \Serializable
      * @var array
      */
     protected $roles;
+
+    /**
+     * @var OrganizationUser[]
+     */
+    protected $organizationUser;
 
     public function __construct($secret = 'GeneratedForGitcolab')
     {
@@ -404,25 +396,6 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @return string
-     */
-    public function getSlugUsername()
-    {
-        return $this->slugUsername;
-    }
-
-    /**
-     * @param string $slugUsername
-     * @return self
-     */
-    public function setSlugUsername($slugUsername)
-    {
-        $this->slugUsername = $slugUsername;
-
-        return $this;
-    }
-
-    /**
      * @return \DateTime
      */
     public function getUpdatedAt()
@@ -463,14 +436,6 @@ class User implements AdvancedUserInterface, \Serializable
         }
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function _toString()
-    {
-        return $this->username;
     }
 
     /**
@@ -586,7 +551,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getUsername()
     {
-        return $this->username;
+        return $this->name;
     }
 
     /**
@@ -611,7 +576,7 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return serialize([
             'id' => $this->id,
-            'username' => $this->username,
+            'name' => $this->name,
             'email' => $this->email,
             'roles' => $this->roles
         ]);
@@ -632,13 +597,8 @@ class User implements AdvancedUserInterface, \Serializable
         $parameters = unserialize($serialized);
 
         $this->id = $parameters['id'];
-        $this->username = $parameters['username'];
+        $this->name = $parameters['name'];
         $this->email = $parameters['email'];
         $this->roles = new ArrayCollection($parameters['roles']);
-    }
-
-    public function __toString()
-    {
-        return $this->username;
     }
 }

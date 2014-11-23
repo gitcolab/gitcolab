@@ -11,25 +11,13 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
-class Organization
+class Organization extends Owner
 {
     /**
      *
      * @var integer
      */
     protected $id;
-
-    /**
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
-     *
-     * @var string
-     */
-    protected $slug;
 
     /**
      *
@@ -72,34 +60,6 @@ class Organization
     protected $users;
 
     /**
-     * Get id.
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * @param $email
      * @return $this
      */
@@ -118,23 +78,9 @@ class Organization
     }
 
     /**
-     * @param $slug
-     * @return $this
+     * @param string $avatar
+     * @return self
      */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
@@ -195,10 +141,5 @@ class Organization
     public function getUsers()
     {
         return $this->users;
-    }
-
-    public function __toString()
-    {
-        return $this->name;
     }
 }

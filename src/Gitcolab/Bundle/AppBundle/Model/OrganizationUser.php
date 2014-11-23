@@ -38,7 +38,7 @@ class OrganizationUser
     /**
      * @param Organization $organization
      * @param User $user
-     * @param $role
+     * @param string $role
      */
     public function __construct(Organization $organization, User $user, $role)
     {
@@ -48,6 +48,10 @@ class OrganizationUser
         $this->createdAt = new \DateTime();
     }
 
+    /**
+     * @param \DateTime $createdAt
+     * @return self
+     */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
@@ -63,17 +67,17 @@ class OrganizationUser
     }
 
     /**
-     * @param $user
-     * @return $this
+     * @param User $user
+     * @return self
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
         return $this;
     }
 
     /**
-     * @return objects
+     * @return User
      */
     public function getUser()
     {
@@ -81,8 +85,8 @@ class OrganizationUser
     }
 
     /**
-     * @param $role
-     * @return $this
+     * @param string $role
+     * @return self
      */
     public function setRole($role)
     {
