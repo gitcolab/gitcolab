@@ -6,7 +6,7 @@
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
 
-    <entity name="Gitcolab\Bundle\AppBundle\Model\OrganizationUser" table="tempo_organization_user">
+    <entity name="Gitcolab\Bundle\AppBundle\Model\OrganizationUser" table="gitcolab_organization_user">
 
         <id name="organization" type="integer" association-key="true" />
         <id name="user" type="integer" association-key="true" />
