@@ -51,11 +51,9 @@ class KeyController extends Controller
             return $this->redirect($this->generateUrl('user_keys'));
         }
 
-        $view = $this->view(array('form' => $form->createView() ), 200)
-            ->setTemplate("GitcolabAppBundle:Key:create.html.twig")
-        ;
-
-        return $this->handleView($view);
+        return $this->render('GitcolabAppBundle:Key:create.html.twig' , array(
+            'form' => $form->createView()
+        ));
     }
 
     public function deleteAction()

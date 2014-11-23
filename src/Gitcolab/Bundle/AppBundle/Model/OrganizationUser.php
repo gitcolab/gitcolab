@@ -11,6 +11,8 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Gitcolab\Bundle\AppBundle\Model\User\User;
+
 class OrganizationUser
 {
     /**

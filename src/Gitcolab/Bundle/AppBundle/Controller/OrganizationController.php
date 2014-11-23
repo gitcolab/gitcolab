@@ -12,12 +12,10 @@
 namespace Gitcolab\Bundle\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use FOS\RestBundle\View\View;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Gitcolab\Bundle\AppBundle\Form\Type\OrganizationType;
 use Gitcolab\Bundle\AppBundle\Model\Organization;
-
 
 class OrganizationController extends Controller
 {
@@ -33,21 +31,17 @@ class OrganizationController extends Controller
             $organization->addUser($this->getUser(), 'ROLE_ADMIN');
             $this->persistAndFlush($organization);
 
-            return $this->redirectToRoute('_welcome');
+            return $this->redirectToRoute('homepage');
         }
 
-        $view = View::create();
-        $view->setData(array(
+        return $this->render('GitcolabAppBundle:Organization:create.html.twig', array(
             'form' => $form->createView()
         ));
-        $view->setTemplate('GitcolabAppBundle:Organization:create.html.twig');
-
-        return $this->handleView($view);
     }
 
     public function showAction(Request $request, $slug)
     {
-        $orgaUser = $this->getRepository('User')->findOneBy(array('usernameCanonical' => $slug));
+        $orgaUser = $this->getRepository('User\User')->findOneBy(array('slugUsername' => $slug));
         if ($orgaUser) {
             $response = $this->forward('GitcolabAppBundle:User:show', array(
                 'slug'  => $slug,

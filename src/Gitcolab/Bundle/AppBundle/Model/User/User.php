@@ -97,6 +97,11 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      */
+    protected $localisation;
+
+    /**
+     * @var string
+     */
     protected $avatar;
 
     /**
@@ -341,6 +346,23 @@ class User implements AdvancedUserInterface, \Serializable
         $this->username = $username;
 
         return $this;
+    }
+
+    /**
+     * @param $localisation
+     * @return self
+     */
+    public function setLocalisation($localisation)
+    {
+        $this->localisation = $localisation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocalisation()
+    {
+        return $this->localisation;
     }
 
     /**

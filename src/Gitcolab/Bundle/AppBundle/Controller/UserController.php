@@ -38,21 +38,14 @@ class UserController extends Controller
             $this->persistAndFlush($profile);
         }
 
-        $view = $this->view(array('form' => $form->createView() ), 200)
-            ->setTemplate("GitcolabAppBundle:User:profile.html.twig")
-            ->setTemplateVar('user')
-        ;
-
-        return $this->handleView($view);
+        return $this->render('GitcolabAppBundle:User:profile.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     public function accountAction()
     {
-        $view = $this->view(array(), 200)
-            ->setTemplate("GitcolabAppBundle:User:account.html.twig")
-        ;
-
-        return $this->handleView($view);
+        return $this->render('GitcolabAppBundle:User:account.html.twig');
     }
 
     public function showAction()
@@ -61,11 +54,9 @@ class UserController extends Controller
             'organization' => $this->getUser()
         ));
 
-        $view = $this->view(array(
+        return $this->render('GitcolabAppBundle:User:show.html.twig', array(
             'user' => $this->getUser(),
             'repositories' => $repositories
-        ), 200)->setTemplate("GitcolabAppBundle:User:show.html.twig");
-
-        return $this->handleView($view);
+        ));
     }
 }
