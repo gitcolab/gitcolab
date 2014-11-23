@@ -12,9 +12,6 @@
 namespace Gitcolab\Bundle\AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
-
-use Gitcolab\Bundle\AppBundle\Form\MotherfuckingFormType;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\Event;
 use Doctrine\ORM\Query;
 use Pagerfanta\Pagerfanta;
