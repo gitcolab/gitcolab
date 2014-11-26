@@ -10,7 +10,7 @@ build:
    - apt-add-repository ppa:chris-lea/node.js
    - apt-get update -y
    - apt-get install -y nodejs
-   - npm install -g bower less
+   - npm install -g bower less@1.7
    - npm install
    - bower install --allow-root
    - mysqladmin create gitcolab
