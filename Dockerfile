@@ -27,7 +27,7 @@ RUN docker/start_mysql.sh && app/console doctrine:fixtures:load --no-interaction
 
 RUN npm install
 RUN bower install --allow-root
-RUN app/console assetic:dump
+RUN docker/start_mysql.sh && app/console assetic:dump
 
 ADD docker/vhost.conf /etc/nginx/sites-enabled/default
 
