@@ -15,7 +15,7 @@
         "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
         "doctrine/migrations": "~1.0@dev",
         "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
+        "symfony/assetic-bundle": "~2.5",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
