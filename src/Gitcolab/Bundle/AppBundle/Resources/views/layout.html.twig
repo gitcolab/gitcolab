@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
 
         {% stylesheets
-            '@GitcolabAppBundle/Resources/client/less/style.less'
+            '@GitcolabAppBundle/Resources/assets/less/style.less'
             filter='less,?uglifycss' debug=true
         %}
         <link rel="stylesheet" href="{{ asset_url }}" />
@@ -91,7 +91,7 @@
                     '@BazingaJsTranslationBundle/Resources/js/translator.js'
                     '@FOSJsRoutingBundle/Resources/public/js/router.js'
                     'vendor/selectize/dist/js/standalone/selectize.min.js'
-                    '@GitcolabAppBundle/Resources/client/js/app.js'
+                    '@GitcolabAppBundle/Resources/assets/js/app.js'
                 filter="?uglifyjs2"
                 output="js/main.js"
                 %}
