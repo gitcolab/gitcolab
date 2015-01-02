@@ -14,7 +14,6 @@ namespace Gitcolab\Bundle\AppBundle\Model\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gitcolab\Bundle\AppBundle\Model\Activity;
 use Gitcolab\Bundle\AppBundle\Model\Key;
-use Gitcolab\Bundle\AppBundle\Model\OrganizationUser;
 use Gitcolab\Bundle\AppBundle\Model\Owner;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -62,16 +61,6 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
     protected $activities;
 
     /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
-
-    /**
      * @var string
      */
     protected $lastName;
@@ -84,7 +73,7 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      */
-    protected $localisation;
+    protected $localization;
 
     /**
      * @var string
@@ -109,7 +98,7 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
     /**
      * @var OrganizationUser[]
      */
-    protected $organizationUser;
+    protected $organizationUsers;
 
     public function __construct($secret = 'GeneratedForGitcolab')
     {
@@ -248,25 +237,6 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTime $createdAt
-     * @return self
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getEmail()
@@ -330,31 +300,39 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * @return OrganizationUser[]
+     */
+    public function getOrganizationUsers()
+    {
+        return $this->organizationUsers;
+    }
+
+    /**
      * @param string $username
      * @return self
      */
     public function setUsername($username)
     {
-        $this->username = $username;
+        $this->name = $username;
 
         return $this;
     }
 
     /**
-     * @param $localisation
+     * @param $localization
      * @return self
      */
-    public function setLocalisation($localisation)
+    public function setLocalization($localization)
     {
-        $this->localisation = $localisation;
+        $this->localization = $localization;
     }
 
     /**
      * @return string
      */
-    public function getLocalisation()
+    public function getLocalization()
     {
-        return $this->localisation;
+        return $this->localization;
     }
 
     /**
@@ -391,25 +369,6 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTime $updatedAt
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }

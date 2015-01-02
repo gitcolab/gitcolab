@@ -35,6 +35,18 @@ abstract class Owner
     protected $projects;
 
     /**
+     *
+     * @var \DateTime
+     */
+    protected $createdAt;
+
+    /**
+     *
+     * @var \DateTime
+     */
+    protected $updatedAt;
+
+    /**
      * @return int
      */
     public function getId()
@@ -95,6 +107,44 @@ abstract class Owner
     public function setProjects($projects)
     {
         $this->projects = $projects;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     * @return self
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     * @return self
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

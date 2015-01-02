@@ -11,31 +11,15 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Gitcolab\Bundle\AppBundle\Model\User\OrganizationUser;
+use Gitcolab\Bundle\AppBundle\Model\User\User;
+
 class Organization extends Owner
 {
     /**
-     *
-     * @var integer
-     */
-    protected $id;
-
-    /**
-     *
      * @var string
      */
     protected $email;
-
-    /**
-     *
-     * @var object
-     */
-    protected $createdAt;
-
-    /**
-     *
-     * @var object
-     */
-    protected $updatedAt;
 
     /**
      * @var object
@@ -49,18 +33,13 @@ class Organization extends Owner
     protected $avatar;
 
     /**
-     * @var object
-     */
-    protected $projects;
-
-    /**
      *
-     * @var object
+     * @var OrganizationUser[]
      */
-    protected $users;
+    protected $organizationUsers;
 
     /**
-     * @param $email
+     * @param string $email
      * @return $this
      */
     public function setEmail($email)
@@ -96,50 +75,21 @@ class Organization extends Owner
     }
 
     /**
-     * @param $projects
-     * @return $this
-     */
-    public function setProjects($projects)
-    {
-        $this->projects = $projects;
-
-        return $this;
-    }
-
-    /**
-     * @return object
-     */
-    public function getProjects()
-    {
-        return $this->projects;
-    }
-
-    /**
-     * @param $user
+     * @param User $user
      * @param string $role
      * @return $this
      */
-    public function addUser($user, $role = 'ROLE_USER')
+    public function addUser(User $user, $role = 'ROLE_USER')
     {
-        $this->users[] = new OrganizationUser($this, $user, $role);
+        $this->organizationUsers[] = new OrganizationUser($this, $user, [$role]);
         return $this;
     }
 
     /**
-     * @param $users
-     * @return $this
+     * @return OrganizationUser
      */
-    public function setUsers($users)
+    public function getOrganizationUsers()
     {
-        $this->users = $users;
-        return $this;
-    }
-
-    /**
-     * @return object
-     */
-    public function getUsers()
-    {
-        return $this->users;
+        return $this->organizationUsers;
     }
 }

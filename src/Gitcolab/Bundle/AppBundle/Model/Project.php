@@ -74,9 +74,14 @@ class Project
     protected $repositorySize;
 
     /**
-     * @var object
+     * @var Team[]
      */
-    protected $users;
+    protected $teams;
+
+    /**
+     * @var Owner
+     */
+    protected $owner;
 
     /**
      * @return int
@@ -101,6 +106,7 @@ class Project
     public function setName($name)
     {
         $this->name = $name;
+
         return $name;
     }
 
@@ -119,6 +125,7 @@ class Project
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -137,11 +144,13 @@ class Project
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * @param \DateTime $created
+     * @return self
      */
     public function setCreatedAt(\DateTime $created)
     {
@@ -151,7 +160,7 @@ class Project
     }
 
     /**
-     * {@inheritdoc}
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -159,7 +168,8 @@ class Project
     }
 
     /**
-     * {@inheritdoc}
+     * @param \DateTime $updated
+     * @return self
      */
     public function setUpdatedAt(\DateTime $updated)
     {
@@ -169,7 +179,7 @@ class Project
     }
 
     /**
-     * {@inheritdoc}
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -177,7 +187,8 @@ class Project
     }
 
     /**
-     * {@inheritdoc}
+     * @param \DateTime $lastActivity
+     * @return self
      */
     public function setLastActivity(\DateTime $lastActivity)
     {
@@ -186,7 +197,7 @@ class Project
     }
 
     /**
-     * {@inheritdoc}
+     * @return \DateTime
      */
     public function getLastActivity()
     {
@@ -202,7 +213,8 @@ class Project
     }
 
     /**
-     * @param $defaultBranch
+     * @param string $defaultBranch
+     * @return self
      */
     public function setDefaultBranch($defaultBranch)
     {
@@ -223,6 +235,7 @@ class Project
 
     /**
      * @param Repository $repository
+     * @return self
      */
     public function setRepository(Repository $repository)
     {
@@ -247,7 +260,7 @@ class Project
 
     public function getUsers()
     {
-        return array();
+        return [];
     }
 
     public function __toString()
