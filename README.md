@@ -1,14 +1,21 @@
-Gitcolab[![Build Status](https://secure.travis-ci.org/gitcolab/gitcolab.png?branch=master)](http://travis-ci.org/gitcolab/gitcolab)
-=============
+Gitcolab
+========
+
+[![Build Status](https://travis-ci.org/gitcolab/gitcolab.svg?branch=master)](https://travis-ci.org/gitcolab/gitcolab)
 
 Git repositories inside your infrastructure, based on the [**Symfony2**](http://symfony.com) framework.
 
 Installation
 ------------
 
+Requirements:
+
+* [Git](http://git-scm.com/)
+* [Composer](http://getcomposer.org)
+* PHP 5.5 or better
+
 ``` bash
-$ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project gitcolab/gitcolab -s dev
+$ git clone https://github.com/gitcolab/gitcolab.git
 $ cd gitcolab
 $ composer install
 ```
@@ -17,10 +24,6 @@ Then configure your project and create database.
 
 ``` bash
 $ cd gitcolab
-
-# Only if the composer install didn't ask you:
-$ cp app/config/parameters.yml.dist app/config/parameters.yml
-$ vi app/config/parameters.yml # And put your values!
 
 # To create the database:
 $ php app/console doctrine:database:create
@@ -33,7 +36,6 @@ $ php app/console doctrine:fixtures:load
 $ npm install
 $ bower install
 $ php app/console assetic:dump
-$ node bin/server.js
 
 
 ```
@@ -50,7 +52,7 @@ $ setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs app/data we
 -----------------------------------
 
 You need to copy Behat default configuration file and enter your specific ``base_url``
-option there.
+option there. Nothing to change if you use `app/console server:run`.
 
 ```bash
 $ cp behat.yml.dist behat.yml
