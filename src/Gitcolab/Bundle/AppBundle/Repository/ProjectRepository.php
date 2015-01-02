@@ -37,11 +37,12 @@ class ProjectRepository extends EntityRepository
 
     public function queryProjectsByUser($user)
     {
-        $query = $this->createQueryBuilder('p')
-            ->leftJoin('p.users', 'users')
-            ->leftJoin('users.user', 'user')
-            ->where('user.id  = ?1')
-            ->setParameter(1, $user);
+        $qb = $this->createQueryBuilder('p');
+        $query = $qb
+            ->leftJoin('p.owner', 'owner')
+            ->where($qb->expr()->eq('owner', ':user'))
+            ->setParameter('user', $user)
+        ;
 
         return $query;
     }

@@ -30,17 +30,20 @@ class LoadOrganizationData
             ->setName('Foo')
             ->getEmail('foo@foo.io');
 
-        $manager->persist($organization);
+        $manager->persist($organization)
+        ;
 
 
         $organization = (new Organization())
             ->setName('Bar')
-            ->getEmail('bar@bar.io');
+            ->getEmail('bar@bar.io')
+        ;
 
 
         $organization = (new Organization())
             ->setName('FooBar')
-            ->getEmail('foobar@foobar.io');
+            ->getEmail('foobar@foobar.io')
+        ;
 
         $manager->flush();
     }

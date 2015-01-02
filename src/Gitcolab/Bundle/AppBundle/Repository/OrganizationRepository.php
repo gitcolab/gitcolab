@@ -23,11 +23,13 @@ class OrganizationRepository extends EntityRepository
 
     public function queryOrganizationsByUser($user)
     {
-        $query = $this->createQueryBuilder('o')
-            ->leftJoin('o.users', 'users')
-            ->leftJoin('users.user', 'user')
-            ->where('user.id  = ?1')
-            ->setParameter(1, $user);
+        $qb = $this->createQueryBuilder('o');
+        $query = $qb
+            ->leftJoin('o.organizationUsers', 'ou')
+            ->leftJoin('ou.user', 'user')
+            ->where($qb->expr()->eq('ou.user',':user'))
+            ->setParameter('user', $user)
+        ;
 
         return $query;
     }

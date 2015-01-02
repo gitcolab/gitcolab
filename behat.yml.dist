@@ -17,7 +17,7 @@ default:
         Behat\MinkExtension:
 
             # You have probably something like "myproject.dev" instead of "localhost"
-            base_url: 'http://localhost:8080/app_test.php'
+            base_url: 'http://localhost:8000/app_test.php'
 
             goutte: ~
             selenium2: ~
