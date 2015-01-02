@@ -40,6 +40,5 @@ before_script:
 
 
 script:
-    - ./bin/phpunit -c app/
     - ./bin/phpspec run
     - ./bin/behat -fprogress --verbose
