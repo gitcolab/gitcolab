@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5b77e8500b091aeddfad7ef9a6a45301",
+    "hash": "976d98533c9f0d88d4e592a755b49b79",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1694,121 +1694,6 @@
                 "psr-3"
             ],
             "time": "2014-12-29 21:29:35"
-        },
-        {
-            "name": "mopa/bootstrap-bundle",
-            "version": "v3.0.0-beta4",
-            "target-dir": "Mopa/Bundle/BootstrapBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phiamo/MopaBootstrapBundle.git",
-                "reference": "3129664a22f4a504cbbc2a5dd7a4f1db5217f970"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/3129664a22f4a504cbbc2a5dd7a4f1db5217f970",
-                "reference": "3129664a22f4a504cbbc2a5dd7a4f1db5217f970",
-                "shasum": ""
-            },
-            "require": {
-                "mopa/composer-bridge": "~1.3",
-                "symfony/console": "~2.3",
-                "symfony/form": "~2.3",
-                "symfony/framework-bundle": "~2.3",
-                "symfony/twig-bundle": "~2.3"
-            },
-            "suggest": {
-                "craue/formflow-bundle": "~2.0",
-                "knplabs/knp-menu-bundle": "~2.0@dev",
-                "knplabs/knp-paginator-bundle": "~2.3",
-                "mopa/bootstrap-sandbox-bundle": "~2.3",
-                "twbs/bootstrap": ">2.0,<4.0-dev",
-                "twbs/bootstrap-sass": "v3.1.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Mopa\\Bundle\\BootstrapBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/phiamo/MopaBootstrapBundle/contributors"
-                },
-                {
-                    "name": "Philipp A. Mohrenweiser",
-                    "email": "phiamo@googlemail.com"
-                }
-            ],
-            "description": "Easy integration of twitters bootstrap into symfony2",
-            "keywords": [
-                "bootstrap",
-                "bootstrap form",
-                "extra form",
-                "form",
-                "template"
-            ],
-            "time": "2014-08-06 08:40:58"
-        },
-        {
-            "name": "mopa/composer-bridge",
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phiamo/MopaComposerBridge.git",
-                "reference": "bbbd9b4595993cda248a996f21af3298f12fa331"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaComposerBridge/zipball/bbbd9b4595993cda248a996f21af3298f12fa331",
-                "reference": "bbbd9b4595993cda248a996f21af3298f12fa331",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/console": ">=2.0.0"
-            },
-            "type": "symfony-bridge",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Mopa\\Bridge\\Composer": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Community contributions",
-                    "homepage": "https://github.com/phiamo/MopaComposerBridge/contributors"
-                },
-                {
-                    "name": "Philipp A. Mohrenweiser",
-                    "email": "phiamo@googlemail.com"
-                }
-            ],
-            "description": "Symfony2 Composer Bridge",
-            "homepage": "http://bootstrap.mohrenweiserpartner.de",
-            "keywords": [
-                "Symfony2",
-                "composer"
-            ],
-            "time": "2014-12-29 13:24:12"
         },
         {
             "name": "pagerfanta/pagerfanta",
@@ -4336,7 +4221,6 @@
         "doctrine/migrations": 20,
         "stof/doctrine-extensions-bundle": 20,
         "willdurand/js-translation-bundle": 0,
-        "mopa/bootstrap-bundle": 10,
         "white-october/pagerfanta-bundle": 20,
         "knplabs/friendly-contexts": 20
     },

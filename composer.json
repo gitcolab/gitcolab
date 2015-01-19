@@ -26,7 +26,6 @@
         "friendsofsymfony/rest-bundle": "~1.0",
         "friendsofsymfony/jsrouting-bundle": "1.5.3",
         "willdurand/js-translation-bundle": "@stable",
-        "mopa/bootstrap-bundle": "v3.0.0-beta4",
         "white-october/pagerfanta-bundle": "2.1.*@dev",
         "gitonomy/gitlib": "~0.1"
     },

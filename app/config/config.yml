@@ -31,6 +31,8 @@ twig:
     globals:
         gitcolab:
           url: %gitcolab.url%
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
 
 # Assetic Configuration
 assetic:
@@ -104,16 +106,6 @@ fos_rest:
         codes:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
             'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
-
-mopa_bootstrap:
-    form:
-        show_legend: false
-        show_child_legend: false
-        error_type: block
-        render_fieldset: false
-        render_optional_text: false
-        checkbox_label: 'both'
-
 
 gitcolab_app:
     repository_path: %gitcolab.repository_path%
