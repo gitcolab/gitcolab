@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "010bce0e972440edcc94260e4b177ab3",
+    "hash": "36ba77d9566f6e87f6d7f61a621070e4",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1140,6 +1140,54 @@
                 "uploadable"
             ],
             "time": "2015-01-28 09:12:46"
+        },
+        {
+            "name": "gitonomy/git-bundle",
+            "version": "v0.2.1",
+            "target-dir": "Gitonomy/Bundle/GitBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gitonomy/git-bundle.git",
+                "reference": "853cf4589511f567480895929ae69b8ed6877e98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gitonomy/git-bundle/zipball/853cf4589511f567480895929ae69b8ed6877e98",
+                "reference": "853cf4589511f567480895929ae69b8ed6877e98",
+                "shasum": ""
+            },
+            "require": {
+                "gitonomy/gitlib": "~0.1"
+            },
+            "require-dev": {
+                "symfony/css-selector": "2.3",
+                "symfony/dom-crawler": "2.3",
+                "symfony/translation": "2.3",
+                "symfony/twig-bridge": "2.3",
+                "twig/twig": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Gitonomy\\Bundle\\GitBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Alexandre Salomé",
+                    "email": "alexandre.salome@gmail.com",
+                    "homepage": "http://alexandre-salome.fr"
+                },
+                {
+                    "name": "Julien DIDIER",
+                    "email": "genzo.wm@gmail.com",
+                    "homepage": "http://www.jdidier.net"
+                }
+            ],
+            "description": "Provides git related features for PHP applications",
+            "homepage": "http://gitonomy.com",
+            "time": "2014-02-28 16:50:28"
         },
         {
             "name": "gitonomy/gitlib",
