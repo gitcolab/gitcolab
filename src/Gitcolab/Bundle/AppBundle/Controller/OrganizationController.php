@@ -31,7 +31,7 @@ class OrganizationController extends Controller
             $organization->addUser($this->getUser(), 'ROLE_ADMIN');
             $this->persistAndFlush($organization);
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('GitcolabAppBundle:Organization:create.html.twig', array(
@@ -41,7 +41,7 @@ class OrganizationController extends Controller
 
     public function showAction(Request $request, $slug)
     {
-        $orgaUser = $this->getRepository('User\User')->findOneBy(array('slugUsername' => $slug));
+        $orgaUser = $this->getRepository('User\User')->findOneBy(array('slug' => $slug));
         if ($orgaUser) {
             $response = $this->forward('GitcolabAppBundle:User:show', array(
                 'slug'  => $slug,

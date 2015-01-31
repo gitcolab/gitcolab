@@ -81,7 +81,7 @@ class Organization extends Owner
      */
     public function addUser(User $user, $role = 'ROLE_USER')
     {
-        $this->organizationUsers[] = new OrganizationUser($this, $user, [$role]);
+        $this->organizationUsers[] = new OrganizationUser($user, $this, [$role]);
         return $this;
     }
 

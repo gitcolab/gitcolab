@@ -15,11 +15,9 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Gitcolab\Bundle\AppBundle\Model\Organization;
 
-class LoadOrganizationData
+class LoadOrganizationData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritdoc}
@@ -28,22 +26,24 @@ class LoadOrganizationData
     {
         $organization = (new Organization())
             ->setName('Foo')
-            ->getEmail('foo@foo.io');
-
-        $manager->persist($organization)
-        ;
-
+            ->addUser($this->getReference('ena'), 'ROLE_ADMIN')
+            ->setEmail('foo@foo.io');
+        $manager->persist($organization);
 
         $organization = (new Organization())
             ->setName('Bar')
+            ->addUser($this->getReference('ena'), 'ROLE_USER')
             ->getEmail('bar@bar.io')
         ;
+        $manager->persist($organization);
 
 
         $organization = (new Organization())
             ->setName('FooBar')
+            ->addUser($this->getReference('ena'), 'ROLE_USER')
             ->getEmail('foobar@foobar.io')
         ;
+        $manager->persist($organization);
 
         $manager->flush();
     }

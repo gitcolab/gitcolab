@@ -44,7 +44,7 @@
                         <ul class="list-no-style">
                             {% for project in projects %}
                             <li>
-                                <a href="{{ project_slug(project) }}">
+                                <a href="{{ project.fullSlug }}">
                                     <span class="repo-name">
                                         <span class="repo-name-prefix">{{ project.organization }} / </span>
                                         <strong class="repo">{{ project }}</strong>

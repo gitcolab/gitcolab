@@ -1,4 +1,4 @@
-{% set repo_url = 'git@' ~ gitcolab_url ~ ':' ~ project_slug(project) ~ '.git' %}
+{% set repo_url = 'git@' ~ gitcolab_url ~ ':' ~ project.fullSlug ~ '.git' %}
 <div id="repo-content" class="clear container">
     <div id="repo-bare">
         <div id="repo-bare-start" class="panel">

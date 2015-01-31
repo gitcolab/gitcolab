@@ -30,7 +30,7 @@
                 {% for project in repositories %}
                 <li>
                     <h3>
-                        <a href="{{ project_slug(project) }}">{{ project }}</a>
+                        <a href="{{ project.fullSlug }}">{{ project }}</a>
                     </h3>
                     <p class="description">{{ project.description }}</p>
                     <div class="last-updated">{{ project.updatedAt|localizeddate('medium', 'none', app.request.locale) }}</div>

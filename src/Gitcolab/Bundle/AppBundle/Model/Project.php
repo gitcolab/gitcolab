@@ -129,6 +129,11 @@ class Project
         return $this;
     }
 
+    public function getFullSlug()
+    {
+        return $this->getOrganization()->getSlug() .'/'. $this->getSlug();
+    }
+
     /**
      * @return string
      */
@@ -224,13 +229,13 @@ class Project
 
     public function setOrganization(Organization $organization)
     {
-        $this->organization = $organization;
+        $this->owner = $organization;
         return $this;
     }
 
     public function getOrganization()
     {
-        return $this->organization;
+        return $this->owner;
     }
 
     /**

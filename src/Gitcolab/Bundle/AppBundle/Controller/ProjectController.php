@@ -36,7 +36,7 @@ class ProjectController extends Controller
 
             $this->dispatch(GitcolabEvents::PROJECT_CREATE, new ProjectEvent($project, $this->getUser()));
 
-            return $this->redirectToRoute('_welcome');
+            return $this->redirectToRoute('dashboard');
         }
 
         $view = View::create();

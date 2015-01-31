@@ -20,7 +20,6 @@ class AppExtension extends \Twig_Extension
     {
         return array(
             'gravatar'    => new \Twig_Function_Method($this, 'getGravatar'),
-            'project_slug' => new \Twig_Function_Method($this, 'getProjectSlug'),
         );
     }
 
@@ -48,11 +47,6 @@ class AppExtension extends \Twig_Extension
         }
 
         return ($secure ? 'https://secure' : 'http://www') . '.gravatar.com/avatar/' . $hash . '?' . http_build_query(array_filter($map));
-    }
-
-    public function getProjectSlug($project)
-    {
-        return $project->getOrganization()->getSlug() .'/'. $project->getSlug();
     }
 
     public function getName()

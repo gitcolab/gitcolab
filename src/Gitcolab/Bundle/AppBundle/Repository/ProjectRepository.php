@@ -19,7 +19,7 @@ class ProjectRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('p')
             ->select('p, org')
-            ->leftJoin('p.organization', 'org')
+            ->leftJoin('p.owner', 'org')
             ->where('p.slug = ?1')
             ->andWhere('org.slug = ?2')
             ->setParameter(1, $project)
@@ -55,7 +55,7 @@ class ProjectRepository extends EntityRepository
     public function getListPaginatorQueryBuilder($org, $search = '', array $orderBy = array())
     {
         $qb = $this->createQueryBuilder('p')
-            ->leftJoin('p.organization', 'org');
+            ->leftJoin('p.owner', 'org');
 
         if ('' !== $search) {
             foreach ($this->_class->getFieldNames() as $fieldName) {
