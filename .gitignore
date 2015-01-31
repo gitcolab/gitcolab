@@ -5,6 +5,7 @@
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
+!app/data/repositories/.gitkeep
 /build/
 /data/
 /vendor/
