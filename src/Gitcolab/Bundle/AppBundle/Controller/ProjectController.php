@@ -50,6 +50,8 @@ class ProjectController extends Controller
 
     public function showAction(Request $request, $slug)
     {
+        $view = View::create();
+
         $slugParameter = explode('/', $slug);
         $project = $this->getRepository('Project')->findProject($slugParameter[0], $slugParameter[1]);
 
@@ -57,13 +59,47 @@ class ProjectController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $view = View::create();
-        $view->setData(array(
+        $data = array(
             'project' => $project,
             'slug' => $slug,
             'gitcolab_url' => str_replace('http://', '', $this->container->getParameter('gitcolab.url'))
-        ));
-        $view->setTemplate('GitcolabAppBundle:Project:show.html.twig');
+        );
+        $path = '';
+
+        $repository = $project->getRepository();
+        $refs       = $repository->getReferences();
+
+        $revision = $repository->getRevision($project->getDefaultBranch());
+
+        try {
+            $commit = $revision->getCommit();
+            $tree = $commit->getTree();
+            if (strlen($path) > 0 && '/' === substr($path, 0, 1)) {
+                $path = substr($path, 1);
+            }
+
+            try {
+                $element = $tree->resolvePath($path);
+            } catch (\InvalidArgumentException $e) {
+                throw $this->createNotFoundException($e->getMessage());
+            }
+
+            $data = array_merge($data, array(
+                'tree' => $tree,
+                'revision' => $revision,
+                'path' => $path,
+
+            ));
+
+
+
+        } catch (\InvalidArgumentException $e) {
+            $data['revision'] =  false;
+        }
+
+        $view
+            ->setData($data)
+            ->setTemplate('GitcolabAppBundle:Project:show.html.twig');
 
         return $this->handleView($view);
     }
