@@ -57,7 +57,10 @@
     </div>
 
     <div id="readme">
-        <h3>README</h3>
+        <h3>{{ readme.filename }}</h3>
+        <div class="markdown-render">
+            {{ readme.content|raw }}
+        </div>
     </div>
 
     {% else  %}

@@ -11,6 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\Controller;
 
+use Gitonomy\Git\Repository;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
 use Gitcolab\Bundle\AppBundle\Form\Type\ProjectType;
@@ -84,11 +85,13 @@ class ProjectController extends Controller
                 throw $this->createNotFoundException($e->getMessage());
             }
 
+            $readme =
+
             $data = array_merge($data, array(
                 'tree' => $tree,
                 'revision' => $revision,
                 'path' => $path,
-
+                'readme' => $this->getReadme($repository, $tree, $path)
             ));
 
 
@@ -102,5 +105,19 @@ class ProjectController extends Controller
             ->setTemplate('GitcolabAppBundle:Project:show.html.twig');
 
         return $this->handleView($view);
+    }
+
+    public function getReadme(Repository $repository, $tree, $path)
+    {
+        foreach ($tree->getEntries() as $name =>  $file) {
+
+            if (preg_match('/^readme*/i', $name)) {
+                return array(
+                    'filename' => $name,
+                    'content'  => (new \Parsedown())->text($tree->resolvePath($name)->getContent())
+                );
+            }
+        }
+        return array();
     }
 }
