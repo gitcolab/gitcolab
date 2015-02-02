@@ -113,6 +113,9 @@ gitonomy_git:
         routes_names:
             tree: project_tree
             commit: project_commit
+        themes:
+            - GitcolabAppBundle:Git:theme.html.twig
+            - GitonomyGitBundle::default_theme.html.twig
 
 
 gitcolab_app:

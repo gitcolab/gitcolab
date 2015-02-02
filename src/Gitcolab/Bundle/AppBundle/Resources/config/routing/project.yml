@@ -1,5 +1,5 @@
 project_create:
-  path: /create
+  path: /project/create
   defaults:
       _controller: GitcolabAppBundle:Project:create
 
