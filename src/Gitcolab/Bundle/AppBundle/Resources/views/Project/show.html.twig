@@ -56,12 +56,14 @@
         {{ git_tree(tree, revision, path) }}
     </div>
 
+    {% if readme is not null %}
     <div id="readme">
         <h3>{{ readme.filename }}</h3>
         <div class="markdown-render">
             {{ readme.content|raw }}
         </div>
     </div>
+    {% endif %}
 
     {% else  %}
         {% include 'GitcolabAppBundle:Project:_no_commit.html.twig'  %}

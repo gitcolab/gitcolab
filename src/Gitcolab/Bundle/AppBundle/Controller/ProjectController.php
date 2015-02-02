@@ -88,8 +88,6 @@ class ProjectController extends Controller
                 throw $this->createNotFoundException($e->getMessage());
             }
 
-            $readme =
-
             $data = array_merge($data, array(
                 'tree' => $tree,
                 'revision' => $revision,
@@ -110,6 +108,12 @@ class ProjectController extends Controller
         return $this->handleView($view);
     }
 
+    /**
+     * @param Repository $repository
+     * @param $tree
+     * @param $path
+     * @return array|null
+     */
     public function getReadme(Repository $repository, $tree, $path)
     {
         foreach ($tree->getEntries() as $name =>  $file) {
@@ -121,11 +125,14 @@ class ProjectController extends Controller
                 );
             }
         }
-        return array();
+        return null;
     }
 
     /**
-     * @var string $revision Can be a branch name or a commit hash
+     * @param $repository
+     * @param $revision Can be a branch name or a commit hash
+     * @param $path
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function treeAction($repository, $revision, $path)
     {
@@ -167,6 +174,10 @@ class ProjectController extends Controller
         return $this->render($tpl, $parameters);
     }
 
+    /**
+     * @param $slug
+     * @return mixed
+     */
     public function getProject($slug)
     {
         $slugParameter = explode('/', $slug);

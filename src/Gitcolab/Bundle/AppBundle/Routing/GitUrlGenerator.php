@@ -12,19 +12,39 @@
 namespace Gitcolab\Bundle\AppBundle\Routing;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 use Gitonomy\Bundle\GitBundle\Routing\GitUrlGenerator as BaseGitUrlGenerator;
 use Gitonomy\Git\Repository;
 
+/**
+ * Implementation uses the slug.
+ *
+ * @author mlanawo mbechezi <mlanawo.mbechezi@ikimea.com>
+ */
 class GitUrlGenerator extends BaseGitUrlGenerator
 {
+    /**
+     * @var EntityManagerInterface
+     */
     protected $entityManager;
-    protected $_storeProject;
 
-    public function setEntityManager($entityManager)
+    /**
+     * @var Collection
+     */
+    protected $storeProject;
+
+    /**
+     * @param RegistryInterface $entityManager
+     */
+    public function setEntityManager(RegistryInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param Repository $repository
+     * @return string
+     */
     public function getName(Repository $repository)
     {
         $name = basename($repository->getPath());
@@ -35,19 +55,12 @@ class GitUrlGenerator extends BaseGitUrlGenerator
                 'repository' => $name
             ));
 
-            $this->_storeProject[$name] = $project;
+            $this->storeProject[$name] = $project;
         } else {
             $project = $this->_storeProject[$name];
         }
 
         return $project->getFullSlug();
-
-
-        if (preg_match('/^(.*)\.git$/', $name, $vars)) {
-            return $vars[1];
-        }
-
-        return $name;
     }
 
 }
