@@ -1,0 +1,7 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+{% block bodyClass %}project tree{% endblock %}
+
+{% block body %}
+    {{ git_blob(blob) }}
+{% endblock body %}
+

@@ -49,6 +49,7 @@
                 {% endif %}
             </td>
             <td>
+                {#{ dump(app.request.getPathInfo())  }#}
                 <a href="{{ git_url(revision, {path: (path ~ (path ? '/') ~ name)}) }}">
                     {{ name }}
                 </a>

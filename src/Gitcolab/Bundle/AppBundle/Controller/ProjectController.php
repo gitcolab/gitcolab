@@ -18,6 +18,9 @@ use Gitcolab\Bundle\AppBundle\Form\Type\ProjectType;
 use Gitcolab\Bundle\AppBundle\Model\Project;
 use Gitcolab\Bundle\AppBundle\GitcolabEvents;
 use Gitcolab\Bundle\AppBundle\Event\ProjectEvent;
+use Gitonomy\Git\Blob;
+use Gitonomy\Git\Reference;
+use Gitonomy\Git\Tree;
 
 class ProjectController extends Controller
 {
@@ -119,5 +122,56 @@ class ProjectController extends Controller
             }
         }
         return array();
+    }
+
+    /**
+     * @var string $revision Can be a branch name or a commit hash
+     */
+    public function treeAction($repository, $revision, $path)
+    {
+        $project    = $this->getProject($repository);
+        $repository = $project->getRepository();
+        $refs       = $repository->getReferences();
+        if ($refs->hasBranch($revision)) {
+            $revision = $refs->getBranch($revision);
+        } else {
+            $revision = $repository->getRevision($revision);
+        }
+        $commit = $revision->getCommit();
+        $tree = $commit->getTree();
+
+        if (strlen($path) > 0 && '/' === substr($path, 0, 1)) {
+            $path = substr($path, 1);
+        }
+
+        try {
+            $element = $tree->resolvePath($path);
+        } catch (\InvalidArgumentException $e) {
+            throw $this->createNotFoundException($e->getMessage());
+        }
+
+        $parameters = array(
+            'project'  => $project,
+            'revision' => $revision,
+            'path'     => $path,
+        );
+
+        if ($element instanceof Blob) {
+            $parameters['blob'] = $element;
+            $tpl = 'GitcolabAppBundle:Project:blob.html.twig';
+        } elseif ($element instanceof Tree) {
+            $parameters['tree'] = $element;
+            $tpl = 'GitcolabAppBundle:Project:tree.html.twig';
+        }
+
+        return $this->render($tpl, $parameters);
+    }
+
+    public function getProject($slug)
+    {
+        $slugParameter = explode('/', $slug);
+        $project = $this->getRepository('Project')->findProject($slugParameter[0], $slugParameter[1]);
+
+        return $project;
     }
 }

@@ -7,6 +7,13 @@ project_tree:
   path: /{repository}/tree/{revision}/{path}
   defaults:
       _controller: GitcolabAppBundle:Project:tree
+      path: ""
+  requirements:
+      path: ".+"
+      repository: ".+"
 
 project_commit:
   path: /{repository}/commits/{hash}
+  requirements:
+      slug: ".+"
+      repository: ".+"
