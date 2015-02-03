@@ -18,15 +18,28 @@ use Doctrine\ORM\Events;
 use Gitcolab\Bundle\AppBundle\Model\Project;
 use Gitcolab\Bundle\AppBundle\Git\RepositoryPoolSubscriber;
 
+/***
+ * Inject repository in entity
+ * @since 1.0
+ */
 class ProjectSubscriber implements EventSubscriber
 {
+    /** @var RepositoryPoolSubscriber  */
     protected $repositoryPool;
 
+    /**
+     * @param RepositoryPoolSubscriber $repositoryPool
+     */
     public function __construct(RepositoryPoolSubscriber $repositoryPool)
     {
         $this->repositoryPool = $repositoryPool;
     }
 
+    /**
+     * Register this class on prePersist and preUpdate
+     *
+     * @return array
+     */
     public function getSubscribedEvents()
     {
         return array(
@@ -34,6 +47,9 @@ class ProjectSubscriber implements EventSubscriber
         );
     }
 
+    /**
+     * @param LifecycleEventArgs $args
+     */
     public function postLoad(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();

@@ -20,13 +20,14 @@ use Gitonomy\Git\Repository;
  * Implementation uses the slug.
  *
  * @author mlanawo mbechezi <mlanawo.mbechezi@ikimea.com>
+ * @since 1.0
  */
 class GitUrlGenerator extends BaseGitUrlGenerator
 {
     /**
-     * @var EntityManagerInterface
+     * @var RegistryInterface
      */
-    protected $entityManager;
+    protected $register;
 
     /**
      * @var Collection
@@ -34,11 +35,13 @@ class GitUrlGenerator extends BaseGitUrlGenerator
     protected $storeProject;
 
     /**
-     * @param RegistryInterface $entityManager
+     * @param RegistryInterface $register
+     * @return self
      */
-    public function setEntityManager(RegistryInterface $entityManager)
+    public function setEntityManager(RegistryInterface $register)
     {
-        $this->entityManager = $entityManager;
+        $this->register = $register;
+        return $this;
     }
 
     /**
@@ -49,15 +52,15 @@ class GitUrlGenerator extends BaseGitUrlGenerator
     {
         $name = basename($repository->getPath());
 
-        if (!isset($this->_storeProject[$name])) {
+        if (!isset($this->storeProject[$name])) {
 
-            $project = $this->entityManager->getRepository('GitcolabAppBundle:Project')->findOneBy(array(
+            $project = $this->register->getRepository('GitcolabAppBundle:Project')->findOneBy(array(
                 'repository' => $name
             ));
-
             $this->storeProject[$name] = $project;
+
         } else {
-            $project = $this->_storeProject[$name];
+            $project = $this->storeProject[$name];
         }
 
         return $project->getFullSlug();
