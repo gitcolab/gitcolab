@@ -25,7 +25,7 @@ class ProfileType extends AbstractType
         $builder
             ->add('first_name')
             ->add('last_name')
-            ->add('localisation', null, array('required' => false))
+            ->add('localization', null, array('required' => false))
         ;
     }
 

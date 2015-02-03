@@ -32,7 +32,7 @@
             <ul class="list-no-style">
             {% for repository in repositories %}
                 <li>
-                    <h3><a href="{{ project_slug(repository) }}">{{ repository }}</a></h3>
+                    <h3><a href="{{ repository.fullSlug }}">{{ repository }}</a></h3>
                     <div></div>
                     <div> {{ repository.lastActivity|localizeddate('medium', 'none', app.request.locale) }} </div>
                 </li>

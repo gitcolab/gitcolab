@@ -51,7 +51,7 @@ class UserController extends Controller
     public function showAction()
     {
         $repositories = $this->getRepository('Project')->findBy(array(
-            'organization' => $this->getUser()
+            'owner' => $this->getUser()
         ));
 
         return $this->render('GitcolabAppBundle:User:show.html.twig', array(
