@@ -25,15 +25,16 @@ class LoadOrganizationData extends AbstractFixture implements OrderedFixtureInte
     public function load(ObjectManager $manager)
     {
         $organization = (new Organization())
-            ->setName('Foo')
             ->addUser($this->getReference('ena'), 'ROLE_ADMIN')
-            ->setEmail('foo@foo.io');
+            ->setEmail('foo@foo.io')
+            ->setName('Foo')
+        ;
         $manager->persist($organization);
 
         $organization = (new Organization())
-            ->setName('Bar')
             ->addUser($this->getReference('ena'), 'ROLE_USER')
-            ->getEmail('bar@bar.io')
+            ->setEmail('bar@bar.io')
+            ->setName('Bar')
         ;
         $manager->persist($organization);
 
@@ -41,7 +42,8 @@ class LoadOrganizationData extends AbstractFixture implements OrderedFixtureInte
         $organization = (new Organization())
             ->setName('FooBar')
             ->addUser($this->getReference('ena'), 'ROLE_USER')
-            ->getEmail('foobar@foobar.io')
+            ->setEmail('foobar@foobar.io')
+            ->setName('FooBar')
         ;
         $manager->persist($organization);
 
