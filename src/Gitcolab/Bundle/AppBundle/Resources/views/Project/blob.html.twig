@@ -1,7 +1,36 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
-{% block bodyClass %}project tree{% endblock %}
+{% block bodyClass %}project blob{% endblock %}
 
 {% block body %}
-    {{ git_blob(blob) }}
+    <h1>
+        <a href="{{ path('organization_show', {'slug' : project.organization.slug}) }}">
+            {{ project.organization }}
+        </a>
+        <span>/</span>
+        <a href="{{ path('project_show', {'slug' : project.fullSlug}) }}">
+            {{ project }}
+        </a>
+    </h1>
+
+    <ul class="breadcrumb">
+        <li>{{ project }}</li>
+        <li>{{ path }}</li>
+    </ul>
+    <div id="tree-content-holder">
+        <div class="commit-head">
+            {{ project.repository.getHeadCommit.getShortMessage }}
+        </div>
+        <div class="commit-meta">
+            <img src="{{ gravatar(project.repository.getHeadCommit.getAuthorEmail)}}" width="20" height="20" />
+            {{ project.repository.getHeadCommit.getAuthorName }}
+            {{ project.repository.getHeadCommit.getAuthorDate|localizeddate('medium', 'none', app.request.locale) }} </dd>
+        </div>
+    </div>
+    <div class="file-box">
+        <div class="file">
+            {{ git_blob(blob) }}
+        </div>
+
+    </div>
 {% endblock body %}
 

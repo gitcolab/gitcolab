@@ -63,12 +63,11 @@
                 {{ readme.content|raw }}
             </div>
         </div>
+        {% endif %}
 
-        {% else  %}
-            {% include 'GitcolabAppBundle:Project:_no_commit.html.twig'  %}
-        {% endif  %}
-    {% endif %}
-
+    {% else  %}
+        {% include 'GitcolabAppBundle:Project:_no_commit.html.twig'  %}
+    {% endif  %}
 
 
 {% endblock body %}
