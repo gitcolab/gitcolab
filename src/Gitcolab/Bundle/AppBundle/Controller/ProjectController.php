@@ -14,6 +14,7 @@ namespace Gitcolab\Bundle\AppBundle\Controller;
 use Gitonomy\Git\Repository;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
+use Michelf\Markdown;
 use Gitcolab\Bundle\AppBundle\Form\Type\ProjectType;
 use Gitcolab\Bundle\AppBundle\Model\Project;
 use Gitcolab\Bundle\AppBundle\GitcolabEvents;
@@ -121,7 +122,7 @@ class ProjectController extends Controller
             if (preg_match('/^readme*/i', $name)) {
                 return array(
                     'filename' => $name,
-                    'content'  => (new \Parsedown())->text($tree->resolvePath($name)->getContent())
+                    'content'  => Markdown::defaultTransform($tree->resolvePath($name)->getContent())
                 );
             }
         }

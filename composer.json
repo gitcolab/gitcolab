@@ -31,7 +31,7 @@
         "white-october/pagerfanta-bundle": "2.1.*@dev",
         "gitonomy/gitlib": "~0.1",
         "gitonomy/git-bundle": "0.2.*",
-        "erusev/parsedown": "~1.5"
+        "michelf/php-markdown": "~1.4"
     },
     "require-dev": {
         "behat/behat": "~3.0",
