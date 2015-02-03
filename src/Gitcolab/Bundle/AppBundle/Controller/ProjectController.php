@@ -93,6 +93,7 @@ class ProjectController extends Controller
                 'tree' => $tree,
                 'revision' => $revision,
                 'path' => $path,
+                'refs' => $refs,
                 'readme' => $this->getReadme($repository, $tree, $path)
             ));
 

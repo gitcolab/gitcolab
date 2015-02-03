@@ -31,12 +31,14 @@
 
         <div class="overall">
             <ul class="nav">
-                <li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-dashboard"></span> <strong> 0 </strong> Commits</a></li>
-                <li role="presentation"><a href="#"><strong> 0 </strong>Branch</a></li>
+                <li role="presentation" class="active">
+                    <a href="#"><span class="glyphicon glyphicon-dashboard"></span> <strong> {{ project.repository.log.countCommits }} </strong> Commits</a>
+                </li>
+                <li role="presentation"><a href="#"><strong> {{ refs.branches|length }} </strong>Branch</a></li>
                 <li role="presentation">
                     <a href="#">
                         <span class="glyphicon glyphicon-tags"></span>
-                        <strong> 0 </strong>
+                        <strong> {{ refs.tags|length }} </strong>
                         Releases
                     </a>
                 </li>
