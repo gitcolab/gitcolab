@@ -99,12 +99,15 @@
   position: relative;
   margin-bottom: 10px;
 }
+
 .project.show .overall li {
   float: left;
 }
+
 .project.show #tree-content-holder,
 .project.tree #tree-content-holder,
-.project.blob #tree-content-holder {
+.project.blob #tree-content-holder,
+.project.commit #tree-content-holder {
   border: 1px solid #eeeeee;
   border-radius: 3px;
 
@@ -209,7 +212,8 @@
 
 .project.show,
 .project.tree,
-.project.blob, {
+.project.blob,
+.project.commit {
   h1 {
     margin-top: 0;
     margin-bottom: 20px;
@@ -227,20 +231,71 @@
     border: 1px solid #ddd;
     border-radius: 3px;
   }
-  .file-box .line-number {
-    font-size: 12px;
-    line-height: 18px;
-    color: rgba(0,0,0,0.3);
-    vertical-align: top;
-    text-align: right;
-    border: solid #eee;
-    border-width: 0 1px 0 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-width: 0 1px 0 0;
-  }
   .file-box .file pre {
     border: none;
+  }
+}
+
+.project.blog .file-box .line-number,
+.project.commit .file .line-number {
+  font-size: 12px;
+  line-height: 18px;
+  color: rgba(0,0,0,0.3);
+  vertical-align: top;
+  text-align: right;
+  border: solid #eee;
+  border-width: 0 1px 0 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-width: 0 1px 0 0;
+}
+
+.project.commit .file {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  pre {
+    border: none;
+    background: none;
+  }
+  margin-bottom: 20px;
+}
+.project.commit .file-changes{
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.project.commit .file header{
+  padding: 5px 10px;
+  text-shadow: 0 1px 0 #fff;
+  border-bottom: 1px solid #d8d8d8;
+  background-color: #f7f7f7;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
+  .diff-file-label {
+    line-height: 33px;
+  }
+}
+
+.project.commit .file .line-number{
+  &.old {
+    //background-color: #ffdddd;
+    //border-color: #f1c0c0;
+  }
+}
+
+.project.commit .diff-summary {
+  margin-bottom: 20px;
+  padding: 0;
+
+  li {
+    input {
+      float: left;
+      margin-right: 10px;
+    }
+    a {
+      float: left;
+    }
   }
 }
 

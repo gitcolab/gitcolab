@@ -175,6 +175,19 @@ class ProjectController extends Controller
 
         return $this->render($tpl, $parameters);
     }
+    /**
+     * Displays a commit.
+     */
+    public function commitAction($repository, $hash)
+    {
+        $project    = $this->getProject($repository);
+        $commit     = $project->getRepository()->getCommit($hash);
+        return $this->render('GitcolabAppBundle:Project:commit.html.twig', array(
+            'project'    => $project,
+            'reference'  => $project->getDefaultBranch(),
+            'commit'     => $commit
+        ));
+    }
 
     /**
      * @param $slug
