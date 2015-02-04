@@ -2,15 +2,7 @@
 {% block bodyClass %}project tree{% endblock %}
 
 {% block body %}
-    <h1>
-        <a href="{{ path('organization_show', {'slug' : project.organization.slug}) }}">
-            {{ project.organization }}
-        </a>
-        <span>/</span>
-        <a href="{{ path('project_show', {'slug' : project.fullSlug}) }}">
-            {{ project }}
-        </a>
-    </h1>
+    {% include '@GitcolabApp/Project/_repo_head.html.twig' %}
     <ul class="breadcrumb">
         <li>{{ project }}</li>
         <li>{{ path }}</li>

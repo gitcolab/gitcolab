@@ -4,27 +4,17 @@
 {% block body %}
 
     {% if revision %}
-
-        <div class="repo-head">
-            <h1 class="pull-left">{{ project }}</h1>
-            <ul class="pull-right nav nav-pills">
-                <li role="presentation"><a href="#">Code</a></li>
-                <li role="presentation"><a href="#">Issues <span class="badge">0</span></a></li>
-                <li role="presentation"><a href="#">Pull Requests <span class="badge">0</span></a></li>
-                <li role="presentation"><a href="#">Settings </a></li>
-            </ul>
-
-            <div class="repo-meta clearbox">
-                <div class="documentation pull-left">
-                    {{ project.description }}
-                </div>
-                <div class="clone-url pull-right">
-                    <div class="input-group">
-                        <input type="text" class="input-mini " value="" readonly="readonly">
+        {% include '@GitcolabApp/Project/_repo_head.html.twig' %}
+        <div class="repo-meta">
+            <div class="documentation pull-left">
+                {{ project.description }}
+            </div>
+            <div class="clone-url pull-right">
+                <div class="input-group">
+                    <input type="text" class="input-mini " value="" readonly="readonly">
                         <span class="input-group-button">
                             <button aria-label="Copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-copied-hint="Copied!" type="button"><span class="glyphicon glyphicon-save"></span></button>
                         </span>
-                    </div>
                 </div>
             </div>
         </div>
