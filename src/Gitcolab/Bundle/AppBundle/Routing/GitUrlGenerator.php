@@ -34,14 +34,11 @@ class GitUrlGenerator extends BaseGitUrlGenerator
      */
     protected $storeProject;
 
-    /**
-     * @param RegistryInterface $register
-     * @return self
-     */
-    public function setEntityManager(RegistryInterface $register)
+    public function __construct(UrlGeneratorInterface $generator, array $routeNames = array(), array $routeArgs = array(), RegistryInterface $register)
     {
+        parent::__construct($generator, $routeNames, $routeArgs);
+
         $this->register = $register;
-        return $this;
     }
 
     /**

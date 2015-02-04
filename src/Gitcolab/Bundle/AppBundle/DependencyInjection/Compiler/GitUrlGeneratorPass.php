@@ -13,6 +13,7 @@ namespace Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 class GitUrlGeneratorPass implements CompilerPassInterface
 {
@@ -24,6 +25,6 @@ class GitUrlGeneratorPass implements CompilerPassInterface
         $definition = $container->getDefinition('gitonomy_twig.url_generator');
         $definition->setClass('Gitcolab\Bundle\AppBundle\Routing\GitUrlGenerator');
 
-        $definition->addMethodCall('setEntityManager', array($container->getDefinition('doctrine')));
+        $definition->addArgument(new Reference('doctrine'));
     }
 }
