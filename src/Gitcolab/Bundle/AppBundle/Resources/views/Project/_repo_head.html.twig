@@ -20,9 +20,9 @@
                 <a href="#" class="nav-link">Pull Requests <span class="label label-default">0</span></a>
             </li>
             {% if is_granted('EDIT', project.organization) %}
-            <li role="presentation" class="nav-item">
-                <a href="{{ path('project_setting', {'slug' : project.fullSlug}) }}" class="nav-link">Settings </a>
-            </li>
+                <li role="presentation" class="nav-item">
+                    <a href="{{ path('project_setting', {'slug' : project.fullSlug}) }}" class="nav-link">Settings </a>
+                </li>
             {% endif %}
         </ul>
     </div>

@@ -74,11 +74,6 @@ class Project implements ResourceInterface
     protected $repositorySize;
 
     /**
-     * @var Team[]
-     */
-    protected $teams;
-
-    /**
      * @var  Collection
      */
     protected $members;
@@ -87,6 +82,32 @@ class Project implements ResourceInterface
      * @var Owner
      */
     protected $owner;
+
+    /**
+     * @var Collection
+     */
+    protected $pullRequests;
+
+    /**
+     * @var Collection
+     */
+    protected $issues;
+
+    /**
+     * @var Collection
+     */
+    protected $tickets;
+
+    /**
+     * @var Collection
+     */
+    protected $milestones;
+
+    public function __construction()
+    {
+        $this->pullRequests = new ArrayCollection();
+        $this->issues = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -286,6 +307,56 @@ class Project implements ResourceInterface
     public function getUsers()
     {
         return [];
+    }
+
+    public function getPullRequests()
+    {
+        return $this->pullRequests;
+    }
+
+    public function setPullRequests($pullRequests)
+    {
+        $this->pullRequests = $pullRequests;
+
+
+        return $this;
+    }
+
+    public function getIssues()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * @param Collection $tickets
+     */
+    public function setTickets($tickets)
+    {
+        $this->tickets = $tickets;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getMembers()
+    {
+        return $this->members;
+    }
+
+    /**
+     * @param Collection $members
+     */
+    public function setMembers($members)
+    {
+        $this->members = $members;
     }
 
     public function __toString()

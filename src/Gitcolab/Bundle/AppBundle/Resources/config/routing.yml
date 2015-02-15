@@ -24,6 +24,15 @@ project:
   resource: "@GitcolabAppBundle/Resources/config/routing/project.yml"
   prefix : /
 
+project_setting:
+  path: /{slug}/settings
+  defaults:
+       _controller: GitcolabAppBundle:Project:settings
+
+milestone:
+  resource: "@GitcolabAppBundle/Resources/config/routing/milestone.yml"
+
+
 project_show:
   path: /{slug}
   defaults:
