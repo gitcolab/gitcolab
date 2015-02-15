@@ -1,6 +1,11 @@
 @import "../../../../../../../web/vendor/bootstrap/less/bootstrap.less";
 @icon-font-path: "/vendor/bootstrap/fonts/";
 
+body {
+  font: 13px/1.4 Helvetica, arial;
+  color: #333;
+}
+
 .clearbox {
   clear: both;
 }
@@ -317,6 +322,28 @@
     border: 1px solid #e5e5e5;
     border-radius: 3px;
   }
+}
+.milestone .subnav ul li {
+  margin-left: 0;
+  a {
+    padding: 7px 14px;
+    font-weight: bold;
+    color: #666;
+    border: 1px solid #e5e5e5;
+    border-right: 0;
+    border-radius: 0;
+  }
+}
+.milestone .subnav ul a.first {
+  border: 1px solid #e5e5e5;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-right: 0;
+}
+.milestone .subnav ul a.last {
+  border-right: 1px solid #e5e5e5;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .user.show .tab-content ul {

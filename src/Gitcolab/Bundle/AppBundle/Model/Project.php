@@ -11,6 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Gitonomy\Git\Repository;
 
 class Project
@@ -82,6 +83,22 @@ class Project
      * @var Owner
      */
     protected $owner;
+
+    /**
+     * @var Collection
+     */
+    protected $pullRequests;
+
+    /**
+     * @var Collection
+     */
+    protected $issues;
+
+    public function __construction()
+    {
+        $this->pullRequests = new ArrayCollection();
+        $this->issues = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -271,6 +288,15 @@ class Project
     public function getUsers()
     {
         return [];
+    }
+
+    public function getPullRequests()
+    {
+        return $this->pullRequests;
+    }
+    public function getIssues()
+    {
+        return $this->issues;
     }
 
     public function __toString()
