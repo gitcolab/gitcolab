@@ -42,7 +42,7 @@ class GitUrlGenerator extends BaseGitUrlGenerator
     }
 
     /**
-     * @param Repository $repository
+     * @param  Repository $repository
      * @return string
      */
     public function getName(Repository $repository)
@@ -50,17 +50,14 @@ class GitUrlGenerator extends BaseGitUrlGenerator
         $name = basename($repository->getPath());
 
         if (!isset($this->storeProject[$name])) {
-
             $project = $this->register->getRepository('GitcolabAppBundle:Project')->findOneBy(array(
-                'repository' => $name
+                'repository' => $name,
             ));
             $this->storeProject[$name] = $project;
-
         } else {
             $project = $this->storeProject[$name];
         }
 
         return $project->getFullSlug();
     }
-
 }

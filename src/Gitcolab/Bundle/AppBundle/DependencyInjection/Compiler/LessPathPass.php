@@ -19,7 +19,7 @@ class LessPathPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $lessAsseticFilter = $container->getDefinition('assetic.filter.less');
-        $kernelRootDir = $container->getParameter('kernel.root_dir'). '/../web';
+        $kernelRootDir = $container->getParameter('kernel.root_dir').'/../web';
         $lessAsseticFilter->addMethodCall('addLoadPath', array($kernelRootDir));
     }
 }

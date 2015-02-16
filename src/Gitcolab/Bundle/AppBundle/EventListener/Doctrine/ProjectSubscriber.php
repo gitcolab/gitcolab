@@ -14,7 +14,6 @@ namespace Gitcolab\Bundle\AppBundle\EventListener\Doctrine;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
-
 use Gitcolab\Bundle\AppBundle\Model\Project;
 use Gitcolab\Bundle\AppBundle\Git\RepositoryPoolSubscriber;
 
@@ -43,7 +42,7 @@ class ProjectSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return array(
-            Events::postLoad
+            Events::postLoad,
         );
     }
 
