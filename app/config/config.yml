@@ -107,6 +107,17 @@ fos_rest:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
             'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
 
+gitonomy_git:
+    twig_extension:
+        enabled: true
+        routes_names:
+            tree: project_tree
+            commit: project_commit
+        themes:
+            - GitcolabAppBundle:Git:theme.html.twig
+            - GitonomyGitBundle::default_theme.html.twig
+
+
 gitcolab_app:
     repository_path: %gitcolab.repository_path%
     # ssh_host: ssh.host_example.com

@@ -13,13 +13,18 @@ namespace Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
-class LessPathPass implements CompilerPassInterface
+class GitUrlGeneratorPass implements CompilerPassInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public function process(ContainerBuilder $container)
     {
-        $lessAsseticFilter = $container->getDefinition('assetic.filter.less');
-        $kernelRootDir = $container->getParameter('kernel.root_dir').'/../web';
-        $lessAsseticFilter->addMethodCall('addLoadPath', array($kernelRootDir));
+        $definition = $container->getDefinition('gitonomy_twig.url_generator');
+        $definition->setClass('Gitcolab\Bundle\AppBundle\Routing\GitUrlGenerator');
+
+        $definition->addArgument(new Reference('doctrine'));
     }
 }

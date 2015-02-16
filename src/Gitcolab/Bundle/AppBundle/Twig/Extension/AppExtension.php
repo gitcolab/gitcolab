@@ -10,6 +10,7 @@
  */
 
 namespace Gitcolab\Bundle\AppBundle\Twig\Extension;
+use Gitcolab\Bundle\AppBundle\Model\Project;
 
 class AppExtension extends \Twig_Extension
 {
@@ -20,6 +21,7 @@ class AppExtension extends \Twig_Extension
     {
         return array(
             'gravatar'    => new \Twig_Function_Method($this, 'getGravatar'),
+            'branches_activity'  => new \Twig_Function_Method($this, 'getBranchesActivity'),
         );
     }
 
@@ -47,6 +49,28 @@ class AppExtension extends \Twig_Extension
         }
 
         return ($secure ? 'https://secure' : 'http://www') . '.gravatar.com/avatar/' . $hash . '?' . http_build_query(array_filter($map));
+    }
+
+    public function getBranchesActivity(Project $project, $branch = null)
+    {
+        $repository = $project->getRepository();
+        $references = $repository->getReferences();
+        $branchName = null === $branch ? $project->getDefaultBranch() : $branch;
+        $against = $references->getBranch($branchName);
+        foreach ($references->getBranches() as $branch) {
+            $logBehind = $repository->getLog($repository->getRevision($branch->getFullname().'..'.$against->getFullname()));
+            $logAbove = $repository->getLog($repository->getRevision($against->getFullname().'..'.$branch->getFullname()));
+            $rows[] = array(
+                'branch'           => $branch,
+                'above'            => $logAbove->count(),
+                'behind'           => $logBehind->count(),
+                'lastModification' => $branch->getLastModification(),
+            );
+        }
+        usort($rows, function ($left, $right) {
+            return $left['lastModification']->getAuthorDate() < $right['lastModification']->getAuthorDate();
+        });
+        return $rows;
     }
 
     public function getName()

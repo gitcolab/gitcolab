@@ -11,7 +11,6 @@
 
 namespace Gitcolab\Bundle\AppBundle\EventListener\Doctrine;
 
-
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -44,7 +43,6 @@ class UserPasswordListener implements EventSubscriber
         ];
     }
 
-
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
@@ -65,7 +63,6 @@ class UserPasswordListener implements EventSubscriber
         $this->updatePassword($entity);
         $args->setNewValue('password', $entity->getPassword());
     }
-
 
     private function updatePassword(User $entity)
     {

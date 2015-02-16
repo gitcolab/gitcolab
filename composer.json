@@ -29,7 +29,9 @@
         "friendsofsymfony/jsrouting-bundle": "1.5.3",
         "willdurand/js-translation-bundle": "~2.2",
         "white-october/pagerfanta-bundle": "2.1.*@dev",
-        "gitonomy/gitlib": "~0.1"
+        "gitonomy/gitlib": "~0.1",
+        "gitonomy/git-bundle": "0.2.*",
+        "michelf/php-markdown": "~1.4"
     },
     "require-dev": {
         "behat/behat": "~3.0",

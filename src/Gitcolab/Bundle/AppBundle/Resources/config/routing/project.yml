@@ -1,4 +1,32 @@
 project_create:
-  path: /create
+  path: /project/create
   defaults:
       _controller: GitcolabAppBundle:Project:create
+
+project_tree:
+  path: /{repository}/tree/{revision}/{path}
+  defaults:
+      _controller: GitcolabAppBundle:Project:tree
+      path: ""
+  requirements:
+      path: ".+"
+      repository: ".+"
+
+project_commits:
+  path: /{slug}/commits/{branch}
+  defaults:
+      _controller: GitcolabAppBundle:Project:commits
+  requirements:
+      slug: ".+"
+      branch: ".+"
+
+project_commit:
+  path: /{repository}/commit/{hash}
+  defaults:
+      _controller: GitcolabAppBundle:Project:commit
+  requirements:
+      slug: ".+"
+      repository: ".+"
+
+branch:
+  path: /

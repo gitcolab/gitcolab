@@ -1,0 +1,17 @@
+<div class="repo-head">
+    <h1 class="pull-left">
+        <a href="{{ path('organization_show', {'slug' : project.organization.slug}) }}">
+            {{ project.organization }}
+        </a>
+        <span>/</span>
+        <a href="{{ path('project_show', {'slug' : project.fullSlug}) }}">
+            {{ project }}
+        </a>
+    </h1>
+    <ul class="pull-right nav nav-pills">
+        <li role="presentation"><a href="#">Code</a></li>
+        <li role="presentation"><a href="#">Issues <span class="badge">0</span></a></li>
+        <li role="presentation"><a href="#">Pull Requests <span class="badge">0</span></a></li>
+        <li role="presentation"><a href="#">Settings </a></li>
+    </ul>
+</div>

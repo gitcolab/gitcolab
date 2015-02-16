@@ -248,6 +248,11 @@ class Project
         return $this;
     }
 
+    public function getRepository()
+    {
+        return $this->repository;
+    }
+
     public function getRepositorySize()
     {
         return $this->repositorySize;

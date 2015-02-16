@@ -23,7 +23,7 @@ organization:
 
 project:
   resource: "@GitcolabAppBundle/Resources/config/routing/project.yml"
-  prefix : /project
+  prefix : /
 
 project_show:
   path: /{slug}

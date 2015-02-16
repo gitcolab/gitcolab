@@ -14,8 +14,7 @@ namespace Gitcolab\Bundle\AppBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler\OverrideServiceCompilerPass;
-use Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler\GitcolabListenersPass;
+use Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler\GitUrlGeneratorPass;
 use Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler\LessPathPass;
 
 class GitcolabAppBundle extends Bundle
@@ -23,6 +22,8 @@ class GitcolabAppBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new LessPathPass());
+        $container->addCompilerPass(new GitUrlGeneratorPass());
+
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Gitcolab\Bundle\AppBundle\Model',
         );

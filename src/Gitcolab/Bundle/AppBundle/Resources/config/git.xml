@@ -7,6 +7,7 @@
 
         <parameter key="gitcolab.git.repository_pool.class">Gitcolab\Bundle\AppBundle\Git\RepositoryPoolSubscriber</parameter>
         <parameter key="gitcolab.git.hook_injector.class">Gitcolab\Bundle\AppBundle\Git\HookInjector</parameter>
+        <parameter key="gitcolab.doctrine.project_subscriber.class">Gitcolab\Bundle\AppBundle\EventListener\Doctrine\ProjectSubscriber</parameter>
 
     </parameters>
 
@@ -24,6 +25,11 @@
                 <argument key="pre-receive">%kernel.root_dir%/Resources/hooks/pre-receive</argument>
                 <argument key="post-receive">%kernel.root_dir%/Resources/hooks/post-receive</argument>
             </argument>
+        </service>
+
+        <service id="gitcolab.doctrine.project_subscriber" class="%gitcolab.doctrine.project_subscriber.class%" public="false">
+            <tag name="doctrine.event_subscriber" connection="default" />
+            <argument type="service" id="gitcolab.git.repository_pool" />
         </service>
 
     </services>
