@@ -72,3 +72,37 @@
         </tr>
     {% endspaceless %}
 {% endblock %}
+
+{% block log_rows %}
+    {% spaceless %}
+        {% set current_date = null %}
+        {% for commit in log %}
+            {% set date = commit.authorDate|git_date('day') %}
+            {% if date != current_date %}
+                <tr>
+                    <th colspan="2">
+                        Commits on {{ date }}
+                    </th>
+                </tr>
+                {% set current_date = date %}
+            {% endif %}
+            <tr data-hash="{{ commit.hash }}" data-parents="{{ commit.parentHashes|join(' ') }}">
+                <td>
+                    <div class="message">
+                        <div class="table-list-cell">
+                            {{ git_author(commit) }}
+                        </div>
+                        <div class="table-list-cell">
+                            {% for reference in commit.resolveReferences %}
+                                {{ git_label(reference) }}
+                            {% endfor %}
+                            <a href="{{ git_url(commit) }}">
+                                {{ commit.shortMessage }}
+                            </a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endspaceless %}
+{% endblock %}

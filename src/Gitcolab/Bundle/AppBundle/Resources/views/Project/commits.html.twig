@@ -1,0 +1,39 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+{% block bodyClass %}project commits{% endblock %}
+{% set branch_key_name = 'revision' %}
+{% set branch_key_name = branch_key_name|default("branch") %}
+
+{% block body %}
+    <div class="btn-group">
+        <a class="menu dropdown-toggle" data-toggle="dropdown">
+            {{ branch|default('contextual.all_branches'|trans) }}
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu pull-right">
+            {% for row in branches_activity(project, branch) %}
+                <li>
+                    <a href="{{ path('project_commits', {
+                        'slug': project.fullSlug,
+                        'path': path|default(null),
+                        'branch': row.branch.name,
+                    }) }}">
+                        {% if row.behind or row.above %}
+                            <div class="label pull-right">
+                                {% if row.behind %}<span class="behind">-{{ row.behind }}</span>{% endif %}
+                                {% if row.above %}<span class="above">+{{ row.above }}</span>{% endif %}
+                            </div>
+                        {% endif %}
+                        {{ row.branch.name }}
+                    </a>
+                </li>
+            {% endfor %}
+            {% if withAll|default(false) %}
+                <li class="divider"></li>
+                <li><a href="{{ path(route, { slug: project.slug }) }}">{{ 'contextual.all_branches'|trans }}</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    {{ git_log(log, {query_url: path('project_commits', {slug: project.slug, branch: branch})}) }}
+
+{% endblock body %}

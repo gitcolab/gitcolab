@@ -175,6 +175,28 @@ class ProjectController extends Controller
 
         return $this->render($tpl, $parameters);
     }
+
+    /**
+     * Display commits history
+     */
+    public function commitsAction(Request $request, $slug)
+    {
+        $branch     = $request->query->get('branch', 'master');
+        $project    = $this->getProject($slug);
+        $repository = $project->getRepository();
+        $log        = $repository->getLog($branch);
+        $log
+            ->setOffset($request->query->get('offset', 0))
+            ->setLimit($request->query->get('limit', 25))
+        ;
+        ;
+        return $this->render('GitcolabAppBundle:Project:commits.html.twig', array(
+            'project'  => $project,
+            'branch'   => $branch,
+            'log'      => $log,
+        ));
+    }
+
     /**
      * Displays a commit.
      */

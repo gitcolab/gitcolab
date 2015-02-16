@@ -12,10 +12,21 @@ project_tree:
       path: ".+"
       repository: ".+"
 
+project_commits:
+  path: /{slug}/commits/{branch}
+  defaults:
+      _controller: GitcolabAppBundle:Project:commits
+  requirements:
+      slug: ".+"
+      branch: ".+"
+
 project_commit:
-  path: /{repository}/commits/{hash}
+  path: /{repository}/commit/{hash}
   defaults:
       _controller: GitcolabAppBundle:Project:commit
   requirements:
       slug: ".+"
       repository: ".+"
+
+branch:
+  path: /
