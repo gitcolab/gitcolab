@@ -34,6 +34,8 @@ class GitcolabAppExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $container->setParameter($this->getAlias() . '.backend_type_orm', true);
+        $container->setParameter('sylius.locale', '%locale%');
+        $container->setParameter('sylius.translation.mapping', array());
 
         $loader->load('services.xml');
         $loader->load('git.xml');

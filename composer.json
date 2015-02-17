@@ -28,10 +28,12 @@
         "friendsofsymfony/rest-bundle": "~1.0",
         "friendsofsymfony/jsrouting-bundle": "1.5.3",
         "willdurand/js-translation-bundle": "~2.2",
-        "white-october/pagerfanta-bundle": "2.1.*@dev",
+        "white-october/pagerfanta-bundle": "~1.0",
         "gitonomy/gitlib": "~0.1",
         "gitonomy/git-bundle": "0.2.*",
-        "michelf/php-markdown": "~1.4"
+        "michelf/php-markdown": "~1.4",
+        "sylius/resource-bundle":"0.13",
+        "sylius/translation-bundle":"0.13"
     },
     "require-dev": {
         "behat/behat": "~3.0",
