@@ -53,20 +53,13 @@ class ProjectController extends Controller
         return $this->handleView($view);
     }
 
-    public function showAction(Request $request, $slug)
+    public function showAction(Request $request, Project $project)
     {
         $view = View::create();
 
-        $slugParameter = explode('/', $slug);
-        $project = $this->getRepository('Project')->findProject($slugParameter[0], $slugParameter[1]);
-
-        if (!$project) {
-            throw $this->createNotFoundException();
-        }
-
         $data = array(
             'project' => $project,
-            'slug' => $slug,
+            'slug' => $project->getFullSlug(),
             'gitcolab_url' => str_replace('http://', '', $this->container->getParameter('gitcolab.url'))
         );
         $path = '';
@@ -94,7 +87,7 @@ class ProjectController extends Controller
                 'revision' => $revision,
                 'path' => $path,
                 'refs' => $refs,
-                'readme' => $this->getReadme($repository, $tree, $path)
+                'readme' => $this->getReadme($tree)
             ));
 
 
@@ -111,12 +104,10 @@ class ProjectController extends Controller
     }
 
     /**
-     * @param Repository $repository
      * @param $tree
-     * @param $path
      * @return array|null
      */
-    public function getReadme(Repository $repository, $tree, $path)
+    private function getReadme($tree)
     {
         foreach ($tree->getEntries() as $name =>  $file) {
 
@@ -139,6 +130,7 @@ class ProjectController extends Controller
     public function treeAction($repository, $revision, $path)
     {
         $project    = $this->getProject($repository);
+
         $repository = $project->getRepository();
         $refs       = $repository->getReferences();
         if ($refs->hasBranch($revision)) {
@@ -211,14 +203,13 @@ class ProjectController extends Controller
         ));
     }
 
-    /**
-     * @param $slug
-     * @return mixed
-     */
-    public function getProject($slug)
+    private function getProject($slug)
     {
-        $slugParameter = explode('/', $slug);
-        $project = $this->getRepository('Project')->findProject($slugParameter[0], $slugParameter[1]);
+        $project  = $this->get('gitcolab.repository.project')->findOneBy(array('slug' => $slug));
+
+        if (null === $project) {
+            throw $this->createNotFoundException('Project not found');
+        }
 
         return $project;
     }

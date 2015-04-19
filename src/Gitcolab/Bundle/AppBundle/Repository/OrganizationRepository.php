@@ -11,7 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class OrganizationRepository extends EntityRepository
 {

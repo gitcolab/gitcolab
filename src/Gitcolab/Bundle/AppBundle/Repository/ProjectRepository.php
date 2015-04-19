@@ -11,10 +11,24 @@
 
 namespace Gitcolab\Bundle\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class ProjectRepository extends EntityRepository
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneBy(array $criteria)
+    {
+        if (isset($criteria['slug']) && strpos($criteria['slug'], '/') == true) {
+            $slugParameter = explode('/', $criteria['slug']);
+            return $this->findProject($slugParameter[0], $slugParameter[1]);
+        }
+
+        return parent::findOneBy($criteria);
+    }
+
+
     public function findProject($org, $project)
     {
         $query = $this->createQueryBuilder('p')
