@@ -1,0 +1,27 @@
+sylius_resource:
+  resources:
+      gitcolab.user:
+          driver: doctrine/orm
+          classes:
+              model: Gitcolab\Bundle\AppBundle\Model\User\User
+
+      gitcolab.organization:
+          driver: doctrine/orm
+          classes:
+              model: Gitcolab\Bundle\AppBundle\Model\Organization
+
+      gitcolab.project:
+          driver: doctrine/orm
+          classes:
+              model: Gitcolab\Bundle\AppBundle\Model\Project
+              repository: Gitcolab\Bundle\AppBundle\Repository\ProjectRepository
+
+      gitcolab.activity:
+          driver: doctrine/orm
+          classes:
+              model: Gitcolab\Bundle\AppBundle\Model\Activity
+
+      gitcolab.key:
+          driver: doctrine/orm
+          classes:
+              model: Gitcolab\Bundle\AppBundle\Model\Key
