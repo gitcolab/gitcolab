@@ -1,27 +1,42 @@
 language: php
 
+sudo: false
+
 php:
   - 5.5
   - 5.6
+  - 7.0
   - hhvm-nightly
 
 matrix:
     allow_failures:
-        - php: 5.6
+        - php: 7.0
         - php: hhvm-nightly
 
-before_script:
-    - echo "Starting install" > install.log
+cache:
+    bundler: true
+    directories:
+        - vendor
+        - bin
+        - node_modules
+        - web/vendor
+addons:
+    apt:
+        packages:
+            - wkhtmltopdf
+            - xvfb
 
+before_install:
+    - composer self-update
+    - if [[ $TRAVIS_PHP_VERSION != 'hhvm' && $TRAVIS_PHP_VERSION != 'hhvm-nightly' ]]; then echo "zend.enable_gc = 0" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;
+
+before_script:
     - npm install
     - npm -v
     - bower -version
     - bower update --config.interactive=false --allow-root
 
     # Composer
-    - composer self-update
-    - composer config --global process-timeout 5000
-    - set "COMPOSER_PROCESS_TIMEOUT=5000"
     - composer install --prefer-source
 
     # Selenium
@@ -30,9 +45,9 @@ before_script:
     - sleep 5
 
     # Install database
-    - php app/console doctrine:database:create -e=test > /dev/null
-    - php app/console doctrine:schema:create -e=test > /dev/null
-    - php app/console doctrine:fixtures:load --no-interaction -e=test > /dev/null
+    - php app/console doctrine:database:create --env=test
+    - php app/console doctrine:schema:create --env=test
+    - php app/console doctrine:fixtures:load --no-interaction --env=test
 
     # Loading web server for selenium
     - php app/console server:run > error.log &
