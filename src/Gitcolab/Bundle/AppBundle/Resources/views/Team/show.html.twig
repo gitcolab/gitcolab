@@ -1,0 +1,41 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+{% block bodyClass %}organization team show{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts '@GitcolabAppBundle/Resources/assets/js/team.js' output='js/team.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+{% block body %}
+
+    {% include '@GitcolabApp/Team/_head.html.twig' with {'organization': team.organization} %}
+
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h1>{{ team.name }}</h1>
+
+                <div class="team-stats">
+                </div>
+            </div>
+            <div class="panel-footer">
+            </div>
+        </div>
+    </div>
+    <div class="subnav">
+        <h4 class="member-title pull-left">Team members</h4>
+        <form method="post" action="{{ path('organization_team_access', {'organization': team.organization.slug, 'slug': team.slug}) }}" class="add-to-team pull-right" style="width: 300px;">
+            <input type="search" name="member" class="form-control selectize autocomplete-field" placeholder="Add a person" />
+        </form>
+        <ul class="row">
+            {% for member in team.members %}
+            <li class="col-md-6 list-item">
+                {{ member.user.username }}
+                <p class="team-member-description" itemprop="name">
+                    {{ member.user.fullName }}
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock body %}

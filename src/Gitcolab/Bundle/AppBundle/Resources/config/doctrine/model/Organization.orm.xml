@@ -15,6 +15,12 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+
+        <one-to-many field="teams" target-entity="Gitcolab\Bundle\AppBundle\Model\Team" mapped-by="organization">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
     </entity>
 
 </doctrine-mapping>

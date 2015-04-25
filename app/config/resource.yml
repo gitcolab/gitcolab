@@ -5,6 +5,12 @@ sylius_resource:
           classes:
               model: Gitcolab\Bundle\AppBundle\Model\User\User
 
+      gitcolab.team:
+          driver: doctrine/orm
+          classes:
+              controller: Gitcolab\Bundle\AppBundle\Controller\TeamController
+              model: Gitcolab\Bundle\AppBundle\Model\Team
+
       gitcolab.organization:
           driver: doctrine/orm
           classes:

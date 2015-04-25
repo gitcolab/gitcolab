@@ -33,6 +33,11 @@ class Organization extends Owner
     protected $avatar;
 
     /**
+     * @var Team[]
+     */
+    protected $teams;
+
+    /**
      *
      * @var OrganizationUser[]
      */
@@ -54,6 +59,22 @@ class Organization extends Owner
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @return object
+     */
+    public function getLastActivity()
+    {
+        return $this->lastActivity;
+    }
+
+    /**
+     * @param object $lastActivity
+     */
+    public function setLastActivity($lastActivity)
+    {
+        $this->lastActivity = $lastActivity;
     }
 
     /**
@@ -91,5 +112,22 @@ class Organization extends Owner
     public function getOrganizationUsers()
     {
         return $this->organizationUsers;
+    }
+
+
+    /**
+     * @return Team[]
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+
+    /**
+     * @param Team[] $teams
+     */
+    public function setTeams($teams)
+    {
+        $this->teams = $teams;
     }
 }

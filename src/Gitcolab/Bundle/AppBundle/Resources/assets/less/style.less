@@ -1,4 +1,5 @@
 @import "../../../../../../../web/vendor/bootstrap/less/bootstrap.less";
+@import "../../../../../../../web/vendor/selectize/dist/less/selectize.bootstrap3.less";
 @icon-font-path: "/vendor/bootstrap/fonts/";
 
 .clearbox {
@@ -55,6 +56,10 @@
   margin-top: 10px;
 }
 
+.pagehead h1 {
+  margin-top: 0px;
+}
+
 .form-control {
   width: 67%;
 }
@@ -80,6 +85,16 @@
 .dashboard #dashboard-sidebar-menu .panel-heading {
   h4 {
     padding: 0;
+  }
+}
+
+.organization.team.show {
+  .list-item {
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    list-style: none;
   }
 }
 

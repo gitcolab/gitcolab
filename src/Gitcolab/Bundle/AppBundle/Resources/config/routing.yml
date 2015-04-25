@@ -5,7 +5,6 @@ dashboard:
 
 user:
   resource: "@GitcolabAppBundle/Resources/config/routing/user.yml"
-  prefix: /user
 
 key:
   resource: "@GitcolabAppBundle/Resources/config/routing/key.yml"

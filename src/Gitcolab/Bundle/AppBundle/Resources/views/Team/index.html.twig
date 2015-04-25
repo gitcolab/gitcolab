@@ -1,0 +1,27 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+{% block body %}
+
+{% include '@GitcolabApp/Team/_head.html.twig' with {'organization': organization} %}
+
+<div class="infos clearfix">
+    <a class="btn btn-primary pull-right" href="{{ path('organization_team_create', {'slug': organization.slug}) }}">Create</a>
+</div>
+<div class="">
+    <div class="row">
+    {% for team in organization.teams %}
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{{ path('organization_team_show', {'slug': team.slug, organization: team.organization.slug}) }}">{{ team.name }}</a>
+                </div>
+                <div class="panel-footer">
+                    {% for user in team.members %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% if loop.index %2 == 0 %}</div><div class="row">{% endif %}
+    {% endfor %}
+    </div>
+</div>
+{% endblock body %}
