@@ -35,6 +35,12 @@ class Access
      */
     protected $type;
 
+
+    /**
+     * @var string
+     */
+    protected $options;
+
     /**
      * @var \DateTime
      */
@@ -85,7 +91,7 @@ class Access
     }
 
     /**
-     * @param User $user
+     * @param User\User $user
      * @return this
      */
     public function setUser($user)
@@ -105,10 +111,13 @@ class Access
 
     /**
      * @param string $type
+     * @return self
      */
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /**

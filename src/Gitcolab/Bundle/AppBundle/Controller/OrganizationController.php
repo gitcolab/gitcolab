@@ -51,6 +51,12 @@ class OrganizationController extends Controller
         }
 
         $organization = $this->getRepository('Organization')->findOneBySlug($slug);
+
+        if (!$organization) {
+            throw $this->createNotFoundException();
+        }
+
+
         $listQuery = $this->getRepository('Project')->getListPaginatorQueryBuilder($slug,'', array('name' => 'ASC'));
         $paginator = new Pagerfanta(new DoctrineORMAdapter($listQuery));
         $paginator

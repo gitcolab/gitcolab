@@ -2,6 +2,10 @@
 @import "../../../../../../../web/vendor/selectize/dist/less/selectize.bootstrap3.less";
 @icon-font-path: "/vendor/bootstrap/fonts/";
 
+a:hover{
+  text-decoration: none;
+}
+
 .clearbox {
   clear: both;
 }
@@ -88,13 +92,52 @@
   }
 }
 
+.organization.team.show .org-name, .organization.show .org-name {
+    font-size: 20px;
+}
 .organization.team.show {
+
   .list-item {
     position: relative;
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
     list-style: none;
+  }
+}
+
+.organization.show .head-orga {
+  img {
+    float: left;
+  }
+  h1 {
+    float: left;
+    margin-left: 10px;
+  }
+}
+.organization.show .option-orga {
+  margin-top: 35px;
+}
+
+.organization.show .orga-teams {
+  color: #333333;
+  font-weight: bold;
+  strong {
+    float: right;
+  }
+}
+
+.organization.show .repositories {
+  list-style: none;
+  padding-left: 0px;
+  li {
+    border-bottom: 1px solid #eee;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    h3 {
+      margin: 0;
+    }
   }
 }
 

@@ -13,10 +13,11 @@
         </id>
 
         <field name="resource" type="string" />
+        <field name="options" type="array" />
 
-        <many-to-one field="organization" target-entity="Gitcolab\Bundle\AppBundle\Model\Organization" inversed-by="members" />
-        <many-to-one field="project" target-entity="Gitcolab\Bundle\AppBundle\Model\Project" inversed-by="members" />
-        <many-to-one field="team" target-entity="Gitcolab\Bundle\AppBundle\Model\Team" inversed-by="members" />
+        <many-to-one field="organization" target-entity="Gitcolab\Bundle\AppBundle\Model\Organization" inversed-by="access" />
+        <many-to-one field="project" target-entity="Gitcolab\Bundle\AppBundle\Model\Project" inversed-by="access" />
+        <many-to-one field="team" target-entity="Gitcolab\Bundle\AppBundle\Model\Team" inversed-by="access" />
         <many-to-one field="user" target-entity="Gitcolab\Bundle\AppBundle\Model\User\User" />
 
         <field name="createdAt" column="created_at" type="date" nullable="false">

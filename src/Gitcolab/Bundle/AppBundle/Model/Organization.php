@@ -39,9 +39,9 @@ class Organization extends Owner
 
     /**
      *
-     * @var OrganizationUser[]
+     * @var array
      */
-    protected $organizationUsers;
+    protected $members;
 
     /**
      * @param string $email
@@ -50,6 +50,7 @@ class Organization extends Owner
     public function setEmail($email)
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -71,10 +72,13 @@ class Organization extends Owner
 
     /**
      * @param object $lastActivity
+     * @return self
      */
     public function setLastActivity($lastActivity)
     {
         $this->lastActivity = $lastActivity;
+
+        return $this;
     }
 
     /**
@@ -84,6 +88,7 @@ class Organization extends Owner
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+
         return $this;
     }
 
@@ -96,24 +101,12 @@ class Organization extends Owner
     }
 
     /**
-     * @param User $user
-     * @param string $role
-     * @return $this
-     */
-    public function addUser(User $user, $role = 'ROLE_USER')
-    {
-        $this->organizationUsers[] = new OrganizationUser($user, $this, [$role]);
-        return $this;
-    }
-
-    /**
      * @return OrganizationUser
      */
-    public function getOrganizationUsers()
+    public function getMembers()
     {
-        return $this->organizationUsers;
+        return $this->members;
     }
-
 
     /**
      * @return Team[]
@@ -125,9 +118,20 @@ class Organization extends Owner
 
     /**
      * @param Team[] $teams
+     * @return self
      */
     public function setTeams($teams)
     {
         $this->teams = $teams;
+
+        foreach ($this->teams as $team) {
+            foreach ($team->getMembers() as $member) {
+                if ($this->members[$member->getId()]) {
+                    $this->members[$member->getId()] = $member;
+                }
+            }
+        }
+
+        return $this;
     }
 }

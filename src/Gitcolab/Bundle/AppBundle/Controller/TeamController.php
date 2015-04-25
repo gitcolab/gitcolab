@@ -32,16 +32,17 @@ class TeamController extends ResourceController
 
     public function addMemberAction(Request $request)
     {
+        $user = $this->get('gitcolab.repository.user')->find($request->get('member'));
         /** @var Team $team */
         $team = $this->findOr404($request);
-        $user = $this->get('gitcolab.repository.user')->find($request->get('member'));
+        $team->setAccess($user);
+
         $access = (new Access())
             ->setResource($team)
             ->setUser($user);
 
-        $team->addMember($user);
         $this->domainManager->create($access);
-        $this->domainManager->update($team);
+        //$this->domainManager->update($team);
 
         return $this->redirectToRoute('organization_team_show', [
             'organization' => $team->getOrganization(),

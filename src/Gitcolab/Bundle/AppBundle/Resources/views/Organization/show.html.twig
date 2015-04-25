@@ -1,6 +1,6 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 
-{% block bodyClass %}project show{% endblock %}
+{% block bodyClass %}organization show{% endblock %}
 {% block body %}
     <div class="col-md-8">
         <div class="head-orga clearfix">
@@ -13,16 +13,18 @@
             </h1>
         </div>
         <div class="option-orga clearfix">
-            <form class="col-md-6" method="post" action="?">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Filter</label>
-                    <input type="text" name="name" class="form-control" />
+            <div class="row">
+                <form class="col-md-6" method="post" action="?">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Filter</label>
+                        <input type="text" name="name" class="form-control" />
+                    </div>
+                </form>
+                <div class="col-md-6">
+                    <a href="{{ path('project_create', {'org': organization.slug}) }}" class="pull-right btn btn-primary">
+                        New repository
+                    </a>
                 </div>
-            </form>
-            <div class="col-md-6">
-                <a href="{{ path('project_create', {'org': organization.slug}) }}" class="pull-right btn btn-primary">
-                    New repository
-                </a>
             </div>
         </div>
         <div>
@@ -45,17 +47,30 @@
     <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a class="label label-default pull-right" href="/org/shine-d/members"><strong>1</strong></a>
+                <span class="label label-default pull-right"><strong>{{ organization.members|length }}</strong></span>
                 <strong>People</strong>
             </div>
-            <div class="panel-body"></div>
-        </div>
-        <!--<div class="panel panel-default">
-            <div class="panel-heading">
-                <a class="text-grey right" href="/org/shine-d/members"><strong>1</strong></a>
-                <strong>Team</strong>
+            <div class="panel-body">
+                {% for member in organization.members %}
+                    <img src="{{ member.avatar }}" width="40" height="40" />
+                    <span>{{ member.username }}</span>
+                {% endfor %}
             </div>
-            <div class="panel-body"></div>
-        </div>-->
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a class="orga-teams" href="{{ path('organization_teams', {'slug': organization.slug}) }}">
+                    <span>Teams</span>
+                    <strong class="label label-default">{{ organization.teams|length }}</strong>
+                </a>
+            </div>
+            <div class="panel-body">
+                {% for team in organization.teams %}
+                    <a href="{{ path('organization_team_show', {'organization': organization.slug, 'slug': team.slug }) }}">
+                        <strong>{{ team.name }}</strong>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock body %}

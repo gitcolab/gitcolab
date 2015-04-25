@@ -65,7 +65,7 @@ class Team
     protected $members;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -73,7 +73,7 @@ class Team
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -81,11 +81,14 @@ class Team
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
+     * @return self
      */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -117,10 +120,13 @@ class Team
 
     /**
      * @param string $access
+     * @return self
      */
     public function setAccess($access)
     {
         $this->access = $access;
+
+        return $this;
     }
 
     /**
@@ -133,10 +139,13 @@ class Team
 
     /**
      * @param string $description
+     * @return self
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -162,11 +171,11 @@ class Team
      * @param $member
      * @return array|User\User[]
      */
-    public function addMember($member)
+    public function addMember(User\User $member)
     {
         $this->members[] = $member;
 
-        return $this->members;
+        return $this;
     }
 
     /**
