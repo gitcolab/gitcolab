@@ -42,7 +42,28 @@ class TeamController extends ResourceController
             ->setUser($user);
 
         $this->domainManager->create($access);
-        //$this->domainManager->update($team);
+
+        return $this->redirectToRoute('organization_team_show', [
+            'organization' => $team->getOrganization(),
+            'slug' => $team->getSlug()
+        ]);
+    }
+
+    public function removeMemberAction(Request $request)
+    {
+        $user = $this->get('gitcolab.repository.user')->find($request->get('member'));
+        $team = $this->findOr404($request);
+
+        $access = $this->get('gitcolab.repository.access')->findOneBy([
+            'user' => $user,
+            'team' => $team
+        ]);
+
+        if (!$access) {
+            throw $this->createNotFoundException();
+        }
+
+        $this->get('gitcolab.domain_manager')->delete($access);
 
         return $this->redirectToRoute('organization_team_show', [
             'organization' => $team->getOrganization(),

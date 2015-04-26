@@ -13,6 +13,7 @@ namespace Gitcolab\Bundle\AppBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
+use Gitcolab\Bundle\AppBundle\Model\Team;
 
 class TeamType extends AbstractType
 {
@@ -23,7 +24,15 @@ class TeamType extends AbstractType
     {
         $builder
             ->add('name', null, ['required' => true])
-            ->add('description', null, array('required' => false))
+            ->add('description', null, ['required' => false])
+            ->add('access', 'choice' , [
+                'expanded' => true,
+                'choices' => [
+                    Team::ACCESS_READ => 'gitcolab.team.access.read',
+                    Team::ACCESS_WRITE => 'gitcolab.team.access.write',
+                    Team::ACCESS_OWNER => 'gitcolab.team.access.admin'
+                ]
+            ])
         ;
     }
 

@@ -36,6 +36,11 @@ organization_team_access:
   defaults:
       _controller: gitcolab.controller.team:addMemberAction
 
+organization_team_remove_acess:
+  path: /organization/{organization}/teams/{slug}/remove
+  defaults:
+      _controller: gitcolab.controller.team:removeMemberAction
+
 organization_team_show:
   path: /organization/{organization}/teams/{slug}
   defaults:

@@ -13,9 +13,11 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <a href="{{ path('organization_team_show', {'slug': team.slug, organization: team.organization.slug}) }}">{{ team.name }}</a>
+                    <a></a>
                 </div>
                 <div class="panel-footer">
                     {% for user in team.members %}
+                        <a href="#"><img width="30" height="30" src="{{ user.user.avatar }}" alt="{{ user.user.username }}" /></a>
                     {% endfor %}
                 </div>
             </div>

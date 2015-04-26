@@ -30,11 +30,17 @@
         <ul class="row">
             {% for member in team.members %}
             <li class="col-md-6 list-item">
-                <img src="{{ member.user.avatar }}" class="avatar" height="40" width="40" />
-                {{ member.user.username }}
-                <p class="team-member-description">
-                    {{ member.user.fullName }}
-                </p>
+                <img src="{{ member.user.avatar }}" class="avatar" height="40" width="40" alt="{{ member.user.username }}" />
+                <div class="infos">
+                    {{ member.user.username }}
+                    <div class="fullname">
+                        {{ member.user.fullName }}
+                    </div>
+                </div>
+                <form action="{{ path('organization_team_remove_acess', {'organization': team.organization.slug, 'slug': team.slug}) }}" method="post">
+                    <input type="hidden" name="member" value="{{ member.user.id }}" />
+                    <input type="submit" class="pull-right btn btn-xs btn-danger" value="Remove" />
+                </form>
             </li>
             {% endfor %}
         </ul>

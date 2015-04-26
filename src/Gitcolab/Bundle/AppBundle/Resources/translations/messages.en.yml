@@ -1,0 +1,6 @@
+gitcolab:
+  team:
+      access:
+          read: Read Access
+          write: Write Access
+          admin: Admin Access
