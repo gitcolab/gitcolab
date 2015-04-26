@@ -26,11 +26,7 @@ class OrganizationController extends Controller
         $form = $this->createForm(new OrganizationType, $organization);
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->persistAndFlush($organization);
-
-            $organization->addUser($this->getUser(), 'ROLE_ADMIN');
-            $this->persistAndFlush($organization);
-
+            $this->get('gitcolab.domain_manager')->create($organization);
             return $this->redirectToRoute('dashboard');
         }
 

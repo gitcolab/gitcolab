@@ -9,11 +9,19 @@
         <parameter key="gitcolab.security.api_internal.class">Gitcolab\Bundle\AppBundle\Security\ApiInternalProvider</parameter>
         <parameter key="gitcolab.menu.builder.class">Gitcolab\Bundle\AppBundle\Menu\MenuBuilder</parameter>
         <parameter key="gitcolab.twig.extension.class">Gitcolab\Bundle\AppBundle\Twig\Extension\AppExtension</parameter>
+        <parameter key="gitcolab.domain_manager.class">Gitcolab\Bundle\AppBundle\Manager\DomainManager</parameter>
+
     </parameters>
 
     <services>
         <service id="twig.extension.intl" class="Twig_Extensions_Extension_Intl">
             <tag name="twig.extension" />
+        </service>
+
+        <service id="gitcolab.domain_manager" class="%gitcolab.domain_manager.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.controller.parameters_parser" />
         </service>
 
         <service id="gitcolab.event_dispatcher" class="%gitcolab.event_dispatcher.class%">
@@ -34,6 +42,12 @@
 
         <service id="gitcolab.user.setting.tabs" class="Knp\Menu\MenuItem" factory-service="gitcolab.menu.builder" factory-method="createTabUserSettings">
             <tag name="knp_menu.menu" alias="user_setting_tabs"/>
+        </service>
+
+        <service id="gitcolab.subscriber.access" class="Gitcolab\Bundle\AppBundle\EventListener\AccessSubscriber">
+            <argument type="service" id="gitcolab.domain_manager" />
+            <argument type="service" id="security.token_storage" />
+            <tag name="kernel.event_subscriber" />
         </service>
 
     </services>

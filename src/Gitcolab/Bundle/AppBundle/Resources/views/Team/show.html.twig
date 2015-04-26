@@ -30,8 +30,9 @@
         <ul class="row">
             {% for member in team.members %}
             <li class="col-md-6 list-item">
+                <img src="{{ member.user.avatar }}" class="avatar" height="40" width="40" />
                 {{ member.user.username }}
-                <p class="team-member-description" itemprop="name">
+                <p class="team-member-description">
                     {{ member.user.fullName }}
                 </p>
             </li>

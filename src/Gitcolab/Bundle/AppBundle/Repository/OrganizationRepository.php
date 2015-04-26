@@ -28,7 +28,6 @@ class OrganizationRepository extends EntityRepository
         $query = $qb
             ->leftJoin('o.teams', 'team')
             ->leftJoin('team.members', 'access', JOIN::WITH, 'access.team = team.id')
-            ->where('access = team.id ')
             ->where($qb->expr()->eq('access.user',':user'))
             ->setParameter('user', $user)
         ;

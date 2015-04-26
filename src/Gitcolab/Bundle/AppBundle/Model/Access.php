@@ -53,6 +53,11 @@ class Access
     protected $project;
     protected $team;
 
+    public function __construct()
+    {
+        $this->options = [];
+    }
+
     /**
      * @return int
      */

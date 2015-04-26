@@ -18,7 +18,9 @@
             <gedmo:slug unique="true" updatable="true" separator="-" fields="name" />
         </field>
 
-        <field name="description" column="message" type="string" nullable="true" />
+        <field name="description" column="description" type="string" nullable="true" />
+
+        <field name="access" column="access" type="string" nullable="false" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
