@@ -179,6 +179,20 @@ class Team
     }
 
     /**
+     * @param $user
+     * @return bool
+     */
+    public function hasMember($user)
+    {
+        foreach ($this->members as $member) {
+            if ($member->getUser() === $user) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * @return User\User[]
      */
     public function getMembers()

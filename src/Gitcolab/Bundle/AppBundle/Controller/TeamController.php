@@ -37,11 +37,17 @@ class TeamController extends ResourceController
         $team = $this->findOr404($request);
         $team->setAccess($user);
 
-        $access = (new Access())
-            ->setResource($team)
-            ->setUser($user);
+        if (false === $team->hasMember($user)) {
+            $access = (new Access())
+                ->setResource($team)
+                ->setUser($user);
 
-        $this->domainManager->create($access);
+            $this->domainManager->create($access);
+            $this->addFlash('success', 'gitcolab.team.success_add');
+
+        } else {
+            $this->addFlash('error', 'gitcolab.team.already_exist');
+        }
 
         return $this->redirectToRoute('organization_team_show', [
             'organization' => $team->getOrganization(),
