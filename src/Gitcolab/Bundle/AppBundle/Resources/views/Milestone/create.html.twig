@@ -1,0 +1,27 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+
+{% block bodyClass %}organization{% endblock %}
+{% block body %}
+    <div class="subhead">
+        <h1 class="subhead-heading">New milestone</h1>
+        <p class="subhead-description">Create a new milestone to help organize your issues and pull requests.</p>
+    </div>
+    <form method="post" action="{{ path('milestone_create', {'slug': project.fullslug}) }}">
+
+        <div class="row">
+            <div class="col-md-8" >
+                {{ form_row(form.name) }}
+                {{ form_row(form.description) }}
+
+                <input type="submit" class="btn btn-primary" />
+                {{ form_rest(form) }}
+            </div>
+            <div class="col-md-2" >
+                Calendar
+            </div>
+        </div>
+
+    </form>
+        </div>
+    </div>
+{% endblock body %}
