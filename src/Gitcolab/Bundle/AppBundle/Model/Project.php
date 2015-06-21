@@ -59,6 +59,11 @@ class Project
     protected $repository;
 
     /**
+     * @var string
+     */
+    protected $path;
+
+    /**
      * @var object
      */
     protected $organization;
@@ -107,7 +112,7 @@ class Project
     {
         $this->name = $name;
 
-        return $name;
+        return $this;
     }
 
     /**
@@ -224,6 +229,7 @@ class Project
     public function setDefaultBranch($defaultBranch)
     {
         $this->defaultBranch = $defaultBranch;
+
         return $this;
     }
 
@@ -253,6 +259,8 @@ class Project
         return $this->repository;
     }
 
+
+
     public function getRepositorySize()
     {
         return $this->repositorySize;
@@ -261,6 +269,35 @@ class Project
     public function setRepositorySize($repositorySize)
     {
         $this->repositorySize = $repositorySize;
+
+        return $this;
+    }
+
+    /**
+     * @return Team[]
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+
+    /**
+     * @param Team $team
+     * @return $this
+     */
+    public function addTeam(Team $team)
+    {
+        $this->teams[] = $team;
+
+        return $this;
+    }
+
+    /**
+     * @param Team[] $teams
+     */
+    public function setTeams($teams)
+    {
+        $this->teams = $teams;
     }
 
     public function addUser($user, $role)

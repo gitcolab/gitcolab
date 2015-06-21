@@ -50,5 +50,9 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
+        <service id="gitcolab.security.access.voter.organization" class="Gitcolab\Bundle\AppBundle\Security\Authorization\Voter\OrganizationVoter">
+            <tag name="security.voter" />
+        </service>
+
     </services>
 </container>

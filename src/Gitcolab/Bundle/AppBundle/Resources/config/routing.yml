@@ -30,9 +30,3 @@ project_show:
       _controller: GitcolabAppBundle:Project:show
   requirements:
       slug: ".+"
-
-project_setting:
-  path: /{slug}/settings
-  defaults:
-       _controller: GitcolabAppBundle:Project:settings
-

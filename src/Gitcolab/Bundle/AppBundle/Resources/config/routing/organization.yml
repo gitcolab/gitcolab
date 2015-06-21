@@ -31,6 +31,21 @@ organization_team_create:
             route: organization_teams
             parameters: {slug : $slug}
 
+organization_team_update:
+  path: /organization/{organization}/teams/{slug}/update
+  defaults:
+      _controller: gitcolab.controller.team:updateAction
+      _sylius:
+          template: GitcolabAppBundle:Team:update.html.twig
+          form: Gitcolab\Bundle\AppBundle\Form\Type\TeamType
+
+organization_team_delete:
+  path: /organization/{organization}/teams/{id}/delete
+  defaults:
+      _controller: gitcolab.controller.team:deleteAction
+      _sylius:
+          redirect: /
+
 organization_team_access:
   path: /organization/{organization}/teams/{slug}/access
   defaults:

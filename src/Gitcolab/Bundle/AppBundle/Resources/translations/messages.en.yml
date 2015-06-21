@@ -1,4 +1,9 @@
 gitcolab:
+  form:
+     create: Create
+     update: Update
+     delete: Delete
+     validate: Validate
   team:
       access:
           read: Read Access

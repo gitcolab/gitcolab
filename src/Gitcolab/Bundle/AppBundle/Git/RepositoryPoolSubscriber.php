@@ -13,8 +13,8 @@ namespace Gitcolab\Bundle\AppBundle\Git;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-use Gitonomy\Git\Repository;
 use Gitonomy\Git\Admin;
+use Sylius\Component\Resource\Event\ResourceEvent;
 use Gitcolab\Bundle\AppBundle\GitcolabEvents;
 use Gitcolab\Bundle\AppBundle\Model\Project;
 
@@ -41,6 +41,7 @@ class RepositoryPoolSubscriber implements EventSubscriberInterface
     {
         return array(
             GitcolabEvents::PROJECT_CREATE => array(array('onProjectCreate', 255)),
+            'gitcolab.project.post_create' => array(array('onProjectCreate', 255)),
             GitcolabEvents::PROJECT_DELETE => array(array('onProjectDelete', -255)),
             GitcolabEvents::PROJECT_PUSH   => array(array('onProjectPush', -255))
         );
@@ -48,12 +49,18 @@ class RepositoryPoolSubscriber implements EventSubscriberInterface
 
     public function onProjectCreate($event)
     {
-        $project = $event->getProject();
+        if ($event instanceof ResourceEvent) {
+            $project = $event->getSubject();
+        } else {
+            $project = $event->getProject();
+        }
+
         $path = $this->getPath($project);
 
         Admin::init($path);
 
         $repository = $this->getGitRepository($project);
+
         $project->setRepository($repository);
         $project->setRepositorySize($repository->getSize());
     }

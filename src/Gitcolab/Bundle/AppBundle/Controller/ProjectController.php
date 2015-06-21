@@ -203,7 +203,7 @@ class ProjectController extends Controller
         ));
     }
 
-    private function getProject($slug)
+    protected function getProject($slug)
     {
         $project  = $this->get('gitcolab.repository.project')->findOneBy(array('slug' => $slug));
 

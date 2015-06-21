@@ -14,15 +14,19 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <h1>{{ team.name }}</h1>
+                <p>{{ team.description }}</p>
 
                 <div class="team-stats">
                 </div>
             </div>
             <div class="panel-footer">
+                {% if is_granted('UPDATE', team.organization) %}
+                <a class="btn btn-default" href="{{ path('organization_team_update', {'organization': team.organization, 'slug': team.slug}) }}">Settings</a>
+                {% endif %}
             </div>
         </div>
     </div>
-    <div class="subnav">
+    <div class="subnav col-md-9">
         <h4 class="member-title pull-left">Team members</h4>
         <form method="post" action="{{ path('organization_team_access', {'organization': team.organization.slug, 'slug': team.slug}) }}" class="add-to-team pull-right" style="width: 300px;">
             <input type="search" name="member" class="form-control selectize autocomplete-field" placeholder="Add a person" />

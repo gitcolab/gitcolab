@@ -101,7 +101,7 @@ class Organization extends Owner
     }
 
     /**
-     * @return OrganizationUser
+     * @return array
      */
     public function getMembers()
     {
@@ -113,6 +113,7 @@ class Organization extends Owner
      */
     public function getTeams()
     {
+        $this->setMembers();
         return $this->teams;
     }
 
@@ -123,15 +124,20 @@ class Organization extends Owner
     public function setTeams($teams)
     {
         $this->teams = $teams;
+        $this->setMembers();
 
+        return $this;
+    }
+
+    protected function setMembers()
+    {
         foreach ($this->teams as $team) {
             foreach ($team->getMembers() as $member) {
-                if ($this->members[$member->getId()]) {
-                    $this->members[$member->getId()] = $member;
+                if (!isset($this->members[$member->getId()])) {
+                    $this->members[$member->getId()] = $member->getUser();
                 }
             }
         }
 
-        return $this;
     }
 }

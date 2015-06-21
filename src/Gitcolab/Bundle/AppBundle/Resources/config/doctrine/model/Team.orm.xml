@@ -8,6 +8,10 @@
 
     <entity name="Gitcolab\Bundle\AppBundle\Model\Team" table="gitcolab_team">
 
+        <unique-constraints>
+            <unique-constraint columns="name,organization_id" name="unique_idx" />
+        </unique-constraints>
+
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
@@ -37,6 +41,7 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
+
     </entity>
 
 </doctrine-mapping>

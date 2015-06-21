@@ -60,6 +60,11 @@ class Team
     protected $organization;
 
     /**
+     * @var Project
+     */
+    protected $project;
+
+    /**
      * @var User\User[][]
      */
     protected $members;
@@ -165,6 +170,22 @@ class Team
         $this->organization = $organization;
 
         return $this;
+    }
+
+    /**
+     * @return Project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param Project $project
+     */
+    public function setProject(Project $project)
+    {
+        $this->project = $project;
     }
 
     /**
