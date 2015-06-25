@@ -374,12 +374,23 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function hasRole($role)
+    {
+        return in_array(strtoupper($role), $this->getRoles(), true);
+    }
+
+    /**
      * @param string $role
      * @return self
      */
     public function addRole($role)
     {
-        $this->roles[] = $role;
+        $role = strtoupper($role);
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
 
         return $this;
     }

@@ -1,5 +1,5 @@
 user_profile:
-    path: /profile
+    path: /user/profile
     defaults:
         _controller: GitcolabAppBundle:User:profile
 
@@ -9,7 +9,7 @@ user_account:
         _controller: GitcolabAppBundle:User:account
 
 user_keys:
-    path: /ssh
+    path: /user/ssh
     defaults:
         _controller: GitcolabAppBundle:User:ssh
 
@@ -23,3 +23,9 @@ login_check:
 
 logout:
     path: /logout
+
+user_autocomplete:
+    path: /api/{version}/user/autocomplete
+    defaults:
+        version: 1
+        _controller: GitcolabAppBundle:User:autocomplete

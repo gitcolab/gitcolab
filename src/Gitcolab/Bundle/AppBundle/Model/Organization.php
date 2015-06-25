@@ -33,10 +33,15 @@ class Organization extends Owner
     protected $avatar;
 
     /**
-     *
-     * @var OrganizationUser[]
+     * @var Team[]
      */
-    protected $organizationUsers;
+    protected $teams;
+
+    /**
+     *
+     * @var array
+     */
+    protected $members;
 
     /**
      * @param string $email
@@ -45,6 +50,7 @@ class Organization extends Owner
     public function setEmail($email)
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -57,12 +63,32 @@ class Organization extends Owner
     }
 
     /**
+     * @return object
+     */
+    public function getLastActivity()
+    {
+        return $this->lastActivity;
+    }
+
+    /**
+     * @param object $lastActivity
+     * @return self
+     */
+    public function setLastActivity($lastActivity)
+    {
+        $this->lastActivity = $lastActivity;
+
+        return $this;
+    }
+
+    /**
      * @param string $avatar
      * @return self
      */
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+
         return $this;
     }
 
@@ -75,21 +101,43 @@ class Organization extends Owner
     }
 
     /**
-     * @param User $user
-     * @param string $role
-     * @return $this
+     * @return array
      */
-    public function addUser(User $user, $role = 'ROLE_USER')
+    public function getMembers()
     {
-        $this->organizationUsers[] = new OrganizationUser($user, $this, [$role]);
-        return $this;
+        return $this->members;
     }
 
     /**
-     * @return OrganizationUser
+     * @return Team[]
      */
-    public function getOrganizationUsers()
+    public function getTeams()
     {
-        return $this->organizationUsers;
+        $this->setMembers();
+        return $this->teams;
+    }
+
+    /**
+     * @param Team[] $teams
+     * @return self
+     */
+    public function setTeams($teams)
+    {
+        $this->teams = $teams;
+        $this->setMembers();
+
+        return $this;
+    }
+
+    protected function setMembers()
+    {
+        foreach ($this->teams as $team) {
+            foreach ($team->getMembers() as $member) {
+                if (!isset($this->members[$member->getId()])) {
+                    $this->members[$member->getId()] = $member->getUser();
+                }
+            }
+        }
+
     }
 }

@@ -1,0 +1,13 @@
+gitcolab:
+  form:
+     create: Create
+     update: Update
+     delete: Delete
+     validate: Validate
+  team:
+      access:
+          read: Read Access
+          write: Write Access
+          admin: Admin Access
+      success_add: The user was successfully added to the team.
+      already_exist: This user has already been assigned to this resource.

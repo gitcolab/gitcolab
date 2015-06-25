@@ -22,12 +22,6 @@
 
         <one-to-many field="keys" target-entity="Gitcolab\Bundle\AppBundle\Model\Key" mapped-by="user" />
         <one-to-many field="activities" target-entity="Gitcolab\Bundle\AppBundle\Model\Activity" mapped-by="author" />
-
-        <one-to-many field="organizationUsers" target-entity="Gitcolab\Bundle\AppBundle\Model\User\OrganizationUser" mapped-by="user">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
     </entity>
 
 </doctrine-mapping>

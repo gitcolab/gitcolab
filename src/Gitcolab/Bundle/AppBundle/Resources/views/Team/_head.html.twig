@@ -1,0 +1,27 @@
+<div class="pagehead">
+    <div class="container">
+        <h1 class="col-md-6">
+            <a class="org-name" href="{{ path('organization_show', {'slug': organization.slug }) }}">
+                <img alt="@{{ organization.name }}" class="avatar" height="30" src="{{ organization.avatar }}" width="30">
+                {{ organization.name }}
+            </a>
+        </h1>
+
+        <nav class="pagehead-nav col-md-6" role="navigation">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a class="pagehead-nav-item selected" href="{{ path('organization_teams', {'slug': organization.slug}) }}">
+                        <span class="octicon octicon-jersey"></span>
+                        Teams
+                        <span class="label label-default">{{ organization.teams|length }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="pagehead-nav-item " href="{{ path('organization_setting', {'slug': organization.slug}) }}">
+                        <span class="octicon octicon-gear"></span>
+                        Settings
+                    </a>
+                </li>
+        </nav>
+    </div>
+</div>

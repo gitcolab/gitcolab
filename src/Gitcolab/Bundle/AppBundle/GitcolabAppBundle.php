@@ -11,16 +11,19 @@
 
 namespace Gitcolab\Bundle\AppBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler\GitUrlGeneratorPass;
 use Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler\LessPathPass;
 
-class GitcolabAppBundle extends Bundle
+class GitcolabAppBundle extends AbstractResourceBundle
 {
     public function build(ContainerBuilder $container)
     {
+        parent::build($container);
+
         $container->addCompilerPass(new LessPathPass());
         $container->addCompilerPass(new GitUrlGeneratorPass());
 
@@ -38,5 +41,29 @@ class GitcolabAppBundle extends Bundle
                     'gitcolab_app.backend_type_orm'
                 ));
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public static function getSupportedDrivers()
+    {
+        return array(
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+        );
+    }
+    /**
+     * {@inheritDoc}
+     */
+    protected function getDoctrineMappingDirectory()
+    {
+        return 'model';
+    }
+    /**
+     * {@inheritDoc}
+     */
+    protected function getModelNamespace()
+    {
+        return 'Gitcolab\Bundle\AppBundle\Model';
     }
 }

@@ -26,11 +26,7 @@ class OrganizationController extends Controller
         $form = $this->createForm(new OrganizationType, $organization);
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->persistAndFlush($organization);
-
-            $organization->addUser($this->getUser(), 'ROLE_ADMIN');
-            $this->persistAndFlush($organization);
-
+            $this->get('gitcolab.domain_manager')->create($organization);
             return $this->redirectToRoute('dashboard');
         }
 
@@ -43,14 +39,18 @@ class OrganizationController extends Controller
     {
         $orgaUser = $this->getRepository('User\User')->findOneBy(array('slug' => $slug));
         if ($orgaUser) {
-            $response = $this->forward('GitcolabAppBundle:User:show', array(
+
+
+            return $this->forward('GitcolabAppBundle:User:show', array(
                 'slug'  => $slug,
             ));
-
-            return $response;
         }
 
         $organization = $this->getRepository('Organization')->findOneBySlug($slug);
+        if (!$organization) {
+            throw $this->createNotFoundException();
+        }
+
         $listQuery = $this->getRepository('Project')->getListPaginatorQueryBuilder($slug,'', array('name' => 'ASC'));
         $paginator = new Pagerfanta(new DoctrineORMAdapter($listQuery));
         $paginator

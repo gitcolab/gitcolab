@@ -75,6 +75,11 @@ doctrine:
                         dir: "%kernel.root_dir%/../src/Gitcolab/Bundle/AppBundle/Model/"
                         type: xml
 
+sensio_framework_extra:
+    view:    { annotations: false }
+    router:  { annotations: true }
+    request: { converters: true }
+
 stof_doctrine_extensions:
     default_locale: en_US
     orm:
@@ -91,22 +96,44 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-
-
+# REST Configuration
 fos_rest:
+    allowed_methods_listener: true
+    body_listener:
+        array_normalizer: fos_rest.normalizer.camel_keys
+    format_listener:
+        media_type:
+            version_regex: '/(v|version)=(?P<version>[0-9\.]+)/'
+        rules:
+            -
+                path: '^/api'
+                priorities: ['application/json', '*/*']
+                fallback_format: json
+                prefer_extension: true
+            -
+                path: '^/'
+                priorities: [ 'text/html', '*/*']
+                fallback_format: html
+                prefer_extension: true
     param_fetcher_listener: true
-    body_listener: true
-    format_listener: true
-    view:
-        view_response_listener: 'force'
     routing_loader:
-        default_format: json
-    access_denied_listener:
-        json: true
-    exception:
-        codes:
-            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
-            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+        default_format: html
+        include_format: false
+    view:
+        serialize_null: true
+        view_response_listener: force
+        mime_types:
+            json:
+                - 'application/json'
+                - 'application/vnd.api+json'
+        formats:
+            xml: false
+            json: true
+            html: true
+
+jms_serializer:
+    metadata:
+        auto_detection: true
 
 gitonomy_git:
     twig_extension:

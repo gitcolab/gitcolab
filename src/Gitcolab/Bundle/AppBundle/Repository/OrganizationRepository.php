@@ -11,6 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\Repository;
 
+use Doctrine\ORM\Query\Expr\JOIN;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class OrganizationRepository extends EntityRepository
@@ -25,9 +26,9 @@ class OrganizationRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('o');
         $query = $qb
-            ->leftJoin('o.organizationUsers', 'ou')
-            ->leftJoin('ou.user', 'user')
-            ->where($qb->expr()->eq('ou.user',':user'))
+            ->leftJoin('o.teams', 'team')
+            ->leftJoin('team.members', 'access', JOIN::WITH, 'access.team = team.id')
+            ->where($qb->expr()->eq('access.user',':user'))
             ->setParameter('user', $user)
         ;
 

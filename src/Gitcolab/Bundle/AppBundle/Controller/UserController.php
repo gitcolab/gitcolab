@@ -59,4 +59,11 @@ class UserController extends Controller
             'repositories' => $repositories
         ));
     }
+
+    public function autocompleteAction(Request $request)
+    {
+        $users = $this->get('gitcolab.repository.user')->findAll();
+
+        return $this->handleView($this->view(['data' => $users], 200));
+    }
 }

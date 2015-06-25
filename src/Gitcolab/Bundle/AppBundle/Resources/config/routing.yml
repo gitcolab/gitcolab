@@ -5,7 +5,6 @@ dashboard:
 
 user:
   resource: "@GitcolabAppBundle/Resources/config/routing/user.yml"
-  prefix: /user
 
 key:
   resource: "@GitcolabAppBundle/Resources/config/routing/key.yml"
@@ -31,9 +30,3 @@ project_show:
       _controller: GitcolabAppBundle:Project:show
   requirements:
       slug: ".+"
-
-project_setting:
-  path: /{slug}/settings
-  defaults:
-       _controller: GitcolabAppBundle:Project:settings
-
