@@ -40,7 +40,7 @@ class KeyController extends Controller
             if( $form->isValid()) {
 
                 //todo check ssh key is valid
-                $this->persistAndFlush($key);
+                $this->get('gitcolab.domain_manager')->create($key);
             }
 
             $this->get('session')->getFlashBag()->add(
@@ -56,8 +56,16 @@ class KeyController extends Controller
         ));
     }
 
-    public function deleteAction()
+    public function deleteAction(Key $key)
     {
 
+        if ($key->getUser() == $this->getUser()) {
+            $this->get('gitcolab.domain_manager')->delete($key);
+            $this->addFlash('success', 'SSH key removed');
+
+            return $this->redirectToRoute('user_keys');
+        }
+
+        throw $this->createAccessDeniedException();
     }
 }

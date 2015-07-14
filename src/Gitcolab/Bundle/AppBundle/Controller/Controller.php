@@ -65,37 +65,6 @@ class Controller extends FOSRestController
     }
 
     /**
-     * Returns a RedirectResponse to the given route with the given parameters.
-     *
-     * @param string $route      The name of the route
-     * @param array  $parameters An array of parameters
-     * @param int    $status     The status code to use for the Response
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    protected function redirectToRoute($route, array $parameters = [], $status = 302)
-    {
-        return $this->redirect($this->generateUrl($route, $parameters), $status);
-    }
-
-    /**
-     * Adds a flash message to the current session for type.
-     *
-     * @param string $type    The type
-     * @param string $message The message
-     *
-     * @throws \LogicException
-     */
-    protected function addFlash($type, $message)
-    {
-        if (!$this->container->has('session')) {
-            throw new \LogicException('You can not use the addFlash method if sessions are disabled.');
-        }
-
-        $this->container->get('session')->getFlashBag()->add($type, $message);
-    }
-
-    /**
      * @param $eventName
      * @param Event $event
      * @return Event
