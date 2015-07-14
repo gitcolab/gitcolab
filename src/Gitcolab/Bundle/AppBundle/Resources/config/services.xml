@@ -10,6 +10,7 @@
         <parameter key="gitcolab.menu.builder.class">Gitcolab\Bundle\AppBundle\Menu\MenuBuilder</parameter>
         <parameter key="gitcolab.twig.extension.class">Gitcolab\Bundle\AppBundle\Twig\Extension\AppExtension</parameter>
         <parameter key="gitcolab.domain_manager.class">Gitcolab\Bundle\AppBundle\Manager\DomainManager</parameter>
+        <parameter key="gitcolab.git.shell_command">php %kernel.root_dir%/console gitcolab:git:shell</parameter>
 
     </parameters>
 

@@ -15,6 +15,8 @@ use Gitonomy\Git\Repository;
 
 class Project
 {
+    const SLUG_PATTERN = "[\w\/]+";
+
     /**
      * @var int
      */
