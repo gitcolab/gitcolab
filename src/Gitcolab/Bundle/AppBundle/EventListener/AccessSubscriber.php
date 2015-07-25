@@ -54,7 +54,8 @@ class AccessSubscriber implements EventSubscriberInterface
         $organization = $event->getSubject();
         $team = (new Team())
             ->setName('Owners')
-            ->setAccess(Team::ACCESS_OWNER);
+            ->setAccess(Team::ACCESS_OWNER)
+            ->setOrganization($organization);
 
         $access = (new Access())
             ->setResource($team)

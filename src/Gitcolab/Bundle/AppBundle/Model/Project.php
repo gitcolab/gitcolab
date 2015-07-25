@@ -86,6 +86,11 @@ class Project
     protected $teams;
 
     /**
+     * @var  Collection
+     */
+    protected $members;
+
+    /**
      * @var Owner
      */
     protected $owner;

@@ -27,8 +27,8 @@ class OrganizationRepository extends EntityRepository
         $qb = $this->createQueryBuilder('o');
         $query = $qb
             ->leftJoin('o.teams', 'team')
-            ->leftJoin('team.members', 'access', JOIN::WITH, 'access.team = team.id')
-            ->where($qb->expr()->eq('access.user',':user'))
+            ->leftJoin('team.members', 'access')
+            ->where('access.user = :user')
             ->setParameter('user', $user)
         ;
 

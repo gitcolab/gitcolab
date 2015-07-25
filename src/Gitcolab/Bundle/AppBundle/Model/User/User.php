@@ -95,11 +95,6 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
      */
     protected $roles;
 
-    /**
-     * @var OrganizationUser[]
-     */
-    protected $organizationUsers;
-
     public function __construct($secret = 'GeneratedForGitcolab')
     {
         $this->token = sha1(uniqid(rand(), true));

@@ -47,10 +47,18 @@ class Access
     protected $createdAt;
 
     /**
-     * @var
+     * @var Organization
      */
     protected $organization;
+
+    /**
+     * @var Project
+     */
     protected $project;
+
+    /**
+     * @var Team
+     */
     protected $team;
 
     public function __construct()
@@ -96,10 +104,10 @@ class Access
     }
 
     /**
-     * @param User\User $user
+     * @param User $user
      * @return this
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 

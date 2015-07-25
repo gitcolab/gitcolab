@@ -27,6 +27,12 @@
         <field name="lastActivity" column="last_activity" type="datetime" nullable="true" />
         <many-to-one field="owner" inversed-by="projects" target-entity="Owner" />
 
+        <one-to-many field="members" target-entity="Gitcolab\Bundle\AppBundle\Model\Access" mapped-by="project">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <many-to-many field="teams" target-entity="Gitcolab\Bundle\AppBundle\Model\Team">
             <cascade>
                 <cascade-persist/>
