@@ -31,24 +31,25 @@ class KeyController extends Controller
 
     public function createAction(Request $request)
     {
+        $authorizedKeys = $_SERVER['HOME'].'/.ssh/authorized_keys';
+        $command = $this->getContainer()->getParameter('gitcolab.git.shell_command');
+
         $key = new Key();
         $key->setUser($this->getUser());
         $form = $this->createForm(new KeyType(), $key);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if( $form->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
+                //@todo check ssh key is valid
+                $this->get('gitcolab.domain_manager')->create($key);
+                $outputd = sprintf(
+                    "command=\"%s %s\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty %s\n",
+                    $command, $key->getId(), $key->getKey()
+                );
+                file_put_contents($authorizedKeys, $outputd, FILE_APPEND);
 
-                //todo check ssh key is valid
-                $this->persistAndFlush($key);
-            }
+            $this->addFlash('notice', 'SSH key created!');
 
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                'SSH key created!'
-            );
-
-            return $this->redirect($this->generateUrl('user_keys'));
+            return $this->redirectToRoute('user_keys');
         }
 
         return $this->render('GitcolabAppBundle:Key:create.html.twig' , array(
@@ -56,8 +57,16 @@ class KeyController extends Controller
         ));
     }
 
-    public function deleteAction()
+    public function deleteAction(Key $key)
     {
 
+        if ($key->getUser() == $this->getUser()) {
+            $this->get('gitcolab.domain_manager')->delete($key);
+            $this->addFlash('success', 'SSH key removed');
+
+            return $this->redirectToRoute('user_keys');
+        }
+
+        throw $this->createAccessDeniedException();
     }
 }

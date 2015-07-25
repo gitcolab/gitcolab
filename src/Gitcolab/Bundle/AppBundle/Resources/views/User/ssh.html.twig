@@ -18,7 +18,7 @@
                                     <div>Added on {{ key.createdAt | localizeddate('long', 'none') }} — Last used on {{ key.updatedAt| localizeddate('long', 'none') }} </div>
                                 </div>
                                 <div class="pull-right">
-                                    <a class="btn btn-danger btn-inverse"> Delete </a>
+                                    <a href="{{ path('key_delete', {'id': key.id}) }}" class="btn btn-danger btn-inverse"> Delete </a>
                                 </div>
                             </div>
                         </li>

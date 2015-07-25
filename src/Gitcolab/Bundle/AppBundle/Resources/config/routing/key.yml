@@ -2,3 +2,8 @@ key_create:
   path: /create
   defaults:
       _controller: GitcolabAppBundle:Key:create
+
+key_delete:
+  path: /{id}/delete
+  defaults:
+      _controller: GitcolabAppBundle:Key:delete
