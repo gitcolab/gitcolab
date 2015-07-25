@@ -9,12 +9,7 @@
     <entity name="Gitcolab\Bundle\AppBundle\Model\Organization" repository-class="Gitcolab\Bundle\AppBundle\Repository\OrganizationRepository" table="gitcolab_organization">
 
         <field name="avatar" column="avatar" type="string" nullable="true" />
-
-        <one-to-many field="teams" target-entity="Gitcolab\Bundle\AppBundle\Model\Team" mapped-by="organization">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
+        s
     </entity>
 
 </doctrine-mapping>

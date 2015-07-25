@@ -33,11 +33,6 @@ class Organization extends Owner
     protected $avatar;
 
     /**
-     * @var Team[]
-     */
-    protected $teams;
-
-    /**
      *
      * @var array
      */
@@ -98,46 +93,5 @@ class Organization extends Owner
     public function getAvatar()
     {
         return $this->avatar;
-    }
-
-    /**
-     * @return array
-     */
-    public function getMembers()
-    {
-        return $this->members;
-    }
-
-    /**
-     * @return Team[]
-     */
-    public function getTeams()
-    {
-        $this->setMembers();
-        return $this->teams;
-    }
-
-    /**
-     * @param Team[] $teams
-     * @return self
-     */
-    public function setTeams($teams)
-    {
-        $this->teams = $teams;
-        $this->setMembers();
-
-        return $this;
-    }
-
-    protected function setMembers()
-    {
-        foreach ($this->teams as $team) {
-            foreach ($team->getMembers() as $member) {
-                if (!isset($this->members[$member->getId()])) {
-                    $this->members[$member->getId()] = $member->getUser();
-                }
-            }
-        }
-
     }
 }

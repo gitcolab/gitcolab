@@ -29,15 +29,16 @@ class ProjectRepository extends EntityRepository
     }
 
 
-    public function findProject($org, $project)
+    public function findProject($organization, $project)
     {
-        $query = $this->createQueryBuilder('p')
-            ->select('p, org')
-            ->leftJoin('p.owner', 'org')
-            ->where('p.slug = ?1')
-            ->andWhere('org.slug = ?2')
-            ->setParameter(1, $project)
-            ->setParameter(2, $org)
+        $query = $this->createQueryBuilder('project')
+            ->select('project, organization')
+            ->leftJoin('project.owner', 'organization')
+            ->leftJoin('organization.teams', 'team')
+            ->leftJoin('team.members', 'access')
+            ->andWhere('project.slug = ?1')
+            ->andWhere('organization.slug = ?2')
+            ->setParameters([1 => $project, 2 =>$organization])
             ->setMaxResults(1);
 
         return $query->getQuery()->getSingleResult();
@@ -51,10 +52,13 @@ class ProjectRepository extends EntityRepository
 
     public function queryProjectsByUser($user)
     {
-        $qb = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('project');
         $query = $qb
-            ->leftJoin('p.owner', 'owner')
-            ->where($qb->expr()->eq('owner', ':user'))
+            ->select('project, organization')
+            ->leftJoin('project.owner', 'organization')
+            ->leftJoin('organization.teams', 'team')
+            ->leftJoin('team.members', 'access')
+            ->where('access.user = :user')
             ->setParameter('user', $user)
         ;
 

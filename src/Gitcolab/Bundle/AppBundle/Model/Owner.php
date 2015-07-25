@@ -47,6 +47,11 @@ abstract class Owner
     protected $updatedAt;
 
     /**
+     * @var Team[]
+     */
+    protected $teams;
+
+    /**
      * @return int
      */
     public function getId()
@@ -149,6 +154,45 @@ abstract class Owner
         return $this;
     }
 
+    /**
+     * @return Team[]
+     */
+    public function getTeams()
+    {
+        $this->setMembers();
+        return $this->teams;
+    }
+
+    /**
+     * @param Team[] $teams
+     * @return self
+     */
+    public function setTeams($teams)
+    {
+        $this->teams = $teams;
+        $this->setMembers();
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMembers()
+    {
+        return $this->members;
+    }
+
+    protected function setMembers()
+    {
+        foreach ($this->teams as $team) {
+            foreach ($team->getMembers() as $member) {
+                if (!isset($this->members[$member->getId()])) {
+                    $this->members[$member->getId()] = $member->getUser();
+                }
+            }
+        }
+    }
 
     public function __toString()
     {
