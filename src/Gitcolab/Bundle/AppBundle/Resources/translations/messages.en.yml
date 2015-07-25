@@ -11,3 +11,16 @@ gitcolab:
           admin: Admin Access
       success_add: The user was successfully added to the team.
       already_exist: This user has already been assigned to this resource.
+
+  organization:
+      name: Name
+      email: Email
+
+  project:
+      organization: Organization
+      name: name
+      description: Description
+
+  key:
+      title: Title
+      key: Key

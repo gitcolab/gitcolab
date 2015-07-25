@@ -19,6 +19,19 @@ use Gitcolab\Bundle\AppBundle\Form\Type\KeyType;
 
 class KeyController extends Controller
 {
+    public function sshAction()
+    {
+        $keys = $this->getRepository('Key')
+            ->findAll(array('user' =>$this->getuser()));
+
+        $view = $this->view($keys, 200)
+            ->setTemplate("GitcolabAppBundle:Key:ssh.html.twig")
+            ->setTemplateVar('keys')
+        ;
+
+        return $this->handleView($view);
+    }
+
     public function discoverAction($key)
     {
         $key = $this->getRepository('Key')->find($key);
@@ -32,7 +45,7 @@ class KeyController extends Controller
     public function createAction(Request $request)
     {
         $authorizedKeys = $_SERVER['HOME'].'/.ssh/authorized_keys';
-        $command = $this->getContainer()->getParameter('gitcolab.git.shell_command');
+        $command = $this->container->getParameter('gitcolab.git.shell_command');
 
         $key = new Key();
         $key->setUser($this->getUser());

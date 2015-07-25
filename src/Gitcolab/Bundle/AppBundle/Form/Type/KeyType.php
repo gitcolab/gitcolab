@@ -23,8 +23,14 @@ class KeyType  extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('key')
+            ->add('title', 'text', [
+                'required' => true,
+                'label' => 'gitcolab.key.title'
+            ])
+            ->add('key', 'textarea', [
+                'required' => true,
+                'label' => 'gitcolab.key.key'
+            ])
         ;
     }
 

@@ -16,19 +16,6 @@ use Gitcolab\Bundle\AppBundle\Form\Type\ProfileType;
 
 class UserController extends Controller
 {
-    public function sshAction()
-    {
-        $keys = $this->getRepository('Key')
-                    ->findAll(array('user' =>$this->getuser()));
-
-        $view = $this->view($keys, 200)
-            ->setTemplate("GitcolabAppBundle:User:ssh.html.twig")
-            ->setTemplateVar('keys')
-        ;
-
-        return $this->handleView($view);
-    }
-
     public function profileAction(Request $request)
     {
         $profile = $this->getUser();

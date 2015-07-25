@@ -1,13 +1,6 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 {% block body %}
-    <div class="col-md-2">
-        <div class="panel-default">
-            <div class="panel-heading">
-                <strong>Settings</strong>
-            </div>
-            <div class="panel-body">
-                {{ knp_menu_render('user_setting_tabs') }}
-            </div>
-        </div>
-    </div>
+
+    {% include '@GitcolabApp/User/_sidebar.html.twig' %}
+
 {% endblock body %}

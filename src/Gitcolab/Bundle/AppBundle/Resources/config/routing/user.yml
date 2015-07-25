@@ -11,7 +11,7 @@ user_account:
 user_keys:
     path: /user/ssh
     defaults:
-        _controller: GitcolabAppBundle:User:ssh
+        _controller: GitcolabAppBundle:Key:ssh
 
 login:
     path: /login

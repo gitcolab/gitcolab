@@ -22,8 +22,14 @@ class OrganizationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('email', 'email')
+            ->add('name', 'text', [
+                'required' => true,
+                'label' => 'gitcolab.organization.name'
+            ])
+            ->add('email', 'email', [
+                'required' => true,
+                'label' => 'gitcolab.organization.email'
+            ])
         ;
     }
 
