@@ -47,7 +47,7 @@ class ShellCommand extends ContainerAwareCommand
         $originalCommand =  isset($_SERVER['SSH_ORIGINAL_COMMAND']) ? $_SERVER['SSH_ORIGINAL_COMMAND'] : null;
 
         if (null === $originalCommand) {
-            $this->outputUserInformation($output, $key->getUser());
+            return $this->outputUserInformation($output, $key->getUser());
         }
 
         if (!preg_match("#([\w-]+) '(".Project::SLUG_PATTERN.").git'#", $originalCommand, $vars)) {

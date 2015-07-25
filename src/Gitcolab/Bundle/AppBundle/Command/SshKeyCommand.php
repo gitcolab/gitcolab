@@ -36,21 +36,19 @@ class SshKeyCommand extends ContainerAwareCommand
     {
         $command = $this->getContainer()->getParameter('gitcolab.git.shell_command');
 
-        $candidate = $_SERVER['HOME'].'/.ssh/authorized_keys';
+        $authorizedKeys = $_SERVER['HOME'].'/.ssh/authorized_keys';
         $repository = $this->getContainer()->get('gitcolab.repository.key');
 
         $keys = $repository->findAll();
         $outputd = '';
 
-        foreach ($keys as $row) {
-            $outputd .= sprintf("command=\"%s %s\" ,no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa %s\n",
-                $command, $row->getId(), $row->getKey()
+        foreach ($keys as $key) {
+            $outputd .= sprintf("command=\"%s %s\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty %s\n",
+                $command, $key->getId(), $key->getKey()
             );
         }
 
-        file_put_contents($candidate, $outputd);
-
-        echo $outputd;
-
+        file_put_contents($authorizedKeys, $outputd);
+        $this->getContainer()->get('logger')->info(sprintf('Update %s', $authorizedKeys));
     }
 }
