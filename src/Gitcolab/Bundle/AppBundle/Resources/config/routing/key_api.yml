@@ -1,5 +1,5 @@
 api_key_discover:
-    pattern:  /discover/{key}
+    path:  /discover/{key}
     defaults: { _controller: GitcolabAppBundle:Key:discover }
     requirements:
       slug: "\w+\/\w+"
