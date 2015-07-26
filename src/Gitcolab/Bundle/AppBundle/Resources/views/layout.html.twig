@@ -41,6 +41,14 @@
                                 </div>
                             </form>
                             <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ path('project_create') }}">New Project</a></li>
+                                        <li><a href="{{ path('organization_create') }}">New Organization</a></li>
+                                    </ul>
+                                </li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="{{ gravatar(app.user.email, 20) }}" />
@@ -52,14 +60,7 @@
                                         <li><a href="{{ path('logout') }}">Logout</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{ path('project_create') }}">New Project</a></li>
-                                        <li><a href="{{ path('organization_create') }}">New Organization</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#"><span class="glyphicon glyphicon-bell"></span></a></li>
+
                             </ul>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->

@@ -22,9 +22,16 @@
         <div class="overall">
             <ul class="nav">
                 <li role="presentation" class="active">
-                    <a href="{{ path('project_commits', {'slug': project.fullSlug, 'branch' : project.defaultBranch}) }}"><span class="glyphicon glyphicon-dashboard"></span> <strong> {{ project.repository.log.countCommits }} </strong> Commits</a>
+                    <a href="{{ path('project_commits', {'slug': project.fullSlug, 'branch' : project.defaultBranch}) }}">
+                        <span class="glyphicon glyphicon-dashboard"></span> <strong> {{ project.repository.log.countCommits }} </strong> Commits
+                    </a>
                 </li>
-                <li role="presentation"><a href="#"><strong> {{ refs.branches|length }} </strong>Branch</a></li>
+                <li role="presentation">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-random"></span>
+                        <strong> {{ refs.branches|length }} </strong>Branch
+                    </a>
+                </li>
                 <li role="presentation">
                     <a href="#">
                         <span class="glyphicon glyphicon-tags"></span>
@@ -32,7 +39,11 @@
                         Releases
                     </a>
                 </li>
-                <li role="presentation"><a href="#"><span class="glyphicon glyphicon-user"></span> Contributors</a></li>
+                <li role="presentation">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-user"></span> Contributors
+                    </a>
+                </li>
             </ul>
         </div>
 
