@@ -14,8 +14,9 @@ namespace Gitcolab\Bundle\AppBundle\EventListener\Doctrine;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
+use Psr\Log\LoggerInterface;
 use Gitcolab\Bundle\AppBundle\Model\Project;
-use Gitcolab\Bundle\AppBundle\Git\RepositoryPoolSubscriber;
+use Gitcolab\Bundle\AppBundle\Git\Repository;
 
 /***
  * Inject repository in entity
@@ -23,15 +24,16 @@ use Gitcolab\Bundle\AppBundle\Git\RepositoryPoolSubscriber;
  */
 class ProjectSubscriber implements EventSubscriber
 {
-    /** @var RepositoryPoolSubscriber  */
-    protected $repositoryPool;
+    protected $logger;
+    protected $repositoryPath;
 
     /**
-     * @param RepositoryPoolSubscriber $repositoryPool
+     * @param $repositoryPath
      */
-    public function __construct(RepositoryPoolSubscriber $repositoryPool)
+    public function __construct(LoggerInterface $logger, $repositoryPath)
     {
-        $this->repositoryPool = $repositoryPool;
+        $this->logger = $logger;
+        $this->repositoryPath = $repositoryPath;
     }
 
     /**
@@ -57,6 +59,10 @@ class ProjectSubscriber implements EventSubscriber
             return;
         }
 
-        $entity->setRepository($this->repositoryPool->getGitRepository($entity));
+        $project = $entity;
+        $path = $this->repositoryPath.'/'.$project->getSlug().'.git';
+        $repository = new Repository($path, ['logger' => $this->logger]);
+
+        $entity->setRepository($repository);
     }
 }

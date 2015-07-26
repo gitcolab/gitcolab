@@ -22,7 +22,7 @@ class UserController extends Controller
         $form = $this->createForm(new ProfileType(), $profile);
 
         if ($form->handleRequest($request)->isValid()) {
-            $this->persistAndFlush($profile);
+            $this->get('gitcolab.domain_manager')->update($profile);
         }
 
         return $this->render('GitcolabAppBundle:User:profile.html.twig', array(
@@ -51,6 +51,6 @@ class UserController extends Controller
     {
         $users = $this->get('gitcolab.repository.user')->findAll();
 
-        return $this->handleView($this->view(['data' => $users], 200));
+        return $this->render(null, ['data' => $users]);
     }
 }

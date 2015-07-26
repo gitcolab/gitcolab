@@ -5,19 +5,13 @@
 
     <parameters>
 
-        <parameter key="gitcolab.git.repository_pool.class">Gitcolab\Bundle\AppBundle\Git\RepositoryPoolSubscriber</parameter>
+        <parameter key="gitcolab.git.repository_pool.class">Gitcolab\Bundle\AppBundle\EventListener\RepositoryPoolSubscriber</parameter>
         <parameter key="gitcolab.git.hook_injector.class">Gitcolab\Bundle\AppBundle\Git\HookInjector</parameter>
         <parameter key="gitcolab.doctrine.project_subscriber.class">Gitcolab\Bundle\AppBundle\EventListener\Doctrine\ProjectSubscriber</parameter>
 
     </parameters>
 
     <services>
-
-        <service id="gitcolab.git.repository_pool" class="%gitcolab.git.repository_pool.class%">
-            <tag name="gitcolab.event_subscriber" />
-            <tag name="kernel.event_subscriber" />
-            <argument>%gitcolab.repository_path%</argument>
-        </service>
 
         <service id="gitcolab.git.hook_injector" class="%gitcolab.git.hook_injector.class%">
             <tag name="gitcolab.event_listener" event="gitcolab.project_create" method="onProjectCreate" />
@@ -28,8 +22,10 @@
         </service>
 
         <service id="gitcolab.doctrine.project_subscriber" class="%gitcolab.doctrine.project_subscriber.class%" public="false">
+            <argument type="service" id="logger" />
+            <argument>%gitcolab.repository_path%</argument>
+
             <tag name="doctrine.event_subscriber" connection="default" />
-            <argument type="service" id="gitcolab.git.repository_pool" />
         </service>
 
     </services>

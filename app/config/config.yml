@@ -136,6 +136,7 @@ jms_serializer:
         auto_detection: true
 
 gitonomy_git:
+    profiler: true
     twig_extension:
         enabled: true
         routes_names:
@@ -148,5 +149,6 @@ gitonomy_git:
 
 gitcolab_app:
     repository_path: %gitcolab.repository_path%
+    ssh_host: %gitcolab.ssh_host%
     # ssh_host: ssh.host_example.com
-    # user: git
+    user:  %gitcolab.user%

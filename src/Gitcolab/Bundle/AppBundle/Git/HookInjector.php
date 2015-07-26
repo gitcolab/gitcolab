@@ -11,8 +11,6 @@
 
 namespace Gitcolab\Bundle\AppBundle\Git;
 
-use Gitcolab\Bundle\AppBundle\Event\ProjectEvent;
-
 class HookInjector
 {
     protected $hooks;

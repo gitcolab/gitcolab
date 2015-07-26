@@ -13,7 +13,11 @@ namespace Gitcolab\Bundle\AppBundle;
 
 final class GitcolabEvents
 {
-    const PROJECT_CREATE = 'gitcolab.project_create';
+    const PROJECT_PRE_CREATE = 'gitcolab.project.pre_create';
+    const PROJECT_CREATE = 'gitcolab.project.post_create';
     const PROJECT_PUSH   = 'gitcolab.project_push';
     const PROJECT_DELETE = 'gitcolab.project_delete';
+
+    const ORGANIZATION_PRE_CREATE = 'gitcolab.organization.pre_create';
+    const ORGANIZATION_CREATE = 'gitcolab.organization.post_create';
 }

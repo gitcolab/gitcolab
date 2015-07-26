@@ -11,11 +11,12 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
-use Gitonomy\Git\Repository;
+use Gitcolab\Bundle\AppBundle\Git\Repository;
 
 class Project
 {
     const SLUG_PATTERN = "[\w\/]+";
+    const DEFAULT_BRANCH = 'master';
 
     /**
      * @var int
@@ -252,6 +253,17 @@ class Project
     }
 
     /**
+     * @param $name
+     * @return $this
+     */
+    public function setRepositoryName($name)
+    {
+        $this->repository = $name;
+
+        return $this;
+    }
+
+    /**
      * @param Repository $repository
      * @return self
      */
@@ -267,7 +279,6 @@ class Project
     }
 
 
-
     public function getRepositorySize()
     {
         return $this->repositorySize;
@@ -277,38 +288,6 @@ class Project
     {
         $this->repositorySize = $repositorySize;
 
-        return $this;
-    }
-
-    /**
-     * @return Team[]
-     */
-    public function getTeams()
-    {
-        return $this->teams;
-    }
-
-    /**
-     * @param Team $team
-     * @return $this
-     */
-    public function addTeam(Team $team)
-    {
-        $this->teams[] = $team;
-
-        return $this;
-    }
-
-    /**
-     * @param Team[] $teams
-     */
-    public function setTeams($teams)
-    {
-        $this->teams = $teams;
-    }
-
-    public function addUser($user, $role)
-    {
         return $this;
     }
 

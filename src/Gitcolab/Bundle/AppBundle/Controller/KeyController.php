@@ -24,22 +24,14 @@ class KeyController extends Controller
         $keys = $this->getRepository('Key')
             ->findAll(array('user' =>$this->getuser()));
 
-        $view = $this->view($keys, 200)
-            ->setTemplate("GitcolabAppBundle:Key:ssh.html.twig")
-            ->setTemplateVar('keys')
-        ;
-
-        return $this->handleView($view);
+        return $this->render('GitcolabAppBundle:Key:ssh.html.twig', ['keys' => $keys]);
     }
 
     public function discoverAction($key)
     {
         $key = $this->getRepository('Key')->find($key);
 
-        $view = View::create();
-        $view->setData($key);
-
-        return $view;
+        return $this->render(null, $key);
     }
 
     public function createAction(Request $request)

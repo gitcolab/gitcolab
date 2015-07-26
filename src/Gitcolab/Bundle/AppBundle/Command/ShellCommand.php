@@ -54,6 +54,8 @@ class ShellCommand extends ContainerAwareCommand
             throw new \RuntimeException('Command seems illegal: '.$originalCommand);
         }
         $action = $vars[1];
+        $this->getContainer()->get('logger')->info($action);
+
         $project = $this->getProject($vars[2]);
         switch ($action) {
             case 'git-receive-pack':

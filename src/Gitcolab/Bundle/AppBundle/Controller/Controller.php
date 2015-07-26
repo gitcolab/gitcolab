@@ -11,15 +11,40 @@
 
 namespace Gitcolab\Bundle\AppBundle\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\HttpFoundation\Response;
+use FOS\RestBundle\Controller\FOSRestController;
 use Doctrine\ORM\Query;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 
-
 class Controller extends FOSRestController
 {
+    /**
+     * @return bool
+     */
+    public function isApiRequest()
+    {
+        $request = $this->get('request_stack')->getCurrentRequest();
+
+        return null !== $request && 'html' !== $request->getRequestFormat();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function render($view, array $parameters = array(), Response $response = null)
+    {
+        if (!$this->isApiRequest() || null !== $view) {
+            return parent::render($view, $parameters, $response);
+        }
+
+        $view
+            ->setData($parameters);
+
+        return $this->handleView($view);
+    }
+
     /**
      * Returns the paginator instance configured for the given query and page
      * number
@@ -54,6 +79,7 @@ class Controller extends FOSRestController
     /**
      * @param $entity
      * @param bool $flush
+     * @deprecated
      */
     protected function persistAndFlush($entity, $flush = true)
     {

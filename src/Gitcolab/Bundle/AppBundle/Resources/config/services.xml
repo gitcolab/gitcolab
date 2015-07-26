@@ -51,6 +51,13 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
+        <service id="gitcolab.subscriber.project" class="Gitcolab\Bundle\AppBundle\EventListener\ProjectSubscriber">
+            <argument type="service" id="logger" />
+            <argument>%gitcolab.repository_path%</argument>
+            <argument type="service" id="gitcolab.domain_manager" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
         <service id="gitcolab.security.access.voter.organization" class="Gitcolab\Bundle\AppBundle\Security\Authorization\Voter\OrganizationVoter">
             <tag name="security.voter" />
         </service>

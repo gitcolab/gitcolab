@@ -17,6 +17,8 @@ parameters:
     gitcolab.db_storage: orm
     gitcolab.url: http://gitcolab.local
     gitcolab.repository_path: '%kernel.root_dir%/data/repositories'
+    gitcolab.user: git
+    gitcolab.ssh_host ssh.host_example.com
 
     node_bin: /usr/local/bin/node
     node_modules: '%kernel.root_dir%/../node_modules'

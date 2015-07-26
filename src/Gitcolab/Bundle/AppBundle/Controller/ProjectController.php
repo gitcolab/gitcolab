@@ -35,37 +35,28 @@ class ProjectController extends Controller
 
         if ($form->handleRequest($request)->isValid()) {
 
-            $this->persistAndFlush($project);
-            $project->addUser($this->getUser(), 'ROLE_ADMIN');
-            $this->persistAndFlush($project);
-
-            $this->dispatch(GitcolabEvents::PROJECT_CREATE, new ProjectEvent($project, $this->getUser()));
+            $this->get('gitcolab.domain_manager')->create($project);
 
             return $this->redirectToRoute('dashboard');
         }
 
-        $view = View::create();
-        $view->setData(array(
+        return $this->render('GitcolabAppBundle:Project:create.html.twig', [
             'form' => $form->createView()
-        ));
-        $view->setTemplate('GitcolabAppBundle:Project:create.html.twig');
-
-        return $this->handleView($view);
+        ]);
     }
 
     public function showAction(Request $request, Project $project)
     {
-        $view = View::create();
-
-        $data = array(
+        $data = [
             'project' => $project,
             'slug' => $project->getFullSlug(),
             'gitcolab_url' => str_replace('http://', '', $this->container->getParameter('gitcolab.url'))
-        );
+        ];
         $path = '';
 
+        /** @var Repository $repository */
         $repository = $project->getRepository();
-        $refs       = $repository->getReferences();
+        $refs  = $repository->getReferences();
 
         $revision = $repository->getRevision($project->getDefaultBranch());
 
@@ -90,17 +81,11 @@ class ProjectController extends Controller
                 'readme' => $this->getReadme($tree)
             ));
 
-
-
         } catch (\InvalidArgumentException $e) {
             $data['revision'] =  false;
         }
 
-        $view
-            ->setData($data)
-            ->setTemplate('GitcolabAppBundle:Project:show.html.twig');
-
-        return $this->handleView($view);
+        return $this->render('GitcolabAppBundle:Project:show.html.twig', $data);
     }
 
     /**

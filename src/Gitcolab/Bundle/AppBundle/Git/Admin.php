@@ -11,8 +11,9 @@
 
 namespace Gitcolab\Bundle\AppBundle\Git;
 
-use Gitonomy\Git\Repository as BaseRepository;
+use Gitonomy\Git\Admin as BaseAdmin;
 
-class Repository extends BaseRepository
+class Admin extends BaseAdmin
 {
+
 }

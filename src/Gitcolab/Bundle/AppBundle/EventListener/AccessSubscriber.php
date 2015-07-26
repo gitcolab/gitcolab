@@ -11,12 +11,13 @@
 
 namespace Gitcolab\Bundle\AppBundle\EventListener;
 
-use Gitcolab\Bundle\AppBundle\Manager\DomainManager;
+use Gitcolab\Bundle\AppBundle\GitcolabEvents;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Gitcolab\Bundle\AppBundle\Model\Team;
 use Gitcolab\Bundle\AppBundle\Model\Access;
+use Gitcolab\Bundle\AppBundle\Manager\DomainManager;
 
 class AccessSubscriber implements EventSubscriberInterface
 {
@@ -26,14 +27,15 @@ class AccessSubscriber implements EventSubscriberInterface
     protected $domainManager;
 
     /**
-     * @var TokenStorage
+     * @var TokenInterface
      */
     protected $tokenStorage;
 
     /**
-     * @param TokenStorage $tokenStorage
+     * @param DomainManager $domainManager
+     * @param TokenInterface $tokenStorage
      */
-    public function __construct(DomainManager $domainManager, $tokenStorage)
+    public function __construct(DomainManager $domainManager, TokenInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
         $this->domainManager = $domainManager;
@@ -42,7 +44,7 @@ class AccessSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'gitcolab.organization.post_create' => 'createOrganization'
+            GitcolabEvents::ORGANIZATION_CREATE => 'createOrganization'
         ];
     }
 
