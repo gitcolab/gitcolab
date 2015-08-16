@@ -11,20 +11,29 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
+
         <field name="name" column="name" type="string" nullable="false" unique="true" />
+
         <field name="slug" type="string" length="255" unique="true" nullable="false">
             <gedmo:slug unique="true" updatable="true" separator="-" fields="name" />
         </field>
+
         <field name="description" column="description" type="text" nullable="true" />
+
         <field name="repository" column="repository" type="string" nullable="true" />
+
         <field name="defaultBranch" column="default_branch" type="string" nullable="true" />
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
+
         <field name="updatedAt" column="updated_at" type="datetime">
             <gedmo:timestampable on="update"/>
         </field>
+
         <field name="lastActivity" column="last_activity" type="datetime" nullable="true" />
+
         <many-to-one field="owner" inversed-by="projects" target-entity="Owner" />
 
         <one-to-many field="members" target-entity="Gitcolab\Bundle\AppBundle\Model\Access" mapped-by="project">
@@ -33,20 +42,10 @@
             </cascade>
         </one-to-many>
 
-        <many-to-many field="teams" target-entity="Gitcolab\Bundle\AppBundle\Model\Team">
-            <cascade>
-                <cascade-persist/>
-            </cascade>
-            <join-table name="gitlab_project_team">
-                <join-columns>
-                    <join-column name="project_id" referenced-column-name="id" nullable="false" unique="false" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="team_id" referenced-column-name="id" nullable="false" unique="false" />
-                </inverse-join-columns>
-            </join-table>
+        <one-to-many field="tickets" target-entity="Gitcolab\Bundle\AppBundle\Model\Tracker\Ticket" mapped-by="project" />
 
-        </many-to-many>
+        <one-to-many field="milestones" target-entity="Gitcolab\Bundle\AppBundle\Model\Tracker\Milestone" mapped-by="project" />
+
     </entity>
 
 </doctrine-mapping>

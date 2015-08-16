@@ -10,13 +10,16 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
+
         <field name="vote" column="vote" type="text" nullable="false" />
 
         <many-to-one field="author" inversed-by="votes" target-entity="Gitcolab\Bundle\AppBundle\Model\User\User">
-            <cascade><cascade-persist /></cascade>
+            <cascade>
+                <cascade-persist />
+            </cascade>
         </many-to-one>
 
-        <many-to-one field="parent" target-entity="Gitcolab\Bundle\AppBundle\Model\Project" inversed-by="children" orphan-removal="true" />
+        <many-to-one field="ticket" inversed-by="votes" target-entity="Gitcolab\Bundle\AppBundle\Model\Tracker\Ticket" />
 
     </entity>
 

@@ -11,10 +11,13 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
+
         <field name="name" column="name" type="string" nullable="true" unique="true" />
+
         <field name="slug" type="string" length="255" unique="true">
             <gedmo:slug unique="true" updatable="true" separator="-" fields="name" />
         </field>
+
         <field name="description" column="description" type="text" nullable="true" />
 
         <field name="createdAt" column="created_at" type="datetime">
@@ -24,7 +27,7 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <many-to-one field="project" inversed-by="tracker" target-entity="Gitcolab\Bundle\AppBundle\Model\Project" />
+        <many-to-one field="project" inversed-by="milestones" target-entity="Gitcolab\Bundle\AppBundle\Model\Project" />
 
     </entity>
 

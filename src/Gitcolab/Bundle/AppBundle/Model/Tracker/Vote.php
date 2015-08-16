@@ -23,7 +23,7 @@ class Vote
     /**
      * @var Object
      */
-    protected $parent;
+    protected $ticket;
 
     /**
      * @var string
@@ -46,17 +46,17 @@ class Vote
     /**
      * @return Object
      */
-    public function getParent()
+    public function getTicket()
     {
-        return $this->parent;
+        return $this->ticket;
     }
 
     /**
-     * @param Object $parent
+     * @param Ticket $ticket
      */
-    public function setParent($parent)
+    public function setTicket(Ticket $ticket)
     {
-        $this->parent = $parent;
+        $this->ticket = $ticket;
     }
 
     /**

@@ -14,13 +14,13 @@ namespace Gitcolab\Bundle\AppBundle\Controller\Tracker;
 use Gitcolab\Bundle\AppBundle\Controller\Controller;
 use Gitcolab\Bundle\AppBundle\Form\Type\MilestoneType;
 use Gitcolab\Bundle\AppBundle\Model\Tracker\Milestone;
+use Gitcolab\Bundle\AppBundle\Model\Project;
 use Symfony\Component\HttpFoundation\Request;
 
 class MilestoneController extends Controller
 {
-    public function indexAction($slug)
+    public function indexAction(Project $project)
     {
-        $project = $this->getProject($slug);
         $milestones = $this->getRepository('Tracker\Milestone')->findBy(['project' => $project]);
 
         return $this->render('GitcolabAppBundle:Milestone:index.html.twig' , array(
@@ -29,9 +29,8 @@ class MilestoneController extends Controller
         ));
     }
 
-    public function createAction(Request $request, $slug)
+    public function createAction(Request $request, Project $project)
     {
-        $project = $this->getProject($slug);
         $milestone = (new Milestone())
             ->setProject($project)
         ;
@@ -39,12 +38,9 @@ class MilestoneController extends Controller
 
         if ($form->handleRequest($request)->isValid()) {
 
-            $this->persistAndFlush($milestone);
+            $this->get('gitcolab.domain_manager')->create($milestone);
 
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                'Milestone created!'
-            );
+            $this->addFlash('notice', 'Milestone created!');
 
             return $this->redirect($this->generateUrl('milestone_show', ['slug' => $milestone->getSlug()]));
         }
@@ -53,17 +49,5 @@ class MilestoneController extends Controller
             'project' => $project,
             'form' => $form->createView()
         ]);
-    }
-
-    /**
-     * @param $slug
-     * @return mixed
-     */
-    public function getProject($slug)
-    {
-        $slugParameter = explode('/', $slug);
-        $project = $this->getRepository('Project')->findProject($slugParameter[0], $slugParameter[1]);
-
-        return $project;
     }
 }

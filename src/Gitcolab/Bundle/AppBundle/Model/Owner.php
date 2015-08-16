@@ -44,6 +44,16 @@ abstract class Owner implements ResourceInterface
     protected $teams;
 
     /**
+     * @var Collection
+     */
+    protected $participations;
+
+    /**
+     * @var Collection
+     */
+    protected $issues;
+
+    /**
      * @return int
      */
     public function getId()
@@ -184,6 +194,29 @@ abstract class Owner implements ResourceInterface
                 }
             }
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParticipations()
+    {
+        return $this->participations;
+    }
+
+    /**
+     * @param mixed $participations
+     */
+    public function setParticipations($participations)
+    {
+        $this->participations = $participations;
+    }
+
+    public function addParticipation($participation)
+    {
+        $this->participations[] = $participation;
+
+        return $this;
     }
 
     public function __toString()

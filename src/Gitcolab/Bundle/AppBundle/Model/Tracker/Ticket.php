@@ -13,12 +13,20 @@ namespace Gitcolab\Bundle\AppBundle\Model\Tracker;
 
 use Gitcolab\Bundle\AppBundle\Model\User\User;
 
-abstract class Tracker
+abstract class Ticket
 {
+    const OPENED = 'opened';
+    const CLOSED = 'closed';
+
     /**
      * @var integer;
      */
     protected $id;
+
+    /**
+     * @var integer;
+     */
+    protected $number;
 
     /**
      * @var string;
@@ -68,7 +76,7 @@ abstract class Tracker
     /**
      * @var Collection
      */
-    protected $participants;
+    protected $participations;
 
     /**
      * @var Collection
@@ -91,6 +99,22 @@ abstract class Tracker
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param int $number
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
     }
 
     /**
@@ -172,18 +196,18 @@ abstract class Tracker
     /**
      * @return \DateTime
      */
-    public function getDeteleteAt()
+    public function getDeletedAt()
     {
-        return $this->deteleteAt;
+        return $this->deletedAt;
     }
 
     /**
-     * @param  \DateTimeInterface $deteleteAt
+     * @param  \DateTimeInterface $deletedAt
      * @return self;
      */
-    public function setDeteleteAt(\DateTimeInterface $deteleteAt)
+    public function setDeletedAt(\DateTimeInterface $deletedAt)
     {
-        $this->deteleteAt = $deteleteAt;
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }
@@ -287,9 +311,9 @@ abstract class Tracker
     /**
      * @return Collection
      */
-    public function getParticipants()
+    public function getParticipations()
     {
-        return $this->participants;
+        return $this->participations;
     }
 
     /**
@@ -297,16 +321,16 @@ abstract class Tracker
      */
     public function addParticipant(User $participant)
     {
-        $this->participants[] = $participant;
+        $this->participations[] = $participant;
     }
 
     /**
-     * @param  Collection $participants
+     * @param  Collection $participations
      * @return self
      */
-    public function setParticipants($participants)
+    public function setParticipations($participations)
     {
-        $this->participants = $participants;
+        $this->participations = $participations;
 
         return $this;
     }
@@ -320,12 +344,14 @@ abstract class Tracker
     }
 
     /**
-     * @param  User $subscription
+     * @param User $subscription
      * @return self
      */
     public function addSubscription(User $subscription)
     {
-        $this->subscriptions[] = $subscription;
+        if ($this->subscriptions->contains($subscription)) {
+            $this->subscriptions[] = $subscription;
+        }
 
         return $this;
     }

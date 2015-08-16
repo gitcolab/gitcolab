@@ -11,6 +11,6 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model\Tracker;
 
-class Issue extends Tracker
+class Issue extends Ticket
 {
 }

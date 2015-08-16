@@ -1,0 +1,30 @@
+{% extends "GitcolabAppBundle::layout.html.twig" %}
+
+{% block bodyClass %}tracker issue create{% endblock %}
+{% block body %}
+    <div class="container">
+
+        {% include '@GitcolabApp/Project/_repo_head.html.twig' %}
+
+        <form method="post" action="{{ path('issue_create', {'slug': project.fullslug}) }}">
+
+            <div class="row">
+                <div class="col-md-8" >
+                    <a href="#" class="pull-left">
+                        <img src="{{ app.user.avatar }}" width="48" height="48" class="avatar" />
+                    </a>
+                    <div class="compose-comment">
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.description) }}
+
+                        <input type="submit" class="btn btn-primary pull-right" />
+                        {{ form_rest(form) }}
+
+                        <div class="clearbox"></div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+{% endblock body %}

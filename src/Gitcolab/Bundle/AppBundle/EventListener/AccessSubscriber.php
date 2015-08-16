@@ -12,8 +12,8 @@
 namespace Gitcolab\Bundle\AppBundle\EventListener;
 
 use Gitcolab\Bundle\AppBundle\GitcolabEvents;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Gitcolab\Bundle\AppBundle\Model\Team;
 use Gitcolab\Bundle\AppBundle\Model\Access;
@@ -33,9 +33,9 @@ class AccessSubscriber implements EventSubscriberInterface
 
     /**
      * @param DomainManager $domainManager
-     * @param TokenInterface $tokenStorage
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(DomainManager $domainManager, TokenInterface $tokenStorage)
+    public function __construct(DomainManager $domainManager, TokenStorageInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
         $this->domainManager = $domainManager;

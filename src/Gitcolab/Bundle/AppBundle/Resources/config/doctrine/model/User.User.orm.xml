@@ -22,6 +22,8 @@
 
         <one-to-many field="keys" target-entity="Gitcolab\Bundle\AppBundle\Model\Key" mapped-by="user" />
         <one-to-many field="activities" target-entity="Gitcolab\Bundle\AppBundle\Model\Activity" mapped-by="author" />
+        <one-to-many field="participations" target-entity="Gitcolab\Bundle\AppBundle\Model\User\User" mapped-by="ticket" />
+        <one-to-many field="issues" target-entity="Gitcolab\Bundle\AppBundle\Model\User\User" mapped-by="author" />
 
     </entity>
 

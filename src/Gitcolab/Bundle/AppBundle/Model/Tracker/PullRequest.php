@@ -11,7 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model\Tracker;
 
-class PullRequest extends Tracker
+class PullRequest extends Ticket
 {
 
 }
