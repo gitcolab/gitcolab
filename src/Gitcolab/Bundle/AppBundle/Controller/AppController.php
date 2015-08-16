@@ -11,6 +11,8 @@
 
 namespace Gitcolab\Bundle\AppBundle\Controller;
 
+use Michelf\Markdown;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AppController extends Controller
@@ -24,5 +26,16 @@ class AppController extends Controller
             'organizations' => $organizations,
             'projects' => $projects,
         ]);
+    }
+
+    public function previewAction(Request $request)
+    {
+        $text = $request->request->get('text');
+
+        if (null !== $text) {
+            $text = Markdown::defaultTransform($text);
+        }
+
+        return $this->render('@GitcolabApp/App/preview.html.twig', ['text' => $text]);
     }
 }

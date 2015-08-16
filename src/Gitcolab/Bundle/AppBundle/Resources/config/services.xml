@@ -9,6 +9,7 @@
         <parameter key="gitcolab.security.api_internal.class">Gitcolab\Bundle\AppBundle\Security\ApiInternalProvider</parameter>
         <parameter key="gitcolab.menu.builder.class">Gitcolab\Bundle\AppBundle\Menu\MenuBuilder</parameter>
         <parameter key="gitcolab.twig.extension.class">Gitcolab\Bundle\AppBundle\Twig\Extension\AppExtension</parameter>
+        <parameter key="gitcolab.form.type.wysiwyg.class">Gitcolab\Bundle\AppBundle\Form\Type\WysiwygType</parameter>
         <parameter key="gitcolab.domain_manager.class">Gitcolab\Bundle\AppBundle\Manager\DomainManager</parameter>
         <parameter key="gitcolab.git.shell_command">php %kernel.root_dir%/console gitcolab:git:shell</parameter>
 
@@ -30,6 +31,10 @@
 
         <service id="gitcolab.twig.extension" class="%gitcolab.twig.extension.class%">
             <tag name="twig.extension" />
+        </service>
+
+        <service id="gitcolab.form.type.wysiwyg" class="%gitcolab.form.type.wysiwyg.class%">
+            <tag name="form.type" alias="wysiwyg" />
         </service>
 
         <service id="gitcolab.security.api_internal" class="%gitcolab.security.api_internal.class%">
@@ -54,6 +59,14 @@
             <argument type="service" id="logger" />
             <argument>%gitcolab.repository_path%</argument>
             <argument type="service" id="gitcolab.domain_manager" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="gitcolab.subscriber.resource" class="Gitcolab\Bundle\AppBundle\EventListener\ResourceSubscriber">
+            <argument type="service" id="logger" />
+            <argument type="service" id="gitcolab.domain_manager" />
+            <argument type="service" id="security.token_storage" />
+
             <tag name="kernel.event_subscriber" />
         </service>
 
