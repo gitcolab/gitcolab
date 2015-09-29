@@ -11,8 +11,7 @@
         "symfony/symfony": "~2.7",
         "doctrine/orm": "~2.5",
         "doctrine/doctrine-bundle": "~1.4",
-        "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
-        "doctrine/migrations": "~1.0@dev",
+        "doctrine/doctrine-migrations-bundle": "1.0",
         "twig/extensions": "~1.2",
         "symfony/assetic-bundle": "~2.6",
         "symfony/swiftmailer-bundle": "~2.3",
@@ -30,8 +29,8 @@
         "gitonomy/gitlib": "~0.1",
         "gitonomy/git-bundle": "0.2.*",
         "michelf/php-markdown": "~1.4",
-        "sylius/resource-bundle":"0.13",
-        "sylius/translation-bundle":"0.13"
+        "sylius/resource-bundle":"0.15",
+        "tempo/resource-extra-bundle":"0.5.x-dev"
     },
     "require-dev": {
         "behat/behat": "~3.0",

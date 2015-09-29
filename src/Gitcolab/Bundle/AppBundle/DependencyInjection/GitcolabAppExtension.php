@@ -15,30 +15,37 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+use Tempo\Bundle\ResourceExtraBundle\DependencyInjection\TempoResourceExtraExtension;
 
 /**
  * This is the class that loads and manages your bundle configuration
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class GitcolabAppExtension extends Extension
+class GitcolabAppExtension extends TempoResourceExtraExtension
 {
+    /**
+     * @var array
+     */
+    protected $configFiles = array(
+        'services.xml',
+        'git.xml',
+        'services/user.xml'
+    );
+
     /**
      * {@inheritDoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $config = $this->configure(
+            $config,
+            new Configuration(),
+            $container,
+            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
+        );
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $container->setParameter($this->getAlias() . '.backend_type_orm', true);
-        $container->setParameter('sylius.locale', '%locale%');
-        $container->setParameter('sylius.translation.mapping', array());
-
-        $loader->load('services.xml');
-        $loader->load('git.xml');
-        $loader->load('services/user.xml');
     }
 }

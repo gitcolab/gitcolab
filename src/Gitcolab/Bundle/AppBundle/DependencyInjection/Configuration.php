@@ -32,6 +32,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('repository_path')->cannotBeEmpty()->end()
+                ->scalarNode('driver')->defaultValue('doctrine/orm')->end()
                 ->scalarNode('user')->defaultValue('git')->end()
                 ->scalarNode('ssh_host')->cannotBeEmpty()->end()
             ->end()
