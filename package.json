@@ -18,9 +18,15 @@
         "uglifycss": "0.0.9"
     },
     "devDependencies": {
-        "grunt": "~0.4",
-        "grunt-contrib-clean": "~0.4",
-        "grunt-contrib-concat": "~0.3",
-        "grunt-contrib-watch": "~0.5"
+        "gulp": "^3.8.0",
+        "gulp-browserify": "^0.5.1",
+        "gulp-concat": "~2.1.7",
+        "gulp-less": "^3.0.3",
+        "gulp-minify-css": "~0.3.0",
+        "gulp-plumber": "^1.0.1",
+        "gulp-uglify": "~0.2.0",
+        "gulp-util": "^3.0.6",
+        "vinyl-buffer": "^1.0.0",
+        "vinyl-source-stream": "^1.1.0"
     }
 }

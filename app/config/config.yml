@@ -35,24 +35,6 @@ twig:
     form:
         resources: ['bootstrap_3_layout.html.twig']
 
-# Assetic Configuration
-assetic:
-    debug:          "%kernel.debug%"
-    use_controller: false
-    #bundles:        [ ]
-    #java: /usr/bin/java
-    filters:
-        cssrewrite: ~
-        less:
-            node: %node_bin%
-            node_paths: [%node_modules%]
-            apply_to: "\.less$"
-        uglifyjs2:
-            # the path to the uglifyjs executable
-            bin: %node_modules%/.bin/uglifyjs
-        uglifycss:
-            bin: %node_modules%/.bin/uglifycss
-
 # Doctrine Configuration
 doctrine:
     dbal:
