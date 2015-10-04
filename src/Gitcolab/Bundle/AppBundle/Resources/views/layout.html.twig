@@ -3,13 +3,9 @@
     <head>
         <meta charset="UTF-8" />
 
-        {% stylesheets
-            '@GitcolabAppBundle/Resources/assets/less/style.less'
-            filter='less,?uglifycss' debug=true
-        %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('/css/app.css') }}" />
+        {% endblock %}
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -83,23 +79,8 @@
                 {% block body %}{% endblock %}
             </div>
             {% block javascripts %}
-                {% javascripts
-                    'vendor/jquery/dist/jquery.js'
-                    'vendor/jquery-ui/ui/jquery-ui.js'
-                    'vendor/bootstrap/dist/js/bootstrap.min.js'
-                    'vendor/moment/moment.js'
-                    'vendor/modernizr/modernizr.js'
-                    '@BazingaJsTranslationBundle/Resources/js/translator.js'
-                    '@FOSJsRoutingBundle/Resources/public/js/router.js'
-                    'vendor/selectize/dist/js/standalone/selectize.min.js'
-                    'vendor/jquery.redirect/jquery.redirect.js'
-                    '@GitcolabAppBundle/Resources/assets/js/app.js'
-                filter="?uglifyjs2"
-                output="js/main.js"
-                %}
-                <script src="{{ asset_url }}"></script>
-                {% endjavascripts %}
-                <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+                <script src="{{ asset('/js/vendor.js') }}"></script>
+                <script src="{{ asset('/js/app.js.js') }}"></script>
             {% endblock %}
         </div>
     </body>

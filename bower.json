@@ -1,13 +1,14 @@
 {
-    "name": "gitcolab",
-    "version": "0.1.0",
-    "dependencies": {
-        "bootstrap": "3.*",
-        "jquery": "2.1.*",
-        "jquery-ui": "1.10.*",
-        "moment": "2.8.*",
-        "modernizr": "2.8.*",
-        "selectize": "0.9.*",
-        "ionicons": "1.5.2"
-    }
+  "name": "gitcolab",
+  "version": "0.1.0",
+  "dependencies": {
+    "bootstrap": "3.*",
+    "jquery": "2.1.*",
+    "jquery-ui": "1.10.*",
+    "moment": "2.8.*",
+    "modernizr": "2.8.*",
+    "selectize": "0.9.*",
+    "ionicons": "1.5.2",
+    "backbone": "~1.2.3"
+  }
 }

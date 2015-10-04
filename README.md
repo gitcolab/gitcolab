@@ -35,8 +35,7 @@ $ php app/console doctrine:fixtures:load
 # Instant messaging ( NodeJs and Npm required)
 $ npm install
 $ bower install
-$ php app/console assetic:dump
-
+$ gulp
 
 ```
 

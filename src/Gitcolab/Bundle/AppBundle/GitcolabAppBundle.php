@@ -24,7 +24,6 @@ class GitcolabAppBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new LessPathPass());
         $container->addCompilerPass(new GitUrlGeneratorPass());
 
         $mappings = array(
