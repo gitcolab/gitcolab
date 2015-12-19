@@ -20,8 +20,8 @@ class AppExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'gravatar'    => new \Twig_Function_Method($this, 'getGravatar'),
-            'branches_activity'  => new \Twig_Function_Method($this, 'getBranchesActivity'),
+            new \Twig_SimpleFunction('gravatar', array($this, 'getGravatar')),
+            new \Twig_SimpleFunction('branches_activity', array($this, 'getBranchesActivity')),
         );
     }
 
