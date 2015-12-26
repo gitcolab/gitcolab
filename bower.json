@@ -10,5 +10,12 @@
     "selectize": "0.9.*",
     "ionicons": "1.5.2",
     "backbone": "~1.2.3"
+  },
+  "overrides": {
+    "modernizr": {
+      "main": [
+        "modernizr.js"
+      ]
+    }
   }
 }
