@@ -1,5 +1,4 @@
 {
-    "directory": "./web/vendor/",
-    "interactive": false,
-    "analytics": false
+  "interactive": false,
+  "analytics": false
 }

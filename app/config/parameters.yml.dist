@@ -22,3 +22,4 @@ parameters:
 
     node_bin: /usr/local/bin/node
     node_modules: '%kernel.root_dir%/../node_modules'
+    assets_base_url: "http://localhost:8090"

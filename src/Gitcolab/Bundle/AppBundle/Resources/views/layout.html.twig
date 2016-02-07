@@ -4,7 +4,6 @@
         <meta charset="UTF-8" />
 
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('/css/app.css') }}" />
         {% endblock %}
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -79,8 +78,7 @@
                 {% block body %}{% endblock %}
             </div>
             {% block javascripts %}
-                <script src="{{ asset('/js/vendor.js') }}"></script>
-                <script src="{{ asset('/js/app.js') }}"></script>
+                <script src="{{ asset('/js/bundle.js') }}"></script>
             {% endblock %}
         </div>
     </body>
