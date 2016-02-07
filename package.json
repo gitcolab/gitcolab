@@ -13,10 +13,17 @@
   "license": "MIT",
   "dependencies": {
     "bower": "1.3.8",
-    "browserify-brunch": "^1.7.3",
-    "less": "~1.7",
-    "less-brunch": "^1.8.1",
+    "less": "^2.5.3",
     "uglify-js": "2.3.6",
-    "uglifycss": "0.0.9"
+    "uglifycss": "0.0.9",
+    "webpack": "^1.5.1"
+  },
+  "devDependencies": {
+    "bower-webpack-plugin": "^0.1.9",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5",
+    "less-loader": "^2.2.2",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7"
   }
 }

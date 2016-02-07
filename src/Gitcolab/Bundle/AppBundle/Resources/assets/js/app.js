@@ -1,3 +1,5 @@
+require('../styles/app.less');
+
 $(function(){
     $('#diff-file--list').collapse({
         toggle: false
