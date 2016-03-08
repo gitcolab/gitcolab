@@ -1,6 +1,8 @@
 Gitcolab
 ========
 
+[![Join the chat at https://gitter.im/gitcolab/gitcolab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gitcolab/gitcolab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/gitcolab/gitcolab.svg?branch=master)](https://travis-ci.org/gitcolab/gitcolab)
 
 Git repositories inside your infrastructure, based on the [**Symfony2**](http://symfony.com) framework.
