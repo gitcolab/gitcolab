@@ -22,7 +22,6 @@
         <service id="gitcolab.domain_manager" class="%gitcolab.domain_manager.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="sylius.controller.parameters_parser" />
         </service>
 
         <service id="gitcolab.event_dispatcher" class="%gitcolab.event_dispatcher.class%">

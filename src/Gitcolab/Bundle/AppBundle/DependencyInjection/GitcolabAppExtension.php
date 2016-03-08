@@ -11,10 +11,11 @@
 
 namespace Gitcolab\Bundle\AppBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Tempo\Bundle\ResourceExtraBundle\DependencyInjection\TempoResourceExtraExtension;
 
 /**
@@ -38,13 +39,13 @@ class GitcolabAppExtension extends TempoResourceExtraExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->configure(
-            $config,
-            new Configuration(),
-            $container,
-            self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS
-        );
+        $processor = new Processor();
+        $config = $processor->processConfiguration(new Configuration(), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
+        foreach ($this->configFiles as $configFile) {
+            $loader->load($configFile);
+        }
 
         $container->setParameter($this->getAlias() . '.backend_type_orm', true);
     }

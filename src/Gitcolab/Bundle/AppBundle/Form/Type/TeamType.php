@@ -11,6 +11,9 @@
 
 namespace Gitcolab\Bundle\AppBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Gitcolab\Bundle\AppBundle\Model\Team;
@@ -23,9 +26,9 @@ class TeamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, ['required' => true])
-            ->add('description', null, ['required' => false])
-            ->add('access', 'choice' , [
+            ->add('name', TextType::class, ['required' => true])
+            ->add('description', TextareaType::class, ['required' => false])
+            ->add('access', ChoiceType::class , [
                 'expanded' => true,
                 'choices' => [
                     Team::ACCESS_READ => 'gitcolab.team.access.read',
@@ -39,7 +42,7 @@ class TeamType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'team';
     }

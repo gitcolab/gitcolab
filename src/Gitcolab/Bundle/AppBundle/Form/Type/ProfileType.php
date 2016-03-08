@@ -11,6 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormViewInterface;
 use Symfony\Component\Form\AbstractType;
@@ -23,19 +24,19 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name', 'text', [
+            ->add('first_name', TextType::class, [
                 'required' => false
             ])
-            ->add('last_name', 'text', [
+            ->add('last_name', TextType::class, [
                 'required' => false
             ])
-            ->add('localization', 'text', [
+            ->add('localization', TextType::class, [
                 'required' => false
             ])
         ;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'profile';
     }

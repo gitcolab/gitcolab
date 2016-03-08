@@ -44,7 +44,7 @@ class DomainManager
     /**
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(ObjectManager $objectManager, EventDispatcherInterface $eventDispatcher, $parameters)
+    public function __construct(ObjectManager $objectManager, EventDispatcherInterface $eventDispatcher, $parameters = [])
     {
         $this->objectManager    = $objectManager;
         $this->eventDispatcher  = $eventDispatcher;

@@ -1,4 +1,5 @@
-require('../styles/app.less');
+import $ from 'jquery';
+import '../styles/app.less';
 
 $(function(){
     $('#diff-file--list').collapse({
