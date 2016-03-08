@@ -11,6 +11,9 @@
 
 namespace Gitcolab\Bundle\AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,7 +27,7 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('organization', 'entity', [
+            ->add('organization', EntityType::class, [
                 'class' => 'GitcolabAppBundle:Organization',
                 'query_builder' => function(OrganizationRepository $er) use($options) {
                     return $er->queryOrganizationsByUser($options['user_id']);
@@ -32,11 +35,11 @@ class ProjectType extends AbstractType
                 'required' => true,
                 'label' => 'gitcolab.project.organization'
             ])
-            ->add('name', 'text', [
+            ->add('name', TextType::class, [
                 'required' => true,
                 'label' => 'gitcolab.project.name'
             ])
-            ->add('description', null, [
+            ->add('description', TextareaType::class, [
                 'required' => false,
                 'label' => 'gitcolab.project.description'
             ])
@@ -54,7 +57,7 @@ class ProjectType extends AbstractType
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'project';
     }
