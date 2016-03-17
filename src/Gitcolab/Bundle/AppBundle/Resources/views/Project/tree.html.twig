@@ -1,7 +1,7 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 {% block bodyClass %}project tree{% endblock %}
 
-{% block body %}
+{% block content %}
     {% include '@GitcolabApp/Project/_repo_head.html.twig' %}
     <ul class="breadcrumb">
         <li>{{ project }}</li>
@@ -18,5 +18,5 @@
         </div>
         {{ git_tree(tree, revision, path) }}
     </div>
-{% endblock body %}
+{% endblock content %}
 

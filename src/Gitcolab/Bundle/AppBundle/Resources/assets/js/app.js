@@ -1,5 +1,8 @@
 import $ from 'jquery';
-import '../styles/app.less';
+//import 'team';
+
+
+console.log('ddd');
 
 $(function(){
     $('#diff-file--list').collapse({
@@ -7,7 +10,12 @@ $(function(){
     });
 
     $('.collapse-file-diff').click( function() {
-        console.log('dd');
         $('#diff-file--list').collapse('show');
     });
+    console.log('ddd');
+
+    $('.selectize').selectize();
+
 });
+
+

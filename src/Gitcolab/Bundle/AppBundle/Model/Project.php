@@ -11,10 +11,14 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Gedmo\Timestampable\Traits\Timestampable;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Gitcolab\Bundle\AppBundle\Git\Repository;
 
-class Project
+class Project implements ResourceInterface
 {
+    use Timestampable;
+
     const SLUG_PATTERN = "[\w\/]+";
     const DEFAULT_BRANCH = 'master';
 
@@ -37,18 +41,6 @@ class Project
      * @var string
      */
     protected $description;
-
-    /**
-     *
-     * @var object
-     */
-    protected $createdAt;
-
-    /**
-     *
-     * @var object
-     */
-    protected $updatedAt;
 
     /**
      *

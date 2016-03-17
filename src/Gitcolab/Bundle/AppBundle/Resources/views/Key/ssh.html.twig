@@ -1,42 +1,32 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 {% block bodyClass %}user settings ssh_keys{% endblock %}
-{% block body %}
+{% block content %}
 
-    <div class="col-md-2">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <strong>Settings</strong>
-            </div>
-            <div class="panel-body">
-                {{ knp_menu_render('user_setting_tabs') }}
-            </div>
-        </div>
-    </div>
+    {% include '@GitcolabApp/User/_sidebar.html.twig' %}
 
-    <div class="col-md-10">
-        <div class="panel panel-default ssh-keys">
-            <div class="panel-heading">
+    <div class="col-md-9">
+        <div class="card ssh-keys">
+            <div class="card-header">
                 SSH Key
             </div>
-            <p>This is a list of SSH keys associated with your account. Remove any keys that you do not recognize. </p>
-            <div class="panel-body">
-                <ul class="list-keys">
-                    {% for key in keys %}
-                        <li>
-                            <div class="clearfix">
-                                <div class="pull-left">
-                                    <div><strong>{{ key.title }}</strong></div>
-                                    <div>Added on {{ key.createdAt | localizeddate('long', 'none') }} — Last used on {{ key.updatedAt| localizeddate('long', 'none') }} </div>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="{{ path('key_delete', {'id': key.id}) }}" class="btn btn-danger btn-inverse"> Delete </a>
-                                </div>
-                            </div>
-                        </li>
-                    {% endfor %}
-                    </tbody>
-                </ul>
+            <div class="card-block">
+            <p class="card-text">This is a list of SSH keys associated with your account. Remove any keys that you do not recognize. </p>
             </div>
+            <ul class="list-keys list-group list-group-flush">
+                {% for key in keys %}
+                    <li class="list-group-item">
+                        <div class="clearfix">
+                            <div class="pull-xs-left">
+                                <h5><strong>{{ key.title }}</strong></h5>
+                                <div>Added on {{ key.createdAt | localizeddate('long', 'none') }} — Last used on {{ key.updatedAt| localizeddate('long', 'none') }} </div>
+                            </div>
+                            <div class="pull-xs-right">
+                                <a href="{{ path('key_delete', {'id': key.id}) }}" class="btn btn-danger btn-inverse"> Delete </a>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
 
         <div id="form-add-key-ssh">
@@ -44,4 +34,4 @@
         </div>
     </div>
 
-{% endblock body %}
+{% endblock content %}

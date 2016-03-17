@@ -1,10 +1,10 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 
 {% block bodyClass %}project create{% endblock %}
-{% block body %}
-    <div>
+{% block content %}
+    <div class="container">
 
-        <div class="panel-body">
+        <div>
             {{ form_start(form) }}
             <form method="post" action="{{ path('project_create') }}">
 
@@ -18,4 +18,4 @@
             {{ form_end(form) }}
         </div>
     </div>
-{% endblock body %}
+{% endblock content %}

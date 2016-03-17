@@ -11,9 +11,12 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
-class Team
+use Gedmo\Timestampable\Traits\Timestampable;
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+class Team implements ResourceInterface
 {
-    use TimesheetTrait;
+    use Timestampable;
 
     const ACCESS_READ = 'ACCESS_READ';
     const ACCESS_WRITE = 'ACCESS_WRITE';
@@ -38,16 +41,6 @@ class Team
      * @var string
      */
     protected $access;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     /**
      * @var string

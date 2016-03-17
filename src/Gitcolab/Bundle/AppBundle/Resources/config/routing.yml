@@ -1,7 +1,7 @@
 dashboard:
   path: /
   defaults:
-      _controller: GitcolabAppBundle:Dashboard:main
+      _controller: GitcolabAppBundle:App:dashboard
 
 user:
   resource: "@GitcolabAppBundle/Resources/config/routing/user.yml"

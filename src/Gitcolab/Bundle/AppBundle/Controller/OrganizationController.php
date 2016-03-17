@@ -23,7 +23,7 @@ class OrganizationController extends Controller
     {
         $organization = new Organization();
 
-        $form = $this->createForm(new OrganizationType, $organization);
+        $form = $this->createForm(OrganizationType::class, $organization);
 
         if ($form->handleRequest($request)->isValid()) {
             $this->get('gitcolab.domain_manager')->create($organization);
@@ -38,9 +38,8 @@ class OrganizationController extends Controller
     public function showAction(Request $request, $slug)
     {
         $orgaUser = $this->getRepository('User\User')->findOneBy(array('slug' => $slug));
+
         if ($orgaUser) {
-
-
             return $this->forward('GitcolabAppBundle:User:show', array(
                 'slug'  => $slug,
             ));

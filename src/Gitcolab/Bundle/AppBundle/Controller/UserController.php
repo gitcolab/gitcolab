@@ -19,7 +19,7 @@ class UserController extends Controller
     public function profileAction(Request $request)
     {
         $profile = $this->getUser();
-        $form = $this->createForm(new ProfileType(), $profile);
+        $form = $this->createForm(ProfileType::class, $profile);
 
         if ($form->handleRequest($request)->isValid()) {
             $this->get('gitcolab.domain_manager')->update($profile);

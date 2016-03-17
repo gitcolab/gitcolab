@@ -1,35 +1,3 @@
-/**$('.autocomplete-field').selectize({
-    valueField: 'avatar',
-    labelField: 'name',
-    searchField: ['name'],
-    options: [],
-    maxItems: 1,
-    create: false,
-    render: {
-        option: function(item, escape) {
-            console.log(item);
-            return '<div>' +
-                (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
-                (item.avatar ? '<img class="avatar" src="' + escape(item.avatar) + '" />' : '') +
-                '</div>';
-        }
-    },
-    load: function(query, callback) {
-        if (!query.length) return callback();
-        $.ajax({
-            url: '/api/1/user/autocomplete?q=' + encodeURIComponent(query),
-            type: 'GET',
-            error: function() {
-                callback();
-            },
-            success: function(res) {
-                callback(res.data);
-            }
-        });
-    }
-});
-**/
-
 $('.autocomplete-field').selectize({
     valueField: 'id',
     labelField: 'name',

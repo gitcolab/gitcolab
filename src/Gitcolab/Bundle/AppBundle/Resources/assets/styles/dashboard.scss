@@ -1,0 +1,26 @@
+.btn.dropdown-toggle {
+  border-left-width: 0px;
+}
+
+#dashboard-sidebar-menu {
+  li.active a {
+    background: #f5f5f5;
+  }
+
+  .nav-link {
+    border-bottom: 0;
+  }
+}
+
+#dashboard-my-repo {
+  &.card {
+    border-top-left-radius: 0;
+  }
+  .card-header {
+    border: 0px;
+
+    h4 {
+      padding: 0;
+    }
+  }
+}

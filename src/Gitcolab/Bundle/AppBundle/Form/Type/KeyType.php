@@ -35,6 +35,9 @@ class KeyType  extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix()
     {
         return 'key';

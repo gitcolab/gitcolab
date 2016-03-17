@@ -11,15 +11,42 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
-class Activity
+use Gedmo\Timestampable\Traits\Timestampable;
+use Gitcolab\Bundle\AppBundle\Model\User\User;
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+class Activity implements ResourceInterface
 {
+    use Timestampable;
+
+    /**
+     * @var integer
+     */
     protected $id;
+
+    /**
+     * @var string
+     */
     protected $message;
+
+    /**
+     * @var User
+     */
     protected $author;
+
+    /**
+     * @var string
+     */
     protected $state;
-    protected $createdAt;
-    protected $updatedAt;
+
+    /**
+     * @var Organization
+     */
     protected $organization;
+
+    /**
+     * @var Project
+     */
     protected $project;
 
     /**

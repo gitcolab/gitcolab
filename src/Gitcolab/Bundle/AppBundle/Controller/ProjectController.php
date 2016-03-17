@@ -29,7 +29,7 @@ class ProjectController extends Controller
     {
         $project = new Project();
 
-        $form = $this->createForm(new ProjectType(), $project, array(
+        $form = $this->createForm(ProjectType::class, $project, array(
             'user_id' => $this->getUser()
         ));
 

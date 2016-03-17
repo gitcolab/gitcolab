@@ -35,6 +35,9 @@ class OrganizationType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix()
     {
         return 'organization';

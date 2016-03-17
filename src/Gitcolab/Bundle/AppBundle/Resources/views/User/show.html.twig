@@ -1,15 +1,15 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 
 {% block bodyClass %}user show{% endblock %}
-{% block body %}
+{% block content %}
 <div class="col-md-3">
     <div>
         <a href="http://gravatar.com/emails/" id="profile-avatar" original-title="Change your avatar at gravatar.com">
             <img class="profile-avatar" src="{{ gravatar(user.email, 200) }}" title="{{ user.username }}">
         </a>
-        <div class="text-center" id="profile-name">
+        <h1 class="text-center" id="profile-name">
             <span class="center-block" id="profile-username">{{ user.username }}</span>
-        </div>
+        </h1>
     </div>
     <div class="profile-info">
         <hr>
@@ -22,8 +22,12 @@
 </div>
 <div class="col-md-6">
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#repositories" role="tab" data-toggle="tab">Repositories</a></li>
-        <li role="presentation"><a href="#activity" role="tab" data-toggle="tab">Public Activity</a></li>
+        <li role="presentation" class="nav-item">
+            <a href="#repositories" class="active">Repositories</a>
+        </li>
+        <li role="presentation" class="nav-item">
+            <a href="#activity" class="nav-link">Public Activity</a>
+        </li>
     </ul>
 
     <!-- Tab panes -->
@@ -45,4 +49,4 @@
     </div>
 
 </div>
-{% endblock body %}
+{% endblock content %}

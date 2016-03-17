@@ -2,87 +2,84 @@
 
 {% block bodyClass %}organization show{% endblock %}
 {% block body %}
-    <div class="col-md-8">
-        <div class="head-orga clearfix">
-            <img src="{{ gravatar(organization.email) }}" />
-            <h1>
-                <span>{{ organization }}</span>
-                {% if is_granted('UPDATE', organization) %}
-                <a class="btn btn-default btn-xs" href="{{ path('organization_setting', {'slug': organization.slug }) }}">
-                    <span class="glyphicon glyphicon-wrench"></span>
-                </a>
-                {% endif %}
-            </h1>
-        </div>
-        <div class="option-orga clearfix">
-            <div class="row">
-                <form class="col-md-6" method="post" action="?">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Filter</label>
-                        <input type="text" name="name" class="form-control" />
+    {% include '@GitcolabApp/Organization/_head.html.twig' %}
+
+    {% block content %}
+        <div class="container">
+            <div class="col-md-8">
+                <div class="option-orga clearfix">
+                    <div class="row">
+                        <form class="col-md-6" method="post" action="?">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Filter</label>
+                                <input type="text" name="name" class="form-control" />
+                            </div>
+                        </form>
+                        {% if is_granted('UPDATE', organization) %}
+                        <div class="col-md-6">
+                            <a href="{{ path('project_create', {'org': organization.slug}) }}" class="pull-right btn btn-primary">
+                                New repository
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
-                </form>
-                {% if is_granted('UPDATE', organization) %}
-                <div class="col-md-6">
-                    <a href="{{ path('project_create', {'org': organization.slug}) }}" class="pull-right btn btn-primary">
-                        New repository
-                    </a>
+                </div>
+                <div>
+                    <ul class="repositories list-group list-group-flush">
+                        {% for project in repositories %}
+                        <li class="list-group-item">
+                            <h3>
+                                <a href="{{ project.fullSlug }}">{{ project }}</a>
+                            </h3>
+                            <p class="description">{{ project.description }}</p>
+                            <div class="last-updated">{{ project.updatedAt|localizeddate('medium', 'none', app.request.locale) }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% if repositories.haveToPaginate() %}
+                        {{ pagerfanta(repositories, 'twitter_bootstrap3') }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="label label-default pull-right"><strong>{{ organization.members|length }}</strong></span>
+                            <strong>People</strong>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        {% for member in organization.members %}
+                            <a href="{{ path('project_show', {'slug': member.slug}) }}">
+                                <img src="{{ member.avatar }}" width="40" height="40" />
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if is_granted('VIEW', organization) %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title team">
+                            <a class="orga-teams" href="{{ path('organization_teams', {'slug': organization.slug}) }}">
+                                <span>Teams</span>
+                                <strong class="label label-default">{{ organization.teams|length }}</strong>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        {% for team in organization.teams %}
+                            <div class="team">
+                                <a href="{{ path('organization_team_show', {'organization': organization.slug, 'slug': team.slug }) }}">
+                                    <strong>{{ team.name }}</strong>
+                                </a>
+                                <p>{{ team.members|length }} members</p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
                 {% endif %}
             </div>
         </div>
-        <div>
-            <ul class="repositories">
-                {% for project in repositories %}
-                <li>
-                    <h3>
-                        <a href="{{ project.fullSlug }}">{{ project }}</a>
-                    </h3>
-                    <p class="description">{{ project.description }}</p>
-                    <div class="last-updated">{{ project.updatedAt|localizeddate('medium', 'none', app.request.locale) }}</div>
-                </li>
-                {% endfor %}
-            </ul>
-            {% if repositories.haveToPaginate() %}
-                {{ pagerfanta(repositories, 'twitter_bootstrap3') }}
-            {% endif %}
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <span class="label label-default pull-right"><strong>{{ organization.members|length }}</strong></span>
-                <strong>People</strong>
-            </div>
-            <div class="panel-body">
-                {% for member in organization.members %}
-                    <a href="{{ path('project_show', {'slug': member.slug}) }}">
-                        <img src="{{ member.avatar }}" width="40" height="40" />
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
-        {% if is_granted('VIEW', organization) %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="team">
-                    <a class="orga-teams" href="{{ path('organization_teams', {'slug': organization.slug}) }}">
-                        <span>Teams</span>
-                        <strong class="label label-default">{{ organization.teams|length }}</strong>
-                    </a>
-                </div>
-            </div>
-            <div class="panel-body">
-                {% for team in organization.teams %}
-                    <div class="team">
-                        <a href="{{ path('organization_team_show', {'organization': organization.slug, 'slug': team.slug }) }}">
-                            <strong>{{ team.name }}</strong>
-                        </a>
-                        <p>{{ team.members|length }} members</p>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-    </div>
+    {% endblock content %}
 {% endblock body %}

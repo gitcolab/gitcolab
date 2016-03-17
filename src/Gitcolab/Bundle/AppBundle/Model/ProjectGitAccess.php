@@ -42,8 +42,10 @@ class ProjectGitAccess
     }
 
     /**
-     * @param string $reference  Fully qualified reference name ("refs/heads/master")
-     * @param int    $permission Write or Admin permission (see self::*_PERMISSION)
+     * @param User $user
+     * @param $reference
+     * @param $permission
+     * @return bool
      */
     public function isGranted(User $user, $reference, $permission)
     {
@@ -56,6 +58,10 @@ class ProjectGitAccess
         return $this->matches($reference) && $this->verifyPermission($permission);
     }
 
+    /**
+     * @param string $reference  Fully qualified reference name ("refs/heads/master")
+     * @return bool
+     */
     public function matches($reference)
     {
         $pattern = preg_quote($this->reference);
@@ -65,6 +71,10 @@ class ProjectGitAccess
         return 0 != preg_match($pattern, $reference);
     }
 
+    /**
+     *  @param int $permission Write or Admin permission (see self::*_PERMISSION)
+     * @return bool
+     */
     public function verifyPermission($permission)
     {
         if ($permission === self::WRITE_PERMISSION) {

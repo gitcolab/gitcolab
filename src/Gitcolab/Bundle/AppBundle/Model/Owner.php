@@ -11,9 +11,13 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Gedmo\Timestampable\Traits\Timestampable;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-abstract class Owner
+abstract class Owner implements ResourceInterface
 {
+    use Timestampable;
+
     /**
      * @var integer
      */
@@ -33,18 +37,6 @@ abstract class Owner
      * @var Project[]
      */
     protected $projects;
-
-    /**
-     *
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     *
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     /**
      * @var Team[]

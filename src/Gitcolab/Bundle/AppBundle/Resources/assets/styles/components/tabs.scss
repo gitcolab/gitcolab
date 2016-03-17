@@ -1,0 +1,16 @@
+.nav-tabs {
+  border: 0;
+
+  .nav-link {
+    &.active, &.active:hover, &:visited {
+      border-bottom: 0;
+      border-top-color: #0275d8;;
+      border-width: 3px 1px 1px;
+      border-radius: 3px 3px 0 0;
+      background: #fff;
+    }
+    &:hover, &:focus {
+      border: 1px solid #fafafa;
+    }
+  }
+}

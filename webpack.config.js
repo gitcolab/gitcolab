@@ -1,13 +1,14 @@
 var webpack = require('webpack');
 var bowerWebpackPlugin = require("bower-webpack-plugin");
 var bower = new bowerWebpackPlugin({
-    modulesDirectories: ["../bower_components"],
-    manifestFiles:      "bower.json"
+    modulesDirectories: [__dirname + "/bower_components"],
+    manifestFiles: "bower.json"
 });
 
 var jquery = new webpack.ProvidePlugin({
     $: 'jquery',
-    jQuery: "jquery"
+    jQuery: "jquery",
+    "window.Tether": 'tether'
 });
 
 module.exports = {
@@ -20,11 +21,20 @@ module.exports = {
         path: 'web/js/',
         publicPath: '/assets'
     },
+    resolve: {
+        alias: {
+            'selectize': 'bower_components/selectize/dist/js/selectize.js'
+        }
+    },
     module: {
         loaders: [
             {
-                test: /\.less$/,
-                loader: "style!css!less?strictMath&noIeCompat&limit=100000"
+                test: /\.scss$/,
+                loader: 'style!css!sass'
+            },
+            {
+                test:   /\.css$/,
+                loader: "style-loader!css-loader"
             },
             {
                 test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
@@ -32,7 +42,7 @@ module.exports = {
             },
             {
                 test: /bootstrap-sass\/assets\/javascripts\//,
-                loader: 'imports?jQuery=jquery'
+                loader: 'imports?jQuery=jquery&Tether=Tether'
             },
             {
                 test: /\.js$/,

@@ -11,10 +11,14 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Gedmo\Timestampable\Traits\Timestampable;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Gitcolab\Bundle\AppBundle\Model\User\User;
 
 class Access
 {
+    use Timestampable;
+
     /**
      * @var int
      */
@@ -40,11 +44,6 @@ class Access
      * @var string
      */
     protected $options;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
 
     /**
      * @var Organization

@@ -11,6 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Gitcolab\Bundle\AppBundle\Model\User\OrganizationUser;
 use Gitcolab\Bundle\AppBundle\Model\User\User;
 

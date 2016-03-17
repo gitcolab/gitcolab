@@ -41,7 +41,7 @@ class KeyController extends Controller
 
         $key = new Key();
         $key->setUser($this->getUser());
-        $form = $this->createForm(new KeyType(), $key);
+        $form = $this->createForm(KeyType::class, $key);
 
         if ($form->handleRequest($request)->isValid()) {
                 //@todo check ssh key is valid

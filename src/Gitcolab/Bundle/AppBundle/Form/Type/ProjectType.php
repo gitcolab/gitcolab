@@ -33,7 +33,8 @@ class ProjectType extends AbstractType
                     return $er->queryOrganizationsByUser($options['user_id']);
                 },
                 'required' => true,
-                'label' => 'gitcolab.project.organization'
+                'label' => 'gitcolab.project.organization',
+                'attr' => ['class' => 'selectize']
             ])
             ->add('name', TextType::class, [
                 'required' => true,
@@ -57,6 +58,9 @@ class ProjectType extends AbstractType
         ));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix()
     {
         return 'project';

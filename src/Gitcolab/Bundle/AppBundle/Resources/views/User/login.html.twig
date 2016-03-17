@@ -1,25 +1,25 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 
-{% trans_default_domain 'FOSUserBundle' %}
 {% block site_header %}
 {% endblock %}
-
-
 {% block body %}
     {% block content %}
 
         {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div>{{ error.messageKey|trans(error.messageData) }}</div>
         {% endif %}
 
         <div class="form-login">
             <h1>Gitcolab</h1>
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card">
+                <div class="card-header">
                     Login
                 </div>
-                <div class="panel-body">
+                <div class="card-block">
                     <form action="{{ path('login_check') }}" method="post" class="form-horizontal">
+                        {% block flashes %}
+                            {{ parent() }}
+                        {% endblock %}
                         <fieldset>
                             <div class="form-group">
                                 <label for="username" class="col-sm-3 control-label">Username</label>

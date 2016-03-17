@@ -1,5 +1,5 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
-{% block body %}
+{% block content %}
 
 {% include '@GitcolabApp/Team/_head.html.twig' with {'organization': organization} %}
 
@@ -10,12 +10,12 @@
     <div class="row">
     {% for team in organization.teams %}
         <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
+            <div class="card">
+                <div class="card-block">
                     <a href="{{ path('organization_team_show', {'slug': team.slug, organization: team.organization.slug}) }}">{{ team.name }}</a>
                     <a></a>
                 </div>
-                <div class="panel-footer">
+                <div class="card-footer">
                     {% for user in team.members %}
                         <a href="#"><img width="30" height="30" src="{{ user.user.avatar }}" alt="{{ user.user.username }}" /></a>
                     {% endfor %}
@@ -26,4 +26,4 @@
     {% endfor %}
     </div>
 </div>
-{% endblock body %}
+{% endblock content %}

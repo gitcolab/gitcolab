@@ -36,6 +36,9 @@ class ProfileType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix()
     {
         return 'profile';

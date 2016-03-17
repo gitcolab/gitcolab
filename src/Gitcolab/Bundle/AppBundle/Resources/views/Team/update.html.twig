@@ -1,5 +1,5 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
-{% block body %}
+{% block content %}
     {% include '@GitcolabApp/Team/_head.html.twig' with {'organization': team.organization} %}
 
     <h3>Edit team</h3>
@@ -14,4 +14,4 @@
             </a>
         </form>
     </div>
-{% endblock body %}
+{% endblock content %}

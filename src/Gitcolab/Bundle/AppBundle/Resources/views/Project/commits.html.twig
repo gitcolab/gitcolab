@@ -3,7 +3,7 @@
 {% set branch_key_name = 'revision' %}
 {% set branch_key_name = branch_key_name|default("branch") %}
 
-{% block body %}
+{% block content %}
     <div class="btn-group">
         <a class="menu dropdown-toggle" data-toggle="dropdown">
             {{ branch|default('contextual.all_branches'|trans) }}
@@ -36,4 +36,4 @@
 
     {{ git_log(log, {query_url: path('project_commits', {slug: project.slug, branch: branch})}) }}
 
-{% endblock body %}
+{% endblock content %}

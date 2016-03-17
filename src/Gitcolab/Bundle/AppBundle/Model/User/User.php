@@ -11,12 +11,12 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model\User;
 
+use Symfony\Component\Security\Core\Role\Role;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gitcolab\Bundle\AppBundle\Model\Activity;
 use Gitcolab\Bundle\AppBundle\Model\Key;
 use Gitcolab\Bundle\AppBundle\Model\Owner;
-use Symfony\Component\Security\Core\Role\Role;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 class User extends Owner implements AdvancedUserInterface, \Serializable
 {

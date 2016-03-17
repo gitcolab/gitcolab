@@ -13,14 +13,14 @@ namespace Gitcolab\Bundle\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
-class DashboardController extends Controller
+class AppController extends Controller
 {
-    public function mainAction()
+    public function dashboardAction()
     {
         $organizations = $this->getRepository('Organization')->findOrganizationsByUser($this->getUser()->getId());
         $projects = $this->getRepository('Project')->findProjectsByUser($this->getUser()->getId());
 
-        return $this->render('GitcolabAppBundle:Dashboard:main.html.twig', [
+        return $this->render('GitcolabAppBundle::dashboard.html.twig', [
             'organizations' => $organizations,
             'projects' => $projects,
         ]);
