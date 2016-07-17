@@ -2,21 +2,21 @@
 
 {% block bodyClass %}tracker issue show{% endblock %}
 {% block body %}
-    <div class="container">
-        {% include '@GitcolabApp/Project/_repo_head.html.twig' %}
-        <div class="col-md-8">
-            <div class="lead">
-                {% include '@GitcolabApp/Issue/_comment.html.twig' with {'resource': issue} %}
+    {% include '@GitcolabApp/Project/_repo_head.html.twig' %}
+    {% block content %}
+        <div class="container">
+            <div class="col-md-8">
+                <div class="lead">
+                    {% include '@GitcolabApp/Issue/_comment.html.twig' with {'resource': issue} %}
+                </div>
+                <div class="comments">
+                    {% for comment in comments %}
+                        {% include '@GitcolabApp/@GitcolabApp/Issue/_comment.html.twig' with {'resource': comment} %}
+                    {% endfor %}
+                </div>
             </div>
-            <div class="comments">
-                {% for comment in comments %}
-                    {% include '@GitcolabApp/@GitcolabApp/Issue/_comment.html.twig' with {'resource': comment} %}
-                {% endfor %}
+            <div class="discussion-sidebar">
             </div>
         </div>
-        <div class="discussion-sidebar">
-        </div>
-    </div>
-
-
+    {% endblock content %}
 {% endblock body %}

@@ -9,12 +9,13 @@
                 {{ project }}
             </a>
         </h1>
+
         <ul class="nav nav-tabs">
             <li role="presentation" class="nav-item">
                 <a href="#" class="nav-link active">Code</a>
             </li>
             <li role="presentation" class="nav-item">
-                <a href="#" class="nav-link">Issues <span class="badge">{{ project.issues.count }}</span></a>
+                <a href="{{ path('issue_list', {'slug': project.fullSlug}) }}" class="nav-link">Issues <span class="label label-default">{{ project.issues.count }}</span></a>
             </li>
             <li role="presentation" class="nav-item">
                 <a href="#" class="nav-link">Pull Requests <span class="label label-default">0</span></a>

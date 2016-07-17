@@ -41,5 +41,6 @@ project_setting_collaboration:
       _controller: GitcolabAppBundle:Project/Settings:collaboration
   requirements:
       repository: ".+"
+
 branch:
   path: /
