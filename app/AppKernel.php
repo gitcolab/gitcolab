@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Gitonomy\Bundle\GitBundle\GitonomyGitBundle(),
+            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Gitcolab\Bundle\AppBundle\GitcolabAppBundle()
         );
