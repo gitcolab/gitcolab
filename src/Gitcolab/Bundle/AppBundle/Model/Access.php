@@ -12,9 +12,12 @@
 namespace Gitcolab\Bundle\AppBundle\Model;
 
 use Gitcolab\Bundle\AppBundle\Model\User\User;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-class Access
+class Access implements ResourceInterface
 {
+    use TimesheetTrait;
+
     /**
      * @var int
      */
@@ -40,16 +43,6 @@ class Access
      * @var string
      */
     protected $options;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var Organization
-     */
-    protected $organization;
 
     /**
      * @var Project

@@ -14,7 +14,17 @@ namespace Gitcolab\Bundle\AppBundle\Model;
 trait TimesheetTrait
 {
     /**
-     * @return \DateTime
+     * @var \DateTimeInterface
+     */
+    protected $createdAt;
+
+    /**
+     * @var \DateTimeInterface
+     */
+    protected $updatedAt;
+
+    /**
+     * @return \DateTimeInterface
      */
     public function getCreatedAt()
     {
@@ -33,7 +43,7 @@ trait TimesheetTrait
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getUpdatedAt()
     {

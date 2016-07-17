@@ -12,16 +12,23 @@
 namespace Gitcolab\Bundle\AppBundle\Model\User;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Gitcolab\Bundle\AppBundle\Model\Activity;
-use Gitcolab\Bundle\AppBundle\Model\Key;
-use Gitcolab\Bundle\AppBundle\Model\Owner;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Gitcolab\Bundle\AppBundle\Model\TimesheetTrait;
+use Gitcolab\Bundle\AppBundle\Model\Key;
+use Gitcolab\Bundle\AppBundle\Model\Activity;
 
-class User extends Owner implements AdvancedUserInterface, \Serializable
+class User implements AdvancedUserInterface, \Serializable
 {
+    use TimesheetTrait;
+
     const ROLE_ADMIN = 'ROLE_ADMIN';
     const ROLE_USER = 'ROLE_USER';
+
+    /**
+     * @var int
+     */
+    protected $id;
 
     /**
      * @var string

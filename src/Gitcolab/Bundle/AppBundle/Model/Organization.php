@@ -11,11 +11,33 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
-use Gitcolab\Bundle\AppBundle\Model\User\OrganizationUser;
-use Gitcolab\Bundle\AppBundle\Model\User\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-class Organization extends Owner
+class Organization implements ResourceInterface
 {
+    use MemberTrait, TimesheetTrait;
+
+    /**
+     * @var integer
+     */
+    protected $id;
+
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $slug;
+
+    /**
+     * @var Project[]
+     */
+    protected $projects;
+
     /**
      * @var string
      */
@@ -32,11 +54,10 @@ class Organization extends Owner
      */
     protected $avatar;
 
-    /**
-     *
-     * @var array
-     */
-    protected $members;
+    public function __construct()
+    {
+        $this->projects = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -139,6 +160,25 @@ class Organization extends Owner
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * @return Project[]|ArrayCollection
+     */
+    public function getProjects()
+    {
+        return $this->projects;
+    }
+
+    /**
+     * @param Project[] $projects
+     * @return self
+     */
+    public function setProjects($projects)
+    {
+        $this->projects = $projects;
+
+        return $this;
     }
 
     public function __toString()

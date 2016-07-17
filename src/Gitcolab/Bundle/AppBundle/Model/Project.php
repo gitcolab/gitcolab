@@ -11,9 +11,10 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Gitcolab\Bundle\AppBundle\Git\Repository;
 
-class Project
+class Project implements ResourceInterface
 {
     const SLUG_PATTERN = "[\w\/]+";
     const DEFAULT_BRANCH = 'master';

@@ -11,10 +11,13 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Gitcolab\Bundle\AppBundle\Model\User\User;
 
-class Activity
+class Activity implements ResourceInterface
 {
+    use TimesheetTrait;
+
     /**
      * @var int
      */
@@ -34,16 +37,6 @@ class Activity
      * @var string
      */
     protected $state;
-
-    /**
-     * @var \DateTimeInterface
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTimeInterface
-     */
-    protected $updatedAt;
 
     /**
      * @var Organization

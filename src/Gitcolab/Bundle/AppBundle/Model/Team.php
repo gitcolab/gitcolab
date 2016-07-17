@@ -11,7 +11,9 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
-class Team
+use Sylius\Component\Resource\Model\ResourceInterface;
+
+class Team implements ResourceInterface
 {
     use TimesheetTrait;
 
@@ -38,16 +40,6 @@ class Team
      * @var string
      */
     protected $access;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     /**
      * @var string
@@ -190,7 +182,7 @@ class Team
 
     /**
      * @param $member
-     * @return array|User\User[]
+     * @return $this
      */
     public function addMember(User\User $member)
     {

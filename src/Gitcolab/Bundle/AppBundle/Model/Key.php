@@ -11,9 +11,10 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Gitcolab\Bundle\AppBundle\Model\User\User;
 
-class Key
+class Key implements ResourceInterface
 {
     /**
      * @var int

@@ -42,7 +42,7 @@ class TeamController extends ResourceController
                 ->setResource($team)
                 ->setUser($user);
 
-            $this->domainManager->create($access);
+            $this->get('gitcolab.domain_manager')->create($access);
             $this->addFlash('success', 'gitcolab.team.success_add');
 
         } else {

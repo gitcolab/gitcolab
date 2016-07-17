@@ -36,12 +36,12 @@ class KeyController extends Controller
 
     public function createAction(Request $request)
     {
-        $authorizedKeys = $_SERVER['HOME'].'/.ssh/authorized_keys';
+        $authorizedKeys = $request->server->get('HOME').'/.ssh/authorized_keys';
         $command = $this->container->getParameter('gitcolab.git.shell_command');
 
-        $key = new Key();
-        $key->setUser($this->getUser());
-        $form = $this->createForm(new KeyType(), $key);
+        $key = (new Key())
+            ->setUser($this->getUser());
+        $form = $this->createForm(KeyType::class, $key);
 
         if ($form->handleRequest($request)->isValid()) {
                 //@todo check ssh key is valid
