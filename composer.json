@@ -30,6 +30,7 @@
         "friendsofsymfony/jsrouting-bundle": "~1.6",
         "willdurand/js-translation-bundle": "~2.5",
         "white-october/pagerfanta-bundle": "~1.0",
+        "ocramius/proxy-manager": "~1.0",
         "gitonomy/gitlib": "~0.1",
         "gitonomy/git-bundle": "0.2.*",
         "michelf/php-markdown": "~1.6",

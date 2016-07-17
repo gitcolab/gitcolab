@@ -128,9 +128,10 @@ gitonomy_git:
             - GitcolabAppBundle:Git:theme.html.twig
             - GitonomyGitBundle::default_theme.html.twig
 
-
 gitcolab_app:
     repository_path: %gitcolab.repository_path%
     ssh_host: %gitcolab.ssh_host%
-    # ssh_host: ssh.host_example.com
     user:  %gitcolab.user%
+
+tempo_resource_extra:
+    app_name: gitcolab

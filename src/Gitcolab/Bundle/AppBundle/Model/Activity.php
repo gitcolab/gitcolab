@@ -11,15 +11,48 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Gitcolab\Bundle\AppBundle\Model\User\User;
+
 class Activity
 {
+    /**
+     * @var int
+     */
     protected $id;
+
+    /**
+     * @var string
+     */
     protected $message;
+
+    /**
+     * @var User
+     */
     protected $author;
+
+    /**
+     * @var string
+     */
     protected $state;
+
+    /**
+     * @var \DateTimeInterface
+     */
     protected $createdAt;
+
+    /**
+     * @var \DateTimeInterface
+     */
     protected $updatedAt;
+
+    /**
+     * @var Organization
+     */
     protected $organization;
+
+    /**
+     * @var Project
+     */
     protected $project;
 
     /**
@@ -40,10 +73,13 @@ class Activity
 
     /**
      * @param string $message
+     * @return $this
      */
     public function setMessage($message)
     {
         $this->message = $message;
+
+        return $this;
     }
 
     /**
@@ -56,10 +92,13 @@ class Activity
 
     /**
      * @param string $author
+     * @return $this
      */
     public function setAuthor($author)
     {
         $this->author = $author;
+
+        return $this;
     }
 
     /**
@@ -72,10 +111,13 @@ class Activity
 
     /**
      * @param integer $state
+     * @return $this
      */
     public function setState($state)
     {
         $this->state = $state;
+
+        return $this;
     }
 
     /**
@@ -93,6 +135,8 @@ class Activity
     public function setProject($project)
     {
         $this->project = $project;
+
+        return $this;
     }
 
     /**
@@ -110,6 +154,7 @@ class Activity
     public function setOrganization($organization)
     {
         $this->organization = $organization;
+
         return $this;
     }
 }

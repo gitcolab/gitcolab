@@ -16,9 +16,13 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 
 use Gitcolab\Bundle\AppBundle\Model\Organization;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
-class LoadOrganizationData extends AbstractFixture implements OrderedFixtureInterface
+class LoadOrganizationData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
+    use ContainerAwareTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -28,25 +32,22 @@ class LoadOrganizationData extends AbstractFixture implements OrderedFixtureInte
             ->setEmail('foo@foo.io')
             ->setName('Foo')
         ;
-        $manager->persist($organization);
+        $this->container->get('gitcolab.domain_manager')->create($organization);
         $this->setReference('organization-foo', $organization);
 
         $organization = (new Organization())
             ->setEmail('bar@bar.io')
             ->setName('Bar')
         ;
-        $manager->persist($organization);
+        $this->container->get('gitcolab.domain_manager')->create($organization);
         $this->setReference('organization-bar', $organization);
 
         $organization = (new Organization())
             ->setName('FooBar')
             ->setEmail('foobar@foobar.io')
-            ->setName('FooBar')
         ;
-        $manager->persist($organization);
+        $this->container->get('gitcolab.domain_manager')->create($organization);
         $this->setReference('organization-foobar', $organization);
-
-        $manager->flush();
     }
 
     /**

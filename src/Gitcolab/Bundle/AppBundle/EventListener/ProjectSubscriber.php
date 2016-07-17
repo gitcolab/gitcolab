@@ -11,7 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\EventListener;
 
-use Gitcolab\Bundle\AppBundle\Manager\DomainManager;
+use Tempo\Bundle\ResourceExtraBundle\Manager\DomainManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

@@ -11,7 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\DataFixtures\ORM;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -20,15 +20,7 @@ use Gitcolab\Bundle\AppBundle\Model\Project;
 
 class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
-    protected $container;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
+    use ContainerAwareTrait;
 
     /**
      * @inheritdoc

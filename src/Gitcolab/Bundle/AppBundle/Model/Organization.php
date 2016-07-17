@@ -39,6 +39,52 @@ class Organization extends Owner
     protected $members;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return self
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
      * @param string $email
      * @return $this
      */
@@ -93,5 +139,10 @@ class Organization extends Owner
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

@@ -31,20 +31,23 @@ class Key
     protected $title;
 
     /**
-     * @var object
+     * @var User\User
      */
     protected $user;
 
     /**
-     * @var object
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 
     /**
-     * @var object
+     * @var \DateTimeInterface
      */
     protected $updatedAt;
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
@@ -119,7 +122,7 @@ class Key
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getUpdatedAt()
     {
@@ -138,7 +141,7 @@ class Key
     }
 
     /**
-     * @return User
+     * @return User $user
      */
     public function getUser()
     {

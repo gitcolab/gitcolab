@@ -11,7 +11,6 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
-
 abstract class Owner
 {
     /**
@@ -51,51 +50,6 @@ abstract class Owner
      */
     protected $teams;
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     * @return self
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param string $slug
-     * @return self
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
 
     /**
      * @return Project[]

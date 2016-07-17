@@ -15,12 +15,14 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Gitcolab\Bundle\AppBundle\Model\Key;
 
-class LoadUserKeyData extends AbstractFixture implements OrderedFixtureInterface
+class LoadUserKeyData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
+    use ContainerAwareTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -31,14 +33,14 @@ class LoadUserKeyData extends AbstractFixture implements OrderedFixtureInterface
             ->setTitle('Laptop-home')
             ->setKey('key-laptop-home');
         ;
-        $manager->persist($key);
+        $this->container->get('gitcolab.domain_manager')->create($key);
 
         $key  = (new Key())
             ->setUser($this->getReference('ena'))
             ->setTitle('Laptop-office')
             ->setKey('key-Laptop-office')
         ;
-        $manager->persist($key);
+        $this->container->get('gitcolab.domain_manager')->create($key);
 
         $manager->flush();
     }

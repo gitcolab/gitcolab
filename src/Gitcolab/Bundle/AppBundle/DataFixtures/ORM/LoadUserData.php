@@ -18,20 +18,11 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Gitcolab\Bundle\AppBundle\Model\User\User;
 use Gitcolab\Bundle\AppBundle\User\UserFactory;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
-    private $container;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
+    use ContainerAwareTrait;
 
     /**
      * {@inheritdoc}
@@ -76,16 +67,16 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
                 $account->addRole(User::ROLE_ADMIN);
             }
 
-            if($username == 'dexter.schwartz') {
+            if ($username == 'dexter.schwartz') {
                 $account->setEnabled(false);
             }
 
             $this->addReference($username, $account);
 
-            $manager->persist($account);
+            $this->container->get('gitcolab.domain_manager')->create($account, false);
         }
 
-        $manager->flush();
+        $this->container->get('gitcolab.domain_manager')->flush();
     }
 
     /**

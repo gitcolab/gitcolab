@@ -8,8 +8,40 @@
 
     <entity name="Gitcolab\Bundle\AppBundle\Model\Organization" repository-class="Gitcolab\Bundle\AppBundle\Repository\OrganizationRepository" table="gitcolab_organization">
 
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+
         <field name="avatar" column="avatar" type="string" nullable="true" />
-        s
+
+        <field name="name" column="name" type="string" nullable="true" length="255" unique="true" />
+
+        <field name="slug" column="slug" type="string" nullable="true" length="255" unique="true">
+            <gedmo:slug unique="true" updatable="true" separator="-" fields="name" />
+        </field>
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+
+        <field name="updatedAt" column="updated_at" type="datetime">
+            <gedmo:timestampable on="update"/>
+        </field>
+
+        <one-to-many field="projects" target-entity="Project" mapped-by="owner">
+            <cascade>
+                <cascade-persist/>
+                <cascade-merge/>
+                <cascade-detach/>
+            </cascade>
+        </one-to-many>
+
+        <one-to-many field="teams" target-entity="Gitcolab\Bundle\AppBundle\Model\Team" mapped-by="organization">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
     </entity>
 
 </doctrine-mapping>

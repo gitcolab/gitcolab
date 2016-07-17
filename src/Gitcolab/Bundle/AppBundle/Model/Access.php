@@ -84,7 +84,7 @@ class Access
 
     /**
      * @param object $resource
-     * @return this
+     * @return $this
      */
     public function setResource($resource)
     {
@@ -105,7 +105,7 @@ class Access
 
     /**
      * @param User $user
-     * @return this
+     * @return $this
      */
     public function setUser(User $user)
     {
@@ -160,7 +160,7 @@ class Access
     {
         $this->project = $project;
 
-        return $project;
+        return $this;
     }
 
     /**

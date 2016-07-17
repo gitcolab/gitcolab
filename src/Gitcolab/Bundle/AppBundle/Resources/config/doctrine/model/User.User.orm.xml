@@ -7,7 +7,19 @@
 
 
     <entity name="Gitcolab\Bundle\AppBundle\Model\User\User" table="gitcolab_user">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
 
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+
+        <field name="updatedAt" column="updated_at" type="datetime">
+            <gedmo:timestampable on="update"/>
+        </field>
+
+        <field name="username" column="username" type="string" nullable="true" />
         <field name="email" column="email" type="string" nullable="true" />
         <field name="salt" column="salt" type="string" nullable="true" />
         <field name="password" column="password" type="string" nullable="true" />

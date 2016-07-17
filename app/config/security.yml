@@ -12,7 +12,7 @@ security:
         main:
             entity:
                 class: Gitcolab\Bundle\AppBundle\Model\User\User
-                property: name
+                property: username
 
     firewalls:
         dev:

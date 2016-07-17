@@ -12,12 +12,12 @@
 namespace Gitcolab\Bundle\AppBundle\EventListener;
 
 use Gitcolab\Bundle\AppBundle\GitcolabEvents;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Gitcolab\Bundle\AppBundle\Model\Team;
 use Gitcolab\Bundle\AppBundle\Model\Access;
-use Gitcolab\Bundle\AppBundle\Manager\DomainManager;
+use Tempo\Bundle\ResourceExtraBundle\Manager\DomainManager;
 
 class AccessSubscriber implements EventSubscriberInterface
 {
@@ -27,15 +27,15 @@ class AccessSubscriber implements EventSubscriberInterface
     protected $domainManager;
 
     /**
-     * @var TokenInterface
+     * @var TokenStorageInterface
      */
     protected $tokenStorage;
 
     /**
      * @param DomainManager $domainManager
-     * @param TokenInterface $tokenStorage
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(DomainManager $domainManager, TokenInterface $tokenStorage)
+    public function __construct(DomainManager $domainManager, TokenStorageInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
         $this->domainManager = $domainManager;
@@ -53,6 +53,10 @@ class AccessSubscriber implements EventSubscriberInterface
      */
     public function createOrganization(ResourceEvent $event)
     {
+        if (null === $this->tokenStorage->getToken() ) {
+            return;
+        }
+
         $organization = $event->getSubject();
         $team = (new Team())
             ->setName('Owners')

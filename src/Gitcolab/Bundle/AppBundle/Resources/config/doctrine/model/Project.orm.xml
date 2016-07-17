@@ -25,7 +25,7 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="lastActivity" column="last_activity" type="datetime" nullable="true" />
-        <many-to-one field="owner" inversed-by="projects" target-entity="Owner" />
+        <many-to-one field="owner" inversed-by="projects" target-entity="Gitcolab\Bundle\AppBundle\Model\Organization" />
 
         <one-to-many field="members" target-entity="Gitcolab\Bundle\AppBundle\Model\Access" mapped-by="project">
             <cascade>

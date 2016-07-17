@@ -26,6 +26,11 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      */
+    protected $username;
+
+    /**
+     * @var string
+     */
     protected $email;
 
     /**
@@ -308,7 +313,7 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
      */
     public function setUsername($username)
     {
-        $this->name = $username;
+        $this->username = $username;
 
         return $this;
     }
@@ -565,5 +570,10 @@ class User extends Owner implements AdvancedUserInterface, \Serializable
         $this->name = $parameters['name'];
         $this->email = $parameters['email'];
         $this->roles = new ArrayCollection($parameters['roles']);
+    }
+
+    public function __toString()
+    {
+        return $this->username;
     }
 }

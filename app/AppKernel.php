@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Gitonomy\Bundle\GitBundle\GitonomyGitBundle(),
             new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new \Tempo\Bundle\ResourceExtraBundle\TempoResourceExtraBundle(),
             new Gitcolab\Bundle\AppBundle\GitcolabAppBundle()
         );
 
