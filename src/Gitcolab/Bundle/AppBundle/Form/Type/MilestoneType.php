@@ -11,6 +11,8 @@
 
 namespace Gitcolab\Bundle\AppBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormViewInterface;
 use Symfony\Component\Form\AbstractType;
@@ -23,11 +25,14 @@ class MilestoneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
+            ->add('name', TextType::class, [
+                'label' => 'gitcolab.milestone.title'
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'gitcolab.milestone.description'
+            ])
         ;
     }
-
 
     public function getName()
     {

@@ -10,6 +10,7 @@
  */
 
 namespace Gitcolab\Bundle\AppBundle\Twig\Extension;
+
 use Gitcolab\Bundle\AppBundle\Model\Project;
 use Michelf\Markdown;
 
@@ -32,7 +33,7 @@ class AppExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            'markdown'  => new \Twig_SimpleFilter($this, 'markdown', array('is_safe' => array('html'))),
+            new \Twig_SimpleFilter('markdown', array($this, 'markdown', array('is_safe' => array('html'))))
         ];
     }
 
@@ -84,11 +85,18 @@ class AppExtension extends \Twig_Extension
         return $rows;
     }
 
+    /**
+     * @param $text
+     * @return string
+     */
     public function markdown($text)
     {
         return Markdown::defaultTransform($text);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'app_extension';
