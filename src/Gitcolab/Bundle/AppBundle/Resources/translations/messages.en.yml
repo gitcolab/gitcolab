@@ -24,3 +24,6 @@ gitcolab:
   key:
       title: Title
       key: Key
+
+  profile:
+      edit:

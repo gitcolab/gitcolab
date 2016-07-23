@@ -1,0 +1,30 @@
+<div class="clearfix">
+    <div class="col-md-1">
+        <img src="{{ resource.author.avatar }}" height="48" />
+    </div>
+    <div class="col-md-11">
+        <div class="card">
+            <div class="card-header clearfix">
+                <div class="pull-left">
+                    <a href="#">
+                        {{ resource.author }}
+                    </a>
+                    <span>{#{ time_ago(comment.createdAt }#}</span>
+                </div>
+                <div class="pull-right">
+                    <a class="edit-comment" onclick="return false;" href="#">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    {% if resource.description is not defined %}
+                    <a class="delete-comment" href="{{ path('comment_delete', { 'comment': resource.id }) }}">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-block">
+                {{ resource.description|markdown|raw }}
+            </div>
+        </div>
+    </div>
+</div>

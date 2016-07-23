@@ -36,3 +36,8 @@ sylius_resource:
           driver: doctrine/orm
           classes:
               model: Gitcolab\Bundle\AppBundle\Model\Key
+
+      gitcolab.issue:
+          driver: doctrine/orm
+          classes:
+              model: Gitcolab\Bundle\AppBundle\Model\Tracker\Issue

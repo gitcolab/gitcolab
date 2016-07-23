@@ -11,67 +11,66 @@
             </div>
             <div class="clone-url pull-right">
                 <div class="input-group">
-                    <input type="text" class="input-mini " value="" readonly="readonly" />
-                    <span class="input-group-button">
-                        <button aria-label="Copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-copied-hint="Copied!" type="button"><span class="glyphicon glyphicon-save"></span></button>
-                    </span>
+                    <input type="text" class="input-mini " value="" readonly="readonly">
+                        <span class="input-group-button">
+                            <button aria-label="Copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-copied-hint="Copied!" type="button"><span class="glyphicon glyphicon-save"></span></button>
+                        </span>
                 </div>
             </div>
         </div>
 
         <div class="overall">
-            <ul class="nav nav-pills">
-                <li role="presentation" class="nav-item">
-                    <a href="{{ path('project_commits', {'slug': project.fullSlug, 'branch' : project.defaultBranch}) }}" class="nav-link">
-                        <i class="material-icons">restore</i>
-                        <strong> {{ project.repository.log.countCommits }} </strong> Commits
+            <ul class="nav">
+                <li role="presentation" class="active">
+                    <a href="{{ path('project_commits', {'slug': project.fullSlug, 'branch' : project.defaultBranch}) }}">
+                        <span class="glyphicon glyphicon-dashboard"></span> <strong> {{ project.repository.log.countCommits }} </strong> Commits
                     </a>
                 </li>
-                <li role="presentation" class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="material-icons">share</i>
+                <li role="presentation">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-random"></span>
                         <strong> {{ refs.branches|length }} </strong>Branch
                     </a>
                 </li>
-                <li role="presentation" class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="material-icons">local_offer</i>
+                <li role="presentation">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-tags"></span>
                         <strong> {{ refs.tags|length }} </strong>
                         Releases
                     </a>
                 </li>
-                <li role="presentation" class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="material-icons">group</i> Contributors
+                <li role="presentation">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-user"></span> Contributors
                     </a>
                 </li>
             </ul>
         </div>
 
-        <div id="tree-content-holder">
-            <div class="commit-head">
-                {{ project.repository.getHeadCommit.getShortMessage }}
+            <div id="tree-content-holder">
+                <div class="commit-head">
+                    {{ project.repository.getHeadCommit.getShortMessage }}
+                </div>
+                <div class="commit-meta">
+                    <img src="{{ gravatar(project.repository.getHeadCommit.getAuthorEmail)}}" width="20" height="20" />
+                    {{ project.repository.getHeadCommit.getAuthorName }}
+                    {{ project.repository.getHeadCommit.getAuthorDate|localizeddate('medium', 'none', app.request.locale) }} </dd>
+                </div>
+                {{ git_tree(tree, revision, path) }}
             </div>
-            <div class="commit-meta">
-                <img src="{{ gravatar(project.repository.getHeadCommit.getAuthorEmail)}}" width="20" height="20" />
-                {{ project.repository.getHeadCommit.getAuthorName }}
-                {{ project.repository.getHeadCommit.getAuthorDate|localizeddate('medium', 'none', app.request.locale) }} </dd>
-            </div>
-            {{ git_tree(tree, revision, path) }}
-        </div>
 
-        {% if readme is not null %}
-        <div id="readme">
-            <h3>{{ readme.filename }}</h3>
-            <div class="markdown-render">
-                {{ readme.content|raw }}
+            {% if readme is not null %}
+            <div id="readme">
+                <h3>{{ readme.filename }}</h3>
+                <div class="markdown-render">
+                    {{ readme.content|raw }}
+                </div>
             </div>
-        </div>
+            {% endif %}
+
+        {% else %}
+            {% include 'GitcolabAppBundle:Project:_no_commit.html.twig'  %}
         {% endif %}
+    {% endblock content %}
 
-    {% else  %}
-        {% include 'GitcolabAppBundle:Project:_no_commit.html.twig'  %}
-    {% endif  %}
-
-
-{% endblock body %}
+{% endblock %}

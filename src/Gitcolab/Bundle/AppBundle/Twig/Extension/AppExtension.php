@@ -10,7 +10,9 @@
  */
 
 namespace Gitcolab\Bundle\AppBundle\Twig\Extension;
+
 use Gitcolab\Bundle\AppBundle\Model\Project;
+use Michelf\Markdown;
 
 class AppExtension extends \Twig_Extension
 {
@@ -19,27 +21,37 @@ class AppExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction('gravatar', array($this, 'getGravatar')),
             new \Twig_SimpleFunction('branches_activity', array($this, 'getBranchesActivity')),
-        );
+            new \Twig_SimpleFunction('gravatar', array($this, 'getGravatar')),
+            new \Twig_SimpleFunction('branches_activity', array($this, 'getBranchesActivity')),
+            new \Twig_SimpleFunction('markdown', array($this, 'markdown', array('is_safe' => array('html')))),
+        ];
+    }
+
+    public function getFilters()
+    {
+        return [
+            new \Twig_SimpleFilter('markdown', array($this, 'markdown', array('is_safe' => array('html'))))
+        ];
     }
 
     // get gravatar image
     public function getGravatar($email, $size = null, $default = 'mm', $rating = null, $secure = null)
     {
-        $defaults = array(
+        $defaults = [
             'size'    => 80,
             'rating'  => 'g',
             'default' => null,
             'secure'  => false,
-        );
+        ];
 
-        $map = array(
+        $map = [
             's' => $size    ?: $defaults['size'],
             'r' => $rating  ?: $defaults['rating'],
             'd' => $default ?: $defaults['default'],
-        );
+        ];
 
         $hash = md5(strtolower(trim($email)));
 
@@ -60,12 +72,12 @@ class AppExtension extends \Twig_Extension
         foreach ($references->getBranches() as $branch) {
             $logBehind = $repository->getLog($repository->getRevision($branch->getFullname().'..'.$against->getFullname()));
             $logAbove = $repository->getLog($repository->getRevision($against->getFullname().'..'.$branch->getFullname()));
-            $rows[] = array(
+            $rows[] = [
                 'branch'           => $branch,
                 'above'            => $logAbove->count(),
                 'behind'           => $logBehind->count(),
                 'lastModification' => $branch->getLastModification(),
-            );
+            ];
         }
         usort($rows, function ($left, $right) {
             return $left['lastModification']->getAuthorDate() < $right['lastModification']->getAuthorDate();
@@ -73,6 +85,18 @@ class AppExtension extends \Twig_Extension
         return $rows;
     }
 
+    /**
+     * @param $text
+     * @return string
+     */
+    public function markdown($text)
+    {
+        return Markdown::defaultTransform($text);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'app_extension';

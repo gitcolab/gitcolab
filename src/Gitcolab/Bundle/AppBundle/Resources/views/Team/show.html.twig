@@ -1,25 +1,19 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 {% block bodyClass %}organization team show{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts '@GitcolabAppBundle/Resources/assets/js/team.js' output='js/team.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}
-{% block body %}
+{% block content %}
 
     {% include '@GitcolabApp/Team/_head.html.twig' with {'organization': team.organization} %}
 
     <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body">
+        <div class="card">
+            <div class="card-header">
                 <h1>{{ team.name }}</h1>
                 <p>{{ team.description }}</p>
 
                 <div class="team-stats">
                 </div>
             </div>
-            <div class="panel-footer">
+            <div class="card-footer">
                 {% if is_granted('UPDATE', team.organization) %}
                 <a class="btn btn-default" href="{{ path('organization_team_update', {'organization': team.organization, 'slug': team.slug}) }}">Settings</a>
                 {% endif %}
@@ -27,13 +21,13 @@
         </div>
     </div>
     <div class="subnav col-md-9">
-        <h4 class="member-title pull-left">Team members</h4>
+        <h4 class="member-title pull-xs-left">Team members</h4>
         <form method="post" action="{{ path('organization_team_access', {'organization': team.organization.slug, 'slug': team.slug}) }}" class="add-to-team pull-right" style="width: 300px;">
             <input type="search" name="member" class="form-control selectize autocomplete-field" placeholder="Add a person" />
         </form>
-        <ul class="row">
+        <ul class="row list-group list-group-flush">
             {% for member in team.members %}
-            <li class="col-md-6 list-item">
+            <li class="col-md-6 list-group-item">
                 <img src="{{ member.user.avatar }}" class="avatar" height="40" width="40" alt="{{ member.user.username }}" />
                 <div class="infos">
                     {{ member.user.username }}
@@ -49,4 +43,4 @@
             {% endfor %}
         </ul>
     </div>
-{% endblock body %}
+{% endblock content %}

@@ -11,15 +11,13 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
-use Gitcolab\Bundle\AppBundle\Model\User\User;
+use Gedmo\Timestampable\Traits\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Gitcolab\Bundle\AppBundle\Model\User\User;
 
-class Access implements ResourceInterface
+class Access
 {
-    use TimesheetTrait;
-
-    const TYPE_COLLABORATOR = 'type_collaborator';
-    const TYPE_OWNER = 'type_owner';
+    use Timestampable;
 
     /**
      * @var int
@@ -37,19 +35,20 @@ class Access implements ResourceInterface
     protected $user;
 
     /**
-     * @var Organization
-     */
-    protected $organization;
-
-    /**
      * @var string
      */
     protected $type;
+
 
     /**
      * @var string
      */
     protected $options;
+
+    /**
+     * @var Organization
+     */
+    protected $organization;
 
     /**
      * @var Project

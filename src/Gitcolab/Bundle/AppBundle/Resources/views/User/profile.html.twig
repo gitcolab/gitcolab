@@ -1,16 +1,16 @@
 {% extends "GitcolabAppBundle::layout.html.twig" %}
 
 {% block bodyClass %}user edit profile{% endblock %}
-{% block body %}
+{% block content %}
 
     {% include '@GitcolabApp/User/_sidebar.html.twig' %}
 
-    <div class="col-md-10">
-        <div class="panel panel-default">
-            <div class="panel-heading">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header">
                 Account Profile
             </div>
-            <div class="panel-body">
+            <div class="card-block">
                 <form action="#" method="POST" class="fos_user_profile_edit">
 
                     <fieldset>
@@ -25,7 +25,7 @@
                     <div class="form-actions clearfix">
                         {{ form_rest(form) }}
 
-                        <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-primary pull-right" />
+                        <input type="submit" value="{{ 'gitcolab.form.validate'|trans }}" class="btn btn-primary pull-right" />
                     </div>
 
                 </form>
@@ -33,4 +33,4 @@
         </div>
     </div>
 
-{% endblock body %}
+{% endblock content %}

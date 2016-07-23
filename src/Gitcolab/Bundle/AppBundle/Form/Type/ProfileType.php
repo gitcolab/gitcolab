@@ -25,17 +25,23 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('first_name', TextType::class, [
-                'required' => false
+                'required' => false,
+                'label' => 'gitcolab.user.first_name'
             ])
             ->add('last_name', TextType::class, [
-                'required' => false
+                'required' => false,
+                'label' => 'gitcolab.user.last_name'
             ])
             ->add('localization', TextType::class, [
-                'required' => false
+                'required' => false,
+                'label' => 'gitcolab.user.localization'
             ])
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix()
     {
         return 'profile';

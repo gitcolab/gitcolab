@@ -1,7 +1,12 @@
 dashboard:
   path: /
   defaults:
-      _controller: GitcolabAppBundle:Dashboard:main
+      _controller: GitcolabAppBundle:App:dashboard
+
+preview:
+  path: /preview
+  defaults:
+      _controller: GitcolabAppBundle:App:preview
 
 user:
   resource: "@GitcolabAppBundle/Resources/config/routing/user.yml"
@@ -23,6 +28,23 @@ organization:
 project:
   resource: "@GitcolabAppBundle/Resources/config/routing/project.yml"
   prefix : /
+
+project_setting:
+  path: /{slug}/settings
+  defaults:
+       _controller: GitcolabAppBundle:Project:settings
+  requirements:
+      slug: ".+"
+
+issue:
+  resource: "@GitcolabAppBundle/Resources/config/routing/issue.yml"
+  prefix: /{slug}/issue
+  requirements:
+      slug: ".+"
+
+milestone:
+  resource: "@GitcolabAppBundle/Resources/config/routing/milestone.yml"
+
 
 project_show:
   path: /{slug}

@@ -17,6 +17,7 @@ use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappi
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler\GitUrlGeneratorPass;
 use Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler\LessPathPass;
+use Gitcolab\Bundle\AppBundle\DependencyInjection\Compiler\ResourceCompilerPass;
 
 class GitcolabAppBundle extends AbstractResourceBundle
 {
@@ -25,6 +26,7 @@ class GitcolabAppBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new GitUrlGeneratorPass());
+        $container->addCompilerPass(new ResourceCompilerPass());
 
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Gitcolab\Bundle\AppBundle\Model',

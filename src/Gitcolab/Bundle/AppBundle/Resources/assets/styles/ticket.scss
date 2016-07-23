@@ -1,0 +1,18 @@
+.navbar {
+  margin-bottom: 0;
+}
+
+.page-head {
+  background-color: #fafafa;
+  margin-bottom: 20px;
+  h1 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    padding: 25px;
+    a {
+      color: #333;
+    }
+  }
+
+  @import "components/tabs";
+}

@@ -1,0 +1,27 @@
+&.show {
+
+  #header {
+    margin-bottom: 10px;
+  }
+
+  .tab-content ul, .profile-info ul {
+    padding-left: 0;
+  }
+}
+
+&.settings.ssh_keys .ssh-keys p {
+  padding: 15px;
+}
+
+
+
+&.settings.ssh_keys .list-keys li {
+  list-style: none;
+  border-top: 1px solid #ddd;
+  line-height: 18px;
+  padding: 15px;
+
+  h5 {
+    font-size: 1rem;
+  }
+}

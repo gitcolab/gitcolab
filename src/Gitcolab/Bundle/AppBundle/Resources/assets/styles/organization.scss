@@ -1,0 +1,84 @@
+.navbar {
+  margin-bottom: 0px;
+}
+
+.team.show .org-name, .show .org-name {
+  font-size: 20px;
+}
+.team.show {
+
+  .list-item {
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    list-style: none;
+    img {
+      float: left;
+    }
+    .infos {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
+
+&.show .page-head {
+  background-color: #fafafa;
+  margin-bottom: 20px;
+  h1 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    padding: 25px 25px 25px 0;
+    a {
+      color: #333;
+    }
+  }
+
+  @import "components/tabs";
+}
+
+.page-head {
+  @import "components/tabs";
+}
+.show .head-orga {
+  img {
+    float: left;
+  }
+  h1 {
+    float: left;
+    margin-left: 10px;
+  }
+
+
+}
+
+.show .option-orga {
+  margin-top: 35px;
+
+  label {
+    padding-top: 7px;
+  }
+}
+
+.show .orga-teams {
+  color: #333333;
+  font-weight: bold;
+  strong {
+    float: right;
+  }
+}
+
+.show .repositories {
+  list-style: none;
+  padding-left: 0px;
+  li {
+    border-bottom: 1px solid #eee;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    h3 {
+      margin: 0;
+    }
+  }
+}

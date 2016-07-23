@@ -20,4 +20,8 @@ final class GitcolabEvents
 
     const ORGANIZATION_PRE_CREATE = 'gitcolab.organization.pre_create';
     const ORGANIZATION_CREATE = 'gitcolab.organization.post_create';
+
+    const ISSUE_CREATE = 'gitcolab.issue.post_create';
+    const ISSUE_PR_CREATE = 'gitcolab.issue.pre_create';
+    const PR_CREATE = 'gitcolab.pullrequest.post_create';
 }

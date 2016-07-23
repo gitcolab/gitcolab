@@ -13,7 +13,11 @@ $(function(){
     });
 
     $('.collapse-file-diff').click( function() {
-        console.log('dd');
         $('#diff-file--list').collapse('show');
     });
+
+    $('.selectize').selectize();
+
 });
+
+

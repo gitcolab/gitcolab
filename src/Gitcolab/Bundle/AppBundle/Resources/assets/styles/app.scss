@@ -1,0 +1,24 @@
+@import "layout";
+@import "security";
+@import "settings";
+
+.dashboard {
+  @import "dashboard";
+}
+
+.organization {
+  @import "organization";
+}
+
+.project {
+  @import "project";
+}
+
+.user {
+  @import "user";
+}
+
+.tracker {
+  @import "ticket";
+}
+

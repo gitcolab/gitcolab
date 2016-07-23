@@ -11,11 +11,13 @@
 
 namespace Gitcolab\Bundle\AppBundle\Controller;
 
+use Michelf\Markdown;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DashboardController extends Controller
+class AppController extends Controller
 {
-    public function mainAction()
+    public function dashboardAction()
     {
         $organizations = $this->getRepository('Organization')->findOrganizationsByUser($this->getUser()->getId());
         $projects = $this->getRepository('Project')->findProjectsByUser($this->getUser()->getId());
@@ -24,5 +26,16 @@ class DashboardController extends Controller
             'organizations' => $organizations,
             'projects' => $projects,
         ]);
+    }
+
+    public function previewAction(Request $request)
+    {
+        $text = $request->request->get('text');
+
+        if (null !== $text) {
+            $text = Markdown::defaultTransform($text);
+        }
+
+        return $this->render('@GitcolabApp/App/preview.html.twig', ['text' => $text]);
     }
 }

@@ -1,8 +1,8 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card">
+    <div class="card-header">
         Add an SSH Key
     </div>
-    <div class="panel-body">
+    <div class="card-block">
         <form action="{{ path('key_create') }}" method="post">
             {{ form_row(form.title) }}
             {{ form_row(form.key) }}

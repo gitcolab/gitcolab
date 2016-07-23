@@ -27,12 +27,20 @@
             <tag name="twig.extension" />
         </service>
 
+        <service id="gitcolab.form.type.wysiwyg" class="%gitcolab.form.type.wysiwyg.class%">
+            <tag name="form.type" alias="wysiwyg" />
+        </service>
+
         <service id="gitcolab.security.api_internal" class="%gitcolab.security.api_internal.class%">
         </service>
 
         <service id="gitcolab.menu.builder" class="%gitcolab.menu.builder.class%">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="translator" />
+        </service>
+
+        <service id="gitcolab.project.head" class="Knp\Menu\MenuItem" factory-service="gitcolab.menu.builder" factory-method="projectHead">
+            <tag name="knp_menu.menu" alias="project_head"/>
         </service>
 
         <service id="gitcolab.user.setting.tabs" class="Knp\Menu\MenuItem" factory-service="gitcolab.menu.builder" factory-method="createTabUserSettings">
@@ -49,6 +57,14 @@
             <argument type="service" id="logger" />
             <argument>%gitcolab.repository_path%</argument>
             <argument type="service" id="gitcolab.domain_manager" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="gitcolab.subscriber.resource" class="Gitcolab\Bundle\AppBundle\EventListener\ResourceSubscriber">
+            <argument type="service" id="logger" />
+            <argument type="service" id="gitcolab.domain_manager" />
+            <argument type="service" id="security.token_storage" />
+
             <tag name="kernel.event_subscriber" />
         </service>
 

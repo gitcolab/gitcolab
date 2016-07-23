@@ -1,0 +1,17 @@
+{% block wysiwyg_widget %}
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#write-tab" aria-controls="write-tab" role="tab" data-toggle="tab">Write</a></li>
+        <li role="presentation"><a href="#preview-tab" aria-controls="preview-tab" role="tab" data-toggle="tab">Preview</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="write-tab">
+            <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="preview-tab">
+            <div class="preview-box">
+                <p>Nothing to preview</p>
+            </div>
+        </div>
+    </div>
+    <div class="drag-and-drop"></div>
+{% endblock %}

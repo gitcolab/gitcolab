@@ -552,7 +552,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getUsername()
     {
-        return $this->username;
+        return $this->name;
     }
 
     /**

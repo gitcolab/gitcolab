@@ -38,6 +38,7 @@ class OrganizationController extends Controller
     public function showAction(Request $request, $slug)
     {
         $orgaUser = $this->getRepository('User\User')->findOneBy(array('slug' => $slug));
+
         if ($orgaUser) {
             return $this->forward('GitcolabAppBundle:User:show', array(
                 'slug'  => $slug,
