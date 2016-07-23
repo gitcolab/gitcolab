@@ -7,18 +7,16 @@
 
 {% block body %}
     {% block content %}
-
-        {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
         <div class="form-login">
             <h1>Gitcolab</h1>
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card">
+                <div class="card-header">
                     Login
                 </div>
-                <div class="panel-body">
+                <div class="card-block">
+                    {% if error %}
+                        <div class="text-xs-center text-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
                     <form action="{{ path('login_check') }}" method="post" class="form-horizontal">
                         <fieldset>
                             <div class="form-group">

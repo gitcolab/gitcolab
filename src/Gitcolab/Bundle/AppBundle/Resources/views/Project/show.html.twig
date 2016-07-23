@@ -11,37 +11,38 @@
             </div>
             <div class="clone-url pull-right">
                 <div class="input-group">
-                    <input type="text" class="input-mini " value="" readonly="readonly">
-                        <span class="input-group-button">
-                            <button aria-label="Copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-copied-hint="Copied!" type="button"><span class="glyphicon glyphicon-save"></span></button>
-                        </span>
+                    <input type="text" class="input-mini " value="" readonly="readonly" />
+                    <span class="input-group-button">
+                        <button aria-label="Copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-copied-hint="Copied!" type="button"><span class="glyphicon glyphicon-save"></span></button>
+                    </span>
                 </div>
             </div>
         </div>
 
         <div class="overall">
-            <ul class="nav">
-                <li role="presentation" class="active">
-                    <a href="{{ path('project_commits', {'slug': project.fullSlug, 'branch' : project.defaultBranch}) }}">
-                        <span class="glyphicon glyphicon-dashboard"></span> <strong> {{ project.repository.log.countCommits }} </strong> Commits
+            <ul class="nav nav-pills">
+                <li role="presentation" class="nav-item">
+                    <a href="{{ path('project_commits', {'slug': project.fullSlug, 'branch' : project.defaultBranch}) }}" class="nav-link">
+                        <i class="material-icons">restore</i>
+                        <strong> {{ project.repository.log.countCommits }} </strong> Commits
                     </a>
                 </li>
-                <li role="presentation">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-random"></span>
+                <li role="presentation" class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="material-icons">share</i>
                         <strong> {{ refs.branches|length }} </strong>Branch
                     </a>
                 </li>
-                <li role="presentation">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-tags"></span>
+                <li role="presentation" class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="material-icons">local_offer</i>
                         <strong> {{ refs.tags|length }} </strong>
                         Releases
                     </a>
                 </li>
-                <li role="presentation">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-user"></span> Contributors
+                <li role="presentation" class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="material-icons">group</i> Contributors
                     </a>
                 </li>
             </ul>

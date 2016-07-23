@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $organizations = $this->getRepository('Organization')->findOrganizationsByUser($this->getUser()->getId());
         $projects = $this->getRepository('Project')->findProjectsByUser($this->getUser()->getId());
 
-        return $this->render('GitcolabAppBundle:Dashboard:main.html.twig', [
+        return $this->render('@GitcolabApp/dasboard.html.twig', [
             'organizations' => $organizations,
             'projects' => $projects,
         ]);

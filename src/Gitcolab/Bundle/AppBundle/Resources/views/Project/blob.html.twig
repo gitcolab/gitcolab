@@ -15,7 +15,7 @@
         <div class="commit-meta">
             <img src="{{ gravatar(project.repository.getHeadCommit.getAuthorEmail)}}" width="20" height="20" />
             {{ project.repository.getHeadCommit.getAuthorName }}
-            {{ project.repository.getHeadCommit.getAuthorDate|localizeddate('medium', 'none', app.request.locale) }} </dd>
+            {{ project.repository.getHeadCommit.getAuthorDate|localizeddate('medium', 'none', app.request.locale) }}
         </div>
     </div>
     <div class="file-box">

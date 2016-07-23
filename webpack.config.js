@@ -1,20 +1,24 @@
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var bowerWebpackPlugin = require("bower-webpack-plugin");
 var bower = new bowerWebpackPlugin({
-    modulesDirectories: ["../bower_components"],
+    modulesDirectories: ["./bower_components"],
     manifestFiles:      "bower.json"
 });
 
 var jquery = new webpack.ProvidePlugin({
     $: 'jquery',
-    jQuery: "jquery"
+    jQuery: "jquery",
+    "Tether": 'tether',
+    "window.Tether": "tether"
 });
 
 module.exports = {
-    entry: {
-        vendors: './src/Gitcolab/Bundle/AppBundle/Resources/assets/js/vendor.js',
-        app: './src/Gitcolab/Bundle/AppBundle/Resources/assets/js/app.js'
-    },
+    entry: [
+        './bower_components/tether/dist/js/tether.js',
+        './app/Resources/assets/js/app.js',
+        './app/Resources/assets/js/team.js'
+    ],
     output: {
         filename: 'bundle.js',
         path: 'web/js/',
@@ -23,8 +27,12 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.less$/,
-                loader: "style!css!less?strictMath&noIeCompat&limit=100000"
+                test: /\.css$/,
+                loader: "style!css"
+            },
+            {
+                test: /\.scss/,
+                loader: "style!css!sass"
             },
             {
                 test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
@@ -36,9 +44,10 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                loaders: ['babel-loader']
+                loaders: ['babel-loader'],
+                exclude: /(node_modules|bower_components)/
             }
         ]
     },
-    plugins: [bower, jquery]
+    plugins: [bower, jquery, new ExtractTextPlugin("bundle.css")]
 };

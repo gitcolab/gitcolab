@@ -1,5 +1,11 @@
 import $ from 'jquery';
-import '../styles/app.less';
+import 'bootstrap';
+import 'selectize';
+import '../styles/app.scss';
+
+
+window.$ = $;
+window.jQuery = $;
 
 $(function(){
     $('#diff-file--list').collapse({

@@ -9,11 +9,19 @@
         </a>
     </h1>
     <ul class="pull-right nav nav-pills">
-        <li role="presentation"><a href="#">Code</a></li>
-        <li role="presentation"><a href="#">Issues <span class="badge">0</span></a></li>
-        <li role="presentation"><a href="#">Pull Requests <span class="badge">0</span></a></li>
+        <li role="presentation" class="nav-item">
+            <a href="#" class="nav-link">Code</a>
+        </li>
+        <li role="presentation" class="nav-item">
+            <a href="#" class="nav-link">Issues <span class="label label-default">0</span></a>
+        </li>
+        <li role="presentation" class="nav-item">
+            <a href="#" class="nav-link">Pull Requests <span class="label label-default">0</span></a>
+        </li>
         {% if is_granted('EDIT', project.organization) %}
-        <li role="presentation"><a href="{{ path('project_setting', {'slug' : project.fullSlug}) }}">Settings </a></li>
+        <li role="presentation" class="nav-item">
+            <a href="{{ path('project_setting', {'slug' : project.fullSlug}) }}" class="nav-link">Settings </a>
+        </li>
         {% endif %}
     </ul>
 </div>

@@ -3,7 +3,7 @@
         <table class="table table-striped">
             {{ git_render('tree_header', {revision: revision}) }}
             <tbody>
-            {% if parent_path is not sameas(false) %}
+            {% if parent_path is not same as(false) %}
                 <tr>
                     <td><i class="glyphicon glyphicon-folder-close"></i></td>
                     <td>
@@ -43,9 +43,9 @@
         <tr>
             <td>
                 {% if is_dir is defined and is_dir %}
-                    <i class="glyphicon glyphicon-folder-close"></i>
+                    <i class="material-icons">folder_open</i>
                 {% else %}
-                    <i class="glyphicon glyphicon-file"></i>
+                    <i class="material-icons">insert_drive_file</i>
                 {% endif %}
             </td>
             <td>
