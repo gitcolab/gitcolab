@@ -16,6 +16,8 @@ use Gitcolab\Bundle\AppBundle\Git\Repository;
 
 class Project implements ResourceInterface
 {
+    use TimesheetTrait;
+
     const SLUG_PATTERN = "[\w\/]+";
     const DEFAULT_BRANCH = 'master';
 
@@ -174,44 +176,6 @@ class Project implements ResourceInterface
         $this->description = $description;
 
         return $this;
-    }
-
-    /**
-     * @param \DateTime $created
-     * @return self
-     */
-    public function setCreatedAt(\DateTime $created)
-    {
-        $this->createdAt = $created;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTime $updated
-     * @return self
-     */
-    public function setUpdatedAt(\DateTime $updated)
-    {
-        $this->updatedAt = $updated;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 
     /**

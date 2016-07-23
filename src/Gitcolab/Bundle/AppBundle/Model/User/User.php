@@ -110,6 +110,16 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var array
      */
+    protected $participations;
+
+    /**
+     * @var array
+     */
+    protected $issues;
+
+    /**
+     * @var array
+     */
     protected $roles;
 
     public function __construct($secret = 'GeneratedForGitcolab')
@@ -552,7 +562,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getUsername()
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**

@@ -27,10 +27,6 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="gitcolab.form.type.wysiwyg" class="%gitcolab.form.type.wysiwyg.class%">
-            <tag name="form.type" alias="wysiwyg" />
-        </service>
-
         <service id="gitcolab.security.api_internal" class="%gitcolab.security.api_internal.class%">
         </service>
 

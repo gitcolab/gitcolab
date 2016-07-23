@@ -17,7 +17,10 @@ use Gitcolab\Bundle\AppBundle\Model\User\User;
 
 class Access
 {
-    use Timestampable;
+    use TimesheetTrait;
+
+    const TYPE_COLLABORATOR = 'type_collaborator';
+    const TYPE_OWNER = 'type_owner';
 
     /**
      * @var int

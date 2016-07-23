@@ -12,7 +12,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="comment" column="message" type="string" nullable="true" />
+        <field name="message" column="message" type="string" nullable="true" />
 
         <many-to-one field="author" inversed-by="activities" target-entity="Gitcolab\Bundle\AppBundle\Model\User\User" />
 
