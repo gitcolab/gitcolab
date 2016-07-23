@@ -18,6 +18,9 @@ class Access implements ResourceInterface
 {
     use TimesheetTrait;
 
+    const TYPE_COLLABORATOR = 'type_collaborator';
+    const TYPE_OWNER = 'type_owner';
+
     /**
      * @var int
      */
@@ -34,10 +37,14 @@ class Access implements ResourceInterface
     protected $user;
 
     /**
+     * @var Organization
+     */
+    protected $organization;
+
+    /**
      * @var string
      */
     protected $type;
-
 
     /**
      * @var string
@@ -138,7 +145,7 @@ class Access implements ResourceInterface
      * @param  Organization $organization
      * @return self
      */
-    public function setOrganization(Organization $organization = null)
+    public function setOrganization(Organization $organization)
     {
         $this->organization = $organization;
 
@@ -149,7 +156,7 @@ class Access implements ResourceInterface
      * @param  Project $project
      * @return self
      */
-    public function setProject(Project $project = null)
+    public function setProject(Project $project)
     {
         $this->project = $project;
 

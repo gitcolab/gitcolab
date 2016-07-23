@@ -16,6 +16,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 
 use Gitcolab\Bundle\AppBundle\Model\Organization;
+use Gitcolab\Bundle\AppBundle\Model\Team;
+use Gitcolab\Bundle\AppBundle\Model\Access;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
@@ -31,13 +33,18 @@ class LoadOrganizationData extends AbstractFixture implements OrderedFixtureInte
         $organization = (new Organization())
             ->setEmail('foo@foo.io')
             ->setName('Foo')
+            ->addTeam($this->createTeam($this->getReference('beck.nash')))
+            ->addAccess($this->getReference('beck.nash'), Access::TYPE_OWNER)
         ;
+
         $this->container->get('gitcolab.domain_manager')->create($organization);
         $this->setReference('organization-foo', $organization);
 
         $organization = (new Organization())
             ->setEmail('bar@bar.io')
             ->setName('Bar')
+            ->addTeam($this->createTeam($this->getReference('ann.perry')))
+            ->addAccess($this->getReference('beck.nash'), Access::TYPE_OWNER)
         ;
         $this->container->get('gitcolab.domain_manager')->create($organization);
         $this->setReference('organization-bar', $organization);
@@ -45,9 +52,21 @@ class LoadOrganizationData extends AbstractFixture implements OrderedFixtureInte
         $organization = (new Organization())
             ->setName('FooBar')
             ->setEmail('foobar@foobar.io')
+            ->addTeam($this->createTeam($this->getReference('ann.perry')))
+            ->addAccess($this->getReference('beck.nash'), Access::TYPE_COLLABORATOR)
         ;
         $this->container->get('gitcolab.domain_manager')->create($organization);
         $this->setReference('organization-foobar', $organization);
+    }
+
+    public function createTeam($user)
+    {
+        $team = new Team();
+        $team
+            ->setName('Owner')
+            ->addAccess($user);
+
+        return $team;
     }
 
     /**

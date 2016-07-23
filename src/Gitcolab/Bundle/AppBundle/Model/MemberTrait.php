@@ -11,60 +11,21 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Gitcolab\Bundle\AppBundle\Model\Access;
+
 trait MemberTrait
 {
     /**
-     * @var array;
-     */
-    protected $members;
-
-
-    /**
-     * @var Team[]
-     */
-    protected $teams;
-
-    /**
-     * @return Team[]
-     */
-    public function getTeams()
-    {
-        $this->setMembers();
-        return $this->teams;
-    }
-
-    /**
-     * @param Team[] $teams
-     * @return self
-     */
-    public function setTeams($teams)
-    {
-        $this->teams = $teams;
-        $this->setMembers();
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getMembers()
-    {
-        return $this->members;
-    }
-
-    /**
+     * @param $user
+     * @param $type
      * @return $this
      */
-    protected function setMembers()
+    public function addAccess($user, $type = Access::TYPE_COLLABORATOR)
     {
-        foreach ($this->teams as $team) {
-            foreach ($team->getMembers() as $member) {
-                if (!isset($this->members[$member->getId()])) {
-                    $this->members[$member->getId()] = $member->getUser();
-                }
-            }
-        }
+        $this->members[] = (new Access())
+            ->setResource($this)
+            ->setUser($user)
+            ->setType($type);
 
         return $this;
     }

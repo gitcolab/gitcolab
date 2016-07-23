@@ -12,10 +12,17 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="type" type="string" nullable="true" />
         <field name="resource" type="string" />
         <field name="options" type="array" />
 
         <many-to-one field="project" target-entity="Gitcolab\Bundle\AppBundle\Model\Project" inversed-by="members" >
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </many-to-one>
+
+        <many-to-one field="organization" target-entity="Gitcolab\Bundle\AppBundle\Model\Organization" inversed-by="members" >
             <cascade>
                 <cascade-persist />
             </cascade>

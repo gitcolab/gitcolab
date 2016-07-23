@@ -11,6 +11,12 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="username" column="username" type="string" nullable="true" />
+
+        <field name="slug" column="slug" type="string" nullable="true" length="255" unique="true">
+            <gedmo:slug unique="true" updatable="true" separator="-" fields="username" />
+        </field>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
@@ -19,7 +25,6 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <field name="username" column="username" type="string" nullable="true" />
         <field name="email" column="email" type="string" nullable="true" />
         <field name="salt" column="salt" type="string" nullable="true" />
         <field name="password" column="password" type="string" nullable="true" />

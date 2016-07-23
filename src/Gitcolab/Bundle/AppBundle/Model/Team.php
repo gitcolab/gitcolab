@@ -11,11 +11,13 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Gitcolab\Bundle\AppBundle\Model\User\User;
 
 class Team implements ResourceInterface
 {
-    use TimesheetTrait;
+    use TimesheetTrait, MemberTrait;
 
     const ACCESS_READ = 'ACCESS_READ';
     const ACCESS_WRITE = 'ACCESS_WRITE';
@@ -57,9 +59,14 @@ class Team implements ResourceInterface
     protected $project;
 
     /**
-     * @var User\User[][]
+     * @var User[]
      */
     protected $members;
+
+    public function __construct()
+    {
+        $this->members = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -181,13 +188,16 @@ class Team implements ResourceInterface
     }
 
     /**
-     * @param $member
+     * @param $access
+     * @param $type
      * @return $this
      */
-    public function addMember(User\User $member)
+    public function addAccess($user, $type = Access::TYPE_COLLABORATOR)
     {
-        $this->members[] = $member;
-
+        $this->members[] = (new Access())
+            ->setResource($this)
+            ->setUser($user)
+            ->setType($type);
         return $this;
     }
 
@@ -206,7 +216,7 @@ class Team implements ResourceInterface
     }
 
     /**
-     * @return User\User[]
+     * @return ArrayCollection|User[]
      */
     public function getMembers()
     {

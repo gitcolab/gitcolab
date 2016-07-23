@@ -38,6 +38,11 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      */
+    protected $slug;
+
+    /**
+     * @var string
+     */
     protected $email;
 
     /**
@@ -326,6 +331,25 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return User
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
      * @param $localization
      * @return self
      */
@@ -528,7 +552,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getUsername()
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**
@@ -553,7 +577,7 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return serialize([
             'id' => $this->id,
-            'name' => $this->name,
+            'username' => $this->username,
             'email' => $this->email,
             'roles' => $this->roles
         ]);
@@ -574,7 +598,7 @@ class User implements AdvancedUserInterface, \Serializable
         $parameters = unserialize($serialized);
 
         $this->id = $parameters['id'];
-        $this->name = $parameters['name'];
+        $this->name = $parameters['username'];
         $this->email = $parameters['email'];
         $this->roles = new ArrayCollection($parameters['roles']);
     }

@@ -39,6 +39,16 @@ class Organization implements ResourceInterface
     protected $projects;
 
     /**
+     * @var Team[]
+     */
+    protected $teams;
+
+    /**
+     * @var array
+     */
+    protected $members;
+
+    /**
      * @var string
      */
     protected $email;
@@ -179,6 +189,48 @@ class Organization implements ResourceInterface
         $this->projects = $projects;
 
         return $this;
+    }
+
+    /**
+     * @return Team[]
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+
+    public function addTeam(Team $team)
+    {
+        $this->teams[] = $team;
+
+        return $this;
+    }
+
+    /**
+     * @param Team[] $teams
+     * @return self
+     */
+    public function setTeams($teams)
+    {
+        $this->teams = $teams;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMembers()
+    {
+        foreach ($this->teams as $team) {
+            foreach ($team->getMembers() as $member) {
+                if (!isset($this->members[$member->getId()])) {
+                    $this->members[$member->getId()] = $member;
+                }
+            }
+        }
+
+        return $this->members;
     }
 
     public function __toString()
