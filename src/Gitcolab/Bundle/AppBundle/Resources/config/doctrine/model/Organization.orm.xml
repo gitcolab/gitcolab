@@ -28,7 +28,7 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <one-to-many field="projects" target-entity="Project" mapped-by="owner">
+        <one-to-many field="projects" target-entity="Project" mapped-by="organization">
             <cascade>
                 <cascade-persist/>
                 <cascade-merge/>

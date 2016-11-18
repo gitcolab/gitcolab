@@ -15,7 +15,7 @@ use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Psr\Log\LoggerInterface;
-use Gitcolab\Bundle\AppBundle\Manager\DomainManager;
+use Tempo\Bundle\ResourceExtraBundle\Manager\DomainManager;
 use Gitcolab\Bundle\AppBundle\GitcolabEvents;
 
 class ResourceSubscriber  implements EventSubscriberInterface

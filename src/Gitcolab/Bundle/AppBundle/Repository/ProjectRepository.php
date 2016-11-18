@@ -55,7 +55,7 @@ class ProjectRepository extends EntityRepository
         $qb = $this->createQueryBuilder('project');
         $query = $qb
             ->select('project, organization')
-            ->leftJoin('project.owner', 'organization')
+            ->leftJoin('project.organization', 'organization')
             ->leftJoin('organization.teams', 'team')
             ->leftJoin('team.members', 'access')
             ->where('access.user = :user')
