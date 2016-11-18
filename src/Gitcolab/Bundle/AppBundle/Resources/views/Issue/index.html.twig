@@ -13,7 +13,7 @@
         </div>
         <div class="issues-filters">
             <div class="issues-details-filters">
-                <ul class="col-md-3 pull-left">
+                <ul class="col-md-3 pull-xs-left">
                     <li><input type="checkbox" class="check-all-issues"/></li>
                     <li><a href="#" class="btn btn-link">Open</a> </li>
                     <li><a href="#" class="btn btn-link">Closed</a> </li>
@@ -24,7 +24,7 @@
                         <select class="selectize">
                             <option value="">Assignee</option>
                             {% for member in project.organization.members %}
-                            <option value="{{ member.id }}">{{ member.name }}</option>
+                            <option value="{{ member.user.id }}">{{ member.user.username }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -32,7 +32,7 @@
                         <select class="selectize">
                             <option value="">Author</option>
                             {% for member in project.organization.members %}
-                            <option value="{{ member.id }}">{{ member.name }}</option>
+                            <option value="{{ member.user.id }}">{{ member.user.username }}</option>
                             {% endfor %}
                         </select>
                     </div>

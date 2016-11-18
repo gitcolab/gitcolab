@@ -20,28 +20,29 @@
         </div>
 
         <div class="overall">
-            <ul class="nav">
+            <ul class="nav nav-pills">
                 <li role="presentation" class="active">
-                    <a href="{{ path('project_commits', {'slug': project.fullSlug, 'branch' : project.defaultBranch}) }}">
-                        <span class="glyphicon glyphicon-dashboard"></span> <strong> {{ project.repository.log.countCommits }} </strong> Commits
+                    <a href="{{ path('project_commits', {'slug': project.fullSlug, 'branch' : project.defaultBranch}) }}" class="nav-link">
+                        <i class="material-icons">restore</i>
+                        <strong> {{ project.repository.log.countCommits }} </strong> Commits
                     </a>
                 </li>
                 <li role="presentation">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-random"></span>
+                    <a href="#" class="nav-link">
+                        <i class="material-icons">share</i>
                         <strong> {{ refs.branches|length }} </strong>Branch
                     </a>
                 </li>
                 <li role="presentation">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-tags"></span>
+                    <a href="#" class="nav-link">
+                        <i class="material-icons">local_offer</i>
                         <strong> {{ refs.tags|length }} </strong>
                         Releases
                     </a>
                 </li>
                 <li role="presentation">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-user"></span> Contributors
+                    <a href="#" class="nav-link">
+                        <i class="material-icons">group</i>  Contributors
                     </a>
                 </li>
             </ul>
@@ -71,6 +72,4 @@
         {% else %}
             {% include 'GitcolabAppBundle:Project:_no_commit.html.twig'  %}
         {% endif %}
-    {% endblock content %}
-
 {% endblock %}

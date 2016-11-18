@@ -49,12 +49,12 @@
         </div>
     </div>
     <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <span class="label label-default pull-right"><strong>{{ organization.members|length }}</strong></span>
+        <div class="card">
+            <div class="card-header">
+                <span class="label label-default pull-xs-right"><strong>{{ organization.members|length }}</strong></span>
                 <strong>People</strong>
             </div>
-            <div class="panel-body">
+            <div class="card-block">
                 {% for member in organization.members %}
                     <a href="{{ path('project_show', {'slug': member.user.slug}) }}">
                         <img src="{{ member.user.avatar }}" width="40" height="40" />
@@ -63,8 +63,8 @@
             </div>
         </div>
         {% if is_granted('VIEW', organization) %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="card">
+            <div class="card-header">
                 <div class="team">
                     <a class="orga-teams" href="{{ path('organization_teams', {'slug': organization.slug}) }}">
                         <span>Teams</span>
@@ -72,7 +72,7 @@
                     </a>
                 </div>
             </div>
-            <div class="panel-body">
+            <div class="card-block">
                 {% for team in organization.teams %}
                     <div class="team">
                         <a href="{{ path('organization_team_show', {'organization': organization.slug, 'slug': team.slug }) }}">

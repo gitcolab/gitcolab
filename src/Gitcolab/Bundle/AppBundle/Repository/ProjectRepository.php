@@ -33,7 +33,7 @@ class ProjectRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('project')
             ->select('project, organization')
-            ->leftJoin('project.owner', 'organization')
+            ->leftJoin('project.organization', 'organization')
             ->leftJoin('organization.teams', 'team')
             ->leftJoin('team.members', 'access')
             ->andWhere('project.slug = ?1')

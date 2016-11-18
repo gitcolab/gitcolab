@@ -11,6 +11,7 @@
 
 namespace Gitcolab\Bundle\AppBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Gitcolab\Bundle\AppBundle\Git\Repository;
 
@@ -43,7 +44,7 @@ class Project implements ResourceInterface
 
     /**
      *
-     * @var object
+     * @var \DateTime
      */
     protected $lastActivity;
 
@@ -73,32 +74,27 @@ class Project implements ResourceInterface
     protected $repositorySize;
 
     /**
-     * @var  Collection
+     * @var  ArrayCollection
      */
     protected $members;
 
     /**
-     * @var Owner
-     */
-    protected $owner;
-
-    /**
-     * @var Collection
+     * @var ArrayCollection
      */
     protected $pullRequests;
 
     /**
-     * @var Collection
+     * @var ArrayCollection
      */
     protected $issues;
 
     /**
-     * @var Collection
+     * @var ArrayCollection
      */
     protected $tickets;
 
     /**
-     * @var Collection
+     * @var ArrayCollection
      */
     protected $milestones;
 
@@ -223,7 +219,7 @@ class Project implements ResourceInterface
 
     public function getOrganization()
     {
-        return $this->owner;
+        return $this->organization;
     }
 
     /**
@@ -289,7 +285,7 @@ class Project implements ResourceInterface
     }
 
     /**
-     * @return Collection
+     * @return ArrayCollection
      */
     public function getTickets()
     {
@@ -297,7 +293,7 @@ class Project implements ResourceInterface
     }
 
     /**
-     * @param Collection $tickets
+     * @param ArrayCollection $tickets
      */
     public function setTickets($tickets)
     {
@@ -305,7 +301,7 @@ class Project implements ResourceInterface
     }
 
     /**
-     * @return Collection
+     * @return ArrayCollection
      */
     public function getMembers()
     {
@@ -313,7 +309,7 @@ class Project implements ResourceInterface
     }
 
     /**
-     * @param Collection $members
+     * @param ArrayCollection $members
      */
     public function setMembers($members)
     {

@@ -1,5 +1,5 @@
 <div class="page-head">
-    <div class="container">
+    <div>
         <h1>
             <a href="{{ path('organization_show', {'slug' : project.organization.slug}) }}">
                 {{ project.organization }}
@@ -15,7 +15,7 @@
                 <a href="#" class="nav-link active">Code</a>
             </li>
             <li role="presentation" class="nav-item">
-                <a href="{{ path('issue_list', {'slug': project.fullSlug}) }}" class="nav-link">Issues <span class="label label-default">{{ project.issues.count }}</span></a>
+                <a href="{{ path('issue_list', {'slug': project.fullSlug}) }}" class="nav-link">Issues <span class="label label-default">{{ project.issues|length }}</span></a>
             </li>
             <li role="presentation" class="nav-item">
                 <a href="#" class="nav-link">Pull Requests <span class="label label-default">0</span></a>
