@@ -1,53 +1,34 @@
-var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var bowerWebpackPlugin = require("bower-webpack-plugin");
-var bower = new bowerWebpackPlugin({
-    modulesDirectories: ["./bower_components"],
-    manifestFiles:      "bower.json"
-});
+// This project uses "Yarn" package manager for managing JavaScript dependencies along
+// with "Webpack Encore" library that helps working with the CSS and JavaScript files
+// that are stored in the "assets/" directory.
+//
+// Read https://symfony.com/doc/current/frontend.html to learn more about how
+// to manage CSS and JavaScript files in Symfony applications.
+var Encore = require('@symfony/webpack-encore');
 
-var jquery = new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: "jquery",
-    "Tether": 'tether',
-    "window.Tether": "tether"
-});
+Encore
+    .setOutputPath('public/build/')
+    .setPublicPath('/build')
+    .cleanupOutputBeforeBuild()
+    .autoProvidejQuery()
+    .autoProvideVariables({
+        "jQuery.tagsinput": "bootstrap-tagsinput"
+    })
+    .enableSassLoader()
+    // when versioning is enabled, each filename will include a hash that changes
+    // whenever the contents of that file change. This allows you to use aggressive
+    // caching strategies. Use Encore.isProduction() to enable it only for production.
+    .enableVersioning(false)
+    .addEntry('app', './assets/js/app.js')
+    .addEntry('login', './assets/js/team.js')
+    .addEntry('admin', './assets/js/tracker.js')
+    .splitEntryChunks()
+    .enableSingleRuntimeChunk()
+    .enableIntegrityHashes(Encore.isProduction())
+    .configureBabel(null, {
+        useBuiltIns: 'usage',
+        corejs: 3,
+    })
+;
 
-module.exports = {
-    entry: [
-        './bower_components/tether/dist/js/tether.js',
-        './app/Resources/assets/js/app.js',
-        './app/Resources/assets/js/team.js'
-    ],
-    output: {
-        filename: 'bundle.js',
-        path: 'web/js/',
-        publicPath: '/assets'
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.css$/,
-                loader: "style!css"
-            },
-            {
-                test: /\.scss/,
-                loader: "style!css!sass"
-            },
-            {
-                test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
-                loader: 'url-loader?limit=100000'
-            },
-            {
-                test: /bootstrap-sass\/assets\/javascripts\//,
-                loader: 'imports?jQuery=jquery'
-            },
-            {
-                test: /\.js$/,
-                loaders: ['babel-loader'],
-                exclude: /(node_modules|bower_components)/
-            }
-        ]
-    },
-    plugins: [bower, jquery, new ExtractTextPlugin("bundle.css")]
-};
+module.exports = Encore.getWebpackConfig();

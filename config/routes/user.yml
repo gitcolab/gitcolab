@@ -1,0 +1,15 @@
+user_profile:
+    path: /user/profile
+    controller: Gitcolab\Controller\UserController:profileAction
+
+user_account:
+    path: /account
+    controller: Gitcolab\Controller\UserController:accountAction
+
+user_keys:
+    path: /user/ssh
+    controller: Gitcolab\Controller\Key:sshAction
+
+user_autocomplete:
+    path: /api/{version}/user/autocomplete
+    controller: Gitcolab\Controller\UserController:autocompleteAction

@@ -1,0 +1,37 @@
+{% extends "layout.html.twig" %}
+{% block bodyClass %}user settings ssh_keys{% endblock %}
+{% block content %}
+
+    {% include 'User/_sidebar.html.twig' %}
+
+    <div class="col-md-9">
+        <div class="card ssh-keys">
+            <div class="card-header">
+                SSH Key
+            </div>
+            <div class="card-block">
+            <p class="card-text">This is a list of SSH keys associated with your account. Remove any keys that you do not recognize. </p>
+            </div>
+            <ul class="list-keys list-group list-group-flush">
+                {% for key in keys %}
+                    <li class="list-group-item">
+                        <div class="clearfix">
+                            <div class="pull-xs-left">
+                                <h5><strong>{{ key.title }}</strong></h5>
+                                <div>Added on {{ key.createdAt | localizeddate('long', 'none') }} — Last used on {{ key.updatedAt| localizeddate('long', 'none') }} </div>
+                            </div>
+                            <div class="pull-xs-right">
+                                <a href="{{ path('key_delete', {'id': key.id}) }}" class="btn btn-danger btn-inverse"> Delete </a>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div id="form-add-key-ssh">
+            {{ render(controller('GitcolabAppBundle:Key:create')) }}
+        </div>
+    </div>
+
+{% endblock content %}

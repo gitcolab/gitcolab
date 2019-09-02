@@ -1,0 +1,10 @@
+#gitonomy_git:
+#    profiler: true
+#    twig_extension:
+#        enabled: true
+#        routes_names:
+#            tree: project_tree
+#            commit: project_commit
+#        themes:
+#            - Git/theme.html.twig
+#            - GitonomyGitBundle::default_theme.html.twig

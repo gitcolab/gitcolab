@@ -1,0 +1,23 @@
+{% extends "layout.html.twig" %}
+
+{% block bodyClass %}project commit{% endblock %}
+{% block body %}
+    {% include 'Project/_repo_head.html.twig' %}
+    {% block content %}
+    <div id="tree-content-holder">
+        <div class="commit-head">
+            {{ commit.getShortMessage }}
+        </div>
+        <div class="commit-meta">
+            <img src="{{ gravatar(commit.getAuthorEmail)}}" width="20" height="20" />
+            {{ commit.getAuthorName }}
+            {{ commit.getAuthorDate|localizeddate('medium', 'none', app.request.locale) }} </dd>
+        </div>
+    </div>
+    <a class="collapse-file-diff" data-toggle="collapse" href="#diff-file--list" aria-expanded="false" aria-controls="diff-file--list">
+        Showing changed files
+    </a>
+
+    {{ git_diff(commit.diff) }}
+    {% endblock content %}
+{% endblock body %}

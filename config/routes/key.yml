@@ -1,0 +1,7 @@
+key_create:
+  path: /create
+  controller: Gitcolab\Controller\Tracker\KeyController::createAction
+
+key_delete:
+  path: /{id}/delete
+  controller: Gitcolab\Controller\Tracker\KeyController::deleteAction

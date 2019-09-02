@@ -1,0 +1,14 @@
+issue_list:
+    path: /issues
+    defaults:
+        _controller: Gitcolab\Controller\Tracker\IssueController::listAction
+
+issue_create:
+    path: /issues/create
+    defaults:
+        _controller: Gitcolab\Controller\Tracker\IssueController::createAction
+
+issue_show:
+    path: /issues/{id}
+    defaults:
+        _controller: Gitcolab\Controller\Tracker\IssueController::showAction

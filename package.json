@@ -2,30 +2,34 @@
   "name": "gitcolab",
   "version": "0.1.0",
   "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:gitcolab/gitcolab.git"
   },
-  "author": "Ikimea",
+  "author": "Mbechezi Nawo",
   "license": "MIT",
-  "dependencies": {
-    "bower": "1.7.9",
-    "uglify-js": "2.3.6",
-    "uglifycss": "0.0.9"
-  },
   "devDependencies": {
-    "babel-loader": "^5.3.2",
-    "bower-webpack-plugin": "^0.1.9",
-    "css-loader": "^0.23.1",
-    "file-loader": "^0.8.5",
-    "node-sass": "^3.8.0",
-    "sass-loader": "^4.0.0",
-    "style-loader": "^0.13.0",
-    "url-loader": "^0.5.7",
-    "webpack": "^1.13.1",
-    "webpack-loader": "0.0.1"
+    "@fortawesome/fontawesome-free": "^5.8.1",
+    "@symfony/webpack-encore": "^0.26.0",
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-tagsinput": "^0.7.1",
+    "core-js": "^3.0.0",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "highlight.js": "^9.12.0",
+    "imports-loader": "^0.8.0",
+    "jquery": "^3.3.1",
+    "lato-font": "^3.0.0",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0",
+    "typeahead.js": "^0.11.1"
+  },
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "dependencies": {
+    "selectize": "^0.12.6"
   }
 }

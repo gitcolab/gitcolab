@@ -1,44 +1,41 @@
-version: '2'
+version: '3'
+
+networks:
+  proxy:
+    external: true
 
 services:
-    gitcolab:
-        build: ./docker/app
-        depends_on:
-            - app_db
     nginx:
-        ports:
-            - "86:80"
         image: nginx
         depends_on:
-            - php_fpm
+            - php
         labels:
             - "traefik.backend=gitcolab"
-            - "traefik.frontend.rule=Host:${SITE_HOST}"
+            - "traefik.frontend.rule=Host:${SITE_HOST-gitcolab.localhost}"
+            - "traefik.http.routers.nginx.rule=Host(`${SITE_HOST-gitcolab.localhost}`)"
             - "traefik.port=80"
             - "traefik.frontend.passHostHeader=true"
-        volumes_from:
-            - php_fpm
+            - "traefik.docker.network=proxy"
         volumes:
            - ./docker/nginx/config/nginx.conf:/etc/nginx/conf.d/default.conf
            - ./:/opt/gitcolab
-           - ./var/logs/nginx/:/var/log/nginx
+           - ./var/log/nginx/:/var/log/nginx
 
-    php_fpm:
+    php:
         build: ./docker/php
         depends_on:
-            - app_db
-        expose:
-            - "9000"
+            - postgresql
         volumes:
             - ./:/opt/gitcolab
 
-    app_db:
-        image: mariadb
+    postgresql:
+        image: postgres:11.5
         environment:
-            MYSQL_USER: gitcolab
-            MYSQL_PASSWORD: azerty123
-            MYSQL_ROOT_PASSWORD: azerty123
-            MYSQL_DB: gitcolab
-
+            POSTGRES_USER: gitcolab
+            POSTGRES_PASSWORD: azerty123
+            POSTGRES_ROOT_PASSWORD: azerty123
+            POSTGRES_DB: gitcolab
         labels:
             - "traefik.enable=false"
+        ports:
+            - 50432:5432

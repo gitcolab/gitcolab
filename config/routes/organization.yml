@@ -1,0 +1,59 @@
+organization_create:
+  path: /organization/create
+  defaults:
+      _controller: Gitcolab\Controller\OrganizationController:createAction
+
+organization_setting:
+  path: /organization/{slug}/settings
+  defaults:
+      _controller: Gitcolab\Controller\OrganizationController:settingsAction
+
+organization_teams:
+  path: /organization/{slug}/teams
+  defaults:
+      _controller: Gitcolab\Controller\OrganizationController:showAction
+      _sylius:
+          template: GitcolabAppBundle:Team:index.html.twig
+
+organization_team_create:
+  path: /organization/{slug}/new-team
+  defaults:
+      _controller: Gitcolab\Controller\TeamController:createAction
+      _sylius:
+          template: GitcolabAppBundle:Team:create.html.twig
+          form: Gitcolab\Form\Type\TeamType
+          redirect:
+            route: organization_teams
+            parameters: {slug : $slug}
+
+organization_team_update:
+  path: /organization/{organization}/teams/{slug}/update
+  defaults:
+      _controller: Gitcolab\Controller\TeamController:updateAction
+      _sylius:
+          template: GitcolabAppBundle:Team:update.html.twig
+          form: Gitcolab\Form\Type\TeamType
+
+organization_team_delete:
+  path: /organization/{organization}/teams/{id}/delete
+  defaults:
+      _controller: gGitcolab\Controller\TeamController:deleteAction
+      _sylius:
+          redirect: /
+
+organization_team_access:
+  path: /organization/{organization}/teams/{slug}/access
+  defaults:
+      _controller: Gitcolab\Controller\TeamController:addMemberAction
+
+organization_team_remove_acess:
+  path: /organization/{organization}/teams/{slug}/remove
+  defaults:
+      _controller: Gitcolab\Controller\TeamController:removeMemberAction
+
+organization_team_show:
+  path: /organization/{organization}/teams/{slug}
+  defaults:
+      _controller: Gitcolab\Controller\TeamController:showAction
+      _sylius:
+          template: GitcolabAppBundle:Team:show.html.twig

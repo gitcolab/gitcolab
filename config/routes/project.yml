@@ -1,0 +1,43 @@
+project_create:
+  path: /project/create
+  defaults:
+      _controller: Gitcolab\Controller\ProjectController:createAction
+
+project_tree:
+  path: /{repository}/tree/{revision}/{path}
+  defaults:
+      _controller: Gitcolab\Controller\ProjectController:treeAction
+      path: ""
+  requirements:
+      path: ".+"
+      repository: ".+"
+
+project_commits:
+  path: /{slug}/commits/{branch}
+  defaults:
+      _controller: Gitcolab\Controller\ProjectController:commitsAction
+  requirements:
+      slug: ".+"
+      branch: ".+"
+
+project_commit:
+  path: /{repository}/commit/{hash}
+  defaults:
+      _controller: Gitcolab\Controller\ProjectController:commitAction
+  requirements:
+      slug: ".+"
+      repository: ".+"
+
+project_setting:
+  path: /{slug}/settings
+  defaults:
+       _controller: Gitcolab\Controller\ProjectController/Settings:settings
+  requirements:
+      slug: ".+"
+
+project_setting_collaboration:
+  path:  /{repository}/settings/collaboration
+  defaults:
+      _controller: Gitcolab\Controller\ProjectController/Settings:collaboration
+  requirements:
+      repository: ".+"

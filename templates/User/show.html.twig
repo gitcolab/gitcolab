@@ -1,0 +1,52 @@
+{% extends "layout.html.twig" %}
+
+{% block bodyClass %}user show{% endblock %}
+{% block content %}
+<div class="col-md-3">
+    <div>
+        <a href="http://gravatar.com/emails/" id="profile-avatar" original-title="Change your avatar at gravatar.com">
+            <img class="profile-avatar" src="{{ gravatar(user.email, 200) }}" title="{{ user.username }}">
+        </a>
+        <h1 class="text-center" id="profile-name">
+            <span class="center-block" id="profile-username">{{ user.username }}</span>
+        </h1>
+    </div>
+    <div class="profile-info">
+        <hr>
+        <ul class="list-no-style">
+            <li class="list-group-item"><a href="mailto:mlanawo.mbechezi@ikimea.com" rel="nofollow">{{ user.email }}</a></li>
+            <li class="list-group-item">Joined on Aug 31, 2014</li>
+        </ul>
+        <hr>
+    </div>
+</div>
+<div class="col-md-6">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="nav-item">
+            <a href="#repositories" class="active">Repositories</a>
+        </li>
+        <li role="presentation" class="nav-item">
+            <a href="#activity" class="nav-link">Public Activity</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="repositories">
+            <ul class="list-no-style">
+            {% for repository in repositories %}
+                <li>
+                    <h3><a href="{{ repository.fullSlug }}">{{ repository }}</a></h3>
+                    <div></div>
+                    <div> {{ repository.lastActivity|localizeddate('medium', 'none', app.request.locale) }} </div>
+                </li>
+            {% endfor %}
+            </ul>
+
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="activity">...</div>
+    </div>
+
+</div>
+{% endblock content %}

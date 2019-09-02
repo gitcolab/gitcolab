@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+
+{% block bodyClass %}organization{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">Organization</div>
+        <div class="card-block">
+            <form method="post" action="{{ path('organization_create') }}">
+
+                {{ form_errors(form) }}
+
+                {{ form_row(form.name) }}
+                {{ form_row(form.email) }}
+                <input type="submit" class="btn btn-primary" />
+                {{ form_rest(form) }}
+            </form>
+        </div>
+    </div>
+{% endblock content %}

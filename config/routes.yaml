@@ -1,0 +1,29 @@
+login:
+  path: /login
+  controller: Gitcolab\Controller\SecurityController::loginAction
+
+login_check:
+  path: /login/check
+  controller: Gitcolab\Controller\User\SecurityController::loginAction
+
+logout:
+  path: /logout
+
+dashboard:
+  path: /
+  controller: Gitcolab\Controller\AppController::dashboardAction
+
+preview:
+  path: /preview
+  controller: Gitcolab\Controller\App::previewAction
+
+organization_show:
+  path: /{slug}
+  controller: Gitcolab\Controller\OrganizationController:showAction
+
+project_show:
+  path: /{slug}
+  defaults:
+    _controller: Gitcolab\Controller\:ProjectController\showAction
+  requirements:
+    slug: ".+"

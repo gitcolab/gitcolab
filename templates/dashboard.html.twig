@@ -1,0 +1,80 @@
+{% extends "layout.html.twig" %}
+{% block bodyClass %}home dashboard{% endblock %}
+{% block content %}
+    <div class="container">
+        <div id="dashboard-switch" class="btn-group pull-left">
+            {% if organizations is not empty %}
+            <button class="btn btn-default" type="button" disabled="disabled">
+                <img width="20" height="20" src="{{ gravatar(organizations[0].email) }}" alt="{{ organizations[0].name }}" />
+                {{ organizations[0].name }}
+            </button>
+
+            <ul class="dropdown-menu" role="menu">
+                {% for organization in organizations %}
+                <li class="dropdown-item"><a href="{{ path('organization_show', {'slug': organization.slug}) }}">{{ organization.name }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                <span class="caret"></span>
+            </button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="clearboth">
+        <div class="pull-xs-right col-md-4" id="dashboard-sidebar">
+            <ul id="dashboard-sidebar-menu" class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#dashboard-my-repo" role="tab" data-toggle="tab">Repository</a>
+                </li>
+
+                <li class="nav-item js-tab-nav">
+                    <a class="nav-link" href="#dashboard-my-org" role="tab" data-toggle="tab">Organization</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="card tab-pane active" id="dashboard-my-repo" role="tabpanel">
+                    <div class="card-header">
+                        <h5 class="left">My Repositories
+                            <span class="label label-default">{{ projects|length }}</span>
+                        </h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for project in projects %}
+                         <li class="list-group-item">
+                            <a href="{{ project.fullSlug }}">
+                                <span class="repo-name">
+                                    <span class="repo-name-prefix">{{ project.organization }} / </span>
+                                    <strong class="repo">{{ project }}</strong>
+                                </span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="card tab-pane" id="dashboard-my-org" role="tabpanel">
+                    <div class="card-header">
+                        <h5 class="text-bold">My Organizations
+                            <span class="label label-default">{{ organizations|length }}</span>
+                        </h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for organization in organizations %}
+                        <li class="list-group-item">
+                            <a href="/{{ organization.slug }}">
+                                <span class="repo-name">
+                                    <strong class="repo">{{ organization }}</strong>
+                                </span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+

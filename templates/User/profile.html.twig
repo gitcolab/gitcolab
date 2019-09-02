@@ -1,0 +1,36 @@
+{% extends "layout.html.twig" %}
+
+{% block bodyClass %}user edit profile{% endblock %}
+{% block content %}
+
+    {% include 'User/_sidebar.html.twig' %}
+
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header">
+                Account Profile
+            </div>
+            <div class="card-block">
+                <form action="#" method="POST" class="fos_user_profile_edit">
+
+                    <fieldset>
+                        {{ form_row(form.first_name) }}
+                        {{ form_row(form.last_name) }}
+                    </fieldset>
+
+                    <fieldset>
+                        {{ form_row(form.localization) }}
+                    </fieldset>
+
+                    <div class="form-actions clearfix">
+                        {{ form_rest(form) }}
+
+                        <input type="submit" value="{{ 'gitcolab.form.validate'|trans }}" class="btn btn-primary pull-right" />
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -19,7 +19,7 @@ cache:
         - vendor
         - bin
         - node_modules
-        - web/vendor
+        - public/vendor
 addons:
     apt:
         packages:
@@ -49,7 +49,7 @@ before_script:
     - php app/console doctrine:schema:create --env=test
     - php app/console doctrine:fixtures:load --no-interaction --env=test
 
-    # Loading web server for selenium
+    # Loading public server for selenium
     - php app/console server:run > error.log &
 
 

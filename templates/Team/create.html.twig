@@ -1,0 +1,13 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    {% include 'Team/_head.html.twig' with {'organization': team.organization} %}
+
+    <h3>Create new team</h3>
+
+    <div class="container">
+        <form method="post" action="{{ path('organization_team_create', {'slug': team.organization.slug}) }}">
+            {% include 'Team/_form.html.twig' with {'form': form} %}
+            <input type="submit" value="{{ 'gitcolab.form.create'|trans }}" class="btn btn-primary" />
+        </form>
+    </div>
+{% endblock content %}

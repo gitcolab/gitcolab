@@ -1,12 +1,12 @@
-/web/bundles/
+/public/bundles/
 /app/bootstrap.php.cache
 /app/cache/*
-/app/config/parameters.yml
+/config/parameters.yml
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
-app/data/repositories/*
-!app/data/repositories/.gitkeep
+var/data/repositories/*
+!var/data/repositories/.gitkeep
 /build/
 /data/
 /vendor/
@@ -18,5 +18,21 @@ app/data/repositories/*
 .vagrant/
 gitcolab-shell/
 node_modules/
-web/vendor
+public/vendor
 behat.yml
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

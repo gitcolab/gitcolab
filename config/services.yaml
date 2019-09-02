@@ -1,0 +1,22 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+          $repositoryPath: '%kernel.root_dir%/data/repositories'
+
+    Gitcolab\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    Gitcolab\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    Gitcolab\DomainManager:
+        public: true
+
+    Gitcolab\EventListener\Doctrine\UserPasswordListener:
+        tags: [doctrine.event_subscriber]

@@ -1,0 +1,15 @@
+milestones:
+  path: /{slug}/milestones
+  controller: Gitcolab\Controller\Tracker\MilestoneController::indexAction
+  requirements:
+      slug: ".+"
+
+milestone_create:
+  path: /{slug}/milestone/new
+  controller: Gitcolab\Controller\Tracker\MilestoneController::createAction
+  requirements:
+    slug: ".+"
+
+milestone_show:
+  path: /milestone/{slug}
+  controller: Gitcolab\Controller\Tracker\MilestoneController::showAction
