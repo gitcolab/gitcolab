@@ -11,10 +11,10 @@
 
 namespace Gitcolab\Security\Authorization\Voter;
 
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Gitcolab\Model\Organization;
 use Gitcolab\Model\Team;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 class OrganizationVoter extends ResourceVoter
 {
@@ -33,26 +33,24 @@ class OrganizationVoter extends ResourceVoter
                 'manage' => Team::ACCESS_OWNER,
             ];
 
-            $role_hierarchy = array(
+            $role_hierarchy = [
                 Team::ACCESS_OWNER => [Team::ACCESS_READ, Team::ACCESS_WRITE],
                 Team::ACCESS_WRITE => [Team::ACCESS_READ],
-                Team::ACCESS_READ => [Team::ACCESS_READ]
-            );
+                Team::ACCESS_READ => [Team::ACCESS_READ],
+            ];
 
-            foreach ($resource->getTeams() as $team ) {
+            foreach ($resource->getTeams() as $team) {
                 if ($team->hasMember($token->getUser()) && isset($rights[$attribute])) {
-
-                    if(
+                    if (
                         $rights[$attribute] === $team->getAccess()
-                        or in_array($rights[$attribute], $role_hierarchy[$team->getAccess()])
+                        or \in_array($rights[$attribute], $role_hierarchy[$team->getAccess()], true)
                     ) {
-                      $granted++;
+                        ++$granted;
                     }
-
                 }
             }
 
-            if($attribute === VoterInterface::ACCESS_GRANTED) {
+            if (VoterInterface::ACCESS_GRANTED === $attribute) {
                 return VoterInterface::ACCESS_GRANTED;
             }
 
@@ -69,7 +67,7 @@ class OrganizationVoter extends ResourceVoter
      */
     public function supportsClass($class)
     {
-        $supportedClass = 'Gitcolab\Model\OrganizationInterface';
+        $supportedClass = Organization::class;
 
         return $supportedClass === $class || is_subclass_of($class, $supportedClass);
     }

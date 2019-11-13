@@ -12,10 +12,10 @@
 namespace Gitcolab\Controller;
 
 use Gitcolab\DomainManager;
+use Gitcolab\Form\Type\ProfileType;
 use Gitcolab\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Gitcolab\Form\Type\ProfileType;
 
 class UserController extends AbstractController
 {
@@ -28,9 +28,9 @@ class UserController extends AbstractController
             $this->get(DomainManager::class)->update($profile);
         }
 
-        return $this->render('User/profile.html.twig', array(
-            'form' => $form->createView()
-        ));
+        return $this->render('User/profile.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     public function accountAction()
@@ -40,14 +40,14 @@ class UserController extends AbstractController
 
     public function showAction()
     {
-        $repositories = $this->getRepository('Project')->findBy(array(
-            'owner' => $this->getUser()
-        ));
+        $repositories = $this->getRepository('Project')->findBy([
+            'owner' => $this->getUser(),
+        ]);
 
-        return $this->render('User/show.html.twig', array(
+        return $this->render('User/show.html.twig', [
             'user' => $this->getUser(),
-            'repositories' => $repositories
-        ));
+            'repositories' => $repositories,
+        ]);
     }
 
     public function autocompleteAction(Request $request, UserRepository $userRepository)

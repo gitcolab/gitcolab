@@ -11,20 +11,20 @@
 
 namespace Gitcolab\DataFixtures\ORM;
 
-use Gitcolab\DomainManager;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use Gitcolab\DomainManager;
 use Gitcolab\Model\Project;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 class LoadProjectData extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {

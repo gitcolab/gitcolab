@@ -12,18 +12,17 @@
 namespace Gitcolab\Controller;
 
 use Gitcolab\DomainManager;
+use Gitcolab\Form\Type\KeyType;
+use Gitcolab\Model\Key;
 use Gitcolab\Repository\KeyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Gitcolab\Model\Key;
-use Gitcolab\Form\Type\KeyType;
-
 
 class KeyController extends AbstractController
 {
     public function sshAction(KeyRepository $keyRepository)
     {
-        $keys = $keyRepository->find(array('user' => $this->getUser()));
+        $keys = $keyRepository->find(['user' => $this->getUser()]);
 
         return $this->render('Key/ssh.html.twig', ['keys' => $keys]);
     }
@@ -45,27 +44,27 @@ class KeyController extends AbstractController
         $form = $this->createForm(KeyType::class, $key);
 
         if ($form->handleRequest($request)->isValid()) {
-                //@todo check ssh key is valid
-                $this->get(DomainManager::class)->create($key);
-                $outputd = sprintf(
+            //@todo check ssh key is valid
+            $this->get(DomainManager::class)->create($key);
+            $output = sprintf(
                     "command=\"%s %s\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty %s\n",
                     $command, $key->getId(), $key->getKey()
                 );
-                file_put_contents($authorizedKeys, $outputd, FILE_APPEND);
+            file_put_contents($authorizedKeys, $output, FILE_APPEND);
 
             $this->addFlash('notice', 'SSH key created!');
 
             return $this->redirectToRoute('user_keys');
         }
 
-        return $this->render('Key/create.html.twig' , array(
-            'form' => $form->createView()
-        ));
+        return $this->render('Key/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     public function deleteAction(Key $key)
     {
-        if ($key->getUser() == $this->getUser()) {
+        if ($key->getUser() === $this->getUser()) {
             $this->get(DomainManager::class)->delete($key);
             $this->addFlash('success', 'SSH key removed');
 

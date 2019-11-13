@@ -16,7 +16,7 @@ use Gitcolab\Model\Project;
 class Milestone
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -36,17 +36,17 @@ class Milestone
     protected $description;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $createdAt;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $updatedAt;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $dueDate;
 
@@ -72,7 +72,8 @@ class Milestone
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return self
      */
     public function setName($name)
@@ -89,7 +90,8 @@ class Milestone
     }
 
     /**
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return self
      */
     public function setSlug($slug)
@@ -108,7 +110,8 @@ class Milestone
     }
 
     /**
-     * @param  string $description
+     * @param string $description
+     *
      * @return self
      */
     public function setDescription($description)
@@ -125,7 +128,6 @@ class Milestone
     }
 
     /**
-     * @param  \DateTimeInterface $createdAt
      * @return self
      */
     public function setCreatedAt(\DateTimeInterface $createdAt)
@@ -144,7 +146,6 @@ class Milestone
     }
 
     /**
-     * @param  \DateTimeInterface $updatedAt
      * @return self
      */
     public function setUpdatedAt(\DateTimeInterface $updatedAt)
@@ -163,7 +164,8 @@ class Milestone
     }
 
     /**
-     * @param  \DateTimeInterface $dueDate
+     * @param \DateTimeInterface $dueDate
+     *
      * @return self
      */
     public function setDueDate($dueDate)

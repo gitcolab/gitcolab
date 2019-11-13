@@ -16,7 +16,6 @@ use Gitcolab\Repository\ProjectRepository;
 use Michelf\Markdown;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class AppController extends AbstractController
 {

@@ -11,20 +11,20 @@
 
 namespace Gitcolab\Event;
 
-use Gitcolab\Model\Project;
+use Gitcolab\Model\Organization;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class ProjectEvent extends Event
+class OrganizationEvent extends Event
 {
-    private $project;
+    private $organization;
 
-    public function __construct($project)
+    public function __construct($organization)
     {
-        $this->project = $project;
+        $this->organization = $organization;
     }
 
-    public function getProject(): Project
+    public function getOrganization(): Organization
     {
-        return $this->project;
+        return $this->organization;
     }
 }

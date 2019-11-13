@@ -11,8 +11,6 @@
 
 namespace Gitcolab\Model;
 
-use Gitcolab\Model\User;
-
 class Activity
 {
     use TimesheetTrait;
@@ -53,102 +51,82 @@ class Activity
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->message;
     }
 
     /**
      * @param string $message
+     *
      * @return $this
      */
-    public function setMessage($message)
+    public function setMessage($message): self
     {
         $this->message = $message;
 
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getAuthor()
+    public function getAuthor(): ?string
     {
         return $this->author;
     }
 
     /**
      * @param string $author
+     *
      * @return $this
      */
-    public function setAuthor($author)
+    public function setAuthor($author): self
     {
         $this->author = $author;
 
         return $this;
     }
 
-    /**
-     * @return integer
-     */
-    public function getState()
+    public function getState(): int
     {
         return $this->state;
     }
 
     /**
-     * @param integer $state
+     * @param int $state
+     *
      * @return $this
      */
-    public function setState($state)
+    public function setState(string $state): self
     {
         $this->state = $state;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getProject()
+    public function getProject(): Project
     {
         return $this->project;
     }
 
-    /**
-     * @param string $project
-     * @return self
-     */
-    public function setProject($project)
+    public function setProject(Project $project): self
     {
         $this->project = $project;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getOrganization()
+    public function getOrganization(): Organization
     {
         return $this->organization;
     }
 
-    /**
-     * @param string $organization
-     * @return self
-     */
-    public function setOrganization($organization)
+    public function setOrganization(Organization $organization): self
     {
         $this->organization = $organization;
 

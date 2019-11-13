@@ -16,12 +16,12 @@ use Gitcolab\Model\User;
 class Vote
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * @var Object
+     * @var object
      */
     protected $ticket;
 
@@ -44,16 +44,13 @@ class Vote
     }
 
     /**
-     * @return Object
+     * @return object
      */
     public function getTicket()
     {
         return $this->ticket;
     }
 
-    /**
-     * @param Ticket $ticket
-     */
     public function setTicket(Ticket $ticket)
     {
         $this->ticket = $ticket;
@@ -84,7 +81,6 @@ class Vote
     }
 
     /**
-     * @param User $author
      * @return self
      */
     public function setAuthor(User $author)

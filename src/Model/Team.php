@@ -12,11 +12,11 @@
 namespace Gitcolab\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Gitcolab\Model\User;
 
 class Team
 {
-    use TimesheetTrait, MemberTrait;
+    use TimesheetTrait;
+    use MemberTrait;
 
     const ACCESS_READ = 'ACCESS_READ';
     const ACCESS_WRITE = 'ACCESS_WRITE';
@@ -87,6 +87,7 @@ class Team
 
     /**
      * @param string $name
+     *
      * @return self
      */
     public function setName($name)
@@ -106,6 +107,7 @@ class Team
 
     /**
      * @param $slug
+     *
      * @return self
      */
     public function setSlug($slug)
@@ -115,9 +117,6 @@ class Team
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAccess()
     {
         return $this->access;
@@ -125,6 +124,7 @@ class Team
 
     /**
      * @param string $access
+     *
      * @return self
      */
     public function setAccess($access)
@@ -134,9 +134,6 @@ class Team
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDescription()
     {
         return $this->description;
@@ -144,6 +141,7 @@ class Team
 
     /**
      * @param string $description
+     *
      * @return self
      */
     public function setDescription($description)
@@ -162,7 +160,6 @@ class Team
     }
 
     /**
-     * @param Organization $organization
      * @return self
      */
     public function setOrganization(Organization $organization)
@@ -180,17 +177,14 @@ class Team
         return $this->project;
     }
 
-    /**
-     * @param Project $project
-     */
     public function setProject(Project $project)
     {
         $this->project = $project;
     }
 
     /**
-     * @param $access
      * @param $type
+     *
      * @return $this
      */
     public function addAccess($user, $type = Access::TYPE_COLLABORATOR)
@@ -199,11 +193,13 @@ class Team
             ->setResource($this)
             ->setUser($user)
             ->setType($type);
+
         return $this;
     }
 
     /**
      * @param $user
+     *
      * @return bool
      */
     public function hasMember($user)
@@ -213,6 +209,7 @@ class Team
                 return true;
             }
         }
+
         return false;
     }
 
@@ -223,5 +220,4 @@ class Team
     {
         return $this->members;
     }
-
 }

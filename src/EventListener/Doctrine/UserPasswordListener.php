@@ -16,6 +16,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Gitcolab\Model\User;
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UserPasswordListener implements EventSubscriber
@@ -31,7 +32,7 @@ class UserPasswordListener implements EventSubscriber
     }
 
     /**
-     * Register this class on prePersist and preUpdate
+     * Register this class on prePersist and preUpdate.
      *
      * @return array
      */

@@ -11,10 +11,9 @@
 
 namespace Gitcolab\Form\Type;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormViewInterface;
-use Symfony\Component\Form\AbstractType;
 
 class ProfileType extends AbstractType
 {
@@ -26,15 +25,15 @@ class ProfileType extends AbstractType
         $builder
             ->add('first_name', TextType::class, [
                 'required' => false,
-                'label' => 'gitcolab.user.first_name'
+                'label' => 'gitcolab.user.first_name',
             ])
             ->add('last_name', TextType::class, [
                 'required' => false,
-                'label' => 'gitcolab.user.last_name'
+                'label' => 'gitcolab.user.last_name',
             ])
             ->add('localization', TextType::class, [
                 'required' => false,
-                'label' => 'gitcolab.user.localization'
+                'label' => 'gitcolab.user.localization',
             ])
         ;
     }

@@ -16,19 +16,19 @@ class DomainManager
         $this->entityManager = $entityManager;
     }
 
-    public function create($entity)
+    public function create($entity): void
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
 
-    public function update($entity)
+    public function update($entity): void
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
 
-    public function delete($entity)
+    public function delete($entity): void
     {
         $this->entityManager->remove($entity);
         $this->entityManager->flush();

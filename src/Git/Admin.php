@@ -15,5 +15,4 @@ use Gitonomy\Git\Admin as BaseAdmin;
 
 class Admin extends BaseAdmin
 {
-
 }

@@ -53,7 +53,7 @@ class User implements UserInterface
     protected $password;
 
     /**
-     * Not persisted
+     * Not persisted.
      *
      * @var string
      */
@@ -95,12 +95,12 @@ class User implements UserInterface
     protected $avatar;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $enabled;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $locked;
 
@@ -124,7 +124,7 @@ class User implements UserInterface
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTime();
         $this->token = sha1(uniqid(rand(), true));
-        $this->salt = sha1(mt_rand() . $secret);
+        $this->salt = sha1(mt_rand().$secret);
         $this->roles = [];
         $this->activities = new ArrayCollection();
         $this->participations = new ArrayCollection();
@@ -159,6 +159,7 @@ class User implements UserInterface
 
     /**
      * @param Key[] $keys
+     *
      * @return self
      */
     public function setKeys($keys)
@@ -178,6 +179,7 @@ class User implements UserInterface
 
     /**
      * @param Activity[] $activities
+     *
      * @return self
      */
     public function setActivities($activities)
@@ -236,7 +238,7 @@ class User implements UserInterface
      */
     public function getFullName()
     {
-        return $this->firstName .' '. strtoupper($this->lastName);
+        return $this->firstName.' '.strtoupper($this->lastName);
     }
 
     /**
@@ -249,6 +251,7 @@ class User implements UserInterface
 
     /**
      * @param string $avatar
+     *
      * @return self
      */
     public function setAvatar($avatar)
@@ -268,6 +271,7 @@ class User implements UserInterface
 
     /**
      * @param string $email
+     *
      * @return self
      */
     public function setEmail($email)
@@ -278,7 +282,8 @@ class User implements UserInterface
     }
 
     /**
-     * @param boolean $enabled
+     * @param bool $enabled
+     *
      * @return self
      */
     public function setEnabled($enabled)
@@ -290,6 +295,7 @@ class User implements UserInterface
 
     /**
      * @param string $password
+     *
      * @return self
      */
     public function setPassword($password)
@@ -301,6 +307,7 @@ class User implements UserInterface
 
     /**
      * @param array $roles
+     *
      * @return self
      */
     public function setRoles($roles)
@@ -312,6 +319,7 @@ class User implements UserInterface
 
     /**
      * @param string $salt
+     *
      * @return self
      */
     public function setSalt($salt)
@@ -331,6 +339,7 @@ class User implements UserInterface
 
     /**
      * @param string $username
+     *
      * @return self
      */
     public function setUsername($username)
@@ -350,6 +359,7 @@ class User implements UserInterface
 
     /**
      * @param string $slug
+     *
      * @return User
      */
     public function setSlug($slug)
@@ -361,6 +371,7 @@ class User implements UserInterface
 
     /**
      * @param $localization
+     *
      * @return self
      */
     public function setLocalization($localization)
@@ -377,7 +388,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isLocked()
     {
@@ -385,7 +396,8 @@ class User implements UserInterface
     }
 
     /**
-     * @param boolean $locked
+     * @param bool $locked
+     *
      * @return self
      */
     public function setLocked($locked)
@@ -405,6 +417,7 @@ class User implements UserInterface
 
     /**
      * @param string $plainPassword
+     *
      * @return self
      */
     public function setPlainPassword($plainPassword)
@@ -419,17 +432,18 @@ class User implements UserInterface
      */
     public function hasRole($role)
     {
-        return in_array(strtoupper($role), $this->getRoles(), true);
+        return \in_array(strtoupper($role), $this->getRoles(), true);
     }
 
     /**
      * @param string $role
+     *
      * @return self
      */
     public function addRole($role)
     {
         $role = strtoupper($role);
-        if (!in_array($role, $this->roles, true)) {
+        if (!\in_array($role, $this->roles, true)) {
             $this->roles[] = $role;
         }
 
@@ -438,11 +452,12 @@ class User implements UserInterface
 
     /**
      * @param string $role
+     *
      * @return self
      */
     public function removeRole($role)
     {
-        if (false !== $key = array_search($role, $this->roles)) {
+        if (false !== $key = array_search($role, $this->roles, true)) {
             unset($role[$key]);
         }
 
@@ -455,7 +470,7 @@ class User implements UserInterface
      * Internally, if this method returns false, the authentication system
      * will throw an AccountExpiredException and prevent login.
      *
-     * @return bool    true if the user's account is non expired, false otherwise
+     * @return bool true if the user's account is non expired, false otherwise
      *
      * @see AccountExpiredException
      */
@@ -470,7 +485,7 @@ class User implements UserInterface
      * Internally, if this method returns false, the authentication system
      * will throw a LockedException and prevent login.
      *
-     * @return bool    true if the user is not locked, false otherwise
+     * @return bool true if the user is not locked, false otherwise
      *
      * @see LockedException
      */
@@ -485,7 +500,7 @@ class User implements UserInterface
      * Internally, if this method returns false, the authentication system
      * will throw a CredentialsExpiredException and prevent login.
      *
-     * @return bool    true if the user's credentials are non expired, false otherwise
+     * @return bool true if the user's credentials are non expired, false otherwise
      *
      * @see CredentialsExpiredException
      */
@@ -500,7 +515,7 @@ class User implements UserInterface
      * Internally, if this method returns false, the authentication system
      * will throw a DisabledException and prevent login.
      *
-     * @return bool    true if the user is enabled, false otherwise
+     * @return bool true if the user is enabled, false otherwise
      *
      * @see DisabledException
      */

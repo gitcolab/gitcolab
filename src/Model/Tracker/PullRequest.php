@@ -13,5 +13,4 @@ namespace Gitcolab\Model\Tracker;
 
 class PullRequest extends Ticket
 {
-
 }

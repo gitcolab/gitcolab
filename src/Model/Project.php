@@ -12,6 +12,7 @@
 namespace Gitcolab\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Gitcolab\Git\Repository;
 
 class Project
@@ -42,7 +43,6 @@ class Project
     protected $description;
 
     /**
-     *
      * @var \DateTime
      */
     protected $lastActivity;
@@ -73,7 +73,7 @@ class Project
     protected $repositorySize;
 
     /**
-     * @var  ArrayCollection
+     * @var ArrayCollection
      */
     protected $members;
 
@@ -97,6 +97,11 @@ class Project
      */
     protected $milestones;
 
+    /**
+     * @var Organization
+     */
+    private $owner;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -108,67 +113,59 @@ class Project
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * @param $name
-     * @return self
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getSlug()
+    public function getSlug(): string
     {
         return $this->slug;
     }
 
     /**
      * @param $slug
+     *
      * @return self
      */
-    public function setSlug($slug)
+    public function setSlug(string $slug)
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    public function getFullSlug()
+    public function getFullSlug(): string
     {
-        return $this->getOrganization()->getSlug() .'/'. $this->getSlug();
+        return $this->getOrganization()->getSlug().'/'.$this->getSlug();
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
      * @param $description
+     *
      * @return self
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
@@ -176,45 +173,36 @@ class Project
     }
 
     /**
-     * @param \DateTime $lastActivity
      * @return self
      */
-    public function setLastActivity(\DateTime $lastActivity)
+    public function setLastActivity(\DateTimeInterface $lastActivity)
     {
         $this->lastActivity = $lastActivity;
+
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getLastActivity()
+    public function getLastActivity(): \DateTime
     {
         return $this->lastActivity;
     }
 
-    /**
-     * @return string
-     */
-    public function getDefaultBranch()
+    public function getDefaultBranch(): string
     {
         return $this->defaultBranch;
     }
 
-    /**
-     * @param string $defaultBranch
-     * @return self
-     */
-    public function setDefaultBranch($defaultBranch)
+    public function setDefaultBranch(string $defaultBranch): self
     {
         $this->defaultBranch = $defaultBranch;
 
         return $this;
     }
 
-    public function setOrganization(Organization $organization)
+    public function setOrganization(Organization $organization): self
     {
         $this->owner = $organization;
+
         return $this;
     }
 
@@ -225,6 +213,7 @@ class Project
 
     /**
      * @param $name
+     *
      * @return $this
      */
     public function setRepositoryName($name)
@@ -235,12 +224,12 @@ class Project
     }
 
     /**
-     * @param Repository $repository
      * @return self
      */
     public function setRepository(Repository $repository)
     {
         $this->repository = $repository;
+
         return $this;
     }
 
@@ -248,7 +237,6 @@ class Project
     {
         return $this->repository;
     }
-
 
     public function getRepositorySize()
     {
@@ -267,20 +255,19 @@ class Project
         return [];
     }
 
-    public function getPullRequests()
+    public function getPullRequests(): Collection
     {
         return $this->pullRequests;
     }
 
-    public function setPullRequests($pullRequests)
+    public function setPullRequests(Collection $pullRequests)
     {
         $this->pullRequests = $pullRequests;
-
 
         return $this;
     }
 
-    public function getIssues()
+    public function getIssues(): Collection
     {
         return $this->tickets;
     }
@@ -288,7 +275,7 @@ class Project
     /**
      * @return ArrayCollection
      */
-    public function getTickets()
+    public function getTickets(): Collection
     {
         return $this->tickets;
     }
@@ -296,7 +283,7 @@ class Project
     /**
      * @param ArrayCollection $tickets
      */
-    public function setTickets($tickets)
+    public function setTickets(Collection $tickets)
     {
         $this->tickets = $tickets;
     }
@@ -304,7 +291,7 @@ class Project
     /**
      * @return ArrayCollection
      */
-    public function getMembers()
+    public function getMembers(): Collection
     {
         return $this->members;
     }
@@ -312,7 +299,7 @@ class Project
     /**
      * @param ArrayCollection $members
      */
-    public function setMembers($members)
+    public function setMembers(Collection $members)
     {
         $this->members = $members;
     }

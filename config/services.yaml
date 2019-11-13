@@ -6,6 +6,7 @@ services:
         autoconfigure: true
         bind:
           $repositoryPath: '%kernel.root_dir%/data/repositories'
+          $gitShellCommand: '%gitcolab.git.shell_command%'
 
     Gitcolab\:
         resource: '../src/*'

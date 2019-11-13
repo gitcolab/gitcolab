@@ -11,10 +11,10 @@
 
 namespace Gitcolab\Form\Type;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\AbstractType;
 
 class OrganizationType extends AbstractType
 {
@@ -26,11 +26,11 @@ class OrganizationType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'required' => true,
-                'label' => 'gitcolab.organization.name'
+                'label' => 'gitcolab.organization.name',
             ])
             ->add('email', EmailType::class, [
                 'required' => true,
-                'label' => 'gitcolab.organization.email'
+                'label' => 'gitcolab.organization.email',
             ])
         ;
     }

@@ -12,22 +12,15 @@
 namespace Gitcolab\Security;
 
 use Gitcolab\Model\User;
-use Symfony\Component\Security\Core\Authentication\SimplePreAuthenticatorInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
-use Symfony\Component\Security\Http\HttpUtils;
 
 class ApiInternalProvider
 {
-    public function __construct(){}
     public function createToken(Request $request, $providerKey)
     {
-
         return new PreAuthenticatedToken(
             'anon.',
             $request->query->get('access_token'),
@@ -40,7 +33,7 @@ class ApiInternalProvider
         $apiKey = $token->getCredentials();
 
         $user = new User();
-        $user->setRoles(array('ROLE_ADMIN'));
+        $user->setRoles(['ROLE_ADMIN']);
 
         return new PreAuthenticatedToken(
             $user,

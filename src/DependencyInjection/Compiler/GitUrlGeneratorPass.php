@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class GitUrlGeneratorPass implements CompilerPassInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {

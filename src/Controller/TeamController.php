@@ -13,31 +13,61 @@ namespace Gitcolab\Controller;
 
 use Gitcolab\DomainManager;
 use Gitcolab\Model\Access;
+use Gitcolab\Model\Team;
+use Gitcolab\Repository\AccessRepository;
 use Gitcolab\Repository\OrganizationRepository;
+use Gitcolab\Repository\TeamRepository;
 use Gitcolab\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Gitcolab\Model\Team;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TeamController extends AbstractController
 {
-    public function cre(OrganizationRepository $organizationRepository)
-    {
-        $request = $this->get('request_stack')->getCurrentRequest();
-        $organization = $organizationRepository->findOneBy(['slug' => $request->get('slug')]);
+    /** @var UserRepository */
+    private $accessRepository;
 
-        $organization->setLastActivity(new \DateTime());
-        $team = (new Team())
-            ->setOrganization($organization);
+    /** @var UserRepository */
+    private $teamRepository;
 
-        return $team;
+    /** @var AccessRepository */
+    private $userRepository;
+    /**
+     * @var DomainManager
+     */
+    private $domainManager;
+
+    public function __construct(
+        UserRepository $userRepository,
+        AccessRepository $accessRepository,
+        TeamRepository $teamRepository,
+        DomainManager $domainManager
+    ) {
+        $this->userRepository = $userRepository;
+        $this->teamRepository = $teamRepository;
+        $this->accessRepository = $accessRepository;
+        $this->domainManager = $domainManager;
     }
 
-    public function addMemberAction(Request $request, UserRepository $userRepository)
+    public function createAction(Request $request, OrganizationRepository $organizationRepository, string $slug)
     {
-        $user = $userRepository->find($request->get('member'));
+        $organization = $organizationRepository->findOneBy(['slug' => $slug]);
+
+        if ($organization) {
+            throw new NotFoundHttpException();
+        }
+
+        $organization->setLastActivity(new \DateTime());
+
+        return (new Team())
+            ->setOrganization($organization);
+    }
+
+    public function addMemberAction(Request $request, string $slug)
+    {
+        $user = $this->userRepository->find($slug);
         /** @var Team $team */
-        $team = $this->findOr404($request);
+        $team = $this->teamRepository->find($request->get('id'));
         $team->setAccess($user);
 
         if (false === $team->hasMember($user)) {
@@ -45,38 +75,37 @@ class TeamController extends AbstractController
                 ->setResource($team)
                 ->setAccess($user);
 
-            $this->get(DomainManager::class)->create($access);
+            $this->domainManager->create($access);
             $this->addFlash('success', 'gitcolab.team.success_add');
-
         } else {
             $this->addFlash('error', 'gitcolab.team.already_exist');
         }
 
         return $this->redirectToRoute('organization_team_show', [
             'organization' => $team->getOrganization(),
-            'slug' => $team->getSlug()
+            'slug' => $team->getSlug(),
         ]);
     }
 
     public function removeMemberAction(Request $request)
     {
-        $user = $this->get('gitcolab.repository.user')->find($request->get('member'));
+        $user = $this->userRepository->find($request->get('member'));
         $team = $this->findOr404($request);
 
-        $access = $this->get('gitcolab.repository.access')->findOneBy([
+        $access = $this->accessRepository->findOneBy([
             'user' => $user,
-            'team' => $team
+            'team' => $team,
         ]);
 
         if (!$access) {
             throw $this->createNotFoundException();
         }
 
-        $this->get(DomainManager::class)->delete($access);
+        $this->domainManager->delete($access);
 
         return $this->redirectToRoute('organization_team_show', [
             'organization' => $team->getOrganization(),
-            'slug' => $team->getSlug()
+            'slug' => $team->getSlug(),
         ]);
     }
 }

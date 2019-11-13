@@ -11,15 +11,15 @@
 
 namespace Gitcolab\DataFixtures\ORM;
 
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Gitcolab\DomainManager;
+use Gitcolab\Model\Access;
 use Gitcolab\Model\Organization;
 use Gitcolab\Model\Team;
-use Gitcolab\Model\Access;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 class LoadOrganizationData extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -71,7 +71,7 @@ class LoadOrganizationData extends Fixture implements OrderedFixtureInterface, C
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getOrder()
     {

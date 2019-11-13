@@ -12,8 +12,8 @@
 namespace Gitcolab\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Gitcolab\Model\Organization;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Gitcolab\Model\Organization;
 
 class OrganizationRepository extends ServiceEntityRepository
 {
@@ -25,6 +25,7 @@ class OrganizationRepository extends ServiceEntityRepository
     public function findOrganizationsByUser($user)
     {
         $query = $this->queryOrganizationsByUser($user);
+
         return $query->getQuery()->getResult();
     }
 

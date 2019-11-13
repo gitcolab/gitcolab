@@ -15,12 +15,12 @@ use Gitcolab\Model\User;
 
 class UserFactory
 {
-    public function createUser(array $data = [])
+    public function createUser(array $data = []): User
     {
         $user = new User();
 
         foreach ($data as $methodPart => $value) {
-            $method = 'set' . ucfirst($methodPart);
+            $method = 'set'.ucfirst($methodPart);
             $user->$method($value);
         }
 

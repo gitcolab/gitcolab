@@ -11,10 +11,9 @@
 
 namespace Gitcolab\DataFixtures\ORM;
 
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-
 use Gitcolab\DomainManager;
 use Gitcolab\Model\User;
 use Gitcolab\User\UserFactory;
@@ -38,23 +37,23 @@ class LoadUserData extends Fixture implements OrderedFixtureInterface, Container
     public function load(ObjectManager $manager)
     {
         $users = [
-            'admin'           => 'Ad Min',
-            'ena'             => 'Ena Ikimea',
-            'john.doe'        => 'John Doe',
-            'brian.lester'    => 'Brian Lester',
-            'jack.gill'       => 'Jack Gill',
-            'olivia.pace'     => 'Olivia Pace',
-            'nola weaver'     => 'Nola Weaver',
-            'oren tyler'      => 'Oren Tyler',
-            'warren.spencer'  => 'Warren Spencer',
-            'jacob.gallegos'  => 'Jacob Gallegos',
+            'admin' => 'Ad Min',
+            'ena' => 'Ena Ikimea',
+            'john.doe' => 'John Doe',
+            'brian.lester' => 'Brian Lester',
+            'jack.gill' => 'Jack Gill',
+            'olivia.pace' => 'Olivia Pace',
+            'nola weaver' => 'Nola Weaver',
+            'oren tyler' => 'Oren Tyler',
+            'warren.spencer' => 'Warren Spencer',
+            'jacob.gallegos' => 'Jacob Gallegos',
             'jordan.saunders' => 'Jordan Saunders',
-            'xavier.stein'    => 'Xavier Stein',
-            'beck.nash'       => 'Beck Nash',
-            'ann.perry'       => 'Ann Perry',
-            'chase.hoffman'   => 'Chase Hoffman',
-            'gregory.joyner'  => 'Gregory Joyner',
-            'dexter.schwartz' => 'Dexter Schwartz'
+            'xavier.stein' => 'Xavier Stein',
+            'beck.nash' => 'Beck Nash',
+            'ann.perry' => 'Ann Perry',
+            'chase.hoffman' => 'Chase Hoffman',
+            'gregory.joyner' => 'Gregory Joyner',
+            'dexter.schwartz' => 'Dexter Schwartz',
         ];
 
         foreach ($users as $username => $name) {
@@ -62,18 +61,18 @@ class LoadUserData extends Fixture implements OrderedFixtureInterface, Container
 
             $account = $this->userFactory->createUser([
                 'username' => $username,
-                'email'    => $username . '@test.com',
+                'email' => $username.'@test.com',
                 'lastName' => $fullName[1],
                 'firstName' => $fullName[0],
                 'plainPassword' => $username,
-                'roles' => [User::ROLE_USER]
+                'roles' => [User::ROLE_USER],
             ]);
 
-            if ($username == 'admin') {
+            if ('admin' === $username) {
                 $account->addRole(User::ROLE_ADMIN);
             }
 
-            if ($username == 'dexter.schwartz') {
+            if ('dexter.schwartz' === $username) {
                 $account->setEnabled(false);
             }
 

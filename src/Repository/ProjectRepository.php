@@ -12,8 +12,8 @@
 namespace Gitcolab\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Gitcolab\Model\Project;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Gitcolab\Model\Project;
 
 class ProjectRepository extends ServiceEntityRepository
 {
@@ -25,16 +25,16 @@ class ProjectRepository extends ServiceEntityRepository
     /**
      * {@inheritdoc}
      */
-    public function findOneBy(array $criteria, ?array $orderBy = NULL)
+    public function findOneBy(array $criteria, ?array $orderBy = null)
     {
-        if (isset($criteria['slug']) && strpos($criteria['slug'], '/') == true) {
+        if (isset($criteria['slug']) && true === strpos($criteria['slug'], '/')) {
             $slugParameter = explode('/', $criteria['slug']);
+
             return $this->findProject($slugParameter[0], $slugParameter[1]);
         }
 
         return parent::findOneBy($criteria);
     }
-
 
     public function findProject($organization, $project)
     {
@@ -45,7 +45,7 @@ class ProjectRepository extends ServiceEntityRepository
             ->leftJoin('team.members', 'access')
             ->andWhere('project.slug = ?1')
             ->andWhere('organization.slug = ?2')
-            ->setParameters([1 => $project, 2 =>$organization])
+            ->setParameters([1 => $project, 2 => $organization])
             ->setMaxResults(1);
 
         return $query->getQuery()->getSingleResult();
@@ -54,6 +54,7 @@ class ProjectRepository extends ServiceEntityRepository
     public function findProjectsByUser($user)
     {
         $query = $this->queryProjectsByUser($user);
+
         return $query->getQuery()->getResult();
     }
 
@@ -74,10 +75,10 @@ class ProjectRepository extends ServiceEntityRepository
 
     /**
      * @param string $search
-     * @param array $orderBy
+     *
      * @return QueryBuilder
      */
-    public function getListPaginatorQueryBuilder($org, $search = '', array $orderBy = array())
+    public function getListPaginatorQueryBuilder($org, $search = '', array $orderBy = [])
     {
         $qb = $this->createQueryBuilder('p')
             ->leftJoin('p.owner', 'org');
@@ -95,7 +96,6 @@ class ProjectRepository extends ServiceEntityRepository
 
         $qb->andWhere('org.slug = ?2')
            ->setParameter(2, $org);
-
 
         return $qb;
     }

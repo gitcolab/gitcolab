@@ -126,7 +126,8 @@ abstract class Ticket
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return self
      */
     public function setName($name)
@@ -145,7 +146,8 @@ abstract class Ticket
     }
 
     /**
-     * @param  string $description
+     * @param string $description
+     *
      * @return self;
      */
     public function setDescription($description)
@@ -164,7 +166,6 @@ abstract class Ticket
     }
 
     /**
-     * @param  \DateTimeInterface $createdAt
      * @return self;
      */
     public function setCreatedAt(\DateTimeInterface $createdAt)
@@ -183,7 +184,6 @@ abstract class Ticket
     }
 
     /**
-     * @param  \DateTimeInterface $updatedAt
      * @return self;
      */
     public function setUpdatedAt(\DateTimeInterface $updatedAt)
@@ -202,7 +202,6 @@ abstract class Ticket
     }
 
     /**
-     * @param  \DateTimeInterface $deletedAt
      * @return self;
      */
     public function setDeletedAt(\DateTimeInterface $deletedAt)
@@ -221,7 +220,8 @@ abstract class Ticket
     }
 
     /**
-     * @param  Project $project
+     * @param Project $project
+     *
      * @return self;
      */
     public function setProject($project)
@@ -240,7 +240,8 @@ abstract class Ticket
     }
 
     /**
-     * @param  User  $author
+     * @param User $author
+     *
      * @return self;
      */
     public function setAuthor($author)
@@ -259,7 +260,8 @@ abstract class Ticket
     }
 
     /**
-     * @param  string $state
+     * @param string $state
+     *
      * @return self;
      */
     public function setState($state)
@@ -271,7 +273,6 @@ abstract class Ticket
 
     /**
      * @return User
-     *
      */
     public function getAssignee()
     {
@@ -279,7 +280,8 @@ abstract class Ticket
     }
 
     /**
-     * @param  User $assignee
+     * @param User $assignee
+     *
      * @return self
      */
     public function setAssignee($assignee)
@@ -289,16 +291,12 @@ abstract class Ticket
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getMilestone()
     {
         return $this->milestone;
     }
 
     /**
-     * @param  Milestone $milestone
      * @return self
      */
     public function setMilestone(Milestone $milestone)
@@ -316,16 +314,14 @@ abstract class Ticket
         return $this->participations;
     }
 
-    /**
-     * @param User $participant
-     */
     public function addParticipant(User $participant)
     {
         $this->participations[] = $participant;
     }
 
     /**
-     * @param  Collection $participations
+     * @param Collection $participations
+     *
      * @return self
      */
     public function setParticipations($participations)
@@ -344,7 +340,6 @@ abstract class Ticket
     }
 
     /**
-     * @param User $subscription
      * @return self
      */
     public function addSubscription(User $subscription)
@@ -357,7 +352,8 @@ abstract class Ticket
     }
 
     /**
-     * @param  Collection $subscriptions
+     * @param Collection $subscriptions
+     *
      * @return self
      */
     public function setSubscriptions($subscriptions)

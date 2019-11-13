@@ -11,14 +11,13 @@
 
 namespace Gitcolab\DataFixtures\ORM;
 
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-
 use Gitcolab\DomainManager;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Gitcolab\Model\Key;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 class LoadUserKeyData extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -29,14 +28,14 @@ class LoadUserKeyData extends Fixture implements OrderedFixtureInterface, Contai
      */
     public function load(ObjectManager $manager)
     {
-        $key  = (new Key())
+        $key = (new Key())
             ->setUser($this->getReference('ena'))
             ->setTitle('Laptop-home')
             ->setKey('key-laptop-home');
-        ;
+
         $this->container->get(DomainManager::class)->create($key);
 
-        $key  = (new Key())
+        $key = (new Key())
             ->setUser($this->getReference('ena'))
             ->setTitle('Laptop-office')
             ->setKey('key-Laptop-office')
@@ -47,7 +46,7 @@ class LoadUserKeyData extends Fixture implements OrderedFixtureInterface, Contai
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getOrder()
     {

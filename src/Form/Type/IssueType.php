@@ -11,8 +11,8 @@
 
 namespace Gitcolab\Form\Type;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class IssueType extends AbstractType
 {
@@ -26,15 +26,15 @@ class IssueType extends AbstractType
                 'required' => true,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Title'
-                ]
+                    'placeholder' => 'Title',
+                ],
             ])
             ->add('description', 'wysiwyg', [
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Description'
-                ]
+                    'placeholder' => 'Description',
+                ],
             ])
         ;
     }
