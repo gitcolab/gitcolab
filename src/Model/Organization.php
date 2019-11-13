@@ -12,13 +12,15 @@
 namespace Gitcolab\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class Organization
 {
-    use MemberTrait, TimesheetTrait;
+    use MemberTrait;
+    use TimesheetTrait;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -58,7 +60,6 @@ class Organization
     protected $lastActivity;
 
     /**
-     *
      * @var string
      */
     protected $avatar;
@@ -68,49 +69,40 @@ class Organization
         $this->projects = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTime();
-
     }
 
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
      * @return self
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getSlug()
+    public function getSlug(): string
     {
         return $this->slug;
     }
 
     /**
-     * @param string $slug
      * @return self
      */
-    public function setSlug($slug)
+    public function setSlug(string $slug)
     {
         $this->slug = $slug;
 
@@ -118,37 +110,29 @@ class Organization
     }
 
     /**
-     * @param string $email
      * @return $this
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return object
-     */
-    public function getLastActivity()
+    public function getLastActivity(): object
     {
         return $this->lastActivity;
     }
 
     /**
-     * @param object $lastActivity
      * @return self
      */
-    public function setLastActivity($lastActivity)
+    public function setLastActivity(object $lastActivity)
     {
         $this->lastActivity = $lastActivity;
 
@@ -156,20 +140,16 @@ class Organization
     }
 
     /**
-     * @param string $avatar
      * @return self
      */
-    public function setAvatar($avatar)
+    public function setAvatar(string $avatar)
     {
         $this->avatar = $avatar;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAvatar()
+    public function getAvatar(): string
     {
         return $this->avatar;
     }
@@ -184,9 +164,10 @@ class Organization
 
     /**
      * @param Project[] $projects
+     *
      * @return self
      */
-    public function setProjects($projects)
+    public function setProjects(Collection $projects)
     {
         $this->projects = $projects;
 
@@ -196,7 +177,7 @@ class Organization
     /**
      * @return Team[]
      */
-    public function getTeams()
+    public function getTeams(): Collection
     {
         return $this->teams;
     }
@@ -210,9 +191,10 @@ class Organization
 
     /**
      * @param Team[] $teams
+     *
      * @return self
      */
-    public function setTeams($teams)
+    public function setTeams(Collection $teams)
     {
         $this->teams = $teams;
 
@@ -222,7 +204,7 @@ class Organization
     /**
      * @return array
      */
-    public function getMembers()
+    public function getMembers(): Collection
     {
         foreach ($this->teams as $team) {
             foreach ($team->getMembers() as $member) {

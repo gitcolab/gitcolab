@@ -17,16 +17,15 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * This method show the login form
+     * This method show the login form.
      *
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function loginAction(Request $request, AuthenticationUtils $helper)
     {
         return $this->render('User/login.html.twig', [
             'last_username' => $helper->getLastUsername(),
-            'error'         => $helper->getLastAuthenticationError(),
+            'error' => $helper->getLastAuthenticationError(),
         ]);
     }
 }

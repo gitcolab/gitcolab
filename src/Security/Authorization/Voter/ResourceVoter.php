@@ -11,10 +11,9 @@
 
 namespace Gitcolab\Security\Authorization\Voter;
 
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Gitcolab\Model\User;
-
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 class ResourceVoter implements VoterInterface
 {
@@ -29,13 +28,13 @@ class ResourceVoter implements VoterInterface
      */
     public function supportsAttribute($attribute)
     {
-        return in_array($attribute, array(
+        return \in_array($attribute, [
             self::VIEW,
             self::EDIT,
             self::DELETE,
             self::ASSIGN,
             self::DELETE_ASSIGN,
-        ));
+        ], true);
     }
 
     /**
@@ -51,8 +50,7 @@ class ResourceVoter implements VoterInterface
             return VoterInterface::ACCESS_DENIED;
         }
 
-
-        if($user->hasRole('ROLE_ADMIN') || $user->hasRole('ROLE_SUPER_ADMIN') ) {
+        if ($user->hasRole('ROLE_ADMIN') || $user->hasRole('ROLE_SUPER_ADMIN')) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
@@ -61,6 +59,5 @@ class ResourceVoter implements VoterInterface
 
     public function supportsClass($class)
     {
-
     }
 }

@@ -22,7 +22,7 @@ class HookInjector
         $this->hooks = $hooks;
     }
 
-    public function onProjectCreate(ProjectEvent $event)
+    public function onProjectCreate(ProjectEvent $event): void
     {
         $hooks = $event->getProject()->getRepository()->getHooks();
 

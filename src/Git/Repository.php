@@ -18,6 +18,7 @@ class Repository extends BaseRepository
     public function __toString()
     {
         $dir = $this->gitDir;
-        return  pathinfo($dir, PATHINFO_FILENAME).'.'. pathinfo($dir, PATHINFO_EXTENSION);
+
+        return  pathinfo($dir, PATHINFO_FILENAME).'.'.pathinfo($dir, PATHINFO_EXTENSION);
     }
 }

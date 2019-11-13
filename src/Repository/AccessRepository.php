@@ -13,12 +13,12 @@ namespace Gitcolab\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Gitcolab\Model\Key;
+use Gitcolab\Model\Access;
 
-class KeyRepository extends ServiceEntityRepository
+class AccessRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Key::class);
+        parent::__construct($registry, Access::class);
     }
 }

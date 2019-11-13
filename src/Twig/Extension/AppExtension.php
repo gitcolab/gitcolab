@@ -14,6 +14,8 @@ namespace Gitcolab\Twig\Extension;
 use Gitcolab\Model\Project;
 use Michelf\Markdown;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+use Twig\TwigFilter;
 
 class AppExtension extends AbstractExtension
 {
@@ -23,18 +25,18 @@ class AppExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('gravatar', array($this, 'getGravatar')),
-            new \Twig_SimpleFunction('branches_activity', array($this, 'getBranchesActivity')),
-            new \Twig_SimpleFunction('gravatar', array($this, 'getGravatar')),
-            new \Twig_SimpleFunction('branches_activity', array($this, 'getBranchesActivity')),
-            new \Twig_SimpleFunction('markdown', array($this, 'markdown', array('is_safe' => array('html')))),
+            new TwigFunction('gravatar', [$this, 'getGravatar']),
+            new TwigFunction('branches_activity', [$this, 'getBranchesActivity']),
+            new TwigFunction('gravatar', [$this, 'getGravatar']),
+            new TwigFunction('branches_activity', [$this, 'getBranchesActivity']),
+            new TwigFunction('markdown', [$this, 'markdown', ['is_safe' => ['html']]]),
         ];
     }
 
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('markdown', array($this, 'markdown', array('is_safe' => array('html'))))
+            new TwigFilter('markdown', [$this, 'markdown', ['is_safe' => ['html']]]),
         ];
     }
 
@@ -42,52 +44,53 @@ class AppExtension extends AbstractExtension
     public function getGravatar($email, $size = null, $default = 'mm', $rating = null, $secure = null)
     {
         $defaults = [
-            'size'    => 80,
-            'rating'  => 'g',
+            'size' => 80,
+            'rating' => 'g',
             'default' => null,
-            'secure'  => false,
+            'secure' => false,
         ];
 
         $map = [
-            's' => $size    ?: $defaults['size'],
-            'r' => $rating  ?: $defaults['rating'],
+            's' => $size ?: $defaults['size'],
+            'r' => $rating ?: $defaults['rating'],
             'd' => $default ?: $defaults['default'],
         ];
 
         $hash = md5(strtolower(trim($email)));
 
-
         if (null === $secure) {
             $secure = $defaults['secure'];
         }
 
-        return ($secure ? 'https://secure' : 'http://www') . '.gravatar.com/avatar/' . $hash . '?' . http_build_query(array_filter($map));
+        return ($secure ? 'https://secure' : 'http://www').'.gravatar.com/avatar/'.$hash.'?'.http_build_query(array_filter($map));
     }
 
-    public function getBranchesActivity(Project $project, $branch = null)
+    public function getBranchesActivity(Project $project, $branch = null): array
     {
         $repository = $project->getRepository();
         $references = $repository->getReferences();
-        $branchName = null === $branch ? $project->getDefaultBranch() : $branch;
+        $branchName = $branch ?? $project->getDefaultBranch();
         $against = $references->getBranch($branchName);
         foreach ($references->getBranches() as $branch) {
             $logBehind = $repository->getLog($repository->getRevision($branch->getFullname().'..'.$against->getFullname()));
             $logAbove = $repository->getLog($repository->getRevision($against->getFullname().'..'.$branch->getFullname()));
             $rows[] = [
-                'branch'           => $branch,
-                'above'            => $logAbove->count(),
-                'behind'           => $logBehind->count(),
+                'branch' => $branch,
+                'above' => $logAbove->count(),
+                'behind' => $logBehind->count(),
                 'lastModification' => $branch->getLastModification(),
             ];
         }
-        usort($rows, function ($left, $right) {
+        usort($rows, static function ($left, $right) {
             return $left['lastModification']->getAuthorDate() < $right['lastModification']->getAuthorDate();
         });
+
         return $rows;
     }
 
     /**
      * @param $text
+     *
      * @return string
      */
     public function markdown($text)

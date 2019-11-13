@@ -12,13 +12,13 @@
 namespace Gitcolab\Form\Type;
 
 use Gitcolab\Model\Organization;
+use Gitcolab\Repository\OrganizationRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Gitcolab\Repository\OrganizationRepository;
 
 class ProjectType extends AbstractType
 {
@@ -30,20 +30,20 @@ class ProjectType extends AbstractType
         $builder
             ->add('organization', EntityType::class, [
                 'class' => Organization::class,
-                'query_builder' => function(OrganizationRepository $er) use($options) {
+                'query_builder' => function (OrganizationRepository $er) use ($options) {
                     return $er->queryOrganizationsByUser($options['user_id']);
                 },
                 'required' => true,
                 'label' => 'gitcolab.project.organization',
-                'attr' => ['class' => 'selectize']
+                'attr' => ['class' => 'selectize'],
             ])
             ->add('name', TextType::class, [
                 'required' => true,
-                'label' => 'gitcolab.project.name'
+                'label' => 'gitcolab.project.name',
             ])
             ->add('description', TextareaType::class, [
                 'required' => false,
-                'label' => 'gitcolab.project.description'
+                'label' => 'gitcolab.project.description',
             ])
         ;
     }
@@ -53,10 +53,10 @@ class ProjectType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'user_id' => null,
             'data_class' => 'Gitcolab\Model\Project',
-        ));
+        ]);
     }
 
     /**

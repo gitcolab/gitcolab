@@ -11,17 +11,40 @@
 
 namespace Gitcolab\Command;
 
-use Symfony\Component\Console\Command\Command;
-
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Output\OutputInterface;
 use Gitcolab\Model\Project;
+use Gitcolab\Repository\KeyRepository;
+use Gitcolab\Repository\ProjectRepository;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ShellCommand extends Command
 {
+    /** @var ProjectRepository */
+    private $projectRepository;
+
+    /** @var KeyRepository */
+    private $keyRepository;
+
+    /** @var LoggerInterface */
+    private $logger;
+
+    public function __construct(
+        ProjectRepository $projectRepository,
+        KeyRepository $keyRepository,
+        LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        $this->keyRepository = $keyRepository;
+        $this->projectRepository = $projectRepository;
+
+        parent::__construct('');
+    }
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -32,18 +55,17 @@ class ShellCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $container = $this->getContainer();
-        $key = $container->get('gitcolab.repository.key')->find($input->getArgument('key'));
+        $key = $this->keyRepository->find($input->getArgument('key'));
 
         if (null === $key) {
             return;
         }
 
-        $originalCommand =  isset($_SERVER['SSH_ORIGINAL_COMMAND']) ? $_SERVER['SSH_ORIGINAL_COMMAND'] : null;
+        $originalCommand = $_SERVER['SSH_ORIGINAL_COMMAND'] ?? null;
 
         if (null === $originalCommand) {
             return $this->outputUserInformation($output, $key->getUser());
@@ -53,7 +75,7 @@ class ShellCommand extends Command
             throw new \RuntimeException('Command seems illegal: '.$originalCommand);
         }
         $action = $vars[1];
-        $this->getContainer()->get('logger')->info($action);
+        $this->logger->info($action);
 
         $project = $this->getProject($vars[2]);
         switch ($action) {
@@ -64,24 +86,24 @@ class ShellCommand extends Command
                 throw new \RuntimeException('Action seems illegal: '.$action);
         }
 
-        $project->getRepository()->shell($action, array());
+        $project->getRepository()->shell($action, []);
     }
 
     protected function outputUserInformation(OutputInterface $output, $user)
     {
-        $output->writeln("");
-        $output->writeln("Hi ".$user->getUsername()."! You've successfully authenticated, but Gitcolab does not provide shell access.");
-        $output->writeln("");
-
+        $output->writeln('');
+        $output->writeln('Hi '.$user->getUsername()."! You've successfully authenticated, but Gitcolab does not provide shell access.");
+        $output->writeln('');
     }
 
-    protected function getProject($slug)
+    protected function getProject(string $slug)
     {
-        $project = $this->getContainer()->get('gitcolab.repository.project')->findOneBySlug($slug);
+        $project = $this->projectRepository->findOneBySlug($slug);
 
         if (!$project) {
             throw new \RuntimeException(sprintf('No project with slug "%s" found', $slug));
         }
+
         return $project;
     }
 }

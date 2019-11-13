@@ -11,12 +11,12 @@
 
 namespace Gitcolab\Form\Type;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\AbstractType;
 
-class KeyType  extends AbstractType
+class KeyType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -26,11 +26,11 @@ class KeyType  extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'required' => true,
-                'label' => 'gitcolab.key.title'
+                'label' => 'gitcolab.key.title',
             ])
             ->add('key', TextareaType::class, [
                 'required' => true,
-                'label' => 'gitcolab.key.key'
+                'label' => 'gitcolab.key.key',
             ])
         ;
     }

@@ -13,8 +13,8 @@ namespace Gitcolab\Controller\Tracker;
 
 use Gitcolab\DomainManager;
 use Gitcolab\Form\Type\MilestoneType;
-use Gitcolab\Model\Tracker\Milestone;
 use Gitcolab\Model\Project;
+use Gitcolab\Model\Tracker\Milestone;
 use Gitcolab\Repository\MilestoneRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,10 +25,10 @@ class MilestoneController extends AbstractController
     {
         $milestones = $milestoneRepository->findBy(['project' => $project]);
 
-        return $this->render('Milestone/index.html.twig' , array(
+        return $this->render('Milestone/index.html.twig', [
             'project' => $project,
-            'milestones' => $milestones
-        ));
+            'milestones' => $milestones,
+        ]);
     }
 
     public function createAction(Request $request, Project $project)
@@ -39,7 +39,6 @@ class MilestoneController extends AbstractController
         $form = $this->createForm(new MilestoneType(), $milestone);
 
         if ($form->handleRequest($request)->isValid()) {
-
             $this->get(DomainManager::class)->create($milestone);
 
             $this->addFlash('notice', 'Milestone created!');
@@ -49,7 +48,7 @@ class MilestoneController extends AbstractController
 
         return $this->render('Milestone/create.html.twig', [
             'project' => $project,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }

@@ -11,17 +11,29 @@
 
 namespace Gitcolab\Command;
 
+use Gitcolab\Repository\KeyRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
-
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SshKeyCommand extends Command
 {
+    private $logger;
+    private $keyRepository;
+    private $gitShellCommand;
+
+    public function __construct(string $gitShellCommand, KeyRepository $keyRepository, LoggerInterface $logger)
+    {
+        $this->gitShellCommand = $gitShellCommand;
+        $this->keyRepository = $keyRepository;
+        $this->logger = $logger;
+
+        parent::__construct('');
+    }
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -30,25 +42,23 @@ class SshKeyCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $command = $this->getContainer()->getParameter('gitcolab.git.shell_command');
-
         $authorizedKeys = $_SERVER['HOME'].'/.ssh/authorized_keys';
-        $repository = $this->getContainer()->get('gitcolab.repository.key');
 
-        $keys = $repository->findAll();
-        $outputd = '';
+        $keys = $this->keyRepository->findAll();
+        $line = '';
 
         foreach ($keys as $key) {
-            $outputd .= sprintf("command=\"%s %s\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty %s\n",
-                $command, $key->getId(), $key->getKey()
+            $line .= sprintf("command=\"%s %s\",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty %s\n",
+                $this->gitShellCommand, $key->getId(), $key->getKey()
             );
         }
 
-        file_put_contents($authorizedKeys, $outputd);
-        $this->getContainer()->get('logger')->info(sprintf('Update %s', $authorizedKeys));
+        file_put_contents($authorizedKeys, $line);
+
+        $this->logger->info(sprintf('Update %s', $authorizedKeys));
     }
 }

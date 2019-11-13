@@ -11,28 +11,21 @@
 
 namespace Gitcolab\Menu;
 
-use Symfony\Component\Translation\TranslatorInterface;
 use Knp\Menu\FactoryInterface;
+use Knp\Menu\ItemInterface;
 
 class MenuBuilder
 {
-    /**
-     * MenuBuilder constructor.
-     * @param FactoryInterface $factory
-     * @param TranslatorInterface $translator
-     */
-    public function __construct(FactoryInterface $factory, TranslatorInterface $translator)
+    /** @var FactoryInterface */
+    private $factory;
+
+    public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
-        $this->translator = $translator;
     }
 
-    /**
-     * @return \Knp\Menu\ItemInterface
-     */
-    public function projectHead()
+    public function projectHead(): ItemInterface
     {
-
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'list-group list-group-flush');
         $menu
@@ -48,27 +41,26 @@ class MenuBuilder
             ->setAttribute('class', 'nav-item');
 
         $menu
-            ->addChild('Settings', array('route' => 'project_setting'))
+            ->addChild('Settings', ['route' => 'project_setting'])
             ->setAttribute('class', 'nav-item');
 
         return $menu;
     }
 
-    public function createTabUserSettings()
+    public function createTabUserSettings(): ItemInterface
     {
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'list-group list-group-flush');
         $menu
-            ->addChild('Profile', array('route' => 'user_profile'))
+            ->addChild('Profile', ['route' => 'user_profile'])
             ->setAttribute('class', 'list-group-item');
         $menu
-            ->addChild('Account', array('route' => 'user_account'))
+            ->addChild('Account', ['route' => 'user_account'])
             ->setAttribute('class', 'list-group-item');
         $menu
-            ->addChild('SSH Keys', array('route' => 'user_keys'))
+            ->addChild('SSH Keys', ['route' => 'user_keys'])
             ->setAttribute('class', 'list-group-item');
 
         return $menu;
     }
-
 }

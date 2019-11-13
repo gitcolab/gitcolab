@@ -11,9 +11,6 @@
 
 namespace Gitcolab\Model;
 
-use Gedmo\Timestampable\Traits\Timestampable;
-use Gitcolab\Model\User;
-
 class Access
 {
     use TimesheetTrait;
@@ -45,7 +42,6 @@ class Access
      */
     protected $type;
 
-
     /**
      * @var string
      */
@@ -75,7 +71,7 @@ class Access
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -90,6 +86,9 @@ class Access
 
     /**
      * @param object $resource
+     *
+     * @throws \ReflectionException
+     *
      * @return $this
      */
     public function setResource($resource)
@@ -101,97 +100,71 @@ class Access
         return $this;
     }
 
-    /**
-     * @return User
-     */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
 
     /**
-     * @param User $user
      * @return $this
      */
-    public function setUser(User $user)
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
      * @param string $type
-     * @return self
      */
-    public function setType($type)
+    public function setType($type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * @return Organization
-     */
-    public function getOrganization()
+    public function getOrganization(): Organization
     {
         return $this->organization;
     }
 
-    /**
-     * @param  Organization $organization
-     * @return self
-     */
-    public function setOrganization(Organization $organization)
+    public function setOrganization(Organization $organization): self
     {
         $this->organization = $organization;
 
         return $this;
     }
 
-    /**
-     * @param  Project $project
-     * @return self
-     */
-    public function setProject(Project $project)
+    public function setProject(Project $project): self
     {
         $this->project = $project;
 
         return $this;
     }
 
-    /**
-     * @return Project
-     */
-    public function getProject()
+    public function getProject(): Project
     {
         return $this->project;
     }
 
     /**
      * @param Team $team
-     * @return self
      */
-    public function setTeam(Team $team = null)
+    public function setTeam(Team $team = null): self
     {
         $this->team = $team;
 
         return $this;
     }
 
-    /**
-     * @return Team
-     */
-    public function getRoom()
+    public function getTeam(): Team
     {
         return $this->team;
     }

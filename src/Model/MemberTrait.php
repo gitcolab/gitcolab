@@ -11,13 +11,12 @@
 
 namespace Gitcolab\Model;
 
-use Gitcolab\Model\Access;
-
 trait MemberTrait
 {
     /**
      * @param $user
      * @param $type
+     *
      * @return $this
      */
     public function addAccess($user, $type = Access::TYPE_COLLABORATOR)

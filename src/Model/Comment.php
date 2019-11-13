@@ -12,7 +12,6 @@
 namespace Gitcolab\Model;
 
 use Gitcolab\Model\Tracker\Ticket;
-use Gitcolab\Model\User;
 
 class Comment
 {
@@ -43,24 +42,17 @@ class Comment
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return User
-     */
-    public function getAuthor()
+    public function getAuthor(): User
     {
         return $this->author;
     }
 
-    /**
-     * @param User $author
-     * @return Comment
-     */
-    public function setAuthor(User $author)
+    public function setAuthor(User $author): self
     {
         $this->author = $author;
 
@@ -68,15 +60,6 @@ class Comment
     }
 
     /**
-     * @return mixed
-     */
-    public function getTicket()
-    {
-        return $this->ticket;
-    }
-
-    /**
-     * @param Ticket $ticket
      * @return Comment
      */
     public function setTicket(Ticket $ticket)
@@ -86,19 +69,15 @@ class Comment
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getMessage()
+    public function getMessage(): string
     {
         return $this->message;
     }
 
     /**
      * @param string $message
-     * @return Comment
      */
-    public function setMessage($message)
+    public function setMessage($message): self
     {
         $this->message = $message;
 

@@ -24,7 +24,7 @@ class ResourceCompilerPass implements CompilerPassInterface
         $container->setParameter(
             'twig.form.resources',
             array_merge(
-                array('GitcolabAppBundle:Form:wysiwyg_widget.html.twig'),
+                ['Form/wysiwyg_widget.html.twig'],
                 $container->getParameter('twig.form.resources')
             )
         );

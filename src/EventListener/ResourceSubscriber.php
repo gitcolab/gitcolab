@@ -11,14 +11,14 @@
 
 namespace Gitcolab\EventListener;
 
+use Gitcolab\DomainManager;
+use Gitcolab\Events;
+use Psr\Log\LoggerInterface;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Psr\Log\LoggerInterface;
-use Gitcolab\DomainManager;
-use Gitcolab\Events;
 
-class ResourceSubscriber  implements EventSubscriberInterface
+class ResourceSubscriber implements EventSubscriberInterface
 {
     /**
      * @var LoggerInterface
@@ -26,16 +26,10 @@ class ResourceSubscriber  implements EventSubscriberInterface
     protected $logger;
 
     /**
-     *
      * @var DomainManager
      */
     protected $domainManager;
 
-    /**
-     * @param LoggerInterface $logger
-     * @param DomainManager $domainManager
-     * @param TokenStorageInterface $tokenStorage
-     */
     public function __construct(LoggerInterface $logger, DomainManager $domainManager, TokenStorageInterface $tokenStorage)
     {
         $this->logger = $logger;
@@ -48,13 +42,10 @@ class ResourceSubscriber  implements EventSubscriberInterface
         return [
             Events::PR_CREATE => 'onTrackerCreate',
             Events::ISSUE_PR_CREATE => 'onTrackerPreCreate',
-            Events::ISSUE_CREATE => 'onTrackerCreate'
+            Events::ISSUE_CREATE => 'onTrackerCreate',
         ];
     }
 
-    /**
-     * @param ResourceEvent $event
-     */
     public function onTrackerPreCreate(ResourceEvent $event)
     {
         $ticket = $event->getSubject();
@@ -62,16 +53,13 @@ class ResourceSubscriber  implements EventSubscriberInterface
 
         $lastTicket = $ticket->getProject()->getTickets()->last();
 
-        if (null == $lastTicket) {
+        if (null === $lastTicket) {
             $ticket->setNumber(1);
         } else {
             $ticket->setNumber($lastTicket->getNumber() + 1);
         }
     }
 
-    /**
-     * @param ResourceEvent $event
-     */
     public function onTrackerCreate(ResourceEvent $event)
     {
         $tracker = $event->getSubject();

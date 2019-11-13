@@ -11,10 +11,10 @@
 
 namespace Gitcolab\Controller\Project;
 
+use Gitcolab\Controller\ProjectController;
 use Gitcolab\DomainManager;
 use Gitcolab\Repository\TeamRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Gitcolab\Controller\ProjectController;
 
 class SettingsController extends ProjectController
 {

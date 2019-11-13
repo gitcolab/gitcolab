@@ -11,12 +11,12 @@
 
 namespace Gitcolab\EventListener\Doctrine;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Psr\Log\LoggerInterface;
-use Gitcolab\Model\Project;
 use Gitcolab\Git\Repository;
+use Gitcolab\Model\Project;
+use Psr\Log\LoggerInterface;
 
 /***
  * Inject repository in entity
@@ -37,20 +37,17 @@ class ProjectSubscriber implements EventSubscriber
     }
 
     /**
-     * Register this class on prePersist and preUpdate
+     * Register this class on prePersist and preUpdate.
      *
      * @return array
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             Events::postLoad,
-        );
+        ];
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function postLoad(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();

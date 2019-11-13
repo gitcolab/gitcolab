@@ -32,7 +32,6 @@ trait TimesheetTrait
     }
 
     /**
-     * @param \DateTimeInterface $createdAt
      * @return self
      */
     public function setCreatedAt(\DateTimeInterface $createdAt)
@@ -51,7 +50,6 @@ trait TimesheetTrait
     }
 
     /**
-     * @param \DateTimeInterface $updatedAt
      * @return self
      */
     public function setUpdatedAt(\DateTimeInterface $updatedAt)
@@ -60,5 +58,4 @@ trait TimesheetTrait
 
         return $this;
     }
-
 }

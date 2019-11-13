@@ -24,7 +24,7 @@ class IssueController extends AbstractController
 {
     public function listAction(Project $project, ProjectRepository $projectRepository, MilestoneRepository $milestoneRepository)
     {
-        $issues = $projectRepository->findBy(array('project' => $project));
+        $issues = $projectRepository->findBy(['project' => $project]);
         $milestones = $milestoneRepository->findBy(['project' => $project]);
 
         return $this->render('Issue/index.html.twig', [
@@ -45,27 +45,27 @@ class IssueController extends AbstractController
         if ($form->handleRequest($request)->isValid()) {
             $this->get(DomainManager::class)->create($issue);
 
-            return $this->redirectToRoute('issue_show',[
+            return $this->redirectToRoute('issue_show', [
                 'project' => $project,
                 'slug' => $project->getSlug(),
-                'id' => $issue->getId()
+                'id' => $issue->getId(),
             ]);
         }
 
         return $this->render('Issue/create.html.twig', [
             'project' => $project,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
     public function showAction(Request $request, ProjectRepository $projectRepository, Issue $issue)
     {
-        $project = $projectRepository->findOneBy(array('slug' => $request->get('slug')));
+        $project = $projectRepository->findOneBy(['slug' => $request->get('slug')]);
 
         return $this->render('Issue/show.html.twig', [
             'project' => $project,
             'issue' => $issue,
-            'comments' => []
+            'comments' => [],
         ]);
     }
 }
