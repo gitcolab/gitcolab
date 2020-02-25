@@ -10,7 +10,7 @@
   "license": "MIT",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
-    "@symfony/webpack-encore": "^0.26.0",
+    "@symfony/webpack-encore": "^0.28.3",
     "bootstrap-sass": "^3.3.7",
     "bootstrap-tagsinput": "^0.7.1",
     "core-js": "^3.0.0",
